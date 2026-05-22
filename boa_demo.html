@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Belastungsorientierte Auftragsfreigabe – Interaktive Demo</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg:       #0f1117;
+  --bg2:      #181c26;
+  --bg3:      #21263a;
+  --bg4:      #2a3050;
+  --line:     rgba(255,255,255,0.07);
+  --line2:    rgba(255,255,255,0.14);
+  --text:     #e8eaf0;
+  --text2:    #9aa0b8;
+  --text3:    #4a5070;
+  --accent:   #4f8ef7;
+  --accent2:  #a78bfa;
+  --green:    #34d399;
+  --amber:    #fbbf24;
+  --red:      #f87171;
+  --font:     'IBM Plex Sans', sans-serif;
+  --mono:     'IBM Plex Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 2rem 1rem 4rem;
+  font-size: 14px;
+}
+
+.page { max-width: 1000px; margin: 0 auto; }
+
+/* Header */
+.header { margin-bottom: 2.5rem; }
+.kurs-label { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 10px; }
+h1 { font-size: 26px; font-weight: 600; color: var(--text); line-height: 1.2; margin-bottom: 6px; }
+.h1-sub { font-size: 13px; color: var(--text2); line-height: 1.6; max-width: 560px; }
+
+/* Step nav */
+.step-nav { display: flex; gap: 0; margin-bottom: 2.5rem; border: 1px solid var(--line2); border-radius: 10px; overflow: hidden; }
+.step-btn { flex: 1; padding: 12px 10px; border: none; background: transparent; color: var(--text2); font-family: var(--font); font-size: 12px; font-weight: 400; cursor: pointer; border-right: 1px solid var(--line2); text-align: center; transition: background .15s, color .15s; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.step-btn:last-child { border-right: none; }
+.step-btn.active { background: var(--bg3); color: var(--text); }
+.step-btn:hover:not(.active) { background: var(--bg2); }
+.step-num { font-family: var(--mono); font-size: 10px; color: var(--text3); }
+.step-btn.active .step-num { color: var(--accent); }
+
+/* Panel */
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* Theorie box */
+.theory {
+  border: 1px solid var(--line2);
+  border-left: 3px solid var(--accent);
+  background: var(--bg2);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 1.5rem;
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.7;
+}
+.theory strong { color: var(--text); font-weight: 500; }
+
+/* Order cards */
+.orders-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; align-items: flex-start; }
+.order-card {
+  background: var(--bg3);
+  border: 1px solid var(--line2);
+  border-radius: 8px;
+  padding: 10px 12px;
+  width: 120px;
+  transition: border-color .2s, transform .2s, opacity .2s;
+  position: relative;
+}
+.order-card.released { border-color: var(--green); }
+.order-card.blocked  { border-color: var(--red); opacity: .5; }
+.order-card.pending  { border-color: var(--amber); }
+.oc-id  { font-family: var(--mono); font-size: 10px; color: var(--text3); margin-bottom: 4px; }
+.oc-name { font-size: 11px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+.oc-row  { display: flex; justify-content: space-between; font-size: 10px; color: var(--text2); margin-bottom: 2px; }
+.oc-val  { font-family: var(--mono); font-weight: 500; color: var(--text); }
+.status-dot { width: 6px; height: 6px; border-radius: 50%; position: absolute; top: 8px; right: 8px; }
+.dot-released { background: var(--green); }
+.dot-blocked  { background: var(--red); }
+.dot-pending  { background: var(--amber); }
+
+/* Pipeline viz */
+.pipeline {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+.ws-wrap { display: flex; align-items: center; }
+.ws {
+  width: 140px;
+  flex-shrink: 0;
+  border: 1px solid var(--line2);
+  border-radius: 10px;
+  background: var(--bg2);
+  padding: 12px 10px;
+  position: relative;
+}
+.ws-name { font-size: 11px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+.ws-cap  { font-size: 10px; color: var(--text3); margin-bottom: 8px; font-family: var(--mono); }
+.load-bar-bg { height: 8px; background: var(--bg4); border-radius: 4px; margin-bottom: 6px; overflow: hidden; }
+.load-bar-fill { height: 100%; border-radius: 4px; transition: width .6s ease, background .3s; }
+.load-label { font-size: 10px; font-family: var(--mono); display: flex; justify-content: space-between; }
+.load-label .val { font-weight: 500; }
+.load-ok    { color: var(--green); }
+.load-warn  { color: var(--amber); }
+.load-over  { color: var(--red); }
+.orders-in-ws { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 8px; min-height: 16px; }
+.ws-order-chip {
+  font-size: 9px;
+  font-family: var(--mono);
+  padding: 2px 5px;
+  border-radius: 3px;
+  background: var(--bg4);
+  color: var(--text2);
+  border: 1px solid var(--line2);
+  transition: background .3s;
+}
+.ws-order-chip.hi { background: rgba(79,142,247,0.18); border-color: rgba(79,142,247,0.4); color: var(--accent); }
+
+.arrow-ws { font-size: 16px; color: var(--text3); padding: 0 6px; flex-shrink: 0; display: flex; align-items: center; }
+
+/* Abwertung table */
+.aw-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 1.5rem; }
+.aw-table th { padding: 8px 12px; text-align: left; font-size: 10px; font-weight: 500; color: var(--text3); text-transform: uppercase; letter-spacing: .05em; border-bottom: 1px solid var(--line2); }
+.aw-table td { padding: 8px 12px; border-bottom: 1px solid var(--line); }
+.aw-table tr:hover td { background: var(--bg2); }
+.mono { font-family: var(--mono); }
+.tag { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 4px; font-family: var(--mono); }
+.tag-green { background: rgba(52,211,153,0.12); color: var(--green); }
+.tag-amber { background: rgba(251,191,36,0.12); color: var(--amber); }
+.tag-red   { background: rgba(248,113,113,0.12); color: var(--red); }
+.tag-blue  { background: rgba(79,142,247,0.12);  color: var(--accent); }
+
+/* Freigabe result */
+.freigabe-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.5rem; }
+.fg-box { border: 1px solid var(--line2); border-radius: 10px; background: var(--bg2); padding: 14px 16px; }
+.fg-title { font-size: 11px; font-weight: 500; color: var(--text2); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.fg-title .dot { width: 7px; height: 7px; border-radius: 50%; }
+.fg-list { display: flex; flex-direction: column; gap: 6px; }
+.fg-item { display: flex; align-items: center; justify-content: space-between; font-size: 11px; }
+.fg-item-name { color: var(--text); font-weight: 500; }
+.fg-item-ws   { font-family: var(--mono); font-size: 10px; color: var(--text3); }
+
+/* Logistik hinweis */
+.logik-box {
+  border: 1px solid rgba(167,139,250,0.3);
+  background: rgba(167,139,250,0.06);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-top: 1.5rem;
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.7;
+}
+.logik-box strong { color: var(--accent2); }
+
+/* Slider */
+.slider-row { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
+.slider-row label { font-size: 12px; color: var(--text2); min-width: 200px; }
+input[type=range] { -webkit-appearance: none; height: 4px; background: var(--bg4); border-radius: 2px; flex: 1; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; background: var(--accent); border-radius: 50%; cursor: pointer; }
+.slider-val { font-family: var(--mono); font-size: 12px; color: var(--accent); min-width: 40px; }
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+  h1 { font-size: 20px; }
+  .freigabe-grid { grid-template-columns: 1fr; }
+  .pipeline { gap: 0; }
+  .ws { width: 120px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <div class="kurs-label">Einheit 2 · PPS-Methoden · Interaktive Demo</div>
+  <h1>Belastungsorientierte Auftragsfreigabe</h1>
+  <p class="h1-sub">Schritt-für-Schritt: Terminierung → Abwertung → Freigabe. Ziel: Der letzte Fertigungsschritt läuft immer durch — kein Materialmangel.</p>
+</div>
+
+<div class="step-nav">
+  <button class="step-btn active" onclick="showStep(0,this)"><span class="step-num">SCHRITT 1</span>Terminierung</button>
+  <button class="step-btn" onclick="showStep(1,this)"><span class="step-num">SCHRITT 2</span>Abwertung</button>
+  <button class="step-btn" onclick="showStep(2,this)"><span class="step-num">SCHRITT 3</span>Freigabe</button>
+  <button class="step-btn" onclick="showStep(3,this)"><span class="step-num">INTERAKTIV</span>Parameter anpassen</button>
+</div>
+
+<!-- SCHRITT 1: TERMINIERUNG -->
+<div class="panel active" id="p0">
+  <div class="theory">
+    <strong>Was passiert hier?</strong> Alle vorliegenden Fertigungsaufträge werden rückwärts terminiert — vom Liefertermin aus. Das ergibt für jeden Auftrag einen geplanten <em>Starttermin</em> an jedem Arbeitsschritt. Gleichzeitig wird die <strong>Belastungsschranke</strong> pro Arbeitsstation definiert: Sie gibt die maximale WIP-Last an, die eine Station gleichzeitig vor sich haben darf.
+  </div>
+
+  <div class="section-label">Vorliegende Aufträge (8 Aufträge, 5 Arbeitsstationen)</div>
+  <div class="orders-row" id="orders-step1"></div>
+
+  <div class="section-label">Fertigungspipeline — geplante Lastverteilung (vor Freigabe)</div>
+  <div class="pipeline" id="pipeline-step1"></div>
+
+  <div class="theory" style="border-left-color: var(--amber)">
+    <strong>Problem ohne BoA:</strong> Würde man alle 8 Aufträge auf einmal freigeben, sind manche Stationen heillos überlastet, andere warten. Die Durchlaufzeiten explodieren — klassisches <em>„Fehlerkreis der Fertigungssteuerung"</em> (Wiendahl).
+  </div>
+</div>
+
+<!-- SCHRITT 2: ABWERTUNG -->
+<div class="panel" id="p1">
+  <div class="theory">
+    <strong>Das Abwertungsprinzip:</strong> Ein Auftrag, der noch 3 Stationen entfernt von einer Arbeitsstation liegt, belastet diese Station heute weniger als ein Auftrag, der bereits direkt davor wartet. Die BoA wendet einen <strong>Abwertungsfaktor</strong> an: Je weiter weg der Auftrag, desto kleiner sein Beitrag zur aktuellen Belastungsrechnung dieser Station. So verhindert man, dass weit entfernte Aufträge die Freigabe blockieren.
+  </div>
+
+  <div class="section-label">Abwertungsfaktoren je Entfernung zur Zielstation</div>
+  <table class="aw-table">
+    <thead><tr><th>Entfernung (Stationen)</th><th>Abwertungsfaktor</th><th>Wirkung</th><th>Beispiel: Auftrag mit 10h Last</th></tr></thead>
+    <tbody>
+      <tr><td>0 — direkt vor der Station</td><td><span class="mono">1,00</span></td><td><span class="tag tag-red">Volle Last</span></td><td class="mono">10,0 h</td></tr>
+      <tr><td>1 — eine Station vorher</td><td><span class="mono">0,75</span></td><td><span class="tag tag-amber">Reduziert</span></td><td class="mono">7,5 h</td></tr>
+      <tr><td>2 — zwei Stationen vorher</td><td><span class="mono">0,50</span></td><td><span class="tag tag-amber">Stark reduziert</span></td><td class="mono">5,0 h</td></tr>
+      <tr><td>3 — drei Stationen vorher</td><td><span class="mono">0,25</span></td><td><span class="tag tag-green">Kaum relevant</span></td><td class="mono">2,5 h</td></tr>
+      <tr><td>4+ — weit entfernt</td><td><span class="mono">0,00</span></td><td><span class="tag tag-green">Keine Last</span></td><td class="mono">0,0 h</td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-label">Abgewertete Belastung je Auftrag an Station WS-3 (Montage)</div>
+  <table class="aw-table" id="aw-detail">
+    <thead><tr><th>Auftrag</th><th>Bearbeitungszeit</th><th>Entfernung zu WS-3</th><th>Faktor</th><th>Abgew. Last</th><th>Wirkung</th></tr></thead>
+    <tbody id="aw-tbody"></tbody>
+  </table>
+
+  <div class="logik-box">
+    <strong>Logistischer Gedanke:</strong> Das Abwertungsprinzip ist das mathematische Äquivalent zum Pufferdenken in der Logistik: Nur was <em>unmittelbar</em> ansteht, zählt voll. Was noch weit weg ist, darf man planungsseitig „vergessen" — weil bis dahin noch viel passieren kann (Störungen, Änderungen, andere Aufträge). Kein Überplanen der Zukunft.
+  </div>
+</div>
+
+<!-- SCHRITT 3: FREIGABE -->
+<div class="panel" id="p2">
+  <div class="theory">
+    <strong>Die Freigabeentscheidung:</strong> Ein Auftrag wird nur dann freigegeben, wenn seine abgewertete Last an <em>keiner</em> der betroffenen Stationen die <strong>Belastungsschranke</strong> überschreitet. Sonst bleibt er im Auftragsvorrat — er wartet, bis die Last sinkt. Damit ist sichergestellt: Die letzten Stationen in der Kette laufen immer durch, weil dort genug Material wartet. Die ersten Stationen werden bewusst etwas überlastet.
+  </div>
+
+  <div class="section-label">Freigabeentscheidung — alle 8 Aufträge</div>
+  <table class="aw-table">
+    <thead><tr><th>Auftrag</th><th>Priorität</th><th>Max. abgew. Last</th><th>Schranke</th><th>Entscheidung</th></tr></thead>
+    <tbody id="freigabe-tbody"></tbody>
+  </table>
+
+  <div class="section-label" style="margin-top:1.5rem">Resultierende Belastung nach Freigabe</div>
+  <div class="pipeline" id="pipeline-step3"></div>
+
+  <div class="freigabe-grid">
+    <div class="fg-box">
+      <div class="fg-title"><div class="dot" style="background:var(--green)"></div>Freigegeben (5 Aufträge)</div>
+      <div class="fg-list" id="fg-released"></div>
+    </div>
+    <div class="fg-box">
+      <div class="fg-title"><div class="dot" style="background:var(--red)"></div>Zurückgehalten (3 Aufträge)</div>
+      <div class="fg-list" id="fg-blocked"></div>
+    </div>
+  </div>
+
+  <div class="logik-box">
+    <strong>Warum das zur Logistik passt:</strong> Die BoA ist im Kern ein <strong>Bestandsregelkreis</strong>. Die Belastungsschranke ist das Äquivalent zum Sicherheitsbestand in der Lagerhaltung — ein bewusst dimensionierter Puffer vor jeder Station. Wer das Trichtermodell kennt, versteht sofort: Solange der Trichtereingang nicht überfüllt ist, läuft der Ausgang stabil. Das ist exakt die gleiche Logik wie bei JIT-Puffern oder Supermarkt-Kanban.
+  </div>
+</div>
+
+<!-- INTERAKTIV -->
+<div class="panel" id="p3">
+  <div class="theory">
+    Verändere die <strong>Belastungsschranke</strong> und den <strong>Einlastungsprozentsatz</strong> und beobachte, wie sich die Freigabeentscheidungen ändern. Niedrige Schranke = weniger WIP, kürzere Durchlaufzeiten, aber Risiko des Stillstands. Hohe Schranke = mehr WIP, sichere Auslastung, aber längere Wartezeiten.
+  </div>
+
+  <div class="slider-row">
+    <label>Belastungsschranke (Stunden je Station)</label>
+    <input type="range" min="10" max="60" value="35" id="sl-schranke" oninput="updateInteractive()">
+    <span class="slider-val" id="sl-schranke-val">35 h</span>
+  </div>
+  <div class="slider-row">
+    <label>Einlastungsprozentsatz (% der Nominalkapazität)</label>
+    <input type="range" min="50" max="130" value="100" id="sl-einlast" oninput="updateInteractive()">
+    <span class="slider-val" id="sl-einlast-val">100 %</span>
+  </div>
+
+  <div class="section-label">Belastung je Station nach Freigabe</div>
+  <div class="pipeline" id="pipeline-interactive"></div>
+
+  <div class="section-label">Freigabeentscheidungen</div>
+  <div class="orders-row" id="orders-interactive"></div>
+
+  <div class="logik-box" id="interactive-hint">
+    Verändere die Schieberegler um verschiedene Szenarien zu erleben.
+  </div>
+</div>
+
+</div>
+
+<script>
+const WS = [
+  {id:'WS1', name:'Zuschnitt', cap:40},
+  {id:'WS2', name:'Bearbeitung', cap:40},
+  {id:'WS3', name:'Montage', cap:40},
+  {id:'WS4', name:'Prüfung', cap:30},
+  {id:'WS5', name:'Versand', cap:25},
+];
+
+const ORDERS = [
+  {id:'A-01', name:'Gehäuse X4', prio:1, times:[8,12,10,6,4],  urgency:'dringend'},
+  {id:'A-02', name:'Welle K7',   prio:2, times:[6, 8, 8,5,3],  urgency:'normal'},
+  {id:'A-03', name:'Flansch Z2', prio:1, times:[10,14,12,7,5], urgency:'dringend'},
+  {id:'A-04', name:'Deckel M3',  prio:3, times:[4, 6, 5,4,2],  urgency:'niedrig'},
+  {id:'A-05', name:'Rahmen T1',  prio:2, times:[12,10,14,8,6], urgency:'normal'},
+  {id:'A-06', name:'Bolzen R9',  prio:3, times:[3, 4, 3,2,2],  urgency:'niedrig'},
+  {id:'A-07', name:'Platte S5',  prio:1, times:[8, 9,11,6,4],  urgency:'dringend'},
+  {id:'A-08', name:'Ring V2',    prio:3, times:[5, 7, 6,4,3],  urgency:'niedrig'},
+];
+
+const AW_FACTORS = [1.0, 0.75, 0.50, 0.25, 0.0];
+
+function calcLoad(orders, schranke) {
+  const loads = WS.map(() => 0);
+  const released = [], blocked = [];
+  const sorted = [...orders].sort((a,b) => a.prio - b.prio);
+  sorted.forEach(o => {
+    let ok = true;
+    for (let s=0; s<WS.length; s++) {
+      let contrib = 0;
+      for (let o2 of [...released, o]) {
+        for (let t=0; t<WS.length; t++) {
+          const dist = t - s;
+          if (dist >= 0 && dist < AW_FACTORS.length) {
+            if (o2.id === o.id) contrib += o.times[t] * AW_FACTORS[dist];
+          }
+        }
+      }
+      const totalAtS = loads[s] + o.times[s] * AW_FACTORS[0];
+      if (totalAtS > schranke) { ok = false; break; }
+    }
+    if (ok) {
+      released.push(o);
+      for (let s=0; s<WS.length; s++) loads[s] += o.times[s];
+    } else {
+      blocked.push(o);
+    }
+  });
+  return {loads, released, blocked};
+}
+
+function loadColor(val, cap, schranke) {
+  const pct = val / cap;
+  if (pct > 1.0) return '#f87171';
+  if (pct > 0.8) return '#fbbf24';
+  return '#34d399';
+}
+
+function renderPipeline(containerId, loads, schranke) {
+  const c = document.getElementById(containerId);
+  c.innerHTML = '';
+  WS.forEach((ws, i) => {
+    const load = loads[i];
+    const pct = Math.min(load / ws.cap, 1.2);
+    const col = loadColor(load, ws.cap, schranke);
+    const cls = pct > 1.0 ? 'load-over' : pct > 0.8 ? 'load-warn' : 'load-ok';
+
+    const wrap = document.createElement('div');
+    wrap.className = 'ws-wrap';
+
+    const ws_el = document.createElement('div');
+    ws_el.className = 'ws';
+    ws_el.innerHTML = `
+      <div class="ws-name">${ws.name}</div>
+      <div class="ws-cap">Kap: ${ws.cap} h</div>
+      <div class="load-bar-bg"><div class="load-bar-fill" style="width:${Math.min(pct*100,100)}%;background:${col}"></div></div>
+      <div class="load-label ${cls}"><span>Last</span><span class="val">${load.toFixed(0)} h</span></div>
+    `;
+
+    wrap.appendChild(ws_el);
+    if (i < WS.length - 1) {
+      const arr = document.createElement('div');
+      arr.className = 'arrow-ws';
+      arr.textContent = '›';
+      wrap.appendChild(arr);
+    }
+    c.appendChild(wrap);
+  });
+}
+
+function renderOrders_step1() {
+  const c = document.getElementById('orders-step1');
+  c.innerHTML = '';
+  ORDERS.forEach(o => {
+    const totalLoad = o.times.reduce((a,b)=>a+b,0);
+    const d = document.createElement('div');
+    d.className = 'order-card';
+    d.innerHTML = `
+      <div class="oc-id">${o.id}</div>
+      <div class="oc-name">${o.name}</div>
+      <div class="oc-row"><span>Priorität</span><span class="oc-val">${o.prio === 1 ? 'Hoch' : o.prio === 2 ? 'Mittel' : 'Niedrig'}</span></div>
+      <div class="oc-row"><span>Gesamtlast</span><span class="oc-val">${totalLoad} h</span></div>
+      <div class="oc-row"><span>Dringlichkeit</span><span class="oc-val" style="font-size:9px">${o.urgency}</span></div>
+    `;
+    c.appendChild(d);
+  });
+}
+
+function renderAWDetail() {
+  const tb = document.getElementById('aw-tbody');
+  tb.innerHTML = '';
+  const ws3idx = 2;
+  ORDERS.forEach(o => {
+    const raw = o.times[ws3idx];
+    let minDist = 99;
+    for (let t=0; t < WS.length; t++) {
+      const d = ws3idx - t;
+      if (d >= 0 && d < AW_FACTORS.length) { minDist = Math.min(minDist, d); }
+    }
+    const dist = ws3idx;
+    const factor = AW_FACTORS[Math.min(dist, AW_FACTORS.length-1)];
+    const abgew = raw * factor;
+    const col = factor >= 1 ? 'tag-red' : factor >= 0.5 ? 'tag-amber' : 'tag-green';
+    tb.innerHTML += `
+      <tr>
+        <td><strong>${o.id}</strong> ${o.name}</td>
+        <td class="mono">${raw} h</td>
+        <td class="mono">${dist} Stationen</td>
+        <td class="mono">${factor.toFixed(2)}</td>
+        <td class="mono">${abgew.toFixed(1)} h</td>
+        <td><span class="tag ${col}">${factor >= 1 ? 'Volle Last' : factor >= 0.5 ? 'Reduziert' : 'Minimal'}</span></td>
+      </tr>`;
+  });
+}
+
+function renderFreigabeTable() {
+  const SCHRANKE = 35;
+  const tb = document.getElementById('freigabe-tbody');
+  tb.innerHTML = '';
+
+  const sorted = [...ORDERS].sort((a,b) => a.prio - b.prio);
+  const released = [];
+
+  sorted.forEach(o => {
+    const loads = WS.map(() => 0);
+    released.forEach(r => { r.times.forEach((t,i) => loads[i] += t); });
+    const wouldAdd = o.times.map((t,i) => loads[i] + t);
+    const maxLoad = Math.max(...wouldAdd);
+    const ok = maxLoad <= SCHRANKE;
+    if (ok) released.push(o);
+
+    const col = ok ? 'tag-green' : 'tag-red';
+    const pText = o.prio === 1 ? '<span class="tag tag-red">Hoch</span>' : o.prio === 2 ? '<span class="tag tag-amber">Mittel</span>' : '<span class="tag" style="background:rgba(255,255,255,.05);color:var(--text2)">Niedrig</span>';
+    tb.innerHTML += `<tr>
+      <td><strong>${o.id}</strong> ${o.name}</td>
+      <td>${pText}</td>
+      <td class="mono">${maxLoad.toFixed(0)} h</td>
+      <td class="mono">${SCHRANKE} h</td>
+      <td><span class="tag ${col}">${ok ? '✓ Freigegeben' : '✗ Zurückgehalten'}</span></td>
+    </tr>`;
+  });
+
+  const {loads, released: rel, blocked: blk} = calcLoad(ORDERS, SCHRANKE);
+  renderPipeline('pipeline-step3', loads, SCHRANKE);
+
+  const relC = document.getElementById('fg-released');
+  relC.innerHTML = rel.map(o=>`<div class="fg-item"><span class="fg-item-name">${o.id} ${o.name}</span><span class="fg-item-ws">Prio ${o.prio}</span></div>`).join('');
+
+  const blkC = document.getElementById('fg-blocked');
+  blkC.innerHTML = blk.map(o=>`<div class="fg-item"><span class="fg-item-name">${o.id} ${o.name}</span><span class="fg-item-ws">Prio ${o.prio}</span></div>`).join('');
+}
+
+function updateInteractive() {
+  const schranke = parseInt(document.getElementById('sl-schranke').value);
+  const einlast  = parseInt(document.getElementById('sl-einlast').value);
+  document.getElementById('sl-schranke-val').textContent = schranke + ' h';
+  document.getElementById('sl-einlast-val').textContent  = einlast  + ' %';
+
+  const effSchranke = schranke * (einlast / 100);
+  const {loads, released, blocked} = calcLoad(ORDERS, effSchranke);
+  renderPipeline('pipeline-interactive', loads, effSchranke);
+
+  const oc = document.getElementById('orders-interactive');
+  oc.innerHTML = '';
+  ORDERS.forEach(o => {
+    const isRel = released.find(r=>r.id===o.id);
+    const d = document.createElement('div');
+    d.className = 'order-card ' + (isRel ? 'released' : 'blocked');
+    d.innerHTML = `
+      <div class="status-dot ${isRel ? 'dot-released' : 'dot-blocked'}"></div>
+      <div class="oc-id">${o.id}</div>
+      <div class="oc-name">${o.name}</div>
+      <div class="oc-row"><span>Status</span><span class="oc-val" style="color:${isRel ? 'var(--green)' : 'var(--red)'};font-size:10px">${isRel ? 'Freigegeben' : 'Zurückgehalten'}</span></div>
+    `;
+    oc.appendChild(d);
+  });
+
+  const hint = document.getElementById('interactive-hint');
+  const overloaded = WS.filter((ws,i) => loads[i] > ws.cap);
+  const idle = WS.filter((ws,i) => loads[i] < ws.cap * 0.4);
+  if (blocked.length === 0) {
+    hint.innerHTML = `<strong style="color:var(--amber)">Alle Aufträge freigegeben</strong> — Die Belastungsschranke ist so hoch, dass kein Auftrag zurückgehalten wird. WIP steigt unkontrolliert, Durchlaufzeiten verlängern sich. ${overloaded.length > 0 ? '<br>⚠ Überlast an: ' + overloaded.map(w=>w.name).join(', ') : ''}`;
+  } else if (released.length <= 2) {
+    hint.innerHTML = `<strong style="color:var(--red)">Sehr restriktive Freigabe</strong> — Nur ${released.length} Auftrag/Aufträge freigegeben. Stationen im Mittelteil laufen leer. Risiko: Stillstand der hinteren Stationen.`;
+  } else {
+    hint.innerHTML = `<strong style="color:var(--green)">${released.length} Aufträge freigegeben, ${blocked.length} zurückgehalten</strong> — Ausgewogene Situation. Die hinteren Stationen sind versorgt, die WIP-Last bleibt kontrolliert.`;
+  }
+}
+
+function showStep(idx, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.step-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('p'+idx).classList.add('active');
+  btn.classList.add('active');
+}
+
+const rawLoads = WS.map((ws,i) => ORDERS.reduce((sum,o) => sum+o.times[i], 0));
+renderPipeline('pipeline-step1', rawLoads, 35);
+renderOrders_step1();
+renderAWDetail();
+renderFreigabeTable();
+updateInteractive();
+</script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+
+<h2 class="sr-only">Übersichtstabelle aller PPS-Steuerungsmethoden mit Klassifizierung nach Steuerungsprinzip, Systemtyp und heutiger Relevanz</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{padding:1rem 0 1.5rem}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.fb{font-size:11px;padding:4px 10px;border:0.5px solid var(--color-border-secondary);border-radius:20px;background:transparent;color:var(--color-text-secondary);cursor:pointer;transition:background .1s,color .1s}
+.fb.on{background:var(--color-background-tertiary);color:var(--color-text-primary);border-color:var(--color-border-primary)}
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12px}
+thead tr{border-bottom:0.5px solid var(--color-border-primary)}
+th{padding:7px 10px;text-align:left;font-size:10px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+tbody tr{border-bottom:0.5px solid var(--color-border-tertiary);transition:background .1s}
+tbody tr:hover{background:var(--color-background-secondary)}
+tbody tr.hidden{display:none}
+td{padding:8px 10px;vertical-align:middle;color:var(--color-text-primary)}
+td.name{font-weight:500;white-space:nowrap}
+td.sub{font-size:11px;color:var(--color-text-tertiary)}
+.badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:4px;font-weight:500;white-space:nowrap}
+.b-push{background:#EEEDFE;color:#3C3489}
+.b-pull{background:#E1F5EE;color:#085041}
+.b-hybrid{background:#FAEEDA;color:#633806}
+.b-zentral{background:#E6F1FB;color:#0C447C}
+.b-dezentral{background:#EAF3DE;color:#27500A}
+.b-klassisch{background:#F1EFE8;color:#444441}
+.b-modern{background:#ddeef8;color:#0c4470}
+.b-aktuell{background:#d4f0e4;color:#0a5038}
+.b-abloesend{background:#faeac8;color:#633806}
+.rel-bar{display:flex;align-items:center;gap:6px}
+.bar-bg{flex:1;max-width:80px;height:5px;background:var(--color-background-tertiary);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px}
+.era-group td:first-child{border-left:2px solid var(--color-border-secondary)}
+.era-label{font-size:10px;font-weight:500;color:var(--color-text-tertiary);letter-spacing:.06em;text-transform:uppercase;padding:12px 10px 4px;background:var(--color-background-secondary)}
+.era-label td{padding:8px 10px 4px;color:var(--color-text-tertiary);font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
+</style>
+
+<div class="wrap">
+<div class="filter-row" id="filters">
+  <span style="font-size:11px;color:var(--color-text-tertiary);padding:4px 0;align-self:center">Filter:</span>
+  <button class="fb on" onclick="filter('all',this)">Alle</button>
+  <button class="fb" onclick="filter('push',this)">Push</button>
+  <button class="fb" onclick="filter('pull',this)">Pull</button>
+  <button class="fb" onclick="filter('hybrid',this)">Hybrid</button>
+  <button class="fb" onclick="filter('klassisch',this)">Klassisch</button>
+  <button class="fb" onclick="filter('modern',this)">Modern / Aktuell</button>
+</div>
+
+<div class="tbl-wrap">
+<table id="tbl">
+<thead>
+<tr>
+  <th style="min-width:140px">Methode</th>
+  <th>Push / Pull</th>
+  <th>Steuerung</th>
+  <th>Kernprinzip</th>
+  <th>Typische Branche</th>
+  <th>Epoche</th>
+  <th style="min-width:100px">Relevanz 2026</th>
+</tr>
+</thead>
+<tbody id="tbody">
+</tbody>
+</table>
+</div>
+</div>
+
+<script>
+const M = [
+  {
+    era:"Klassische Methoden (1960er – 1990er)",
+    rows:[
+      {name:"MRP I",sub:"Material Requirements Planning",push:"push",ctrl:"zentral",kern:"Bedarfsrechnung aus Stückliste; Bruttobedarfsauflösung → Nettobedarfsermittlung; Losgrößenoptimierung",branche:"Diskrete Fertigung allgemein",epoche:"klassisch",rel:90,relLabel:"Fundament (im ERP)",relColor:"#534AB7"},
+      {name:"MRP II",sub:"Manufacturing Resource Planning",push:"push",ctrl:"zentral",kern:"MRP I + Kapazitätsplanung, Finanzintegration; geschlossener Regelkreis Planung–Steuerung–Kontrolle",branche:"Diskrete Fertigung, Maschinenbau",epoche:"klassisch",rel:88,relLabel:"ERP-Standard",relColor:"#534AB7"},
+      {name:"OPT / TOC",sub:"Optimized Production Technology",push:"push",ctrl:"zentral",kern:"Engpassorientierung; Nicht-Engpässe untergeordnet; 9 OPT-Regeln; Durchsatz vor Auslastung",branche:"Diskrete Fertigung, Engpassszenarien",epoche:"klassisch",rel:60,relLabel:"Konzept lebt in APS",relColor:"#0F6E56"},
+      {name:"BoA",sub:"Belastungsorientierte Auftragsfreigabe",push:"push",ctrl:"zentral",kern:"Trichtermodell; Auftragsfreigabe nach Belastungsschranke; Einlastungsprozentsatz; Abwertungsfaktor",branche:"Werkstattfertigung, Einzel-/Kleinserie",epoche:"klassisch",rel:35,relLabel:"Nischeneinsatz",relColor:"#888780"},
+      {name:"Fortschrittszahlen",sub:"Fortschrittszahlensteuerung",push:"pull",ctrl:"dezentral",kern:"Kumulierte Soll-/Ist-Mengen je Kontrollblock; Vorlauf/Rückstand-Steuerung; JIT-kompatibel",branche:"Automobil, Zulieferer (EDI/VDA)",epoche:"klassisch",rel:70,relLabel:"Automobil Standard",relColor:"#0F6E56"},
+      {name:"Kanban",sub:"Pull-Steuerung mit Karten",push:"pull",ctrl:"dezentral",kern:"Holprinzip; Karte = Fertigungsauftrag; WIP-Begrenzung; visuelle Steuerung",branche:"Automobil, Lean Production",epoche:"klassisch",rel:85,relLabel:"Shopfloor-Standard",relColor:"#0F6E56"},
+      {name:"ConWIP",sub:"Constant Work in Process",push:"pull",ctrl:"dezentral",kern:"Eine Karte für alle Produkte; WIP-Deckel systemweit; flexibler als Kanban bei Varianten",branche:"Variantenfertigung, Elektronik",epoche:"klassisch",rel:55,relLabel:"Alternative zu Kanban",relColor:"#888780"},
+      {name:"Synchro-MRP",sub:"Hybrid MRP + Kanban",push:"hybrid",ctrl:"hybrid",kern:"Zentrales Tagesproduktionsprogramm + Zwei-Karten-Kanban; nur Nachfertigung wenn Tagesabgang nicht erreicht",branche:"Variantenfertigung, häufige Produktwechsel",epoche:"klassisch",rel:40,relLabel:"Spezialanwendung",relColor:"#888780"},
+    ]
+  },
+  {
+    era:"Moderne Methoden & Systeme (2000er – heute)",
+    rows:[
+      {name:"APS",sub:"Advanced Planning & Scheduling",push:"hybrid",ctrl:"zentral",kern:"Endliche Kapazitätsplanung; simultane Mehrengpassoptimierung; Echtzeit-Neuplanung; Minutengranularität",branche:"Automobil, Chemie, Komplexfertigung",epoche:"modern",rel:92,relLabel:"Wachstumsmarkt",relColor:"#185FA5"},
+      {name:"SAP IBP / PP/DS",sub:"Integrated Business Planning + PP/DS",push:"hybrid",ctrl:"zentral",kern:"Nachfolger SAP APO; cloud-basiert; Supply-Chain-weite Planung; ePP/DS embedded in S/4HANA",branche:"Enterprise-Fertigung weltweit",epoche:"modern",rel:95,relLabel:"Migrationswelle 2025–27",relColor:"#185FA5"},
+      {name:"MES",sub:"Manufacturing Execution System",push:"pull",ctrl:"dezentral",kern:"Echtzeit-Shopfloor-Steuerung; Rückmeldungen an ERP/APS; OEE-Kennzahlen; Schnittstelle Planung→Ausführung",branche:"Alle produzierenden Branchen",epoche:"modern",rel:90,relLabel:"Pflichtbaustein I4.0",relColor:"#185FA5"},
+      {name:"KI / ML in PP",sub:"Maschinelles Lernen in der Planung",push:"hybrid",ctrl:"hybrid",kern:"Prädiktive Durchlaufzeiten; Lieferterminprognosen; Rüstzeitoptimierung; autonome Umplanung bei Störungen",branche:"Großserie, Automobilbau, Elektronik",epoche:"modern",rel:55,relLabel:"Im Aufbau (Vorreiter)",relColor:"#BA7517"},
+    ]
+  }
+];
+
+function buildTable(){
+  const tb = document.getElementById('tbody');
+  tb.innerHTML = '';
+  M.forEach(group => {
+    const er = document.createElement('tr');
+    er.innerHTML = `<td colspan="7" style="padding:12px 10px 4px;background:var(--color-background-secondary);color:var(--color-text-tertiary);font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase">${group.era}</td>`;
+    tb.appendChild(er);
+    group.rows.forEach(r => {
+      const tr = document.createElement('tr');
+      tr.dataset.push = r.push;
+      tr.dataset.epoche = r.epoche;
+      const bPush = r.push==='push'?'b-push':r.push==='pull'?'b-pull':'b-hybrid';
+      const bCtrl = r.ctrl==='zentral'?'b-zentral':r.ctrl==='dezentral'?'b-dezentral':'b-hybrid';
+      const bEp = r.epoche==='klassisch'?'b-klassisch':r.epoche==='modern'?'b-modern':'b-aktuell';
+      tr.innerHTML = `
+        <td><div class="name">${r.name}</div><div class="sub">${r.sub}</div></td>
+        <td><span class="badge ${bPush}">${r.push.charAt(0).toUpperCase()+r.push.slice(1)}</span></td>
+        <td><span class="badge ${bCtrl}">${r.ctrl.charAt(0).toUpperCase()+r.ctrl.slice(1)}</span></td>
+        <td style="max-width:200px;color:var(--color-text-secondary);font-size:11px;line-height:1.5">${r.kern}</td>
+        <td style="font-size:11px;color:var(--color-text-secondary);white-space:nowrap">${r.branche}</td>
+        <td><span class="badge ${bEp}">${r.epoche.charAt(0).toUpperCase()+r.epoche.slice(1)}</span></td>
+        <td>
+          <div class="rel-bar">
+            <div class="bar-bg"><div class="bar-fill" style="width:${r.rel}%;background:${r.relColor}"></div></div>
+            <span style="font-size:11px;color:var(--color-text-secondary);white-space:nowrap">${r.relLabel}</span>
+          </div>
+        </td>
+      `;
+      tb.appendChild(tr);
+    });
+  });
+}
+
+function filter(key, btn){
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('#tbody tr[data-push]').forEach(tr=>{
+    if(key==='all') tr.classList.remove('hidden');
+    else if(key==='push'||key==='pull'||key==='hybrid') tr.classList.toggle('hidden', tr.dataset.push!==key);
+    else if(key==='klassisch') tr.classList.toggle('hidden', tr.dataset.epoche!=='klassisch');
+    else if(key==='modern') tr.classList.toggle('hidden', tr.dataset.epoche!=='modern');
+  });
+}
+
+buildTable();
+</script>

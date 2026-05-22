@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auftragsfluss – Produktionslogistik & PPS</title>
+<style>
+  :root {
+    --bg:        #ffffff;
+    --bg2:       #f5f4f0;
+    --bg3:       #eceae4;
+    --text:      #1a1a18;
+    --text2:     #5a5a56;
+    --text3:     #9a9890;
+    --border:    rgba(0,0,0,0.10);
+    --border2:   rgba(0,0,0,0.18);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --font:      -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --mono:      "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:      #1c1c1a;
+      --bg2:     #252522;
+      --bg3:     #2e2e2b;
+      --text:    #e8e6df;
+      --text2:   #a8a69f;
+      --text3:   #68665f;
+      --border:  rgba(255,255,255,0.10);
+      --border2: rgba(255,255,255,0.18);
+    }
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg2);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  .page {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .header {
+    margin-bottom: 2rem;
+  }
+  .header-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .unit-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text3);
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  h1 {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.5;
+  }
+  .legend {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 1.25rem;
+  }
+  .leg { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text2); }
+  .dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+
+  /* Main layout */
+  .main {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: 216px;
+    flex-shrink: 0;
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 8px;
+    position: sticky;
+    top: 1.5rem;
+  }
+  .sitem {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 7px 8px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    border: 0.5px solid transparent;
+    transition: background .12s, border-color .12s;
+  }
+  .sitem:hover { background: var(--bg2); }
+  .sitem.active { background: var(--bg); border-color: var(--border2); }
+  .sitem.active .snum { background: #534AB7; color: #fff; }
+  .snum {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--bg3); color: var(--text3);
+    font-size: 10px; font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .stext { flex: 1; min-width: 0; }
+  .slabel { font-size: 11px; font-weight: 500; color: var(--text); line-height: 1.3; }
+  .smod   { font-size: 10px; color: var(--text3); margin-top: 1px; }
+  .divider { height: 0.5px; background: var(--border); margin: 4px 0; }
+
+  /* Detail panel */
+  .detail {
+    flex: 1;
+    min-width: 0;
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    min-height: 440px;
+    display: flex;
+    flex-direction: column;
+  }
+  .d-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .d-badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 9px;
+    border-radius: 4px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .d-title { font-size: 17px; font-weight: 500; color: var(--text); line-height: 1.3; }
+  .d-step  { font-size: 11px; color: var(--text3); white-space: nowrap; margin-top: 3px; }
+  .d-desc  {
+    font-size: 13px; color: var(--text2);
+    line-height: 1.7; margin-bottom: 12px;
+  }
+  .mto-hint {
+    font-size: 12px;
+    padding: 9px 11px;
+    border-radius: var(--radius-md);
+    border-left: 2px solid #534AB7;
+    background: var(--bg2);
+    color: var(--text2);
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+  .mto-hint strong { font-weight: 500; color: var(--text); }
+  .facts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .fact {
+    background: var(--bg2);
+    border-radius: var(--radius-md);
+    padding: 9px 11px;
+  }
+  .fl { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 2px; }
+  .fv { font-size: 12px; color: var(--text); font-weight: 500; line-height: 1.4; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .tag {
+    font-size: 11px; padding: 2px 8px;
+    border-radius: 4px;
+    border: 0.5px solid var(--border2);
+    color: var(--text2);
+    font-family: var(--mono);
+    background: var(--bg2);
+  }
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 0.5px solid var(--border);
+  }
+  .nbtn {
+    font-size: 12px; padding: 6px 14px;
+    border: 0.5px solid var(--border2);
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    font-family: var(--font);
+    transition: background .1s;
+  }
+  .nbtn:hover { background: var(--bg2); }
+  .nbtn:disabled { opacity: .3; cursor: default; }
+  .nav-hint { font-size: 11px; color: var(--text3); }
+
+  /* Footer */
+  .footer {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text3);
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .main { flex-direction: column; }
+    .sidebar { width: 100%; position: static; }
+    .facts { grid-template-columns: 1fr; }
+    h1 { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-top">
+      <div>
+        <div class="unit-label">Einheit 2 · Produktionslogistik & PPS</div>
+        <h1>Auftragsfluss: Vom Kundenauftrag zur Auslieferung</h1>
+        <p class="subtitle">10 Stationen · SAP-Module, Transaktionscodes & Bewegungsarten · Make-to-Order / Make-to-Stock</p>
+      </div>
+    </div>
+    <div class="legend">
+      <div class="leg"><div class="dot" style="background:#534AB7"></div>Aktive Station</div>
+      <div class="leg"><div class="dot" style="background:#1D9E75"></div>PPS-Kern</div>
+      <div class="leg"><div class="dot" style="background:#378ADD"></div>Logistikschnittstelle</div>
+      <div class="leg"><div class="dot" style="background:#BA7517"></div>Abschluss / Controlling</div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="sidebar" id="sidebar"></div>
+    <div class="detail" id="detail"></div>
+  </div>
+
+  <div class="footer">
+    Lehrveranstaltungsunterlagen · Produktionslogistik & PPS · Interaktiv klickbar
+  </div>
+
+</div>
+
+<script>
+const S = [
+  {
+    short:"Kundenauftrags­entstehung",
+    mod:"SAP SD",
+    badge:"Auftragseingang", bc:"#ddeef8", bt:"#0c4470",
+    title:"Kundenauftragsentstehung (Primärbedarf)",
+    desc:"Der Kundenauftrag ist der Auslöser des gesamten Produktionsprozesses. Je nach Fertigungsstrategie erzeugt er entweder direkt einen Primärbedarf für ein Fertigerzeugnis (Make-to-Order) oder fließt in die Absatzplanung ein (Make-to-Stock). PPS-theoretisch: Primärbedarfsplanung als erste Stufe der PPS.",
+    mto:"Make-to-Order (MtO): Kundenauftrag erzeugt direkten Primärbedarf — das Produkt wird dem KA zugeordnet. Make-to-Stock (MtS): Auftrag fließt in Absatzplanung / Forecast — Produktion auf Lager.",
+    facts:[
+      {l:"SAP-Modul",   v:"SD – Sales & Distribution"},
+      {l:"Dokument",    v:"Kundenauftrag (KA)"},
+      {l:"PPS-Begriff", v:"Primärbedarfsplanung"},
+      {l:"Schlüsselfelder", v:"Material, Menge, Wunschtermin"}
+    ],
+    tags:[]
+  },
+  {
+    short:"Programm- & Bedarfs­planung",
+    mod:"SAP PP · MRP",
+    badge:"PPS-Kern", bc:"#d4f0e4", bt:"#0a5038",
+    title:"Programm- & Bedarfsplanung (MRP-Lauf)",
+    desc:"Auf Basis des Primärbedarfs führt das System den Materialbedarfsplanungslauf (MRP = Material Requirements Planning) durch. Es ermittelt den Nettobedarf unter Berücksichtigung vorhandener Lagerbestände und bereits eingeplanter Zugänge. Ergebnis: Planaufträge für Eigenfertigung und Bestellanforderungen (BANF) für Fremdbezug.",
+    mto:"",
+    facts:[
+      {l:"SAP-Modul",          v:"PP – Production Planning"},
+      {l:"MRP-Lauf (gesamt)",  v:"MD01"},
+      {l:"MRP-Lauf (einzeln)", v:"MD02"},
+      {l:"Bedarfs-/Bestandssicht", v:"MD04 / MD05"}
+    ],
+    tags:["MD01","MD02","MD04","MD05"]
+  },
+  {
+    short:"Planauftrag",
+    mod:"SAP PP",
+    badge:"PPS-Kern", bc:"#d4f0e4", bt:"#0a5038",
+    title:"Planauftrag als internes Planungselement",
+    desc:"Der Planauftrag ist ein unverbindlicher Beschaffungsvorschlag des MRP. Er enthält Menge, Ecktermine (Anfang / Ende), Material, Werk und ggf. Dispomerkmale. Solange er nicht in einen Fertigungsauftrag umgesetzt ist, kann das MRP-System ihn automatisch ändern oder löschen. Er ist das zentrale Bindeglied zwischen automatischer Planung und manueller Disposition.",
+    mto:"",
+    facts:[
+      {l:"SAP-Modul", v:"PP – Production Planning"},
+      {l:"Status",    v:"unverbindlich, änderbar durch MRP"},
+      {l:"Inhalt",    v:"Menge, Ecktermine, Material, Werk"},
+      {l:"Nächster Schritt", v:"→ Kapazitätsprüfung / FA-Umsetzung"}
+    ],
+    tags:["MD11","MD12","MD13"]
+  },
+  {
+    short:"Kapazitäts­planung",
+    mod:"SAP PP-CRP",
+    badge:"PPS-Kern", bc:"#d4f0e4", bt:"#0a5038",
+    title:"Kapazitätsplanung (CRP – Capacity Requirements Planning)",
+    desc:"Die geplanten Fertigungsmengen werden auf verfügbare Maschinenkapazitäten und Personalressourcen gelegt. Engpässe werden sichtbar — Aufträge können verschoben, aufgeteilt oder Überkapazitäten genutzt werden. Für die Logistik ist das die kritische Schnittstelle: Fertigungsstörungen, ungeplante Stillstände und Reihenfolgeverschiebungen entstehen genau hier und wirken direkt auf Materialbereitstellung und Auslieferungstermine.",
+    mto:"",
+    facts:[
+      {l:"SAP-Modul",    v:"PP-CRP (Capacity Requirements Planning)"},
+      {l:"Eingabe",      v:"Planaufträge, Arbeitspläne, Kapazitäten"},
+      {l:"Ausgabe",      v:"Kapazitätsbelastung, Engpässe"},
+      {l:"Logistik-Konflikt", v:"Fertigungsstörungen ↔ Liefertermin"}
+    ],
+    tags:["CM01","CM21","CM50"]
+  },
+  {
+    short:"Planauftrag → Fertigungs­auftrag",
+    mod:"SAP PP",
+    badge:"Disposition", bc:"#e8e6fc", bt:"#3c3489",
+    title:"Umsetzung Planauftrag → Fertigungsauftrag",
+    desc:"Der Disponent prüft die Material- und Kapazitätssituation, Losgrößen und Terminlage. Relevante Planaufträge werden manuell oder per Sammelumsetzung in Fertigungsaufträge (= Produktionsaufträge) umgesetzt. Ab diesem Punkt sind die Aufträge 'hart': Das MRP-System ändert sie nicht mehr automatisch. Diese Entscheidungsebene ist eine der wichtigsten Stellen im Zusammenspiel PPS ↔ Logistik.",
+    mto:"",
+    facts:[
+      {l:"SAP-Modul",      v:"PP – Production Planning"},
+      {l:"Einzel-Umsetzung",  v:"CO40"},
+      {l:"Sammel-Umsetzung",  v:"CO41"},
+      {l:"MRP-Verhalten",  v:"FA wird nicht mehr automatisch geändert"}
+    ],
+    tags:["CO40","CO41"]
+  },
+  {
+    short:"FA: Struktur & Freigabe",
+    mod:"SAP PP",
+    badge:"Steuerdokument", bc:"#e8e6fc", bt:"#3c3489",
+    title:"Fertigungsauftrag: Struktur & Freigabe",
+    desc:"Der Fertigungsauftrag ist das zentrale Steuerdokument der Fertigung. Er enthält das Referenzmaterial, die Menge, das Werk, die aufgelöste Stückliste (Komponenten) und den Arbeitsplan (Vorgänge, Arbeitsplätze, Zeiten). Nach Prüfung von Materialverfügbarkeit und Kapazität wird der Auftrag freigegeben — erst dann wird er in der Fertigungssteuerung und im Lager sichtbar.",
+    mto:"",
+    facts:[
+      {l:"SAP-Modul",  v:"PP – Production Planning"},
+      {l:"Enthält",    v:"Stückliste + Arbeitsplan (Routing)"},
+      {l:"Freigabe",   v:"CO02 / CO15"},
+      {l:"ATP-Check",  v:"Materialverfügbarkeitsprüfung vor Freigabe"}
+    ],
+    tags:["CO01","CO02","CO03","CO15"]
+  },
+  {
+    short:"Materialbereit­stellung & Fertigung",
+    mod:"SAP WM · EWM · PP",
+    badge:"Logistikschnittstelle", bc:"#ddeef8", bt:"#0c4470",
+    title:"Materialbereitstellung & Fertigungsdurchführung",
+    desc:"Für den freigegebenen Fertigungsauftrag werden Komponenten aus dem Lager entnommen und an der Linie bereitgestellt. Die Warenbewegung wird mit Bewegungsart 261 gebucht (Warenentnahme für Fertigungsauftrag). An den Arbeitsplätzen werden die Vorgänge abgearbeitet; Rückmeldungen schreiben Ist-Zeiten, Mengen und Ausschuss zurück ins System. PPS-theoretisch: Ablaufplanung, Auftragsüberwachung, Kapazitätssteuerung.",
+    mto:"",
+    facts:[
+      {l:"SAP-Module",         v:"WM / EWM + PP"},
+      {l:"Bewegungsart Entnahme", v:"261 – Warenentnahme für FA"},
+      {l:"Vorgangsrückmeldung", v:"CO11N"},
+      {l:"PPS-Funktion",       v:"Ablaufplanung, Auftragsüberwachung"}
+    ],
+    tags:["Bwart 261","CO11N","LT0A"]
+  },
+  {
+    short:"Wareneingang aus Fertigung",
+    mod:"SAP PP · MM",
+    badge:"Lagereingang", bc:"#dff0d0", bt:"#254d0a",
+    title:"Wareneingang aus Fertigung (Fertigerzeugnis)",
+    desc:"Nach Abschluss der Produktion wird das Fertigerzeugnis per Wareneingangsbuchung ins Fertigwarenlager eingebucht. Die Bewegungsart 101 bucht den Wareneingang gegen den Fertigungsauftrag. Die Auftragskosten werden auf das Lagerkonto umgebucht, der Auftrag sukzessive entlastet. Bei Make-to-Order wird das Fertigerzeugnis direkt dem Kundenauftrag zugeordnet (Sonderbestand E).",
+    mto:"MtO: Fertigerzeugnis wird direkt dem KA zugeordnet (Sonderbestand E). MtS: Einbuchung ins freie Lager — Zuordnung zum KA erfolgt erst beim Versand.",
+    facts:[
+      {l:"SAP-Module",       v:"PP + MM – Materials Management"},
+      {l:"Bewegungsart WE",  v:"101 – Wareneingang aus FA"},
+      {l:"Kosteneffekt",     v:"Auftragskosten → Lagerkonto"},
+      {l:"MtO-Sonderbestand", v:"Kennzeichen 'E' (Kundenauftragsbestand)"}
+    ],
+    tags:["Bwart 101","MIGO","CO15"]
+  },
+  {
+    short:"Auftragsabschluss & Controlling",
+    mod:"SAP PP · CO",
+    badge:"Abschluss / Controlling", bc:"#faeac8", bt:"#633806",
+    title:"Auftragsabschluss & Controlling",
+    desc:"Nach vollständiger Rückmeldung und Wareneingang erfolgt der technische Abschluss (TECO) des Fertigungsauftrags. Das Produktionscontrolling analysiert die Abweichungen zwischen Plan- und Ist-Kosten, Mengen und Zeiten. Abweichungen werden kategorisiert (Mengenabweichung, Rüstzeitabweichung etc.) und fließen in die Kalkulation zukünftiger Aufträge ein.",
+    mto:"",
+    facts:[
+      {l:"SAP-Module",          v:"PP + CO – Controlling"},
+      {l:"Technischer Abschluss", v:"TECO via CO02"},
+      {l:"Abweichungsanalyse",  v:"KKS1 / KKS2"},
+      {l:"Plan/Ist-Vergleich",  v:"KKBC_ORD / CO03"}
+    ],
+    tags:["TECO","KKS1","KKS2","KKBC_ORD"]
+  },
+  {
+    short:"Versand & Auslieferung",
+    mod:"SAP SD · WM",
+    badge:"Logistikschnittstelle", bc:"#ddeef8", bt:"#0c4470",
+    title:"Materialwirtschaft & Versand (Warenausgang)",
+    desc:"Bei Make-to-Order: Das Fertigerzeugnis wird dem Kundenauftrag zugeordnet, kommissioniert und mit Warenausgangsbuchung aus dem Lager entnommen — der Kundenauftrag ist damit erfüllt. Bei Make-to-Stock: Das Fertigerzeugnis wurde eingelagert und wird bei Eingang eines Kundenauftrags regulär entnommen. Schnittstelle PPS ↔ Materialwirtschaft / Logistik.",
+    mto:"MtO: Kommissionierung aus Sonderbestand E → Warenausgang → Faktura. MtS: Warenausgang aus freiem Lagerbestand → Faktura.",
+    facts:[
+      {l:"SAP-Module",       v:"SD + WM / EWM"},
+      {l:"Bewegungsart WA",  v:"601 – Warenausgang Lieferung"},
+      {l:"Dokumente",        v:"Lieferung (VL01N), Kommissionierliste"},
+      {l:"Abschluss",        v:"Warenausgang → Faktura (VF01)"}
+    ],
+    tags:["Bwart 601","VL01N","VF01","LT0A"]
+  }
+];
+
+let active = 0;
+
+function renderSidebar() {
+  const dividers = new Set([1,4,6,8]);
+  document.getElementById('sidebar').innerHTML = S.map((s,i) => `
+    <div class="sitem${i===active?' active':''}" onclick="setA(${i})">
+      <div class="snum">${i+1}</div>
+      <div class="stext">
+        <div class="slabel">${s.short}</div>
+        <div class="smod">${s.mod}</div>
+      </div>
+    </div>
+    ${dividers.has(i) ? '<div class="divider"></div>' : ''}
+  `).join('');
+}
+
+function renderDetail() {
+  const s = S[active];
+  const facts = s.facts.map(f =>
+    `<div class="fact"><div class="fl">${f.l}</div><div class="fv">${f.v}</div></div>`
+  ).join('');
+  const tags = s.tags.length
+    ? `<div class="tags">${s.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>`
+    : '';
+  const mto = s.mto
+    ? `<div class="mto-hint"><strong>MtO / MtS:</strong> ${s.mto}</div>`
+    : '';
+  document.getElementById('detail').innerHTML = `
+    <div class="d-top">
+      <div>
+        <div class="d-badge" style="background:${s.bc};color:${s.bt}">${s.badge}</div>
+        <div class="d-title">${s.title}</div>
+      </div>
+      <div class="d-step">Station ${active+1} / ${S.length}</div>
+    </div>
+    <p class="d-desc">${s.desc}</p>
+    ${mto}
+    ${tags}
+    <div class="facts">${facts}</div>
+    <div class="nav">
+      <button class="nbtn" onclick="setA(${active-1})" ${active===0?'disabled':''}>← Zurück</button>
+      <span class="nav-hint">Klicken Sie auf eine Station oder navigieren Sie</span>
+      <button class="nbtn" onclick="setA(${active+1})" ${active===S.length-1?'disabled':''}>Weiter →</button>
+    </div>
+  `;
+}
+
+function setA(i) {
+  if (i < 0 || i >= S.length) return;
+  active = i;
+  renderSidebar();
+  renderDetail();
+}
+
+renderSidebar();
+renderDetail();
+</script>
+</body>
+</html>
