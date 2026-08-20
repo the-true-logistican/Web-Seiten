@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deutsches Text-Audit V10.9.9</title>
+<title>Deutsches Text-Audit V10.9.10</title>
 <style>
 body {
     font-family: Arial, sans-serif;
@@ -555,6 +555,7 @@ body.modal-open { overflow: hidden; }
 .license-notice img { display: block; width: 88px; height: 31px; border: 0; }
 .license-meta { display: flex; flex-direction: row; align-items: center; gap: 8px; }
 .license-notice a { color: #555; }
+#footerVersion { color: #555; white-space: nowrap; }
 
 .text-quantity-guide {
     width: 100%;
@@ -624,8 +625,9 @@ body.modal-open { overflow: hidden; }
     <div class="license-meta">
         <span id="copyrightNotice">© 2026 Martin Wölker</span>
         <a id="contactLink" href="http://www.woelker.name/" target="_blank" rel="noopener noreferrer">Kontakt</a>
-        <a id="faqLink" href="https://the-true-logistican.github.io/Web-Seiten/DTA-FAQ.html" target="_blank" rel="noopener noreferrer">FAQ</a>
+        <a id="faqLink" href="https://the-true-logistican.github.io/Web-Seiten/DTA-FAQ.html?dta=10.9.10" target="_blank" rel="noopener noreferrer">FAQ</a>
         <button id="imprintLink" class="imprint-link-button" type="button" onclick="openImprint()">Impressum</button>
+        <span id="footerVersion">Version 10.9.10</span>
     </div>
 </div>
 
@@ -668,7 +670,7 @@ document.addEventListener("keydown", event => {
 });
 
 
-const DTA_VERSION = "10.9.9";
+const DTA_VERSION = "10.9.10";
 const DTA_RELEASE_DATE = "20.08.2026";
 
 let lastAnalysisData = null;
@@ -7239,7 +7241,7 @@ function runRegressionTests() {
         if (!condition) failures.push(name + (details ? ": " + details : ""));
     };
 
-    check("V10.9.9 Selbstprüfung", verifyDTAIntegrity(), computeDTAIntegrityHash());
+    check("V10.9.10 Selbstprüfung", verifyDTAIntegrity(), computeDTAIntegrityHash());
 
     const dtaZero = computeDTAIndex({ bcfData: { B: 0, C: 0, F: 0 }, predictedBlaBlaMeterIndex: 0, lixCalibrated: 0 });
     const dtaUnit = computeDTAIndex({ bcfData: { B: 1, C: 0, F: 0 }, predictedBlaBlaMeterIndex: 0, lixCalibrated: 0 });
