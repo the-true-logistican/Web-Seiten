@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deutsches Text-Audit V10.9.0</title>
+<title>Deutsches Text-Audit V10.9.8</title>
 <style>
 body {
     font-family: Arial, sans-serif;
@@ -180,7 +180,7 @@ button {
 
 .profile-audit-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 280px;
+    grid-template-columns: minmax(0, 1fr) 430px;
     gap: 18px;
     align-items: start;
 }
@@ -193,43 +193,88 @@ button {
     align-items: flex-start;
 }
 .pq-map-box {
-    width: 270px;
+    width: 416px;
 }
 .pq-map {
-    width: 270px;
-    height: 270px;
+    width: 416px;
+    height: auto;
+    aspect-ratio: 442 / 319;
     display: block;
 }
 .pq-map text {
     font-family: Arial, sans-serif;
-    fill: #555;
+    fill: #fff;
     font-size: 10px;
 }
-.pq-map .axis { stroke: #777; stroke-width: 1.2; }
-.pq-map .grid { stroke: #e1e1e1; stroke-width: 1; }
-.pq-map .tick { stroke: #999; stroke-width: 1; }
-.pq-map .point-ring { fill: none; stroke: #7b1e1e; stroke-width: 1.9; }
-.pq-map .point-cross { stroke: #7b1e1e; stroke-width: 1.9; stroke-linecap: round; }
+.pq-map .plot-bg { fill: #000; }
+.pq-map .axis { stroke: #fff; stroke-width: 1.4; }
+.pq-map .grid { stroke: #777; stroke-width: 0.7; stroke-dasharray: 3 3; opacity: 0.75; }
+.pq-map .tick { stroke: #fff; stroke-width: 1; }
+.pq-map .point-ring { fill: none; stroke-width: 2.6; }
+.pq-map .point-cross { stroke-width: 2.6; stroke-linecap: round; }
+.pq-map .scale-outline { fill: none; stroke: #bbb; stroke-width: 0.6; }
+.pq-map { cursor: zoom-in; }
+.pq-zoom-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(0, 0, 0, 0.82);
+    box-sizing: border-box;
+}
+.pq-zoom-panel {
+    position: relative;
+    width: min(1100px, 96vw);
+    max-height: 94vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pq-zoom-panel .pq-map {
+    width: 100%;
+    height: auto;
+    max-height: 90vh;
+    cursor: zoom-out;
+}
+.pq-zoom-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 2;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.65);
+    color: #fff;
+    font-size: 22px;
+    line-height: 1;
+}
 .pq-map-box.compact-main {
-    width: 270px;
-    margin-top: -28px;
+    width: 416px;
+    margin-top: -38px;
 }
 .pq-map-box.compact-main .pq-map {
-    width: 270px;
-    height: 248px;
+    width: 416px;
+    height: auto;
+    aspect-ratio: 442 / 319;
 }
 .pq-map-box.compact-main .pq-map-note {
     margin-top: 0;
 }
 .pq-map-note {
-    margin-top: 6px;
-    font-size: 11px;
-    line-height: 1.35;
+    margin-top: 2px;
+    font-size: 10px;
+    line-height: 1.3;
     color: #555;
     text-align: center;
 }
 .dta-result {
-    margin-top: 28px;
+    margin-top: 18px;
     padding: 16px 18px;
     border: 2px solid #333;
     border-radius: 4px;
@@ -243,7 +288,7 @@ button {
 }
 .dta-result-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 280px;
+    grid-template-columns: minmax(0, 1fr) 430px;
     gap: 18px;
     align-items: start;
 }
@@ -267,8 +312,8 @@ button {
     white-space: nowrap;
 }
 .dta-meta {
-    margin-top: 14px;
-    padding-top: 10px;
+    margin-top: 8px;
+    padding-top: 7px;
     border-top: 1px solid #eee;
     color: #777;
     font-size: 12px;
@@ -287,8 +332,8 @@ button {
     .profile-audit-grid,
     .dta-result-grid { grid-template-columns: 1fr; }
     .pq-map-wrap { justify-content: flex-start; }
-    .pq-map-box { width: 235px; }
-    .pq-map { width: 235px; height: 235px; }
+    .pq-map-box { width: min(416px, 100%); }
+    .pq-map { width: min(416px, 100%); height: auto; }
 }
 @media (max-width: 520px) {
     .dta-line {
@@ -509,14 +554,14 @@ body.modal-open { overflow: hidden; }
 <script>
 "use strict";
 
-const DTA_VERSION = "10.9.0";
-const DTA_RELEASE_DATE = "14.08.2026";
+const DTA_VERSION = "10.9.8";
+const DTA_RELEASE_DATE = "17.08.2026";
 
 let lastAnalysisData = null;
 let activeBlaBlaMeterStage = null;
 
 
-const DTA_INTEGRITY_EXPECTED_SHA256 = "34bd97f9760bc33b572d4b12ea3f460fee1e9b6b17091e1bc5979607d6d29b2b";
+const DTA_INTEGRITY_EXPECTED_SHA256 = "ebf0b9a05575a1f16e325349ef4e6e0a2d2d8a4d22d73c93234c0ff82f5de97f";
 let dtaIntegrityState = null;
 const DTA_LICENSE_METADATA = Object.freeze({
     license: "CC BY-NC-SA 4.0",
@@ -531,6 +576,91 @@ const TEXT_QUANTITY_LIMITS = Object.freeze({
     minimum: Object.freeze({ characters: 300, words: 50, sentences: 3 }),
     optimal: Object.freeze({ characters: 900, words: 150, sentences: 9 })
 });
+
+// ---------------------------------------------------------------------------
+// DEUTSCH-GATE V10.9.8
+// Methode: rangbasierter Zeichen-N-Gramm-Vergleich nach Cavnar & Trenkle.
+// Referenzprofile: libexttextcat-LM-Profile, 400 Ränge je Sprache;
+// Profile aus externer Datenquelle, nicht aus dem DTA-Trainingskorpus abgeleitet.
+// Berücksichtigte Konkurrenzsprachen: Englisch, Niederländisch, Französisch,
+// Spanisch, Italienisch, Portugiesisch.
+// ---------------------------------------------------------------------------
+const LANGUAGE_GATE_CONFIG = Object.freeze({
+    maxNgrams: 400,
+    maxNgramLength: 5,
+    missingPenalty: 400,
+    acceptableScoreRatio: 1.02,
+    germanCode: "de"
+});
+
+const LANGUAGE_GATE_PROFILES = Object.freeze({"de":["_","e","n","i","r","t","s","a","h","d","er","en","u","l","n_","c","ch","g","o","e_","r_","m","_d","de","en_","ei","er_","in","te","ie","b","t_","f","k","ge","s_","un",",",",_","w","z","nd","he","st","_s","_de",".","_e","ne","der","._","be","es","ic","_a","ie_","is","ich","an","re","di","ein","se","\"","ng","_i","sc","sch","it","der_","h_","ch_","le","p","ä","ü","au","v","che","_w","d_","die","_di","m_","_die","el","_der","li","_der_","si","al","ns","on","or","ti","ten","ht","die_","_die_","rt","nd_","_u","nt","in_","den","cht","und","me","_z","ung","ll","_un","_ei","_n","hr","ine","_ein","ar","ra","_v","_g","as","zu","et","em","eine","gen","g_","da","we","lt","_\"","nde","ni","und_","ur","_m","ri","ha","eh","ten_","es_","_k","_und","ig","_b","hen","_und_","_au","_da","_zu","_in","at","us","wi","n,","n,_","nn","te_","eit","_h","ter","n.","ß","ng_","sche","-","rs","den_","_si","im","_ge","chen","rd","n._","icht","rn","uf","isch","isc","nen","_in_","_er","ich_","ac","lic","ber","la","vo","eb","ke","as_","hen_","ach","en,","ung_","lich","ste","en,_","ben","_f","en.","_be","it_","_se","mi","ve","na","on_","ss","ist","ö","ht_","ru","st_","ts","ab","ol","_eine","hi","so","em_","\"_","ren","en._","chen_","ta","ere","ische","ers","ert","_p","tr","ed","ze","eg","ens","ür","ah","_vo","ne_","cht_","uc","_wi","nge","lle","fe","_l","ver","hl","ma","wa","auf","nte","uch","l_","sei","nen_","u_","_den","_al","t.","lte","ut","ent","sich","sic","il","ier","am","gen_","sen","fü","um","t._","f_","he_","ner","nst","ls","_sei","ro","ir","ebe","mm","ag","ern","t,_","t,","eu","ft","icht_","hre","nz","nder","_t","_den_","iche","tt","zu_","and","j","rde","rei","_we","ige","rte","hei","das","aus","che_","_das","_zu_","tz","_ni","das_","_r","des","_ve","_j","_das_","men","_so","_ver","_auf","ine_","_ha","rg","ind","eben","kt","mit","_an","her","_sich","_sic","end","abe","ck","sse","ür_","ell","ik","o_","nic","nich","sa","_fü","hn","zi","no","nicht","im_","von_","von","_nic","_nich","eine_","oc","wei","io","schen","gt"],"en":["_","e","t","o","n","i","a","s","r","h","e_","d","_t","c","l","th","he","_th","u","f","m","p","_a","the","_the","s_","er","_o","he_","d_","t_","the_","_the_","on","in","y","n_","b","re",",",",_","an","g","w","_i","en","f_","y_","of","_of","es","ti","v","_of_","of_","nd","at","r_","_w","it","ed","_p","nt","_c","o_","io","_an","te","or","_b","nd_","to","st","is","_s","_in","ion","and","de","ve","ha","ar","_m","and_","_and","_and_","se","_to","me","to_","ed_",".","be","_f","._","_to_","co","ic","ns","al","le","ou","ce","ent","l_","_co","tio","on_","_d","tion","ri","_e","ng","hi","er_","ea","as","_be","pe","h_","_r","ec","ch","ro","ct","_h","pr","in_","ne","ll","rt","s,_","s,","li","ra","wh","a_","ac","_wh","_n","ts","di","es_","si","re_","at_","nc","ie","_a_","_in_","ing","us","_re","g_","ng_","op","con","tha","_l","_tha","ver","ma","ion_","_con","ci","ons","_it","po","ere","is_","ta","la","_pr","fo","ho","ir","ss","men","be_","un","ty","_be_","ing_","om","ot","hat","ly","_g","em","rs","mo","ch_","wi","we","ad","ts_","res","_wi","hat_","ei","ly_","ni","os","ca","ur","ut","that","_that","ati","_fo","st_","il","or_","for","pa","ul","ate","ter","it_","nt_","that_","_ha","al_","el","as_","ll_","_ma","no","ment","an_","tion_","su","bl","_de","nce","pl","fe","tr","so","int","ov","e,","e,_","_u","ent_","her","j","atio","ation","le_","ai","_it_","_on","_for","ect","k","hic","est","der","tu","na","_by_","by_","by","_by","ve_","_di","en_","vi","m_","_whi","iv","whi","ns_","ich","ge","pro","ess","_whic","ers","hich","ce_","which","whic","all","ove","_is","ich_","ee","hich_","n,_","n,","im","ir_","hei","ions","sti","se_","per","_pa","heir","id","eir","eir_","ig","heir_","_no","ev","era","_int","ted","ies","art","thei","_ar","_thei","their","_pro","et","_pe","_mo","ther","x","gh","_is_","ol","ty_","nde","am","rn","nte","mp","_su","_we","par","_v","pu","his","ow","mi","go","ue","ple","ep","ab",";_",";","ex","ain","over","_un","q","qu","pp","ith","ry","_as","ber","ub","av","uc","s._","s.","enc","are","iti","gr","his_","ua","part","ff","eve","rea","ous","ia","ag","mb","_go","fa","on,_","ern","t,_","on,","t,","_me"],"nl":["_","e","n","a","t","i","r","d","o","n_","en","s","e_","l","g","en_","de","er","t_","v","u","k","_d","h","m","an","te","j","in","_v","r_","de_","ee","p","et","ge","aa","b","_e","st","z","ie","_de","w","c",".","s_","_de_","_h","el","ij","._","et_","an_","he","_o","nd","_i","ar","_m","re","ve","'","or","ng","at","_s","oo","_z","le","_b","_a","_he","va","er_","me","_w","f","on","_t","_va","_g","di","nt",",","g_",",_","van","ch","is","ing","be","ni","it","een","_van","al","den","ti","van_","oe","ke","_van_","aar","d_","we","da","tu","_ee","ud","een_","li","es","_st","ver","ten","ri","nde","der","_in","k_","vo","het","oor","_het","het_","_het_","_een","l_","ze","_n","ro","gen","_een_","at_","op","n.","_en","rs","_da","stu","in_","_be","_ge","_k","rd","tud","_en_","n._","te_","ei","ent","_me","la","ek","ed","ra","stud","en.","ie_","ste","_vo","_in_","_stu","zi","om","ui","en._","ten_","_stud","ude","die","ns","_j","aan","se","ma","_ve","ne","_p","eg","p_","ar_","aar_","_te","ng_","_we","''","ers","_op","dat","dat_","ig","ere","eer","_zi","voor","voo","nge","nder","nte","or_","ta","je","ing_","ll","_ver","jk","oor_","_dat","ijk","ren","is_","_dat_","_l","and","lij","ter","na","uden","tude","_voor","_voo","ond","ken","cht","_al","ht","wa","ho","em","den_","pe","sc","un","ur","_di","gen_","zo","rt","ev","mo","lijk","_is","stude","ha","to","el_","og","op_","sch","ol","ente","_u","pr","end","mi","iet","_aa","eli","dent","ijn","jn","ou","men","_'","tie","_is_","nie","tr","ak","id","udent","tuden","uit","_te_","aan_","ld","_aan","ede","ja","nten","it_","je_","ts","erd","est","_op_","ad","al_","_ze","_on","rk","lle","ens","gel","m_","len","_r","ec","inge","met","_met","si","die_","us","onde","_ni","eu","dente","enten","ic","_met_","f_","met_","no","ko","voor_","rde","ngen","lo","ot","as","zij","_nie","vi","eb","_zij","ep","wi","_zo","kt","ege","bi","j_","ij_","ze_","do","lan","ov","udi","ord","onder","elij","_wa","elijk","ef","_die","ag","erk","eren","ik","_ma","gr","am","_mo","ul","nn","eve","maa","ingen","wo","_''","tudi","nt_","tudie","ven","udie","nten_","_die_","jaa","ka","eke","ite","a_","_je","ac","jaar","_je_","_zijn","zijn","n,","nen","n,_","ijn_"],"fr":["_","e","i","s","a","n","r","t","u","o","l","e_","d","s_","_d","c","p","é","m","es","t_","_l","de","on","_de","en","_p","nt","le","es_","re",",",",_","n_","de_","'","an","_de_","v","_s","r_","_c","er","ai","_a","_e","ou","q","qu","is","te","ti","ur","it","g","a_","f","la","in","_le","me","nt_",".","b","ra","io","ent","._","ne","ns","ion","h","ue","se","le_","ar","ie","co","at","tr","et","pr","ce","au","u_","il","_r","_la","un","eu","st","re_","ro","la_","on_","_m","_la_","que","_qu","_q","po","tio","tion","pa","li","_t","nc","si","_pr","ri","al","ui","_co","i_","ta","é_","x","em","l_","et_","_l'","l'","les","ns_","ir","_le_","ent_","or","ré","_f","ne_","à","ve","ch","it_","di","oi","-","ni","à_","les_","d'","el","ss","_n","ut","our","des","\"","ur_","nd","er_","ait","ion_","rs","_en","_et","j","_d'","ll","_des","des_","_pa","té","_et_","_à","_à_","om","ma","ati","_des_","so","_u","è","_\"","sa","_po","tre","dé","ue_","pe","en_","ont","_un","us","_les","_les_","rt","is_","_i","du","e,_","e,","na","s,","s,_","as","men","ait_","'a","vi","ci","ant","_au","da","ation","atio","con","que_","ons","eur","est","me_","mi","par","tion_","_so","te_","res","lo","ment","és","ans","_du","du_","ux","un_","y","pro","_du_","_dé","ce_","_se","_re","pl","ge","ic","su","x_","ien","nce","\"_","ac","il_","qui","_pro","no","av","_v","_o","rs_","ans_","eme","bl","emen","_en_","iqu","ct","iq","lle","nn","ts","ement","ét","_\"_","ér","té_","_ce","mp","ire","ui_","to","he","_é","ca","_j","ec","va","_par","ée","_con","se_","tre_","ique","dan","éc","ha","une","lu","ux_","_b","s.","pou","_pou","ier","ais","s._","ain","_un_","nte","'e","mo","mm","ment_","une_","com","'i","_ma","do","ant_","anc","che","ap","ont_","_que","os","urs","_di","fi","im","pour","_pour","ê","ts_","_g","our_","_sa","ntr","_da","_ré","rai","rm","_qui","e.","am","_com","uv","qui_","e._","pu","_qui_","ia","_dan","_dans","dans","ter","fo","son","dans_","id","ag","ine","tu","ran","au_","ol","oc","est_","st_","enc","_tr","'u","tai","ell","_su","ions","pré","sé","ab","né","_que_","_in","_av","pour_","fa","rr","air","_ch","_a_","ba","_pl","gr","tt","ssi","rd","pas","bi"],"es":["_","e","a","o","s","n","i","r","l","d","c","t","u","a_","e_","s_","de","p","_d","m","_de","n_","o_","en","_e","es","_l","de_","la","os","_de_","_p","l_","ci","_c","_a","os_","ar","er","as","ra","nt","_la","re",",_",",","el","ta","ue","g","on","al","_s","co","b","an","v","la_","or","te","st","el_","_la_","y","to","r_","ad","ó","do","ro","se","as_","q","qu",".","._","en_","ca","in","un","_co","es_","ic","_en","ac","que","na","lo","_m","f","ent","da","ue_","po","le","_q","_qu","que_","_que","ie","h","pa","y_","ti","_que_","_en_","_y","tr","_el","ri","ia","_el_","_se","ió","_y_","io","pr","ón","ec","no","id","í","mi","_t","ión","nte","me","aci","do_","li","con","nd","est","ni","á","di","_es","_lo","ció","ma","ón_","_pr","_r","ción","z","ra_","si","ión_","oc","nc","_u","_po","los","or_","_con","is","del","_del","ado","se_","_i","los_","_re","por","_del_","sta","del_","al_","ne","_h","cu","_n","_a_","_v","_un","ce","so","ción_","res","vi","om","te_","_pa","ien","j","_los","_los_","to_","ol","it","am","ació","rt","ación","pe","ha","_se_","nto","_o","on_","sa","na_","ta_","su","cia","mo","ct","par","_f","_por","eg","_in","ur","ve","im","ga","_est","ar_","ab","tu","at","no_","s,","s,_","_por_","por_","las","ba","o,_","o,","ento","et","_ha","tra","ient","_al","a,_","ica","a,","pro","ado_","ici","_ca","an_","las_","ara","nci","ente","ú","rr","ir","da_","em","ll","il","ía","iv","_su","_par","ul","ant","mp","_las_","_las","_pro","men","des","com","ion","era","ed","ida","sp","gu","nte_","ns","za","dos","cio","les","bl","_com","s._","s.","ua","nta","mu","_no","dad","ñ","é","un_","va","ist","nes","iento","one","ara_","ada","_un_","fi","pre","tos","ter","ot","esta","_me","ido","ob","_g","br","go","ea","nto_","ona","pu","dos_","tro","ier","para","ment","ag","ero","gr","rec","bi","ia_","una","nic","ncia","ía_","a._","tos_","a.","ran","lo_","ones","rm","lu","ron","con_","ó_","nes_","_ci","ante","ch","_con_","_para","ntr","una_","para_","mie","ico","fe","les_","uc","ip","sto","_ma","ui","sta_","_ve","cion","\"","op","cal","_mu","ro_","_pe","ste","ras","pl","_una","_di","ento_","ita","ione","ect","_una_","mien","tan","du","den","ndo","per","eri"],"it":["_","a","e","i","o","l","n","r","t","c","s","a_","e_","d","i_","o_","u","v","p","m","_c",",",",_","_s","_d","g","an","er","_a","_p","la","_l","re","ar","h","no","co","va","_e","n_","on","ra","to","f","di","_i","ch","ll","l_","la_","ta","el","in","_m","en","b","ri","_co","_n","_di","li","av","al","le","ia","se","ol","_f","or","te","_e_","ve","at","de",".","ne","va_","ca","._","tt","re_","nt","io","_v","pe","z","to_","_ch","na","si","'","he","no_","ci","_la","ro","_g","st","cc","he_","di_","ma","ev","che","es","me","pa","_t","ti","_di_","ss","che_","a,_","a,","nd","o,","o,_","ell","gl","sa","il","gli","da","as","do","_che","_che_","eva","_la_","lla","le_","un","_pe","_de","q","qu","ava","po","on_","r_","li_","_b","_il","_il_","il_","lo","om","e,","e,_","ni","tr","so","ra_","os","_in","_u","per","are","et","_se","ano","si_","_ca","_qu","lla_","_q","_a_","ac","_r","ic","_no","ie","fa","hi","del","ua","_per","ce","_ma","sc","_del","mi","_un","chi","era","i,","i,_","su","and","vo","_fa","eva_","ano_","gli_","non","pi","vi","er_","_al","se_","_ne","_non","am","is","ava_","_non_","non_","in_","ent","_si","_pa","com","!","_le","_su","uo","el_","!_","l'","ue","te_","_com","are_","pr","_in_","van","mo","ta_","gn","ere","na_","tto","it","_per_","per_","é","all","ess","ut","col","acc","gi","lo_","oc","vano","io_","_av","ndo","é_","ato","ave","_st","me_","'a","ia_","con","mp","fi","ett","_si_","_pi","era_","ti_","ó","vano_","_gl","qua","ella","sta","ome","_gli","ad","_ve","ant","ne_","ó_","sp","do_","_po","ro_","ov","_le_","ella_","sse","_con","ir","_vi","ig","_gli_","_ave","vev","un_","ot","veva","dell","que","a.","_o","a._","tu","cia","za","_que","_da","par","_pr","cch","_dell","eg","_sa","o._","o.","_col","lt","_un_","rt","ur","_vo","_me","ome_","ap","zi","nto","og","_an","_so","em","ag","be","ni_","im","cchi","ver","lle","nz","cci","_ri","nc","_er","come_","come","aveva","ui","avev","tto_","_come","ed","man","rs","occ","ndo_","ato_","_qua","_era","ari","ba","_mo","nel","id","men","_fi","_all","rr","_do","_avev","att","l'a","ei","zz",";","vol","pp","tra",";_","ere_","lle_","nda","utt","est","_nel","ul","ola","iv","ando","ale","lu","rn","e.","e._","ll'","tta","nte","_l'","uel"],"pt":["_","a","e","o","s","r","i","n","d","t","m","u","o_","a_","e_","c","s_","_d","l","p","_a","de",",",",_","_e","es","os","ra","_p","nt","_de","do","en","re","as","v","m_","de_","er","g","_c","da","co","os_","te","ar","or","q","qu","_s","ta","_de_","_o","se","ue","to","ad",".","que","em","an","f","r_","b","st","is","al","_qu","_q","in","as_","ã","do_","ent","ão","_n","_co","_a_","_m","on","ç","ri","_que","ma","po","ia","ão_","._","na","me","ro","_t","pa","da_","h","ue_","ca","que_","nte","no","tr","am","em_","_que_","_se","om","io","_do","ti","ci","_da","nd","ei","ra_","pr","_r","_e_","_f","ss","es_","el","id","_o_","_pa","um","pe","_po","la","ir","á","ic","di","li","é","_re","ve","mo","s,","s,_","ou","com","sa","si","men","rt","_i","con","o,","_da_","o,_","se_","_com","ado","to_","ai","it","ec","dos","_em","ção","aç","çã","ara","so","tu","res","im","_pr","mi","ua","nto","ment","í","par","_do_","ce","est","u_","ente","l_","_u","\"","ni","z","sta","nc","_em_","ção_","_v","at","dos_","_es","«","_«","te_","»","va","le","ur","_um","vi","_par","a,","a,_","_con","ant","lo","ia_","gu","ar_","ac","e,_","e,","no_","eg","il","ns","er_","_ma","por","_in","_l","ó","ont","_no","tra","ida","is_","ol","açã","ter","ação","un","-","_te","or_","ma_","_pe","ara_","ist","para","nta","ais","ut","nte_","j","dad","_na","am_","ade","ica","x","al_","des","_para","ada","nh","_se_","mp","ndo","_por","ação_","para_","eir","ui","vo","ou_","ta_","ria","tos","rr","io_","br","_di","õ","õe","fo","ões","mo_","ov","pro","_os_","_os","das","iv","uma","gr","su","fi","um_","na_","ga","ais_","lh","ort","cia","..","_est","cont","ig","á_","ran","ça","om_","_en","dade","_as","ho","ntr","nto_","fe","das_","uma_","ess","é_","ndo_","ob","»_","ul","ente_","go","ento","ver","_des","gi","ha","cu","idad","av","ões_","_pro","ura","ap","_com_","_ca","com_","ao","ne","od","_\"","pre","ras","_me","_ao","_no_","oc","str","tes","_b","and","_g","ro_","omo","_dos","_fo","_dos_","rn","mento","ito","ev","rio","ass","eu","be","os,","os,_","sp","_uma","ep","tad","s.","_uma_","idade","_um_","nã","não","ct","ram","ado_","ela","omo_","iz","_an"]});
+const LANGUAGE_GATE_PROFILE_MAPS = Object.freeze(Object.fromEntries(
+    Object.entries(LANGUAGE_GATE_PROFILES).map(([language, grams]) => [
+        language,
+        new Map(grams.map((gram, index) => [gram, index + 1]))
+    ])
+));
+
+function buildLanguageNGramProfile(text, maxNgrams = LANGUAGE_GATE_CONFIG.maxNgrams) {
+    const words = (String(text || "").normalize("NFC").toLowerCase().match(/\p{L}+/gu) || []);
+    const counts = new Map();
+    for (const word of words) {
+        const bounded = "_" + word + "_";
+        const maxLength = Math.min(LANGUAGE_GATE_CONFIG.maxNgramLength, bounded.length);
+        for (let n = 1; n <= maxLength; n++) {
+            for (let i = 0; i <= bounded.length - n; i++) {
+                const gram = bounded.slice(i, i + n);
+                counts.set(gram, (counts.get(gram) || 0) + 1);
+            }
+        }
+    }
+    return Array.from(counts.entries())
+        .sort((a, b) => (b[1] - a[1]) || a[0].localeCompare(b[0], "de"))
+        .slice(0, maxNgrams)
+        .map(entry => entry[0]);
+}
+
+function evaluateGermanLanguage(text) {
+    const documentProfile = buildLanguageNGramProfile(text);
+    if (!documentProfile.length) {
+        return { isGerman: false, reason: "no-language-profile", scores: [], ratio: 0 };
+    }
+
+    const scores = Object.entries(LANGUAGE_GATE_PROFILE_MAPS).map(([language, refMap]) => {
+        let distance = 0;
+        for (let i = 0; i < documentProfile.length; i++) {
+            const gram = documentProfile[i];
+            const docRank = i + 1;
+            const refRank = refMap.get(gram);
+            distance += refRank === undefined
+                ? LANGUAGE_GATE_CONFIG.missingPenalty
+                : Math.abs(docRank - refRank);
+        }
+        return { language, distance };
+    }).sort((a, b) => a.distance - b.distance);
+
+    const best = scores[0];
+    const second = scores[1];
+    const ratio = best && second && best.distance > 0
+        ? second.distance / best.distance
+        : 0;
+    const isGerman = Boolean(
+        best &&
+        best.language === LANGUAGE_GATE_CONFIG.germanCode &&
+        ratio >= LANGUAGE_GATE_CONFIG.acceptableScoreRatio
+    );
+
+    return {
+        isGerman,
+        bestLanguage: best ? best.language : null,
+        bestDistance: best ? best.distance : null,
+        secondLanguage: second ? second.language : null,
+        secondDistance: second ? second.distance : null,
+        ratio,
+        evaluatedNgrams: documentProfile.length,
+        scores
+    };
+}
 
 function classifyTextQuantity(characterCount, wordCount, sentenceCount) {
     const belowMinimum =
@@ -589,6 +719,10 @@ function buildDTAIntegrityPayload() {
         DTA_LICENSE_METADATA,
         TEXT_QUANTITY_LIMITS,
         classifyTextQuantity,
+        LANGUAGE_GATE_CONFIG,
+        LANGUAGE_GATE_PROFILES,
+        buildLanguageNGramProfile,
+        evaluateGermanLanguage,
         BLABLAMETER_NN_MODEL,
         SUCCESS_FALSE_POSITIVES,
         JARGON_FAMILIES,
@@ -759,10 +893,12 @@ function buildDTAIntegrityPayload() {
         computeBCF1012,
         countDiagnosticOverlaps9916,
         computeDTAComponents,
+        openPQMapZoom,
         renderPQMap,
         computeDTAIndex,
         formatDTAValue,
         renderDTAResult,
+        renderNonGermanResult,
         renderMinimalResult,
         analyzeText
     ];
@@ -791,7 +927,7 @@ function getDtaRuntimeVersion() {
 // Neu trainiert auf 2.170 V15-Datensätzen mit 19 längenunabhängigen Merkmalen.
 // Parabolische Gewichtung: w(0)=15, w(0.3173)=1; oberhalb konstant 1.
 // Die Eingaben werden weiterhin auf vier Nachkommastellen gerundet.
-const BLABLAMETER_NN_MODEL = {"model_name":"BlaBlaMeter-NN-19-8-1-Parabel","model_version":"10.0","source_parameter_version":"V10.8.4 / Korpus V15","training_file":"Training_NN_V15_19_Eingaben_BBM-Ue.csv","training_file_sha256":"bbdc3be68c272bf1386ff352892de3102c85cc08f666d8a6063358eba4edfd9a","training_rows":2170,"target_name":"BBM-Ü","input_size":19,"hidden_size":8,"output_size":1,"trainable_parameters":169,"hidden_activation":"tanh","output_activation":"softplus","feature_names":["NN Exzesszeichen >8 je Wort","NN Ratio Wörter >=16","NN Ratio überschneidungsbereinigte Diagnosetokens","Ratio Jargon-Familientreffer","NN Ratio alle Jargon-Familientreffer","BCF B3 Ratio ungebundene Abstraktionstokens","NN Ratio Jargon Tier B","NN Ratio Doppelzählung Jargon/Suffix","NN Ratio Jargon Innovation","Ratio Jargon Management","NN Ratio Jargon Strategie","NN Ø Satzlänge","NN Ratio Jargon Tier C","NN Ratio Jargon Tier A","NN Ratio Jargon Tier E","Ratio Jargon Faktor","Ratio Jargon Implementierung","Ratio Jargon Transparenz","Ratio Jargon Erfolg"],"scaler":{"mean":[1.284272764976962,0.04752046082949302,0.09249059907834098,0.016410599078341005,0.02857152073732725,0.011136912442396311,0.010364331797235032,0.008842903225806456,0.0008915668202764978,0.0010427188940092171,0.0011551152073732728,18.595231152073787,0.004541981566820275,0.0015045161290322571,0.004310046082949309,0.0005530875576036865,0.00040940092165898614,0.00030396313364055303,0.0011238709677419362],"scale":[0.5195131792105577,0.03252853983711992,0.04893199516935733,0.02394886388136059,0.03295793884196047,0.016375808465825033,0.015930637660137113,0.013248548754706683,0.0036288409286116376,0.0037943901083377723,0.00418393725783616,5.448421976468556,0.009808934267548865,0.0045146171070214345,0.007121751616058063,0.002264435954159544,0.0018092501974712515,0.0014989191062629303,0.003098343803447989]},"input_weights":[[-0.33706402343409386,0.09486940337126751,-0.09242366816310735,-0.09492416983797991,0.09483899962645852,0.3011894402025645,-0.09940597673811137,0.09145195759061785],[-0.2867691124831817,0.03154134930062661,0.009983693592572871,-0.031171850038800436,0.03165607851459052,0.2104675522678535,-0.04617278349142264,0.07053020346142838],[-0.30767510178100593,0.06814963993629049,-0.16039361827498558,-0.06860839866250001,0.06801412515827655,0.14205979558733967,-0.05139760834210242,0.03000150894246562],[-0.13894480974685064,0.04998258412600887,-0.10468976866175857,-0.04998096326954215,0.04998134461940706,-0.005604821471157704,-0.03706763023845061,0.06313734329443042],[-0.015562773402106883,-0.023620224305534194,-0.03846177489830691,0.023752167329230432,-0.023567206683801068,-0.09000048834492616,0.015029299194469107,-0.009329938045031107],[-0.08855853337946357,0.008695099904369325,-0.06117790652900105,-0.00874690748457451,0.008673991502383715,0.02289028604832835,-0.02005493620978079,0.017385111460867894],[-0.18500471626488588,0.08050381754548809,-0.10078123316021477,-0.08071879393488741,0.08043153449725328,0.014406707812025991,-0.040990745855973745,0.0842674154782922],[-0.007349353836997759,0.010199350234759895,-0.07662301908358195,-0.009875989118612498,0.0102994458012365,-0.11883154778928054,-0.0046913082433904536,0.03972162105579481],[-0.09731445794364295,0.04164294684631837,-0.06030389794846303,-0.04162005198857625,0.04164869450480887,0.052394658706716196,-0.04638917527599606,0.04825389856672482],[-0.07061639661714551,0.018181269299259874,-0.051231445569184283,-0.018105275265955553,0.018193382439363828,0.023996513898820515,0.0545944741215834,0.02935696218637069],[-0.0782285825422581,0.0125018599720587,-0.05282212088298619,-0.012481039677092468,0.01251278496907463,0.05596242980008073,0.0739780920776242,0.016623912971662786],[-0.023180769704917146,-0.012516176143588539,-0.015967659167667035,0.012790835269234522,-0.012427722018908214,0.038083012213599644,0.02821567653527449,0.008741548833127296],[0.007775706823078817,-0.021603583273696023,-0.07000837596832182,0.021904746817469605,-0.021507105058044165,-0.06764085828255928,0.0045176790609723315,0.0013656426054887913],[-0.10196627939223032,0.030059784676015874,-0.04895381240473127,-0.029953079102644036,0.030099006640190995,0.06915831343052896,-0.06307300344580624,0.03610352129414491],[-0.0005847129101843242,-0.011468579768183154,0.0565017623096037,0.011594050181287523,-0.011416151581196143,0.08980582738060644,-0.019905310985261777,-0.007512768460777559],[-0.0674904760400852,0.027754055869038567,0.016690017004724875,-0.028060900075584795,0.02767022721384593,-0.0032421668560299608,0.0002163658684870414,0.030102465747549066],[-0.0923478342101917,0.007837562277967003,-0.07648523873553013,-0.007496008846232558,0.007938672812871451,0.05133041421172793,0.012197444851614012,0.032990523283647044],[-0.008290300785515242,0.015534395542109093,-0.08193193809641186,-0.01557964237942026,0.015536245784656377,0.0023783090615885224,0.011457625061072594,0.010960545318871926],[-0.04304992852987253,0.006992759529431373,-0.07312300881891606,-0.007318235272849106,0.00688866444835718,-0.009448090942839351,-0.035381515054397725,-0.029794581120013534]],"hidden_bias":[-1.275488790974589,-0.4282415395484197,-0.40997413616560435,0.4231200541357347,-0.42973190391270993,0.6836376248493259,0.86507184336818,-0.9737677019398416],"output_weights":[-0.679495872576193,0.27822202234108356,-0.36951252285546393,-0.2784167592149043,0.27814402320858467,0.4779445958271895,-0.2725327314391796,0.28797661109883216],"output_bias":-0.610318415400907,"training":{"method":"full-batch backpropagation with L-BFGS-B","loss":"parabolically_weighted_mean_squared_error_plus_l2","sample_weighting":{"mode":"parabolic-low-15-mid-0.3173","formula":"w(y)=1+(14/0.3173^2)*(y-0.3173)^2 for 0<=y<0.3173; w(y)=1 for y>=0.3173","normalization":"divide by mean training weight","weight_at_zero_before_normalization":15.0,"weight_at_or_above_mode_before_normalization":1.0},"l2_definition":"alpha*(sum(input_weights^2)+sum(output_weights^2)); biases excluded; no division by n","l2_candidates":[1e-05,3e-05,0.0001,0.0003,0.001,0.003,0.01,0.03,0.1],"selected_l2_alpha":0.001,"cross_validation":{"splits":5,"repeats":5,"seed":91919,"selection":"lowest mean fold MAE, then mean fold RMSE","selection_table":[{"alpha":1e-05,"mean_fold_mae":0.08814659113747407,"mean_fold_rmse":0.12389231794732447,"all_success":false,"mean_iterations":2605.28,"oof_mae":0.0808071320903239,"oof_rmse":0.11090649458849045},{"alpha":3e-05,"mean_fold_mae":0.08647183518021899,"mean_fold_rmse":0.12002687659919642,"all_success":true,"mean_iterations":1743.24,"oof_mae":0.08014189821249505,"oof_rmse":0.10864623199284945},{"alpha":0.0001,"mean_fold_mae":0.08428408911662814,"mean_fold_rmse":0.11597835331900301,"all_success":true,"mean_iterations":1111.84,"oof_mae":0.0801117663500032,"oof_rmse":0.10879742548318191},{"alpha":0.0003,"mean_fold_mae":0.08243069260182297,"mean_fold_rmse":0.11143091731334533,"all_success":true,"mean_iterations":825.68,"oof_mae":0.08136685633559375,"oof_rmse":0.10949362580284994},{"alpha":0.001,"mean_fold_mae":0.08217873259105377,"mean_fold_rmse":0.11006784331108233,"all_success":true,"mean_iterations":734.68,"oof_mae":0.08189295343520824,"oof_rmse":0.10966327913237324},{"alpha":0.003,"mean_fold_mae":0.08382649114467551,"mean_fold_rmse":0.11271048769761732,"all_success":true,"mean_iterations":339.8,"oof_mae":0.08368280307321804,"oof_rmse":0.11263954848933774},{"alpha":0.01,"mean_fold_mae":0.0902711195652807,"mean_fold_rmse":0.1224045646849422,"all_success":true,"mean_iterations":239.6,"oof_mae":0.09019843519079938,"oof_rmse":0.1225847754205538},{"alpha":0.03,"mean_fold_mae":0.09733876196816689,"mean_fold_rmse":0.13142432537042548,"all_success":true,"mean_iterations":57.36,"oof_mae":0.0972848704652265,"oof_rmse":0.13165619001484635},{"alpha":0.1,"mean_fold_mae":0.13576883526087408,"mean_fold_rmse":0.18162955496892255,"all_success":true,"mean_iterations":40.24,"oof_mae":0.13574867219385808,"oof_rmse":0.18188884350942328}],"metrics":{"count":2170,"mae":0.08189295343520824,"rmse":0.10966327913237324,"r2":0.8933161995167267,"bias":-0.015165699803867057,"median_absolute_error":0.0623101571860515,"within_0_05":0.4184331797235023,"within_0_10":0.6940092165898617,"pearson":0.9467696447978072,"spearman":0.9364544769008429,"prediction_min":0.07409124899644601,"prediction_max":2.125501762495055,"prediction_mean":0.5204011204726307,"prediction_sd":0.3285780088081938,"wasserstein":0.018908985263785545,"ranges":{"0_to_lt_0_10":{"count":79,"mae":0.049639979368216305,"bias":0.049639979368216305},"0_to_lt_0_20":{"count":264,"mae":0.042248537745230866,"bias":0.025591895515451477},"0_to_lt_0_30":{"count":552,"mae":0.04970322364181395,"bias":0.01195558256456147},"0_to_lt_0_40":{"count":866,"mae":0.05802583418564792,"bias":0.002816697865082546},"ge_0_40":{"count":1304,"mae":0.09774335624971685,"bias":-0.02710799764229525},"ge_1_00":{"count":211,"mae":0.1320196740895404,"bias":-0.07004518325628457},"ge_1_50":{"count":34,"mae":0.17987270094337415,"bias":-0.1454459178994952}}}},"optimizer":{"success":true,"status":0,"message":"CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH","iterations":735,"objective":0.009631884561062636,"training_mae":0.07914307144011573,"training_rmse":0.1050419643969259,"maxiter":5000,"ftol":1e-12,"gtol":1e-08,"maxls":30}},"integration_status":"embedded in ReverseBlablaMeter-Linear V10.9.0","excluded_text_numbers":[568,897,988,999,1245],"excluded_details":[[568,"excluded from V15 training"],[897,"excluded from V15 training"],[988,"excluded from V15 training"],[999,"excluded from V15 training"],[1245,"excluded from V15 training"]]};
+const BLABLAMETER_NN_MODEL = {"model_name":"BlaBlaMeter-NN-19-8-1-Parabel","model_version":"10.0","source_parameter_version":"V10.8.4 / Korpus V15","training_file":"Training_NN_V15_19_Eingaben_BBM-Ue.csv","training_file_sha256":"bbdc3be68c272bf1386ff352892de3102c85cc08f666d8a6063358eba4edfd9a","training_rows":2170,"target_name":"BBM-Ü","input_size":19,"hidden_size":8,"output_size":1,"trainable_parameters":169,"hidden_activation":"tanh","output_activation":"softplus","feature_names":["NN Exzesszeichen >8 je Wort","NN Ratio Wörter >=16","NN Ratio überschneidungsbereinigte Diagnosetokens","Ratio Jargon-Familientreffer","NN Ratio alle Jargon-Familientreffer","BCF B3 Ratio ungebundene Abstraktionstokens","NN Ratio Jargon Tier B","NN Ratio Doppelzählung Jargon/Suffix","NN Ratio Jargon Innovation","Ratio Jargon Management","NN Ratio Jargon Strategie","NN Ø Satzlänge","NN Ratio Jargon Tier C","NN Ratio Jargon Tier A","NN Ratio Jargon Tier E","Ratio Jargon Faktor","Ratio Jargon Implementierung","Ratio Jargon Transparenz","Ratio Jargon Erfolg"],"scaler":{"mean":[1.284272764976962,0.04752046082949302,0.09249059907834098,0.016410599078341005,0.02857152073732725,0.011136912442396311,0.010364331797235032,0.008842903225806456,0.0008915668202764978,0.0010427188940092171,0.0011551152073732728,18.595231152073787,0.004541981566820275,0.0015045161290322571,0.004310046082949309,0.0005530875576036865,0.00040940092165898614,0.00030396313364055303,0.0011238709677419362],"scale":[0.5195131792105577,0.03252853983711992,0.04893199516935733,0.02394886388136059,0.03295793884196047,0.016375808465825033,0.015930637660137113,0.013248548754706683,0.0036288409286116376,0.0037943901083377723,0.00418393725783616,5.448421976468556,0.009808934267548865,0.0045146171070214345,0.007121751616058063,0.002264435954159544,0.0018092501974712515,0.0014989191062629303,0.003098343803447989]},"input_weights":[[-0.33706402343409386,0.09486940337126751,-0.09242366816310735,-0.09492416983797991,0.09483899962645852,0.3011894402025645,-0.09940597673811137,0.09145195759061785],[-0.2867691124831817,0.03154134930062661,0.009983693592572871,-0.031171850038800436,0.03165607851459052,0.2104675522678535,-0.04617278349142264,0.07053020346142838],[-0.30767510178100593,0.06814963993629049,-0.16039361827498558,-0.06860839866250001,0.06801412515827655,0.14205979558733967,-0.05139760834210242,0.03000150894246562],[-0.13894480974685064,0.04998258412600887,-0.10468976866175857,-0.04998096326954215,0.04998134461940706,-0.005604821471157704,-0.03706763023845061,0.06313734329443042],[-0.015562773402106883,-0.023620224305534194,-0.03846177489830691,0.023752167329230432,-0.023567206683801068,-0.09000048834492616,0.015029299194469107,-0.009329938045031107],[-0.08855853337946357,0.008695099904369325,-0.06117790652900105,-0.00874690748457451,0.008673991502383715,0.02289028604832835,-0.02005493620978079,0.017385111460867894],[-0.18500471626488588,0.08050381754548809,-0.10078123316021477,-0.08071879393488741,0.08043153449725328,0.014406707812025991,-0.040990745855973745,0.0842674154782922],[-0.007349353836997759,0.010199350234759895,-0.07662301908358195,-0.009875989118612498,0.0102994458012365,-0.11883154778928054,-0.0046913082433904536,0.03972162105579481],[-0.09731445794364295,0.04164294684631837,-0.06030389794846303,-0.04162005198857625,0.04164869450480887,0.052394658706716196,-0.04638917527599606,0.04825389856672482],[-0.07061639661714551,0.018181269299259874,-0.051231445569184283,-0.018105275265955553,0.018193382439363828,0.023996513898820515,0.0545944741215834,0.02935696218637069],[-0.0782285825422581,0.0125018599720587,-0.05282212088298619,-0.012481039677092468,0.01251278496907463,0.05596242980008073,0.0739780920776242,0.016623912971662786],[-0.023180769704917146,-0.012516176143588539,-0.015967659167667035,0.012790835269234522,-0.012427722018908214,0.038083012213599644,0.02821567653527449,0.008741548833127296],[0.007775706823078817,-0.021603583273696023,-0.07000837596832182,0.021904746817469605,-0.021507105058044165,-0.06764085828255928,0.0045176790609723315,0.0013656426054887913],[-0.10196627939223032,0.030059784676015874,-0.04895381240473127,-0.029953079102644036,0.030099006640190995,0.06915831343052896,-0.06307300344580624,0.03610352129414491],[-0.0005847129101843242,-0.011468579768183154,0.0565017623096037,0.011594050181287523,-0.011416151581196143,0.08980582738060644,-0.019905310985261777,-0.007512768460777559],[-0.0674904760400852,0.027754055869038567,0.016690017004724875,-0.028060900075584795,0.02767022721384593,-0.0032421668560299608,0.0002163658684870414,0.030102465747549066],[-0.0923478342101917,0.007837562277967003,-0.07648523873553013,-0.007496008846232558,0.007938672812871451,0.05133041421172793,0.012197444851614012,0.032990523283647044],[-0.008290300785515242,0.015534395542109093,-0.08193193809641186,-0.01557964237942026,0.015536245784656377,0.0023783090615885224,0.011457625061072594,0.010960545318871926],[-0.04304992852987253,0.006992759529431373,-0.07312300881891606,-0.007318235272849106,0.00688866444835718,-0.009448090942839351,-0.035381515054397725,-0.029794581120013534]],"hidden_bias":[-1.275488790974589,-0.4282415395484197,-0.40997413616560435,0.4231200541357347,-0.42973190391270993,0.6836376248493259,0.86507184336818,-0.9737677019398416],"output_weights":[-0.679495872576193,0.27822202234108356,-0.36951252285546393,-0.2784167592149043,0.27814402320858467,0.4779445958271895,-0.2725327314391796,0.28797661109883216],"output_bias":-0.610318415400907,"training":{"method":"full-batch backpropagation with L-BFGS-B","loss":"parabolically_weighted_mean_squared_error_plus_l2","sample_weighting":{"mode":"parabolic-low-15-mid-0.3173","formula":"w(y)=1+(14/0.3173^2)*(y-0.3173)^2 for 0<=y<0.3173; w(y)=1 for y>=0.3173","normalization":"divide by mean training weight","weight_at_zero_before_normalization":15.0,"weight_at_or_above_mode_before_normalization":1.0},"l2_definition":"alpha*(sum(input_weights^2)+sum(output_weights^2)); biases excluded; no division by n","l2_candidates":[1e-05,3e-05,0.0001,0.0003,0.001,0.003,0.01,0.03,0.1],"selected_l2_alpha":0.001,"cross_validation":{"splits":5,"repeats":5,"seed":91919,"selection":"lowest mean fold MAE, then mean fold RMSE","selection_table":[{"alpha":1e-05,"mean_fold_mae":0.08814659113747407,"mean_fold_rmse":0.12389231794732447,"all_success":false,"mean_iterations":2605.28,"oof_mae":0.0808071320903239,"oof_rmse":0.11090649458849045},{"alpha":3e-05,"mean_fold_mae":0.08647183518021899,"mean_fold_rmse":0.12002687659919642,"all_success":true,"mean_iterations":1743.24,"oof_mae":0.08014189821249505,"oof_rmse":0.10864623199284945},{"alpha":0.0001,"mean_fold_mae":0.08428408911662814,"mean_fold_rmse":0.11597835331900301,"all_success":true,"mean_iterations":1111.84,"oof_mae":0.0801117663500032,"oof_rmse":0.10879742548318191},{"alpha":0.0003,"mean_fold_mae":0.08243069260182297,"mean_fold_rmse":0.11143091731334533,"all_success":true,"mean_iterations":825.68,"oof_mae":0.08136685633559375,"oof_rmse":0.10949362580284994},{"alpha":0.001,"mean_fold_mae":0.08217873259105377,"mean_fold_rmse":0.11006784331108233,"all_success":true,"mean_iterations":734.68,"oof_mae":0.08189295343520824,"oof_rmse":0.10966327913237324},{"alpha":0.003,"mean_fold_mae":0.08382649114467551,"mean_fold_rmse":0.11271048769761732,"all_success":true,"mean_iterations":339.8,"oof_mae":0.08368280307321804,"oof_rmse":0.11263954848933774},{"alpha":0.01,"mean_fold_mae":0.0902711195652807,"mean_fold_rmse":0.1224045646849422,"all_success":true,"mean_iterations":239.6,"oof_mae":0.09019843519079938,"oof_rmse":0.1225847754205538},{"alpha":0.03,"mean_fold_mae":0.09733876196816689,"mean_fold_rmse":0.13142432537042548,"all_success":true,"mean_iterations":57.36,"oof_mae":0.0972848704652265,"oof_rmse":0.13165619001484635},{"alpha":0.1,"mean_fold_mae":0.13576883526087408,"mean_fold_rmse":0.18162955496892255,"all_success":true,"mean_iterations":40.24,"oof_mae":0.13574867219385808,"oof_rmse":0.18188884350942328}],"metrics":{"count":2170,"mae":0.08189295343520824,"rmse":0.10966327913237324,"r2":0.8933161995167267,"bias":-0.015165699803867057,"median_absolute_error":0.0623101571860515,"within_0_05":0.4184331797235023,"within_0_10":0.6940092165898617,"pearson":0.9467696447978072,"spearman":0.9364544769008429,"prediction_min":0.07409124899644601,"prediction_max":2.125501762495055,"prediction_mean":0.5204011204726307,"prediction_sd":0.3285780088081938,"wasserstein":0.018908985263785545,"ranges":{"0_to_lt_0_10":{"count":79,"mae":0.049639979368216305,"bias":0.049639979368216305},"0_to_lt_0_20":{"count":264,"mae":0.042248537745230866,"bias":0.025591895515451477},"0_to_lt_0_30":{"count":552,"mae":0.04970322364181395,"bias":0.01195558256456147},"0_to_lt_0_40":{"count":866,"mae":0.05802583418564792,"bias":0.002816697865082546},"ge_0_40":{"count":1304,"mae":0.09774335624971685,"bias":-0.02710799764229525},"ge_1_00":{"count":211,"mae":0.1320196740895404,"bias":-0.07004518325628457},"ge_1_50":{"count":34,"mae":0.17987270094337415,"bias":-0.1454459178994952}}}},"optimizer":{"success":true,"status":0,"message":"CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH","iterations":735,"objective":0.009631884561062636,"training_mae":0.07914307144011573,"training_rmse":0.1050419643969259,"maxiter":5000,"ftol":1e-12,"gtol":1e-08,"maxls":30}},"integration_status":"embedded in ReverseBlablaMeter-Linear V10.9.5","excluded_text_numbers":[568,897,988,999,1245],"excluded_details":[[568,"excluded from V15 training"],[897,"excluded from V15 training"],[988,"excluded from V15 training"],[999,"excluded from V15 training"],[1245,"excluded from V15 training"]]};
 
 function blaBlaSoftplus(value) {
   if (value > 40) return value;
@@ -1716,13 +1852,24 @@ const BUREAUCRACY_SUFFIXES = [
     /nahme(?:n|s)?$/iu
 ];
 
+// V10.9.1: Abkürzungsschutz auf Basis des vollständigen V15-Korpus erweitert.
+// V10.9.5: Ausschließlich pQ-Layout geändert: SVG-Seitenverhältnis korrigiert, Achsenlabel-Abstände symmetrisiert und vertikale Leerflächen entfernt.
+// Mehrgliedrige Formen werden kanonisch ohne optionale Leerzeichen gespeichert;
+// createAbbreviationRegex() akzeptiert dieselben Formen zugleich mit Zwischenräumen.
 const ABBREVIATIONS = [
-    "Prof.", "Dr.", "Dr.-Ing.", "Dipl.-Inf.", "rer. nat.", "Inf.", "M.Sc.",
-    "Phil.", "Dipl.", "bspw.", "m.E.", "u.a.", "u.dgl.", "u.U.", "z.B.", "bzw.",
-    "usw.", "evtl.", "inkl.", "ca.", "Nr.", "Tel.", "etc.", "ggf.", "d.h.",
-    "i.d.R.", "i.S.d.", "i.V.m.", "a.a.O.", "o.ä.", "o.g.", "v.a.", "s.o.", "s.u.",
-    "Art.", "Abs.", "S.", "ff.", "vgl.", "Mr.", "Mrs.", "Ms.", "Jan.", "Feb.",
-    "Mär.", "Apr.", "Jun.", "Jul.", "Aug.", "Sep.", "Okt.", "Nov.", "Dez."
+    "Prof.", "Dr.", "Dr.-Ing.", "Dipl.-Inf.", "rer.nat.", "Inf.", "M.Sc.",
+    "Phil.", "Dipl.", "B.A.", "M.A.", "Priv.-Doz.", "Univ.-Prof.", "Doz.", "Dkfm.",
+    "Mag.", "habil.", "Univ.", "Jr.", "Lt.",
+    "bspw.", "bsp.", "bzgl.", "m.E.", "u.a.", "u.dgl.", "u.U.", "u.v.m.",
+    "z.B.", "z.T.", "z.Zt.", "bzw.", "usw.", "evtl.", "inkl.", "ca.", "ggü.",
+    "max.", "min.", "Mio.", "Mrd.", "Std.", "qm.", "Nr.", "Tel.", "etc.",
+    "ggf.", "d.h.", "i.d.R.", "i.S.d.", "i.V.m.", "n.i.O.", "a.a.O.", "o.ä.",
+    "o.g.", "o.D.", "o.V.", "v.a.", "s.o.", "s.u.", "d.J.", "n.Chr.", "v.Chr.",
+    "Art.", "Abs.", "S.", "ff.", "vgl.", "Abb.", "Tab.", "Rn.", "Az.", "ABl.",
+    "BGBl.", "GBl.", "GMBl.", "GV.NRW.", "e.V.", "Fa.", "Co.",
+    "ebd.", "engl.", "geb.", "gem.", "resp.", "Rev.", "sog.", "vergl.",
+    "Mr.", "Mrs.", "Ms.", "Jan.", "Feb.", "Mär.", "Apr.", "Jun.", "Jul.",
+    "Aug.", "Sep.", "Okt.", "Nov.", "Dez."
 ];
 
 // ---------------------------------------------------------------------------
@@ -6224,85 +6371,169 @@ function computeDTAComponents(data) {
     return { P, Q, R, mean, dimension, scores };
 }
 
+function openPQMapZoom(svgElement) {
+    if (!svgElement) return;
+    const existing = document.querySelector(".pq-zoom-overlay");
+    if (existing) existing.remove();
+
+    const overlay = document.createElement("div");
+    overlay.className = "pq-zoom-overlay";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+    overlay.setAttribute("aria-label", "pQ-Grafik vergrößert");
+
+    const panel = document.createElement("div");
+    panel.className = "pq-zoom-panel";
+
+    const clone = svgElement.cloneNode(true);
+    clone.removeAttribute("onclick");
+    clone.setAttribute("aria-label", "pQ-Grafik vergrößert");
+
+    const closeButton = document.createElement("button");
+    closeButton.className = "pq-zoom-close";
+    closeButton.type = "button";
+    closeButton.setAttribute("aria-label", "Vergrößerte Grafik schließen");
+    closeButton.textContent = "×";
+
+    const close = () => {
+        overlay.remove();
+        document.removeEventListener("keydown", onKeyDown);
+    };
+    const onKeyDown = event => {
+        if (event.key === "Escape") close();
+    };
+
+    closeButton.addEventListener("click", event => {
+        event.stopPropagation();
+        close();
+    });
+    clone.addEventListener("click", close);
+    overlay.addEventListener("click", event => {
+        if (event.target === overlay) close();
+    });
+    document.addEventListener("keydown", onKeyDown);
+
+    panel.appendChild(clone);
+    panel.appendChild(closeButton);
+    overlay.appendChild(panel);
+    document.body.appendChild(overlay);
+}
+
 function renderPQMap(data, compactMain = false) {
-    function chooseScale(p, q) {
-        const m = Math.max(p, q);
-        if (m <= 1) return 1;
-        if (m <= 1.5) return 1.5;
-        if (m <= 2) return 2;
-        if (m <= 2.5) return 2.5;
-        return 3;
-    }
-    const max = chooseScale(data.dtaP, data.dtaQ);
-    const fmt = v => Math.abs(v - Math.round(v)) < 1e-9 ? String(Math.round(v)) : v.toFixed(1);
-    const ticks = [0, max / 2, max];
+    const P_MAX = 3.0;
+    const Q_MAX = 1.8;
+    const Q_SAT_MIN = 0.20;
 
-    if (compactMain) {
-        const x0 = 40, y0 = 200, span = 168;
-        const px = x0 + Math.min(max, Math.max(0, data.dtaP)) / max * span;
-        const py = y0 - Math.min(max, Math.max(0, data.dtaQ)) / max * span;
-        return (
-            '<div class="pq-map-wrap">' +
-            '<div class="pq-map-box compact-main">' +
-            '<svg class="pq-map" viewBox="0 0 260 244" role="img" aria-label="DTA P-Q-Karte">' +
-            '<text x="17" y="24">Q: Profilunwucht</text>' +
-            '<line class="grid" x1="40" y1="116" x2="208" y2="116" />' +
-            '<line class="grid" x1="124" y1="32" x2="124" y2="200" />' +
-            '<line class="axis" x1="40" y1="200" x2="216" y2="200" />' +
-            '<line class="axis" x1="40" y1="205" x2="40" y2="32" />' +
-            '<line class="tick" x1="40" y1="200" x2="40" y2="205" />' +
-            '<line class="tick" x1="124" y1="200" x2="124" y2="205" />' +
-            '<line class="tick" x1="208" y1="200" x2="208" y2="205" />' +
-            '<line class="tick" x1="35" y1="200" x2="40" y2="200" />' +
-            '<line class="tick" x1="35" y1="116" x2="40" y2="116" />' +
-            '<line class="tick" x1="35" y1="32" x2="40" y2="32" />' +
-            '<text x="37" y="217">' + fmt(ticks[0]) + '</text>' +
-            '<text x="121" y="217">' + fmt(ticks[1]) + '</text>' +
-            '<text x="205" y="217">' + fmt(ticks[2]) + '</text>' +
-            '<text x="17" y="203">' + fmt(ticks[0]) + '</text>' +
-            '<text x="17" y="119">' + fmt(ticks[1]) + '</text>' +
-            '<text x="17" y="35">' + fmt(ticks[2]) + '</text>' +
-            '<text x="124" y="238" text-anchor="middle">Parallelkomponente</text>' +
-            '<circle class="point-ring" cx="' + px.toFixed(2) + '" cy="' + py.toFixed(2) + '" r="9" />' +
-            '<line class="point-cross" x1="' + (px - 5.5).toFixed(2) + '" y1="' + (py - 5.5).toFixed(2) + '" x2="' + (px + 5.5).toFixed(2) + '" y2="' + (py + 5.5).toFixed(2) + '" />' +
-            '<line class="point-cross" x1="' + (px - 5.5).toFixed(2) + '" y1="' + (py + 5.5).toFixed(2) + '" x2="' + (px + 5.5).toFixed(2) + '" y2="' + (py - 5.5).toFixed(2) + '" />' +
-            '</svg>' +
-            '<div class="pq-map-note">Messsymbol: Der Messwert liegt exakt im Schnittpunkt des X; der Kreis dient nur der besseren Sichtbarkeit.</div>' +
-            '</div>' +
-            '</div>'
-        );
+    function clamp(value, min, max) {
+        return Math.min(max, Math.max(min, value));
     }
 
-    const x0 = 40, y0 = 224, span = 176;
-    const px = x0 + Math.min(max, Math.max(0, data.dtaP)) / max * span;
-    const py = y0 - Math.min(max, Math.max(0, data.dtaQ)) / max * span;
+    function hueFromP(p) {
+        // V10.9.5 P-Farbskala: Blau -> Grün -> Grasgrün -> Gelb -> Orange ->
+        // Dunkelorange -> Rot -> kräftiges Rot -> Rotviolett -> Violett.
+        // Die Stützpunkte liegen gleichmäßig über P=0..3; interpoliert wird im HSV-Farbton.
+        const hues = [240, 120, 100, 60, 36, 24, 0, 350, 320, 280];
+        const t = clamp(Number(p) / P_MAX, 0, 1) * (hues.length - 1);
+        const i = Math.min(hues.length - 2, Math.floor(t));
+        const f = t - i;
+        let h0 = hues[i];
+        let h1 = hues[i + 1];
+        let delta = h1 - h0;
+        if (delta > 180) delta -= 360;
+        if (delta < -180) delta += 360;
+        return (h0 + f * delta + 360) % 360;
+    }
+
+    function saturationFromQ(q) {
+        // Q=0 -> 20 %, Q=1.8 -> 100 %, dazwischen linear.
+        return Q_SAT_MIN + (1 - Q_SAT_MIN) * clamp(Number(q) / Q_MAX, 0, 1);
+    }
+
+    function hsvToHex(h, s, v = 1) {
+        const c = v * s;
+        const hp = ((h % 360) + 360) % 360 / 60;
+        const x = c * (1 - Math.abs((hp % 2) - 1));
+        let r1 = 0, g1 = 0, b1 = 0;
+        if (hp < 1) [r1, g1] = [c, x];
+        else if (hp < 2) [r1, g1] = [x, c];
+        else if (hp < 3) [g1, b1] = [c, x];
+        else if (hp < 4) [g1, b1] = [x, c];
+        else if (hp < 5) [r1, b1] = [x, c];
+        else [r1, b1] = [c, x];
+        const m = v - c;
+        const hex = n => Math.round(255 * (n + m)).toString(16).padStart(2, "0");
+        return "#" + hex(r1) + hex(g1) + hex(b1);
+    }
+
+    const p = Number(data.dtaP);
+    const q = Number(data.dtaQ);
+    const markerHue = hueFromP(p);
+    const markerSaturation = saturationFromQ(q);
+    const markerColor = hsvToHex(markerHue, markerSaturation, 1);
+
+    const width = 442;
+    const height = 319;
+    const x0 = 88;
+    const y0 = 262;
+    const plotW = 314;
+    const plotH = 212;
+    const px = x0 + clamp(p / P_MAX, 0, 1) * plotW;
+    const py = y0 - clamp(q / Q_MAX, 0, 1) * plotH;
+    const fmt = v => Math.abs(v - Math.round(v)) < 1e-9 ? String(Math.round(v)) : v.toFixed(1).replace(".", ",");
+
+    const pTicks = [0, 0.5, 1, 1.5, 2, 2.5, 3];
+    const qTicks = [0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8];
+
+    // V10.9.8: Vier fest codierte Referenzlinien konstanter Summe P + Q.
+    // Basis: 1.1459; Faktoren 5/35, 20/35, 35/35 und 50/35.
+    const pqReferenceSums = [
+        1.1459 * 5 / 35,
+        1.1459 * 20 / 35,
+        1.1459,
+        1.1459 * 50 / 35
+    ];
+    let referenceLines = "";
+    pqReferenceSums.forEach(sum => {
+        const pStart = Math.max(0, sum - Q_MAX);
+        const qStart = sum - pStart;
+        const pEnd = Math.min(P_MAX, sum);
+        const qEnd = sum - pEnd;
+        const x1 = x0 + pStart / P_MAX * plotW;
+        const y1 = y0 - qStart / Q_MAX * plotH;
+        const x2 = x0 + pEnd / P_MAX * plotW;
+        const y2 = y0 - qEnd / Q_MAX * plotH;
+        referenceLines += '<line x1="' + x1.toFixed(2) + '" y1="' + y1.toFixed(2) + '" x2="' + x2.toFixed(2) + '" y2="' + y2.toFixed(2) + '" style="stroke:#00cfe8;stroke-width:1.4" />';
+    });
+
+    let grid = "";
+    pTicks.forEach(value => {
+        const x = x0 + value / P_MAX * plotW;
+        grid += '<line class="grid" x1="' + x.toFixed(2) + '" y1="' + (y0 - plotH) + '" x2="' + x.toFixed(2) + '" y2="' + y0 + '" />';
+        grid += '<line class="tick" x1="' + x.toFixed(2) + '" y1="' + y0 + '" x2="' + x.toFixed(2) + '" y2="' + (y0 + 4) + '" />';
+        grid += '<text x="' + x.toFixed(2) + '" y="' + (y0 + 15) + '" text-anchor="middle">' + fmt(value) + '</text>';
+    });
+    qTicks.forEach(value => {
+        const y = y0 - value / Q_MAX * plotH;
+        grid += '<line class="grid" x1="' + x0 + '" y1="' + y.toFixed(2) + '" x2="' + (x0 + plotW) + '" y2="' + y.toFixed(2) + '" />';
+        grid += '<line class="tick" x1="' + (x0 - 4) + '" y1="' + y.toFixed(2) + '" x2="' + x0 + '" y2="' + y.toFixed(2) + '" />';
+        grid += '<text x="' + (x0 - 8) + '" y="' + (y + 3).toFixed(2) + '" text-anchor="end">' + fmt(value) + '</text>';
+    });
+
     return (
         '<div class="pq-map-wrap">' +
-        '<div class="pq-map-box">' +
-        '<svg class="pq-map" viewBox="0 0 260 280" role="img" aria-label="DTA P-Q-Karte">' +
-        '<text x="86" y="16">Q: Profilunwucht</text>' +
-        '<line class="grid" x1="40" y1="136" x2="216" y2="136" />' +
-        '<line class="grid" x1="128" y1="48" x2="128" y2="224" />' +
-        '<line class="axis" x1="40" y1="224" x2="224" y2="224" />' +
-        '<line class="axis" x1="40" y1="230" x2="40" y2="40" />' +
-        '<line class="tick" x1="40" y1="224" x2="40" y2="229" />' +
-        '<line class="tick" x1="128" y1="224" x2="128" y2="229" />' +
-        '<line class="tick" x1="216" y1="224" x2="216" y2="229" />' +
-        '<line class="tick" x1="35" y1="224" x2="40" y2="224" />' +
-        '<line class="tick" x1="35" y1="136" x2="40" y2="136" />' +
-        '<line class="tick" x1="35" y1="48" x2="40" y2="48" />' +
-        '<text x="37" y="242">' + fmt(ticks[0]) + '</text>' +
-        '<text x="125" y="242">' + fmt(ticks[1]) + '</text>' +
-        '<text x="213" y="242">' + fmt(ticks[2]) + '</text>' +
-        '<text x="17" y="227">' + fmt(ticks[0]) + '</text>' +
-        '<text x="17" y="139">' + fmt(ticks[1]) + '</text>' +
-        '<text x="17" y="51">' + fmt(ticks[2]) + '</text>' +
-        '<text x="96" y="270">Parallelkomponente</text>' +
-        '<circle class="point-ring" cx="' + px.toFixed(2) + '" cy="' + py.toFixed(2) + '" r="9" />' +
-        '<line class="point-cross" x1="' + (px - 5.5).toFixed(2) + '" y1="' + (py - 5.5).toFixed(2) + '" x2="' + (px + 5.5).toFixed(2) + '" y2="' + (py + 5.5).toFixed(2) + '" />' +
-        '<line class="point-cross" x1="' + (px - 5.5).toFixed(2) + '" y1="' + (py + 5.5).toFixed(2) + '" x2="' + (px + 5.5).toFixed(2) + '" y2="' + (py - 5.5).toFixed(2) + '" />' +
+        '<div class="pq-map-box' + (compactMain ? ' compact-main' : '') + '">' +
+        '<svg class="pq-map" viewBox="0 0 ' + width + ' ' + height + '" role="img" onclick="openPQMapZoom(this)" aria-label="pQ-Koordinatensystem: P bestimmt den Farbton, Q die Sättigung; zum Vergrößern anklicken">' +
+        '<rect class="plot-bg" x="8" y="8" width="426" height="303" rx="3" />' +
+        grid +
+        referenceLines +
+        '<line class="axis" x1="' + x0 + '" y1="' + y0 + '" x2="' + (x0 + plotW + 5) + '" y2="' + y0 + '" />' +
+        '<line class="axis" x1="' + x0 + '" y1="' + (y0 + 1) + '" x2="' + x0 + '" y2="' + (y0 - plotH - 5) + '" />' +
+        '<text x="' + (x0 + plotW / 2) + '" y="298" text-anchor="middle">P (Parallelwert)</text>' +
+        '<text x="52" y="' + (y0 - plotH / 2) + '" text-anchor="middle" transform="rotate(-90 52 ' + (y0 - plotH / 2) + ')">Q (Orthogonalwert)</text>' +
+        '<circle class="point-ring" style="stroke:' + markerColor + '" cx="' + px.toFixed(2) + '" cy="' + py.toFixed(2) + '" r="10" />' +
+        '<line class="point-cross" style="stroke:' + markerColor + '" x1="' + (px - 6).toFixed(2) + '" y1="' + (py - 6).toFixed(2) + '" x2="' + (px + 6).toFixed(2) + '" y2="' + (py + 6).toFixed(2) + '" />' +
+        '<line class="point-cross" style="stroke:' + markerColor + '" x1="' + (px - 6).toFixed(2) + '" y1="' + (py + 6).toFixed(2) + '" x2="' + (px + 6).toFixed(2) + '" y2="' + (py - 6).toFixed(2) + '" />' +
         '</svg>' +
-        '<div class="pq-map-note">Messsymbol: Der Messwert liegt exakt im Schnittpunkt des X; der Kreis dient nur der besseren Sichtbarkeit.</div>' +
         '</div>' +
         '</div>'
     );
@@ -6311,7 +6542,7 @@ function renderPQMap(data, compactMain = false) {
 function renderBCFSummary1010(data) {
     const calibration = BCF_EMPIRICAL_CALIBRATION_1014;
     return (
-        '<div class="section-header">Profil 10.8.4</div>' +
+        '<div class="section-header">Profil 10.9.5</div>' +
         '<div class="profile-audit-grid"><div class="profile-audit-values">' +
         metric("Betazoid-Faktor B – Gamma-kalibriert", data.bcfData.B.toFixed(4)) +
         metric("Cardassianisch-Faktor C – Gamma-kalibriert", data.bcfData.C.toFixed(4)) +
@@ -6325,7 +6556,7 @@ function renderBCFSummary1010(data) {
         metric("Empirische Perzentile B / C / F", (100 * data.bcfData.percentile.B).toFixed(2) + " % / " + (100 * data.bcfData.percentile.C).toFixed(2) + " % / " + (100 * data.bcfData.percentile.F).toFixed(2) + " %") +
         metric("Bisherige lineare Faktoren 0–1", data.bcfData.linear.B.toFixed(4) + " / " + data.bcfData.linear.C.toFixed(4) + " / " + data.bcfData.linear.F.toFixed(4)) +
         metric("Statistische Belastbarkeit", data.bcfData.reliability + " bei " + data.wordCount + " Wörtern") +
-        '<div class="note">DTA 10.9.0 zerlegt den fünfdimensionalen Profilvektor B/C/F/ANN/LIX in zwei orthogonale Größen in zwei orthogonale Größen: P ist die Projektion auf die normierte Raumdiagonale und beschreibt das gemeinsame Gesamtniveau; Q ist die Länge der senkrechten Restkomponente und beschreibt die Profilunwucht. Es gilt weiterhin exakt R² = P² + Q², sodass die bisherige euklidische Vektorlänge geometrisch vollständig erhalten bleibt. Die P/Q-Karte ist vorerst rein diagnostisch; Bewertungszonen und Klassengrenzen sind noch nicht festgelegt. B, C, F und LIX werden über empirische Rangverteilungen des Korpus ' + escapeHTML(calibration.corpusLabel) + ' (' + calibration.corpusSize + ' Texte) auf die aktuelle ANN-V10.0-Verteilung abgebildet.</div>' +
+        '<div class="note">DTA 10.9.5 zerlegt den fünfdimensionalen Profilvektor B/C/F/ANN/LIX in zwei orthogonale Größen in zwei orthogonale Größen: P ist die Projektion auf die normierte Raumdiagonale und beschreibt das gemeinsame Gesamtniveau; Q ist die Länge der senkrechten Restkomponente und beschreibt die Profilunwucht. Es gilt weiterhin exakt R² = P² + Q², sodass die bisherige euklidische Vektorlänge geometrisch vollständig erhalten bleibt. Die P/Q-Karte ist vorerst rein diagnostisch; Bewertungszonen und Klassengrenzen sind noch nicht festgelegt. B, C, F und LIX werden über empirische Rangverteilungen des Korpus ' + escapeHTML(calibration.corpusLabel) + ' (' + calibration.corpusSize + ' Texte) auf die aktuelle ANN-V10.0-Verteilung abgebildet.</div>' +
         '</div>' + renderPQMap(data, true) + '</div>'
     );
 }
@@ -6847,6 +7078,20 @@ function renderInsufficientTextResult(data) {
     );
 }
 
+function renderNonGermanResult(data) {
+    return (
+        '<div class="dta-result">' +
+        '<div class="dta-title">DEUTSCHES TEXT-AUDIT (DTA)</div>' +
+        '<div class="dta-line dta-index-line"><span class="text-quantity-refusal">Der Text scheint kein deutscher Text zu sein.</span></div>' +
+        '<div class="dta-meta">' +
+        'Version: V' + getDtaRuntimeVersion() + '<br>' +
+        'Skriptstand: ' + DTA_RELEASE_DATE + '<br>' +
+        'Analysezeitpunkt: ' + formatDateTimeDDMMYYYY(data.analysisTimestamp) +
+        '</div>' +
+        '</div>'
+    );
+}
+
 function renderFullAnalysis(data) {
     return renderSummary(data) + renderDetailedSections(data) + renderTransformationLog(data) + renderDTAResult(data);
 }
@@ -6880,7 +7125,7 @@ function runRegressionTests() {
         if (!condition) failures.push(name + (details ? ": " + details : ""));
     };
 
-    check("V10.9.0 Selbstprüfung", verifyDTAIntegrity(), computeDTAIntegrityHash());
+    check("V10.9.7 Selbstprüfung", verifyDTAIntegrity(), computeDTAIntegrityHash());
 
     const dtaZero = computeDTAIndex({ bcfData: { B: 0, C: 0, F: 0 }, predictedBlaBlaMeterIndex: 0, lixCalibrated: 0 });
     const dtaUnit = computeDTAIndex({ bcfData: { B: 1, C: 0, F: 0 }, predictedBlaBlaMeterIndex: 0, lixCalibrated: 0 });
@@ -6901,7 +7146,7 @@ const dtaBalanced = computeDTAComponents({ bcfData: { B: 0.4, C: 0.4, F: 0.4 }, 
     const dtaFiveOnes = computeDTAComponents({ bcfData: {B:1,C:1,F:1}, predictedBlaBlaMeterIndex:1, lixCalibrated:1 });
     check("V10.7.0 DTA fünf Dimensionen", dtaFiveOnes.dimension === 5 && Math.abs(dtaFiveOnes.P - Math.sqrt(5)) < 1e-12 && Math.abs(dtaFiveOnes.Q) < 1e-12, JSON.stringify(dtaFiveOnes));
     const lixMappedFixture = interpolateLIXCalibration(59.02286969085685);
-    check("V10.9.0 LIX Kalibrierung", Math.abs(lixMappedFixture.calibrated - 0.4390739742009698) < 1e-9, JSON.stringify(lixMappedFixture));
+    check("V10.9.5 LIX Kalibrierung", Math.abs(lixMappedFixture.calibrated - 0.4390739742009698) < 1e-9, JSON.stringify(lixMappedFixture));
     const lixFixture = wordLengthProfile([
         { original: "kurz" },
         { original: "Lesbarkeit" },
@@ -7082,6 +7327,25 @@ const dtaBalanced = computeDTAComponents({ bcfData: { B: 0.4, C: 0.4, F: 0.4 }, 
     const abbreviationUU = normalizeTechnicalText("Das kann mit u. U. unbefriedigenden Ergebnissen enden.");
     check("Abkürzung u. U. geschützt", abbreviationUU.text.includes("u. U.") && abbreviationUU.audit.protectedAbbreviations >= 1, abbreviationUU.text);
     check("Abkürzung u. U. kein Satzbruch", sentenceUnits(abbreviationUU.text).length === 1, JSON.stringify(sentenceUnits(abbreviationUU.text)));
+
+    // V10.9.1: V15-Abkürzungsregressionen, inklusive Schreibweisen mit optionalen Leerzeichen.
+    const abbreviationV15Cases = [
+        ["Abb.", "Die Abb. zeigt den Aufbau. Danach folgt die Auswertung."],
+        ["gem.", "Die Prüfung erfolgt gem. § 5 der Ordnung. Danach wird entschieden."],
+        ["e. V.", "Der Verein Muster e. V. veröffentlicht den Bericht. Danach folgt die Anlage."],
+        ["v. Chr.", "Das Ereignis wird auf 50 v. Chr. datiert. Danach änderte sich die Lage."],
+        ["z. T.", "Die Ergebnisse sind z. T. widersprüchlich. Danach folgt die Einordnung."],
+        ["ggü.", "Die Kosten sind ggü. dem Vorjahr gesunken. Danach werden Ursachen genannt."],
+        ["Univ.-Prof.", "Univ.-Prof. Dr. Beispiel erläutert das Verfahren. Danach beginnt die Diskussion."],
+        ["Priv.-Doz.", "Priv.-Doz. Dr. Beispiel stellt die Methode vor. Danach folgen die Daten."],
+        ["B.A.", "Muster, B.A. arbeitet im Projekt. Danach folgt die Auswertung."],
+        ["GV.NRW.", "Die Regelung steht im GV.NRW. 2024. Danach wird sie erläutert."]
+    ];
+    for (const [label, input] of abbreviationV15Cases) {
+        const normalized = normalizeTechnicalText(input);
+        check("V10.9.1 Abkürzung geschützt: " + label, normalized.audit.protectedAbbreviations >= 1, JSON.stringify(normalized.audit));
+        check("V10.9.1 Abkürzung kein Zusatzsatz: " + label, sentenceUnits(normalized.text).length === 2, JSON.stringify(sentenceUnits(normalized.text)));
+    }
 
     const genderTechnical = normalizeTechnicalText("Gründer*innen, Autor:innen, Nutzer_innen, StudentInnen und Entwickler/innen arbeiten.");
     const genderTechnicalData = countGenderForms(genderTechnical.text, tokenize(genderTechnical.text).length);
@@ -7288,7 +7552,7 @@ const dtaBalanced = computeDTAComponents({ bcfData: { B: 0.4, C: 0.4, F: 0.4 }, 
     const gammaMid1014 = interpolateCalibration1014(BCF_EMPIRICAL_CALIBRATION_1014.B.knots[Math.floor(BCF_EMPIRICAL_CALIBRATION_1014.B.knots.length / 2)][0], "B");
     const gammaTail1014 = interpolateCalibration1014(BCF_EMPIRICAL_CALIBRATION_1014.B.tailMaxRaw + 0.25, "B");
     check("V10.3.2 Quantil-Nullpunkt", gammaZero1014.gamma === 0 && gammaZero1014.percentile === 0, JSON.stringify(gammaZero1014));
-    check("V10.9.0 ANN-Referenzkalibrierung", Math.abs(BCF_REFERENCE_TARGET_1032.modeApprox - 0.316519033) < 1e-9 && BCF_REFERENCE_TARGET_1032.count === 2170 && BCF_EMPIRICAL_CALIBRATION_1014.corpusSize === 2170 && BCF_EMPIRICAL_CALIBRATION_1014.sourceParameterSha256 === "30a0336a6edd5e74efe6f6b0620642d63147473293efbf03bf45b2c46654cf61", JSON.stringify(BCF_REFERENCE_TARGET_1032));
+    check("V10.9.5 ANN-Referenzkalibrierung", Math.abs(BCF_REFERENCE_TARGET_1032.modeApprox - 0.316519033) < 1e-9 && BCF_REFERENCE_TARGET_1032.count === 2170 && BCF_EMPIRICAL_CALIBRATION_1014.corpusSize === 2170 && BCF_EMPIRICAL_CALIBRATION_1014.sourceParameterSha256 === "30a0336a6edd5e74efe6f6b0620642d63147473293efbf03bf45b2c46654cf61", JSON.stringify(BCF_REFERENCE_TARGET_1032));
     check("V10.3.2 Quantil-Monotonie und Tail", gammaMid1014.gamma > 0 && gammaTail1014.gamma > BCF_EMPIRICAL_CALIBRATION_1014.B.tailMaxTarget && gammaTail1014.extrapolated, JSON.stringify(gammaTail1014));
 
     const quotes1011 = normalizeTechnicalText('Der „Scheduler-Token“ und das «gepufferte» Modell sowie "ASCII-Zitat".');
@@ -7370,6 +7634,16 @@ const dtaBalanced = computeDTAComponents({ bcfData: { B: 0.4, C: 0.4, F: 0.4 }, 
     const bzwDecision = detectDecisionAvoidance9916("Fehler werden vermieden bzw. direkt behoben. Tabellen bzw. Bilder werden eingefügt.");
     check("V10.2.15 beziehungsweise nicht Ferengi", bzwDecision.groups.assignmentAlternatives.count === 2 && bzwDecision.cascadeExcessCount === 0, JSON.stringify(bzwDecision));
 
+
+    const languageGateGerman = evaluateGermanLanguage("Die Produktionsplanung wird im Unternehmen anhand der vorhandenen Aufträge und Kapazitäten durchgeführt. Die Mitarbeitenden prüfen die Daten, stimmen die Reihenfolge ab und dokumentieren die Ergebnisse. Anschließend werden die freigegebenen Aufträge an die Produktion übergeben und die Abweichungen ausgewertet.");
+    check("V10.9.7 Deutsch-Gate deutscher Kontrolltext", languageGateGerman.isGerman === true, JSON.stringify(languageGateGerman));
+
+    const languageGateEnglish = evaluateGermanLanguage("The production planning team reviews available orders and capacities before releasing work to the factory. Employees check the data, coordinate the sequence and document the results. Afterwards the approved orders are sent to production and deviations are evaluated for the next planning cycle.");
+    check("V10.9.7 Deutsch-Gate englischer Kontrolltext", languageGateEnglish.isGerman === false, JSON.stringify(languageGateEnglish));
+
+    const languageGateDutch = evaluateGermanLanguage("De productieplanning wordt in het bedrijf uitgevoerd op basis van de beschikbare orders en capaciteiten. Medewerkers controleren de gegevens, stemmen de volgorde af en documenteren de resultaten. Daarna worden de vrijgegeven orders aan de productie doorgegeven en worden afwijkingen geëvalueerd.");
+    check("V10.9.7 Deutsch-Gate niederländischer Kontrolltext", languageGateDutch.isGerman === false, JSON.stringify(languageGateDutch));
+
     return { passed: total - failures.length, total, failures };
 }
 
@@ -7428,6 +7702,15 @@ function analyzeText() {
         return;
     }
 
+    const languageGateData = evaluateGermanLanguage(analysisText);
+    if (!languageGateData.isGerman) {
+        lastAnalysisData = null;
+        document.getElementById("result").innerHTML = renderNonGermanResult({
+            analysisTimestamp: analysisTimestamp.toISOString()
+        });
+        return;
+    }
+
     const avgSentenceLength = wordCount / sentenceCount;
     const lengthData = wordLengthProfile(tokenData);
     const rawLix = avgSentenceLength + (100 * lengthData.ratioLong7);
@@ -7474,7 +7757,7 @@ function analyzeText() {
     };
 
     lastAnalysisData = {
-        originalText, technicalText, revisedText, evaluableText, analysisText, analysisNeutralizationData,
+        originalText, technicalText, revisedText, evaluableText, analysisText, analysisNeutralizationData, languageGateData,
         originalTextSha256, technicalTextSha256, revisedTextSha256,
         originalCharCount: originalText.length,
         technicalCharCount: technicalText.length,
