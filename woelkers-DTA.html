@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deutsches Text-Audit V10.9.8</title>
+<title>Deutsches Text-Audit V10.9.9</title>
 <style>
 body {
     font-family: Arial, sans-serif;
@@ -463,6 +463,83 @@ body.modal-open { overflow: hidden; }
 }
 .modal-close:hover { background: #777; }
 
+
+.imprint-link-button {
+    border: 0;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #555;
+    font: inherit;
+    font-size: inherit;
+    font-weight: normal;
+    line-height: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.imprint-link-button:hover {
+    background: transparent;
+    color: #333;
+}
+.imprint-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.28);
+}
+.imprint-overlay.open {
+    display: flex;
+}
+.imprint-dialog {
+    position: relative;
+    width: min(440px, 100%);
+    box-sizing: border-box;
+    padding: 22px 46px 22px 24px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    background: #fff;
+    color: #222;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.22);
+    font-size: 14px;
+    line-height: 1.55;
+}
+.imprint-dialog-title {
+    margin: 0 0 8px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.imprint-dialog-text {
+    margin: 0;
+    white-space: pre-line;
+}
+.imprint-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #999;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+}
+.imprint-close:hover {
+    background: #777;
+}
+
 .license-notice {
     display: flex;
     align-items: center;
@@ -547,15 +624,52 @@ body.modal-open { overflow: hidden; }
     <div class="license-meta">
         <span id="copyrightNotice">© 2026 Martin Wölker</span>
         <a id="contactLink" href="http://www.woelker.name/" target="_blank" rel="noopener noreferrer">Kontakt</a>
+        <a id="faqLink" href="https://the-true-logistican.github.io/Web-Seiten/DTA-FAQ.html" target="_blank" rel="noopener noreferrer">FAQ</a>
+        <button id="imprintLink" class="imprint-link-button" type="button" onclick="openImprint()">Impressum</button>
     </div>
 </div>
 
 
+<div id="imprintOverlay" class="imprint-overlay" role="dialog" aria-modal="true" aria-labelledby="imprintTitle" onclick="closeImprintOnBackdrop(event)">
+    <div class="imprint-dialog">
+        <button class="imprint-close" type="button" aria-label="Impressum schließen" onclick="closeImprint()">×</button>
+        <div id="imprintTitle" class="imprint-dialog-title">IMPRESSUM</div>
+        <p class="imprint-dialog-text">Martin Wölker
+Bismarckstr. 34, 66953 Pirmasens, Germany
+Mail: martin@woelker.name
+Phone: +49 173 28 29 0 25</p>
+    </div>
+</div>
+
 <script>
 "use strict";
 
-const DTA_VERSION = "10.9.8";
-const DTA_RELEASE_DATE = "17.08.2026";
+
+function openImprint() {
+    const overlay = document.getElementById("imprintOverlay");
+    if (!overlay) return;
+    overlay.classList.add("open");
+    const closeButton = overlay.querySelector(".imprint-close");
+    if (closeButton) closeButton.focus();
+}
+
+function closeImprint() {
+    const overlay = document.getElementById("imprintOverlay");
+    if (!overlay) return;
+    overlay.classList.remove("open");
+}
+
+function closeImprintOnBackdrop(event) {
+    if (event.target === event.currentTarget) closeImprint();
+}
+
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape") closeImprint();
+});
+
+
+const DTA_VERSION = "10.9.9";
+const DTA_RELEASE_DATE = "20.08.2026";
 
 let lastAnalysisData = null;
 let activeBlaBlaMeterStage = null;
@@ -7125,7 +7239,7 @@ function runRegressionTests() {
         if (!condition) failures.push(name + (details ? ": " + details : ""));
     };
 
-    check("V10.9.7 Selbstprüfung", verifyDTAIntegrity(), computeDTAIntegrityHash());
+    check("V10.9.9 Selbstprüfung", verifyDTAIntegrity(), computeDTAIntegrityHash());
 
     const dtaZero = computeDTAIndex({ bcfData: { B: 0, C: 0, F: 0 }, predictedBlaBlaMeterIndex: 0, lixCalibrated: 0 });
     const dtaUnit = computeDTAIndex({ bcfData: { B: 1, C: 0, F: 0 }, predictedBlaBlaMeterIndex: 0, lixCalibrated: 0 });
