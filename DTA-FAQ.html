@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deutsches Text-Audit – FAQ 0.6.3</title>
+<title>Deutsches Text-Audit – FAQ 0.6.4</title>
 <style>
 body {
     font-family: Arial, sans-serif;
@@ -334,12 +334,22 @@ h1 {
     background: #777;
 }
 
+
+.dta-version-status {
+    margin-left: 10px;
+    font-size: 0.55em;
+    font-weight: 700;
+    color: #a40000;
+    white-space: nowrap;
+}
+
+#faqVersion { color: #555; white-space: nowrap; }
 </style>
 </head>
 <body>
 
 <div class="faq-sticky-header">
-    <h1>Deutsches Text-Audit – FAQ <span class="version-label">Version 0.6.3</span></h1>
+    <h1>Deutsches Text-Audit – FAQ <span id="dtaVersionStatus" class="dta-version-status" hidden>Aufruf von der falschen Version</span></h1>
     <div class="faq-global-controls" aria-label="Alle FAQ-Antworten steuern">
         <button id="openAllFaq" type="button" class="global-control open-all" title="Alle Antworten öffnen" aria-label="Alle Antworten öffnen"></button>
         <button id="closeAllFaq" type="button" class="global-control close-all" title="Alle Antworten schließen" aria-label="Alle Antworten schließen"></button>
@@ -822,6 +832,7 @@ h1 {
         <span id="copyrightNotice">© 2026 Martin Wölker</span>
         <a id="contactLink" href="http://www.woelker.name/" target="_blank" rel="noopener noreferrer">Kontakt</a>
         <button id="imprintLink" class="imprint-link-button" type="button" onclick="openImprint()">Impressum</button>
+        <span id="faqVersion">Version 0.6.4</span>
     </div>
 </div>
 
@@ -837,6 +848,25 @@ Phone: +49 173 28 29 0 25</p>
 </div>
 
 <script>
+
+const FAQ_DTA_VERSION = "10.9.10";
+
+function checkCallingDTAVersion() {
+    const params = new URLSearchParams(window.location.search);
+    const callingVersion = params.get("dta");
+    const status = document.getElementById("dtaVersionStatus");
+    if (!status) return;
+
+    if (callingVersion !== FAQ_DTA_VERSION) {
+        status.hidden = false;
+        status.title = callingVersion
+            ? `FAQ für DTA ${FAQ_DTA_VERSION}; aufgerufen von DTA ${callingVersion}.`
+            : `FAQ für DTA ${FAQ_DTA_VERSION}; keine DTA-Version übergeben.`;
+    } else {
+        status.hidden = true;
+    }
+}
+
 "use strict";
 
 function setOpen(item, open) {
@@ -884,6 +914,7 @@ function openTargetFromHash() {
 
 
 window.addEventListener("hashchange", openTargetFromHash);
+checkCallingDTAVersion();
 openTargetFromHash();
 
 const openAllFaqButton = document.getElementById("openAllFaq");
