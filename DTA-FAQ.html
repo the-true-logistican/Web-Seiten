@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deutsches Text-Audit – FAQ 0.6.4</title>
+<title>Deutsches Text-Audit – FAQ 0.6.5</title>
 <style>
 body {
     font-family: Arial, sans-serif;
@@ -751,9 +751,45 @@ h1 {
         <div class="faq-id">ID: faq-technische-bestandteile</div>
     </div>
 </section>
+<section class="faq-item" id="faq-textuebernahme-problemquellen">
+    <button class="faq-question" type="button" aria-expanded="false" aria-controls="answer-textuebernahme-problemquellen">
+        <span><span class="faq-number">D5</span> Wie gehe ich mit Texten aus PDFs, PowerPoint-Dateien oder schlecht kopierbaren Quellen um?</span>
+        <span class="faq-symbol" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" id="answer-textuebernahme-problemquellen">
+        Einfach den verfügbaren Text in das DTA übernehmen. Das DTA bereinigt die Eingabe vor der eigentlichen Analyse technisch. Dabei werden unter anderem überflüssige Leerzeichen, problematische Sonderzeichen, ungewöhnliche Aufzählungszeichen, Trennungsartefakte und andere typische Kopierfehler soweit möglich normalisiert. Die Analyse arbeitet anschließend mit dieser bereinigten Textfassung. Diese lässt sich auch anzeigen und kopieren – das DTA kann damit nebenbei als Werkzeug zur technischen Textbereinigung verwendet werden.<br><br>
+        Lässt sich Text aus einem PDF oder einer anderen Quelle nicht direkt kopieren, kann er über OCR übernommen werden. Unter Windows geht das beispielsweise mit PowerToys Text Extractor: Windows + Shift + T, gewünschten Bildschirmbereich markieren und den erkannten Text anschließend ins DTA einfügen. Auch typische OCR-Artefakte versucht die Vorverarbeitung des DTA zu bereinigen.<br><br>
+        Bereinigen bedeutet dabei nicht, OCR-Fehler zuverlässig inhaltlich zu korrigieren. Wenn OCR Zeichen oder Wörter falsch erkennt, kann der ursprüngliche Inhalt verloren gehen.
+        <div class="faq-id">ID: faq-textuebernahme-problemquellen</div>
+    </div>
+</section>
+<section class="faq-item" id="faq-ocr-formeln">
+    <button class="faq-question" type="button" aria-expanded="false" aria-controls="answer-ocr-formeln">
+        <span><span class="faq-number">D6</span> Wie zuverlässig funktioniert das DTA bei OCR-Texten und mathematischen Formeln?</span>
+        <span class="faq-symbol" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" id="answer-ocr-formeln">
+        Das DTA versucht, typische technische Artefakte aus kopierten oder per OCR erkannten Texten zu bereinigen und eindeutig erkennbare mathematische Formeln von der sprachlichen Analyse auszunehmen. Das funktioniert jedoch nur, soweit die ursprüngliche Struktur noch zuverlässig erkennbar ist.<br><br>
+        Insbesondere OCR kann Zeichen falsch interpretieren oder Informationen vollständig verlieren. Aus mathematischen Operatoren, Variablen, Indizes oder Sonderzeichen können beispielsweise normale Buchstaben, Zahlen oder Satzzeichen werden. Solche Fehler lassen sich nicht zuverlässig automatisch rekonstruieren. Das DTA korrigiert deshalb nur eindeutige technische Artefakte und versucht nicht, mehrdeutige Zeichenfolgen zu erraten.<br><br>
+        Wenn möglich, sollte daher sauber extrahierter Text verwendet werden. Direktes Kopieren aus einem PDF ist einer OCR-Erkennung in der Regel vorzuziehen, sofern dabei brauchbarer Text entsteht. OCR ist vor allem eine Ausweichmöglichkeit für Quellen, aus denen sich Text nicht direkt übernehmen lässt. Je stärker ein Ausgangstext durch Formeln, ungewöhnliche Typografie, OCR-Fehler oder andere technische Artefakte verändert wurde, desto schwieriger wird die zuverlässige Analyse des darin enthaltenen deutschen Fließtextes.
+        <div class="faq-id">ID: faq-ocr-formeln</div>
+    </div>
+</section>
+<section class="faq-item" id="faq-seltsame-leerzeichen">
+    <button class="faq-question" type="button" aria-expanded="false" aria-controls="answer-seltsame-leerzeichen">
+        <span><span class="faq-number">D7</span> Warum sieht mein kopierter Text plötzlich seltsam aus oder enthält Leerzeichen an falschen Stellen?</span>
+        <span class="faq-symbol" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" id="answer-seltsame-leerzeichen">
+        Was auf dem Bildschirm wie sauberer Text aussieht, muss technisch nicht als sauberer Text gespeichert sein. PDF-, Textverarbeitungs- und Layoutprogramme können unsichtbare Steuerzeichen, ungewöhnliche Leerzeichen oder andere Formatierungsinformationen enthalten. Beim Kopieren werden diese teilweise sichtbar oder verändern die Struktur des Textes. So kann beispielsweise mitten in einem Wort plötzlich ein Leerzeichen erscheinen, obwohl das Wort im PDF optisch korrekt dargestellt wird.<br><br>
+        Auch OCR ist nicht fehlerfrei. Dabei wird das sichtbare Dokument neu als Text interpretiert. Buchstaben, Zahlen, Satzzeichen oder mathematische Symbole können verwechselt, Leerzeichen falsch gesetzt oder Zeichen ganz ausgelassen werden. Ähnliche Probleme können auch beim Kopieren aus Word-Dokumenten oder anderen formatierten Quellen auftreten.<br><br>
+        Das DTA versucht, technisch eindeutige Störungen wie überflüssige Leerzeichen und typische Extraktionsartefakte zu bereinigen. Nicht eindeutige Fälle werden bewusst nicht automatisch erraten, da eine vermeintliche Korrektur den ursprünglichen Text auch verfälschen könnte. Für die zuverlässigste Analyse ist daher sauberer Plain Text ohne unnötige Formatierungsinformationen die beste Ausgangsbasis. Entscheidend ist nicht nur, was ein Mensch auf dem Bildschirm sieht, sondern welche Zeichen tatsächlich im zugrunde liegenden Text enthalten sind.
+        <div class="faq-id">ID: faq-seltsame-leerzeichen</div>
+    </div>
+</section>
 <section class="faq-item" id="faq-mindesttextmenge">
     <button class="faq-question" type="button" aria-expanded="false" aria-controls="answer-mindesttextmenge">
-        <span><span class="faq-number">D5</span> Warum braucht das DTA eine gewisse Mindestmenge an Text?</span>
+        <span><span class="faq-number">D8</span> Warum braucht das DTA eine gewisse Mindestmenge an Text?</span>
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-mindesttextmenge">
@@ -763,7 +799,7 @@ h1 {
 </section>
 <section class="faq-item" id="faq-ki-texte">
     <button class="faq-question" type="button" aria-expanded="false" aria-controls="answer-ki-texte">
-        <span><span class="faq-number">D6</span> Funktioniert das DTA auch bei Texten, die von einer KI erzeugt wurden?</span>
+        <span><span class="faq-number">D9</span> Funktioniert das DTA auch bei Texten, die von einer KI erzeugt wurden?</span>
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-ki-texte">
@@ -832,7 +868,7 @@ h1 {
         <span id="copyrightNotice">© 2026 Martin Wölker</span>
         <a id="contactLink" href="http://www.woelker.name/" target="_blank" rel="noopener noreferrer">Kontakt</a>
         <button id="imprintLink" class="imprint-link-button" type="button" onclick="openImprint()">Impressum</button>
-        <span id="faqVersion">Version 0.6.4</span>
+        <span id="faqVersion">Version 0.6.5</span>
     </div>
 </div>
 
@@ -849,7 +885,7 @@ Phone: +49 173 28 29 0 25</p>
 
 <script>
 
-const FAQ_DTA_VERSION = "10.9.10";
+const FAQ_DTA_VERSION = "10.10.3";
 
 function checkCallingDTAVersion() {
     const params = new URLSearchParams(window.location.search);
