@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deutsches Text-Audit V10.10.3</title>
+<title>Deutsches Text-Audit V10.10.6</title>
 <style>
 body {
     font-family: Arial, sans-serif;
@@ -33,11 +33,24 @@ textarea {
     border-radius: 50%;
     background-color: #999;
     color: white;
-    font-size: 18px;
-    font-weight: bold;
-    line-height: 1;
+    font-size: 0;
+    line-height: 0;
     cursor: pointer;
 }
+.clear-btn::before,
+.clear-btn::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 12px;
+    height: 2px;
+    border-radius: 1px;
+    background: currentColor;
+    transform-origin: center;
+}
+.clear-btn::before { transform: translate(-50%, -50%) rotate(45deg); }
+.clear-btn::after { transform: translate(-50%, -50%) rotate(-45deg); }
 .clear-btn:hover { background-color: #777; }
 .button-container {
     display: flex;
@@ -180,7 +193,7 @@ button {
 
 .profile-audit-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto 430px;
+    grid-template-columns: minmax(0, 1fr) 430px;
     gap: 18px;
     align-items: start;
 }
@@ -274,7 +287,7 @@ button {
     text-align: center;
 }
 .dta-result {
-    margin-top: 18px;
+    margin: 0;
     padding: 16px 18px;
     border: 2px solid #777;
     border-radius: 9px;
@@ -454,18 +467,30 @@ body.modal-open { overflow: hidden; }
     z-index: 6;
     top: 12px;
     right: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 32px;
     height: 32px;
     padding: 0;
+    border: none;
     border-radius: 50%;
     background: #999;
     color: white;
-    font-size: 20px;
-    line-height: 1;
+    font-size: 0;
+    line-height: 0;
 }
+.modal-close::before,
+.modal-close::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 14px;
+    height: 2px;
+    border-radius: 1px;
+    background: currentColor;
+    transform-origin: center;
+}
+.modal-close::before { transform: translate(-50%, -50%) rotate(45deg); }
+.modal-close::after { transform: translate(-50%, -50%) rotate(-45deg); }
 .modal-close:hover { background: #777; }
 
 
@@ -526,9 +551,6 @@ body.modal-open { overflow: hidden; }
     position: absolute;
     top: 8px;
     right: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 26px;
     height: 26px;
     padding: 0;
@@ -536,11 +558,24 @@ body.modal-open { overflow: hidden; }
     border-radius: 50%;
     background: #999;
     color: #fff;
-    font-size: 18px;
-    font-weight: bold;
-    line-height: 1;
+    font-size: 0;
+    line-height: 0;
     cursor: pointer;
 }
+.imprint-close::before,
+.imprint-close::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 12px;
+    height: 2px;
+    border-radius: 1px;
+    background: currentColor;
+    transform-origin: center;
+}
+.imprint-close::before { transform: translate(-50%, -50%) rotate(45deg); }
+.imprint-close::after { transform: translate(-50%, -50%) rotate(-45deg); }
 .imprint-close:hover {
     background: #777;
 }
@@ -630,9 +665,9 @@ body.modal-open { overflow: hidden; }
     <div class="license-meta">
         <span id="copyrightNotice">© 2026 Martin Wölker</span>
         <a id="contactLink" href="http://www.woelker.name/" target="_blank" rel="noopener noreferrer">Kontakt</a>
-        <a id="faqLink" href="https://the-true-logistican.github.io/Web-Seiten/DTA-FAQ.html?dta=10.10.3" target="_blank" rel="noopener noreferrer">FAQ</a>
+        <a id="faqLink" href="https://the-true-logistican.github.io/Web-Seiten/DTA-FAQ.html?dta=10.10.6" target="_blank" rel="noopener noreferrer">FAQ</a>
         <button id="imprintLink" class="imprint-link-button" type="button" onclick="openImprint()">Impressum</button>
-        <span id="footerVersion">Version 10.10.3</span>
+        <span id="footerVersion">Version 10.10.6</span>
     </div>
 </div>
 
@@ -675,14 +710,14 @@ document.addEventListener("keydown", event => {
 });
 
 
-const DTA_VERSION = "10.10.3";
+const DTA_VERSION = "10.10.6";
 const DTA_RELEASE_DATE = "22.08.2026";
 
 let lastAnalysisData = null;
 let activeBlaBlaMeterStage = null;
 
 
-const DTA_INTEGRITY_EXPECTED_SHA256 = "ae09eb18c8406133ed7d20216ac69ecbddb9dc6c4a26b683a4ce37a881ef958f";
+const DTA_INTEGRITY_EXPECTED_SHA256 = "fa571c328fdf4024843200482875244c8625e4a88c576e3a97c988288955c256";
 let dtaIntegrityState = null;
 const DTA_LICENSE_METADATA = Object.freeze({
     license: "CC BY-NC-SA 4.0",
@@ -1051,7 +1086,7 @@ function getDtaRuntimeVersion() {
 // Neu trainiert auf 2.352 V16-Datensätzen mit 19 längenunabhängigen Merkmalen.
 // Parabolische Gewichtung: w(0)=15, w(0.317774)=1; oberhalb konstant 1.
 // Die Eingaben werden weiterhin auf vier Nachkommastellen gerundet.
-const BLABLAMETER_NN_MODEL = {"model_name":"BlaBlaMeter-NN-19-8-1-Parabel","model_version":"11.0","integration_status":"embedded in ReverseBlablaMeter-Linear V10.10.3","source_parameter_version":"V10.9.15 / Korpus V16","training_file":"NN_Trainingsdaten_V16_10.9.15_BBM-Ue_korrekt_2358.csv","training_file_sha256":"ba7fcf759144a8a836689d40196e519cd9f18d66270bc0133421c65505ef854f","training_rows":2352,"excluded_text_numbers":[568,897,988,999,1245,2354],"target_name":"BBM-Ü","input_size":19,"hidden_size":8,"output_size":1,"trainable_parameters":169,"hidden_activation":"tanh","output_activation":"softplus","feature_names":["NN Exzesszeichen >8 je Wort","NN Ratio Wörter >=16","NN Ratio überschneidungsbereinigte Diagnosetokens","Ratio Jargon-Familientreffer","NN Ratio alle Jargon-Familientreffer","BCF B3 Ratio ungebundene Abstraktionstokens","NN Ratio Jargon Tier B","NN Ratio Doppelzählung Jargon/Suffix","NN Ratio Jargon Innovation","Ratio Jargon Management","NN Ratio Jargon Strategie","NN Ø Satzlänge","NN Ratio Jargon Tier C","NN Ratio Jargon Tier A","NN Ratio Jargon Tier E","Ratio Jargon Faktor","Ratio Jargon Implementierung","Ratio Jargon Transparenz","Ratio Jargon Erfolg"],"scaler":{"mean":[1.2785014030612274,0.04726181972789112,0.09111534863945583,0.015725595238095223,0.02755795068027218,0.010660374149659854,0.01003698979591837,0.008528954081632652,0.0008392857142857144,0.0009859268707482997,0.0011852465986394568,18.78462852891164,0.004272916666666665,0.001416284013605441,0.004172831632653063,0.0005433248299319727,0.0003803571428571428,0.0002903486394557824,0.001080102040816327],"scale":[0.5104095195912384,0.03203547069113976,0.04814635547870529,0.02334222418532162,0.03221618798708715,0.01589900639290944,0.015587890243108155,0.012953524627165952,0.003515817634556268,0.003702852376552842,0.004301755596811595,5.520003899836249,0.009499219104847656,0.004371947249918665,0.0069705049745986325,0.0022302244327277784,0.0017406690621751702,0.0014593690560360981,0.0030149731764799697]},"input_weights":[[-0.010798425479604431,-0.12181151314896851,-0.25705909810087685,0.08754322589924607,0.10217992658715765,0.10065586004286449,-0.1495097557349517,-0.3999122874344709],[-0.057440032416934184,0.038573399657434546,-0.2966874614269877,0.12916308278042898,0.07581533307052883,0.11797360592067137,-0.03605553078586359,-0.3737606580356927],[0.21789053804350253,-0.022322555728342762,-0.30681349758885845,0.02612320626552629,-0.047221108704786144,0.15175704812947163,-0.045209170858542064,-0.2013067796378826],[0.08162602317464276,-0.06888252652564471,-0.22022771786696518,0.10230682354063349,0.03428335177376798,0.031244764616130523,-0.02830221448440432,0.023487235272005705],[-0.01054422969040627,0.04428720027892332,0.024748354543589174,-0.042694114661201814,0.012352031647085164,0.014229019720577716,0.029110439577741065,0.13680109203535992],[0.08050389620163022,-0.06521882743936967,-0.13913871395759503,0.03637398093139374,0.08493475217470664,-0.03778610179912053,0.10987879424607279,-0.011772646102033948],[0.08335524940953158,-0.07503812572873228,-0.2715476309803251,0.11470487226541931,0.07178460413458287,0.10628567596194798,-0.011532039801774226,-0.018690113703946482],[0.1698863918132919,0.0376711682894342,-0.019922937003399147,0.006637759890651616,-0.05734392906161388,0.0007244846943040991,-0.04963640532672295,0.15463585976018354],[0.005314105489952252,-0.07286864554557926,-0.1364424970672693,0.05179728263998653,0.055019846375956395,-0.0057723540266415956,-0.06261133092352389,-0.1125454893075259],[0.06683727797635862,0.21534973256962084,-0.08579367701313353,0.06307318470806676,0.09909610613229483,0.20476835009918232,0.036325023791057835,-0.06492896643842443],[-0.06253453980461449,-0.21038536547389686,-0.08079456898083787,-0.0175097839513544,0.019397939975577556,0.05983298071230277,0.15036216169891403,-0.04348199077003322],[0.09924834964230667,-0.06733955926038862,-0.0025161327484540686,0.061351671801393594,-0.2662556519046634,-0.024344783643713227,-0.03332977192515477,-0.09002121991500636],[0.05303705960519519,-0.04414704321877324,-0.03976100178241053,0.03279631788781175,-0.04730948914076837,-0.12317773848817422,-0.036010135343505625,0.1592311980474082],[0.022647413212458656,-0.002491663600257367,-0.12008770201090771,0.06650693607915688,0.030840146707417627,0.05385667331648715,-0.028215508772116826,-0.15628150708486846],[-0.1362103707017556,-0.07983569481636728,0.08425629449181765,-0.1063425735137282,-0.14164463803966332,0.06421401291194151,-0.06608233334802208,-0.21217134270025942],[-0.042288460979507454,0.05382294868076189,-0.05273699708504458,0.11116689476887606,0.08072758228260397,-0.08398026049152546,-0.08794427398526579,0.006419689713914667],[-0.05767988178492605,-0.08431227620690389,-0.14347611939588092,0.13082651703679063,-0.17289349959559533,-0.1650532297292798,-0.27533640771524065,0.01753445567290844],[0.10950198569988219,0.025365345008174146,0.03633380355714915,0.04223318220083889,-0.14575302575500115,0.04977275294687006,-0.14042824934483156,-0.06982049024986185],[0.05491285609023417,-0.02520540283344526,-0.030005063037211954,-0.06824264456879794,0.01910356978119966,-0.0331803069617029,-0.02533603035812889,-0.0048561918734868065]],"hidden_bias":[0.4629778054600842,0.2008262697765119,-1.3728478730013423,-1.6636256447383269,0.401803594503086,-1.0137562312054358,0.2534612005151581,-1.335160598438315],"output_weights":[0.3871932815329371,-0.405919226058929,-0.6784570740009439,0.386223532151811,0.3774183513812904,0.36835771543034107,-0.40559781090990776,-0.6426394658670795],"output_bias":-0.9650064558563026,"training":{"method":"full-batch backpropagation with L-BFGS-B","loss":"parabolically_weighted_mean_squared_error_plus_l2","sample_weighting":{"mode":0.31777394678439713,"formula":"w(y)=1+(14.0/0.3177739468^2)*(y-0.3177739468)^2 for 0<=y<0.3177739468; w(y)=1 above","normalization":"divide by mean training weight","weight_at_zero_before_normalization":15.0},"l2_definition":"alpha*(sum(input_weights^2)+sum(output_weights^2)); biases excluded; no division by n","l2_candidates":[1e-05,3e-05,0.0001,0.0003,0.001,0.003,0.01,0.03,0.1],"selected_l2_alpha":0.0003,"cross_validation":{"splits":5,"repeats":5,"seed":91919,"selection":"lowest mean fold MAE, then mean fold RMSE","selection_table":[{"alpha":1e-05,"mean_fold_mae":0.08686782490922904,"mean_fold_rmse":0.12176635114801065,"all_success":true,"mean_iterations":2128.08,"oof_mae":0.08085196683692669,"oof_rmse":0.11126180084691735},{"alpha":3e-05,"mean_fold_mae":0.08595339028626375,"mean_fold_rmse":0.12130899845525901,"all_success":true,"mean_iterations":1669.92,"oof_mae":0.08087260168395685,"oof_rmse":0.11191366476945876},{"alpha":0.0001,"mean_fold_mae":0.08382650812266451,"mean_fold_rmse":0.11558460157817489,"all_success":true,"mean_iterations":1075.16,"oof_mae":0.08063133089292197,"oof_rmse":0.11061809947969038},{"alpha":0.0003,"mean_fold_mae":0.08195454385328775,"mean_fold_rmse":0.11205729933606486,"all_success":true,"mean_iterations":779.96,"oof_mae":0.08089565864832998,"oof_rmse":0.11049439710605719},{"alpha":0.001,"mean_fold_mae":0.0819759115862577,"mean_fold_rmse":0.11173723414347032,"all_success":true,"mean_iterations":747.84,"oof_mae":0.08168505179809205,"oof_rmse":0.11154799952223801},{"alpha":0.003,"mean_fold_mae":0.08356668248964738,"mean_fold_rmse":0.11435403300662872,"all_success":true,"mean_iterations":356.48,"oof_mae":0.08340981549016091,"oof_rmse":0.11446915353633207},{"alpha":0.01,"mean_fold_mae":0.08967707971778179,"mean_fold_rmse":0.12365765458876961,"all_success":true,"mean_iterations":230.0,"oof_mae":0.0896063683555372,"oof_rmse":0.12399617876542555},{"alpha":0.03,"mean_fold_mae":0.09672856598786032,"mean_fold_rmse":0.1322798373185874,"all_success":true,"mean_iterations":48.16,"oof_mae":0.0966881566648371,"oof_rmse":0.13263217194393637},{"alpha":0.1,"mean_fold_mae":0.13583043552176832,"mean_fold_rmse":0.18306359444631226,"all_success":true,"mean_iterations":34.64,"oof_mae":0.13581000568556462,"oof_rmse":0.18335128049566599}],"metrics":{"count":2352,"mae":0.08089565864832998,"rmse":0.11049439710605719,"r2":0.8885119875719426,"bias":-0.013442085275382185,"median_absolute_error":0.06182674167953728,"within_0_05":0.4192176870748299,"within_0_10":0.7066326530612245,"pearson":0.94408101305123,"spearman":0.9334564235427427,"prediction_min":0.0554877714836902,"prediction_max":2.2725894144695644,"prediction_mean":0.5153674385341417,"prediction_sd":0.32352681087940927,"wasserstein":0.015347462990749707,"ranges":{"0_to_lt_0_10":{"count":84,"mae":0.03775949542775229,"bias":0.03688677931691536},"0_to_lt_0_20":{"count":281,"mae":0.04014478814686058,"bias":0.018716226478485767},"0_to_lt_0_30":{"count":600,"mae":0.04984876754854706,"bias":0.010951048547074488},"0_to_lt_0_40":{"count":957,"mae":0.058554639899082654,"bias":0.004505996755308675},"ge_0_40":{"count":1395,"mae":0.09622207796232975,"bias":-0.02575485552869484},"ge_1_00":{"count":219,"mae":0.1381741575104996,"bias":-0.07602160789404712},"ge_1_50":{"count":35,"mae":0.1516954484652972,"bias":-0.11973628253156812}}}},"optimizer":{"success":true,"status":0,"message":"CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH","iterations":792,"objective":0.008126473270908006,"training_mae":0.07540211566448728,"training_rmse":0.10165464865036923,"maxiter":5000,"ftol":1e-12,"gtol":1e-08,"maxls":30}}};
+const BLABLAMETER_NN_MODEL = {"model_name":"BlaBlaMeter-NN-19-8-1-Parabel","model_version":"11.0","integration_status":"embedded in ReverseBlablaMeter-Linear V10.10.6","source_parameter_version":"V10.9.15 / Korpus V16","training_file":"NN_Trainingsdaten_V16_10.9.15_BBM-Ue_korrekt_2358.csv","training_file_sha256":"ba7fcf759144a8a836689d40196e519cd9f18d66270bc0133421c65505ef854f","training_rows":2352,"excluded_text_numbers":[568,897,988,999,1245,2354],"target_name":"BBM-Ü","input_size":19,"hidden_size":8,"output_size":1,"trainable_parameters":169,"hidden_activation":"tanh","output_activation":"softplus","feature_names":["NN Exzesszeichen >8 je Wort","NN Ratio Wörter >=16","NN Ratio überschneidungsbereinigte Diagnosetokens","Ratio Jargon-Familientreffer","NN Ratio alle Jargon-Familientreffer","BCF B3 Ratio ungebundene Abstraktionstokens","NN Ratio Jargon Tier B","NN Ratio Doppelzählung Jargon/Suffix","NN Ratio Jargon Innovation","Ratio Jargon Management","NN Ratio Jargon Strategie","NN Ø Satzlänge","NN Ratio Jargon Tier C","NN Ratio Jargon Tier A","NN Ratio Jargon Tier E","Ratio Jargon Faktor","Ratio Jargon Implementierung","Ratio Jargon Transparenz","Ratio Jargon Erfolg"],"scaler":{"mean":[1.2785014030612274,0.04726181972789112,0.09111534863945583,0.015725595238095223,0.02755795068027218,0.010660374149659854,0.01003698979591837,0.008528954081632652,0.0008392857142857144,0.0009859268707482997,0.0011852465986394568,18.78462852891164,0.004272916666666665,0.001416284013605441,0.004172831632653063,0.0005433248299319727,0.0003803571428571428,0.0002903486394557824,0.001080102040816327],"scale":[0.5104095195912384,0.03203547069113976,0.04814635547870529,0.02334222418532162,0.03221618798708715,0.01589900639290944,0.015587890243108155,0.012953524627165952,0.003515817634556268,0.003702852376552842,0.004301755596811595,5.520003899836249,0.009499219104847656,0.004371947249918665,0.0069705049745986325,0.0022302244327277784,0.0017406690621751702,0.0014593690560360981,0.0030149731764799697]},"input_weights":[[-0.010798425479604431,-0.12181151314896851,-0.25705909810087685,0.08754322589924607,0.10217992658715765,0.10065586004286449,-0.1495097557349517,-0.3999122874344709],[-0.057440032416934184,0.038573399657434546,-0.2966874614269877,0.12916308278042898,0.07581533307052883,0.11797360592067137,-0.03605553078586359,-0.3737606580356927],[0.21789053804350253,-0.022322555728342762,-0.30681349758885845,0.02612320626552629,-0.047221108704786144,0.15175704812947163,-0.045209170858542064,-0.2013067796378826],[0.08162602317464276,-0.06888252652564471,-0.22022771786696518,0.10230682354063349,0.03428335177376798,0.031244764616130523,-0.02830221448440432,0.023487235272005705],[-0.01054422969040627,0.04428720027892332,0.024748354543589174,-0.042694114661201814,0.012352031647085164,0.014229019720577716,0.029110439577741065,0.13680109203535992],[0.08050389620163022,-0.06521882743936967,-0.13913871395759503,0.03637398093139374,0.08493475217470664,-0.03778610179912053,0.10987879424607279,-0.011772646102033948],[0.08335524940953158,-0.07503812572873228,-0.2715476309803251,0.11470487226541931,0.07178460413458287,0.10628567596194798,-0.011532039801774226,-0.018690113703946482],[0.1698863918132919,0.0376711682894342,-0.019922937003399147,0.006637759890651616,-0.05734392906161388,0.0007244846943040991,-0.04963640532672295,0.15463585976018354],[0.005314105489952252,-0.07286864554557926,-0.1364424970672693,0.05179728263998653,0.055019846375956395,-0.0057723540266415956,-0.06261133092352389,-0.1125454893075259],[0.06683727797635862,0.21534973256962084,-0.08579367701313353,0.06307318470806676,0.09909610613229483,0.20476835009918232,0.036325023791057835,-0.06492896643842443],[-0.06253453980461449,-0.21038536547389686,-0.08079456898083787,-0.0175097839513544,0.019397939975577556,0.05983298071230277,0.15036216169891403,-0.04348199077003322],[0.09924834964230667,-0.06733955926038862,-0.0025161327484540686,0.061351671801393594,-0.2662556519046634,-0.024344783643713227,-0.03332977192515477,-0.09002121991500636],[0.05303705960519519,-0.04414704321877324,-0.03976100178241053,0.03279631788781175,-0.04730948914076837,-0.12317773848817422,-0.036010135343505625,0.1592311980474082],[0.022647413212458656,-0.002491663600257367,-0.12008770201090771,0.06650693607915688,0.030840146707417627,0.05385667331648715,-0.028215508772116826,-0.15628150708486846],[-0.1362103707017556,-0.07983569481636728,0.08425629449181765,-0.1063425735137282,-0.14164463803966332,0.06421401291194151,-0.06608233334802208,-0.21217134270025942],[-0.042288460979507454,0.05382294868076189,-0.05273699708504458,0.11116689476887606,0.08072758228260397,-0.08398026049152546,-0.08794427398526579,0.006419689713914667],[-0.05767988178492605,-0.08431227620690389,-0.14347611939588092,0.13082651703679063,-0.17289349959559533,-0.1650532297292798,-0.27533640771524065,0.01753445567290844],[0.10950198569988219,0.025365345008174146,0.03633380355714915,0.04223318220083889,-0.14575302575500115,0.04977275294687006,-0.14042824934483156,-0.06982049024986185],[0.05491285609023417,-0.02520540283344526,-0.030005063037211954,-0.06824264456879794,0.01910356978119966,-0.0331803069617029,-0.02533603035812889,-0.0048561918734868065]],"hidden_bias":[0.4629778054600842,0.2008262697765119,-1.3728478730013423,-1.6636256447383269,0.401803594503086,-1.0137562312054358,0.2534612005151581,-1.335160598438315],"output_weights":[0.3871932815329371,-0.405919226058929,-0.6784570740009439,0.386223532151811,0.3774183513812904,0.36835771543034107,-0.40559781090990776,-0.6426394658670795],"output_bias":-0.9650064558563026,"training":{"method":"full-batch backpropagation with L-BFGS-B","loss":"parabolically_weighted_mean_squared_error_plus_l2","sample_weighting":{"mode":0.31777394678439713,"formula":"w(y)=1+(14.0/0.3177739468^2)*(y-0.3177739468)^2 for 0<=y<0.3177739468; w(y)=1 above","normalization":"divide by mean training weight","weight_at_zero_before_normalization":15.0},"l2_definition":"alpha*(sum(input_weights^2)+sum(output_weights^2)); biases excluded; no division by n","l2_candidates":[1e-05,3e-05,0.0001,0.0003,0.001,0.003,0.01,0.03,0.1],"selected_l2_alpha":0.0003,"cross_validation":{"splits":5,"repeats":5,"seed":91919,"selection":"lowest mean fold MAE, then mean fold RMSE","selection_table":[{"alpha":1e-05,"mean_fold_mae":0.08686782490922904,"mean_fold_rmse":0.12176635114801065,"all_success":true,"mean_iterations":2128.08,"oof_mae":0.08085196683692669,"oof_rmse":0.11126180084691735},{"alpha":3e-05,"mean_fold_mae":0.08595339028626375,"mean_fold_rmse":0.12130899845525901,"all_success":true,"mean_iterations":1669.92,"oof_mae":0.08087260168395685,"oof_rmse":0.11191366476945876},{"alpha":0.0001,"mean_fold_mae":0.08382650812266451,"mean_fold_rmse":0.11558460157817489,"all_success":true,"mean_iterations":1075.16,"oof_mae":0.08063133089292197,"oof_rmse":0.11061809947969038},{"alpha":0.0003,"mean_fold_mae":0.08195454385328775,"mean_fold_rmse":0.11205729933606486,"all_success":true,"mean_iterations":779.96,"oof_mae":0.08089565864832998,"oof_rmse":0.11049439710605719},{"alpha":0.001,"mean_fold_mae":0.0819759115862577,"mean_fold_rmse":0.11173723414347032,"all_success":true,"mean_iterations":747.84,"oof_mae":0.08168505179809205,"oof_rmse":0.11154799952223801},{"alpha":0.003,"mean_fold_mae":0.08356668248964738,"mean_fold_rmse":0.11435403300662872,"all_success":true,"mean_iterations":356.48,"oof_mae":0.08340981549016091,"oof_rmse":0.11446915353633207},{"alpha":0.01,"mean_fold_mae":0.08967707971778179,"mean_fold_rmse":0.12365765458876961,"all_success":true,"mean_iterations":230.0,"oof_mae":0.0896063683555372,"oof_rmse":0.12399617876542555},{"alpha":0.03,"mean_fold_mae":0.09672856598786032,"mean_fold_rmse":0.1322798373185874,"all_success":true,"mean_iterations":48.16,"oof_mae":0.0966881566648371,"oof_rmse":0.13263217194393637},{"alpha":0.1,"mean_fold_mae":0.13583043552176832,"mean_fold_rmse":0.18306359444631226,"all_success":true,"mean_iterations":34.64,"oof_mae":0.13581000568556462,"oof_rmse":0.18335128049566599}],"metrics":{"count":2352,"mae":0.08089565864832998,"rmse":0.11049439710605719,"r2":0.8885119875719426,"bias":-0.013442085275382185,"median_absolute_error":0.06182674167953728,"within_0_05":0.4192176870748299,"within_0_10":0.7066326530612245,"pearson":0.94408101305123,"spearman":0.9334564235427427,"prediction_min":0.0554877714836902,"prediction_max":2.2725894144695644,"prediction_mean":0.5153674385341417,"prediction_sd":0.32352681087940927,"wasserstein":0.015347462990749707,"ranges":{"0_to_lt_0_10":{"count":84,"mae":0.03775949542775229,"bias":0.03688677931691536},"0_to_lt_0_20":{"count":281,"mae":0.04014478814686058,"bias":0.018716226478485767},"0_to_lt_0_30":{"count":600,"mae":0.04984876754854706,"bias":0.010951048547074488},"0_to_lt_0_40":{"count":957,"mae":0.058554639899082654,"bias":0.004505996755308675},"ge_0_40":{"count":1395,"mae":0.09622207796232975,"bias":-0.02575485552869484},"ge_1_00":{"count":219,"mae":0.1381741575104996,"bias":-0.07602160789404712},"ge_1_50":{"count":35,"mae":0.1516954484652972,"bias":-0.11973628253156812}}}},"optimizer":{"success":true,"status":0,"message":"CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH","iterations":792,"objective":0.008126473270908006,"training_mae":0.07540211566448728,"training_rmse":0.10165464865036923,"maxiter":5000,"ftol":1e-12,"gtol":1e-08,"maxls":30}}};
 
 function blaBlaSoftplus(value) {
   if (value > 40) return value;
@@ -6634,10 +6669,16 @@ function renderPQMap(data, compactMain = false) {
     const py = y0 - clamp(q / Q_MAX, 0, 1) * plotH;
     const fmt = v => Math.abs(v - Math.round(v)) < 1e-9 ? String(Math.round(v)) : v.toFixed(1).replace(".", ",");
 
+    // V10.10.6: Beide Achsen verwenden 0,5 als Hauptintervall.
+    // Kleine Achsenticks werden zusätzlich im Abstand 0,1 gezeichnet.
     const pTicks = [0, 0.5, 1, 1.5, 2, 2.5, 3];
-    const qTicks = [0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8];
+    const qTicks = [0, 0.5, 1, 1.5];
+    const pMinorTicks = Array.from({ length: Math.round(P_MAX * 10) + 1 }, (_, i) => i / 10)
+        .filter(value => Math.abs(value * 2 - Math.round(value * 2)) > 1e-9);
+    const qMinorTicks = Array.from({ length: Math.floor(Q_MAX * 10) + 1 }, (_, i) => i / 10)
+        .filter(value => Math.abs(value * 2 - Math.round(value * 2)) > 1e-9);
 
-    // V10.10.3: Vier Referenzlinien konstanter Summe P + Q.
+    // V10.10.6: Vier Referenzlinien konstanter Summe P + Q.
     // Basis = Modus(P) + Modus(Q) = 1.171323725999; Faktoren 5/35, 20/35, 35/35 und 50/35.
     const pqReferenceSums = [
         1.171323725999 * 5 / 35,
@@ -6659,6 +6700,14 @@ function renderPQMap(data, compactMain = false) {
     });
 
     let grid = "";
+    pMinorTicks.forEach(value => {
+        const x = x0 + value / P_MAX * plotW;
+        grid += '<line class="tick minor-tick" x1="' + x.toFixed(2) + '" y1="' + y0 + '" x2="' + x.toFixed(2) + '" y2="' + (y0 + 2.5) + '" />';
+    });
+    qMinorTicks.forEach(value => {
+        const y = y0 - value / Q_MAX * plotH;
+        grid += '<line class="tick minor-tick" x1="' + (x0 - 2.5) + '" y1="' + y.toFixed(2) + '" x2="' + x0 + '" y2="' + y.toFixed(2) + '" />';
+    });
     pTicks.forEach(value => {
         const x = x0 + value / P_MAX * plotW;
         grid += '<line class="grid" x1="' + x.toFixed(2) + '" y1="' + (y0 - plotH) + '" x2="' + x.toFixed(2) + '" y2="' + y0 + '" />';
@@ -6695,7 +6744,7 @@ function renderPQMap(data, compactMain = false) {
 function renderBCFSummary1010(data) {
     const calibration = BCF_EMPIRICAL_CALIBRATION_1014;
     return (
-        '<div class="section-header">Profil 10.10.3</div>' +
+        '<div class="section-header">Profil 10.10.6</div>' +
         '<div class="profile-audit-grid"><div class="profile-audit-values">' +
         metric("Betazoid-Faktor B – Gamma-kalibriert", data.bcfData.B.toFixed(4)) +
         metric("Cardassianisch-Faktor C – Gamma-kalibriert", data.bcfData.C.toFixed(4)) +
@@ -6709,7 +6758,7 @@ function renderBCFSummary1010(data) {
         metric("Empirische Perzentile B / C / F", (100 * data.bcfData.percentile.B).toFixed(2) + " % / " + (100 * data.bcfData.percentile.C).toFixed(2) + " % / " + (100 * data.bcfData.percentile.F).toFixed(2) + " %") +
         metric("Bisherige lineare Faktoren 0–1", data.bcfData.linear.B.toFixed(4) + " / " + data.bcfData.linear.C.toFixed(4) + " / " + data.bcfData.linear.F.toFixed(4)) +
         metric("Statistische Belastbarkeit", data.bcfData.reliability + " bei " + data.wordCount + " Wörtern") +
-        '<div class="note">DTA 10.10.3 zerlegt den fünfdimensionalen Profilvektor B/C/F/ANN/LIX in zwei orthogonale Größen in zwei orthogonale Größen: P ist die Projektion auf die normierte Raumdiagonale und beschreibt das gemeinsame Gesamtniveau; Q ist die Länge der senkrechten Restkomponente und beschreibt die Profilunwucht. Es gilt weiterhin exakt R² = P² + Q², sodass die bisherige euklidische Vektorlänge geometrisch vollständig erhalten bleibt. Die P/Q-Karte ist vorerst rein diagnostisch; Bewertungszonen und Klassengrenzen sind noch nicht festgelegt. B, C, F und LIX werden über empirische Rangverteilungen des Korpus ' + escapeHTML(calibration.corpusLabel) + ' (' + calibration.corpusSize + ' Texte) auf die aktuelle ANN-V11.0-Verteilung abgebildet.</div>' +
+        '<div class="note">DTA 10.10.6 zerlegt den fünfdimensionalen Profilvektor B/C/F/ANN/LIX in zwei orthogonale Größen in zwei orthogonale Größen: P ist die Projektion auf die normierte Raumdiagonale und beschreibt das gemeinsame Gesamtniveau; Q ist die Länge der senkrechten Restkomponente und beschreibt die Profilunwucht. Es gilt weiterhin exakt R² = P² + Q², sodass die bisherige euklidische Vektorlänge geometrisch vollständig erhalten bleibt. Die P/Q-Karte ist vorerst rein diagnostisch; Bewertungszonen und Klassengrenzen sind noch nicht festgelegt. B, C, F und LIX werden über empirische Rangverteilungen des Korpus ' + escapeHTML(calibration.corpusLabel) + ' (' + calibration.corpusSize + ' Texte) auf die aktuelle ANN-V11.0-Verteilung abgebildet.</div>' +
         '</div>' + renderPQMap(data, true) + '</div>'
     );
 }
@@ -7277,7 +7326,7 @@ function runRegressionTests() {
         if (!condition) failures.push(name + (details ? ": " + details : ""));
     };
 
-    check("V10.10.3 Selbstprüfung", verifyDTAIntegrity(), computeDTAIntegrityHash());
+    check("V10.10.6 Selbstprüfung", verifyDTAIntegrity(), computeDTAIntegrityHash());
 
     const dtaZero = computeDTAIndex({ bcfData: { B: 0, C: 0, F: 0 }, predictedBlaBlaMeterIndex: 0, lixCalibrated: 0 });
     const dtaUnit = computeDTAIndex({ bcfData: { B: 1, C: 0, F: 0 }, predictedBlaBlaMeterIndex: 0, lixCalibrated: 0 });
@@ -7298,7 +7347,7 @@ const dtaBalanced = computeDTAComponents({ bcfData: { B: 0.4, C: 0.4, F: 0.4 }, 
     const dtaFiveOnes = computeDTAComponents({ bcfData: {B:1,C:1,F:1}, predictedBlaBlaMeterIndex:1, lixCalibrated:1 });
     check("V10.7.0 DTA fünf Dimensionen", dtaFiveOnes.dimension === 5 && Math.abs(dtaFiveOnes.P - Math.sqrt(5)) < 1e-12 && Math.abs(dtaFiveOnes.Q) < 1e-12, JSON.stringify(dtaFiveOnes));
     const lixMappedFixture = interpolateLIXCalibration(59.02286969085685);
-    check("V10.10.3 LIX Kalibrierung", Math.abs(lixMappedFixture.calibrated - 0.43814090867201932) < 1e-9, JSON.stringify(lixMappedFixture));
+    check("V10.10.6 LIX Kalibrierung", Math.abs(lixMappedFixture.calibrated - 0.43814090867201932) < 1e-9, JSON.stringify(lixMappedFixture));
     const lixFixture = wordLengthProfile([
         { original: "kurz" },
         { original: "Lesbarkeit" },
@@ -7724,7 +7773,7 @@ const dtaBalanced = computeDTAComponents({ bcfData: { B: 0.4, C: 0.4, F: 0.4 }, 
     const gammaMid1014 = interpolateCalibration1014(BCF_EMPIRICAL_CALIBRATION_1014.B.knots[Math.floor(BCF_EMPIRICAL_CALIBRATION_1014.B.knots.length / 2)][0], "B");
     const gammaTail1014 = interpolateCalibration1014(BCF_EMPIRICAL_CALIBRATION_1014.B.tailMaxRaw + 0.25, "B");
     check("V10.3.2 Quantil-Nullpunkt", gammaZero1014.gamma === 0 && gammaZero1014.percentile === 0, JSON.stringify(gammaZero1014));
-    check("V10.10.3 ANN-Referenzkalibrierung", Math.abs(BCF_REFERENCE_TARGET_1032.modeApprox - 0.3118610135413792) < 1e-12 && BCF_REFERENCE_TARGET_1032.count === 2352 && BCF_EMPIRICAL_CALIBRATION_1014.corpusSize === 2352 && BCF_EMPIRICAL_CALIBRATION_1014.sourceParameterSha256 === "8dd3d9b2614019642cda1547f75fb0470a38c8a907201e92778872820d29e664", JSON.stringify(BCF_REFERENCE_TARGET_1032));
+    check("V10.10.6 ANN-Referenzkalibrierung", Math.abs(BCF_REFERENCE_TARGET_1032.modeApprox - 0.3118610135413792) < 1e-12 && BCF_REFERENCE_TARGET_1032.count === 2352 && BCF_EMPIRICAL_CALIBRATION_1014.corpusSize === 2352 && BCF_EMPIRICAL_CALIBRATION_1014.sourceParameterSha256 === "8dd3d9b2614019642cda1547f75fb0470a38c8a907201e92778872820d29e664", JSON.stringify(BCF_REFERENCE_TARGET_1032));
     check("V10.3.2 Quantil-Monotonie und Tail", gammaMid1014.gamma > 0 && gammaTail1014.gamma > BCF_EMPIRICAL_CALIBRATION_1014.B.tailMaxTarget && gammaTail1014.extrapolated, JSON.stringify(gammaTail1014));
 
     const quotes1011 = normalizeTechnicalText('Der „Scheduler-Token“ und das «gepufferte» Modell sowie "ASCII-Zitat".');
