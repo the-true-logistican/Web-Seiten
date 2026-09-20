@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deutsches Text-Audit – FAQ 0.6.7</title>
+<title>Deutsches Text-Audit – FAQ 0.6.6</title>
 <style>
 body {
     font-family: Arial, sans-serif;
@@ -315,6 +315,9 @@ h1 {
     position: absolute;
     top: 8px;
     right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 26px;
     height: 26px;
     padding: 0;
@@ -322,24 +325,11 @@ h1 {
     border-radius: 50%;
     background: #999;
     color: #fff;
-    font-size: 0;
-    line-height: 0;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1;
     cursor: pointer;
 }
-.imprint-close::before,
-.imprint-close::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 12px;
-    height: 2px;
-    border-radius: 1px;
-    background: currentColor;
-    transform-origin: center;
-}
-.imprint-close::before { transform: translate(-50%, -50%) rotate(45deg); }
-.imprint-close::after { transform: translate(-50%, -50%) rotate(-45deg); }
 .imprint-close:hover {
     background: #777;
 }
@@ -430,7 +420,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-nullwerte">
-        Theoretisch ja, praktisch ist das äußerst unwahrscheinlich und auch nicht unbedingt erstrebenswert. Ein nahezu vollständig unbelasteter Text könnte sprachlich extrem reduziert, nüchtern und unnatürlich wirken. Gute Texte brauchen ein gewisses Maß an sprachlicher Komplexität und Redundanz, damit sie menschlich und angenehm lesbar bleiben. Ziel des DTA ist deshalb nicht der perfekte Nullvektor, sondern ein niedriges und zugleich ausgewogenes Belastungsprofil.
+        Ein exakter Nullpunkt ist im aktuellen Modell weder ein realistisches noch ein sinnvolles Ziel. Dafür müssten alle fünf Dimensionen gleichzeitig nahezu unbelastet sein. Durch die empirische Kalibrierung und die eigenständige ANN-Dimension ist das bei realen zusammenhängenden Texten äußerst unwahrscheinlich. Entscheidend ist deshalb nicht die Annäherung an einen mathematischen Nullpunkt, sondern ein niedriger P-Wert zusammen mit einem niedrigen Q-Wert: geringe Gesamtbelastung bei zugleich ausgewogenem Profil.
         <div class="faq-id">ID: faq-nullwerte</div>
     </div>
 </section>
@@ -440,7 +430,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-maximalwert">
-        Die Skala ist bewusst nicht nach oben begrenzt. Typische Texte liegen beim P-Wert ungefähr im Bereich um 0,7; auch Werte um 1 sind durchaus möglich. Extrem belastete Texte können jedoch deutlich darüber liegen. Ein P-Wert um 2 zusammen mit einem hohen Q-Wert ist ein starkes Warnsignal: Der Text ist insgesamt stark belastet und zusätzlich unausgewogen. Solche Texte sind typischerweise schwer verständlich oder deutlich aufgebläht.
+        Die Skala ist bewusst nicht nach oben begrenzt. Im aktuellen Referenzkorpus der Version 10.10.14 liegt der P-Wert im Mittel bei ungefähr 1,01 und der Median bei ungefähr 0,95. Diese Werte sind keine festen Grenzwerte, sondern beschreiben die gegenwärtige Referenzverteilung und können sich mit einer neuen Version ändern. Deutlich höhere P-Werte weisen auf eine stärkere Gesamtbelastung hin. Ein P-Wert um 2 zusammen mit einem hohen Q-Wert ist deshalb ein starkes Warnsignal: Der Text ist insgesamt stark belastet und zusätzlich unausgewogen.
         <div class="faq-id">ID: faq-maximalwert</div>
     </div>
 </section>
@@ -503,7 +493,7 @@ h1 {
             <li>
                 <strong>ANN – rekonstruiertes BlaBlaMeter</strong>
                 <span class="info-tip" tabindex="0" aria-label="Erklärung ANN">i
-                    <span class="tip-box">Der ANN-Wert rekonstruiert das Verhalten des externen BlaBlaMeters aus mehreren tausend Beispielen mit einem einfachen Feedforward-Netz. Er ist bewusst als separater Vergleichswert von den deterministischen B-, C-, F- und LIX-Dimensionen getrennt.</span>
+                    <span class="tip-box">Der ANN-Wert rekonstruiert das Verhalten des externen BlaBlaMeters mit einem einfachen Feedforward-Netz. In Version 10.10.14 wurde dieses Netz aus 2.545 nutzbaren überarbeiteten Referenztexten vollständig neu trainiert und unabhängig getestet. ANN bleibt eine eigenständige fünfte Dimension; die regelbasierten Größen B, C, F und LIX werden dadurch nicht verändert.</span>
                 </span>
                 : Weitere Informationen beim <a href="http://www.blablameter.de/" target="_blank" rel="noopener noreferrer">BlaBlaMeter</a>.
             </li>
@@ -557,7 +547,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-ann-deterministisch">
-        Das neuronale Netz gehört nur zum separat ausgewiesenen ANN-Vergleichswert. Es rekonstruiert das Verhalten des BlaBlaMeters aus Beispieldaten. Die eigentlichen DTA-Detektoren B, C, F und die weiteren regelbasierten Analysen werden dadurch nicht zu einer Black Box. Der ANN-Wert ist bewusst als eigene Vergleichsdimension kenntlich gemacht.
+        Das neuronale Netz bildet die fünfte DTA-Dimension ANN. Es rekonstruiert das Verhalten des BlaBlaMeters aus Beispieldaten und geht zusammen mit B, C, F und LIX in die P-Q-Darstellung ein. Die regelbasierten Detektoren B, C und F sowie der LIX werden dadurch jedoch nicht verändert. Nach dem Training sind Skalierung, Gewichte und Bias-Werte fest in der HTML-Datei hinterlegt; bei gleicher Programmversion und gleichem Text entsteht deshalb auch für ANN reproduzierbar dasselbe Ergebnis.
         <div class="faq-id">ID: faq-ann-deterministisch</div>
     </div>
 </section>
@@ -727,7 +717,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-fachgebiet">
-        Das ist überprüfbar. Texte einer neuen Disziplin können in den Korpus aufgenommen und systematisch auf Fehlklassifikationen untersucht werden. Zeigen sich fachtypische Probleme, werden Detektoren angepasst, erneut getestet und die erforderlichen Modelle und Kalibrierungen neu bestimmt.
+        Das ist überprüfbar. Texte einer neuen Disziplin können in den Korpus aufgenommen und systematisch auf Fehlklassifikationen untersucht werden. Zeigen sich fachtypische Probleme, werden Detektoren angepasst, erneut getestet und die erforderlichen Modelle und Kalibrierungen neu bestimmt. Dasselbe Vorgehen ist auch für besondere Textsorten oder spezielle Anforderungen möglich. Dafür braucht man jedoch repräsentative Beispiele und eine erneute Validierung; eine Anpassung sollte nicht als individuelle Score-Optimierung erfolgen, sondern als eigene dokumentierte Modellversion.
         <div class="faq-id">ID: faq-fachgebiet</div>
     </div>
 </section>
@@ -817,6 +807,17 @@ h1 {
         <div class="faq-id">ID: faq-ki-texte</div>
     </div>
 </section>
+<section class="faq-item" id="faq-stabilitaet-neukalibrierung">
+    <button class="faq-question" type="button" aria-expanded="false" aria-controls="answer-stabilitaet-neukalibrierung">
+        <span><span class="faq-number">D10</span> Wie wird geprüft, ob ein neu trainiertes ANN oder eine neue Kalibrierung die bisherigen DTA-Ergebnisse grundlegend verändert?</span>
+        <span class="faq-symbol" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" id="answer-stabilitaet-neukalibrierung">
+        Neue Modelle werden nicht einfach eingebaut, weil sie auf den Trainingsdaten gut aussehen. Für Version 10.10.14 wurde das ANN vollständig neu aus den erweiterten Referenzdaten aufgebaut. Die Modellwahl erfolgte auf Entwicklungsdaten; ein zuvor abgetrennter Testsatz wurde erst für die abschließende unabhängige Prüfung verwendet. Dort erreichte das neue ANN einen mittleren absoluten Fehler von etwa 0,085 gegenüber dem BlaBlaMeter und ein Bestimmtheitsmaß R² von etwa 0,90.<br><br>
+        Anschließend wurden B, C, F und LIX neu auf die aktuelle ANN-Referenzverteilung kalibriert und der gesamte gültige Referenzkorpus mit dem vorherigen Stand verglichen. Die Rangfolge der Texte blieb dabei nahezu unverändert: Für P lag die Spearman-Korrelation bei etwa 0,999, für Q bei etwa 0,998. Q blieb auch im Mittel praktisch stabil; P verschob sich nur leicht nach oben. Solche internen Stabilitätsprüfungen zeigen, ob eine Weiterentwicklung das bestehende Messverhalten kontrolliert fortführt. Sie ersetzen jedoch keine externe Validierung an unabhängigen Textsammlungen.
+        <div class="faq-id">ID: faq-stabilitaet-neukalibrierung</div>
+    </div>
+</section>
     </div>
 </section>
 
@@ -833,7 +834,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-funktionsweise">
-        Das DTA ist transparent aufgebaut: Der vollständige Programmcode liegt in der HTML-Datei und kann eingesehen werden. Damit lässt sich nachvollziehen, welche Merkmale gesucht, wie sie erkannt und wie die Werte berechnet werden. Anders als beim BlaBlaMeter ist die eigentliche DTA-Analyse keine Black Box. Lediglich der BlaBlaMeter-Vergleichswert wird separat durch ein einfaches Feedforward-Netz nachgebildet.
+        Das DTA ist transparent aufgebaut: Der vollständige Programmcode liegt in der HTML-Datei und kann eingesehen werden. Damit lässt sich nachvollziehen, welche Merkmale gesucht, wie sie erkannt und wie die Werte berechnet werden. B, C und F beruhen auf expliziten Regeln, der LIX auf einer bekannten Lesbarkeitsformel. ANN ist die gelernte Komponente: Das verwendete Feedforward-Netz wurde aus Referenzdaten trainiert, seine Skalierungsparameter, Gewichte und Bias-Werte sind anschließend aber fest im Programm hinterlegt. P und Q werden aus allen fünf Dimensionen berechnet. Damit bleibt die Laufzeitberechnung lokal und reproduzierbar, auch wenn ANN selbst nicht regelbasiert entstanden ist.
         <div class="faq-id">ID: faq-funktionsweise</div>
     </div>
 </section>
@@ -878,7 +879,7 @@ h1 {
         <span id="copyrightNotice">© 2026 Martin Wölker</span>
         <a id="contactLink" href="http://www.woelker.name/" target="_blank" rel="noopener noreferrer">Kontakt</a>
         <button id="imprintLink" class="imprint-link-button" type="button" onclick="openImprint()">Impressum</button>
-        <span id="faqVersion">Version 0.6.7</span>
+        <span id="faqVersion">Version 0.6.6</span>
     </div>
 </div>
 
@@ -895,7 +896,7 @@ Phone: +49 173 28 29 0 25</p>
 
 <script>
 
-const FAQ_DTA_VERSION = "10.10.6";
+const FAQ_DTA_VERSION = "10.10.14";
 
 function checkCallingDTAVersion() {
     const params = new URLSearchParams(window.location.search);
