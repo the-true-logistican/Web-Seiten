@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Greenfield Illusion vs. Brownfield Reality in Circular Economy</title>
+  
+  <!-- Luminous Runtime Tokens & Components -->
+  <link rel="stylesheet" href="assets/luminous.css">
+  
+  <!-- Chart.js Core & datalabels -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"
+    onerror="let s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js';document.head.appendChild(s)"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"
+    onerror="console.warn('datalabels plugin failed to load')"></script>
+
+  <style>
+    /* Custom page glue & slide deck state overrides */
+    .deck-container {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .slide-viewer {
+      position: relative;
+      min-height: 520px;
+      background: var(--surface);
+      border: 1px solid var(--on-surface-low);
+      border-radius: var(--r-l);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--on-surface-low);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+      gap: 16px;
+    }
+
+    .slide-number-badge {
+      font-family: var(--ff-mono);
+      font-size: 13px;
+      padding: 4px 10px;
+      background: var(--surface-dim);
+      border-radius: var(--r-full);
+      white-space: nowrap;
+      color: var(--on-surface-variant);
+    }
+
+    .slide-body {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .slide-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-top: 1px solid var(--on-surface-low);
+      padding-top: 16px;
+      margin-top: 32px;
+      gap: 16px;
+    }
+
+    /* Matrix interactive grid for Slide 4 */
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .matrix-cell {
+      padding: 16px;
+      background: var(--surface-dim);
+      border-radius: var(--r-m);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .matrix-cell.highlight {
+      background: var(--accent-container);
+      border: 1.5px solid var(--primary);
+    }
+
+    .toolbar-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn-group {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .slide-progress-track {
+      flex-grow: 1;
+      max-width: 320px;
+      height: 4px;
+      background: var(--surface-container);
+      border-radius: var(--r-full);
+      overflow: hidden;
+    }
+
+    .slide-progress-fill {
+      height: 100%;
+      background: var(--primary);
+      width: 6.25%; /* 1/16 */
+      transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Expandable Audit Checklist Item styling */
+    .checklist-item-interactive {
+      border-bottom: 1px solid var(--on-surface-low);
+      padding: 12px 0;
+      cursor: pointer;
+    }
+
+    .checklist-item-interactive:last-child {
+      border-bottom: none;
+    }
+
+    .checklist-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .checklist-details {
+      display: none;
+      margin-top: 8px;
+      padding-left: 16px;
+      color: var(--on-surface-variant);
+    }
+
+    .checklist-item-interactive.active .checklist-details {
+      display: block;
+    }
+
+    /* Speaker Notes Box */
+    .speaker-notes-card {
+      padding: 16px 20px;
+      background: var(--surface-dim);
+      border-radius: var(--r-m);
+      margin-top: 16px;
+    }
+
+    /* Formula & SRI Display */
+    .sri-box {
+      padding: 16px;
+      background: var(--surface-dim);
+      border-radius: var(--r-m);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    .slide-content-pane {
+      display: none;
+    }
+
+    .slide-content-pane.active {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+
+<style id="lumi-runtime">
+:root {
+  --body-bg: transparent;
+  --ff-sans: "Google Sans Flex", "Google Sans Text", "Google Sans", sans-serif;
+  --ff-mono: "Google Sans Code", monospace;
+  --surface: #fdfcfc;
+  --surface-dim: #f2f0f0;
+  --surface-bright: #fff;
+  --surface-container: #f2f0f0;
+  --surface-container-high: #e6e6e6;
+  --on-surface: #000;
+  --on-surface-variant: rgba(0, 0, 0, 0.55);
+  --on-surface-low: rgba(0, 0, 0, 0.08);
+  --primary: #3186ff;
+  --accent: #9dd2ff;
+  --accent-container: #dcf1ff;
+  --accent-fixed: #3186ff;
+  --positive: #008052;
+  --error: #de2d29;
+  --stroke-default: #e3e3e3;
+  --r-l: 24px;
+  --r-m: 16px;
+  --r-full: 999px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body {
+  margin: 0 !important; padding: 0 !important; background: var(--body-bg, transparent) !important; color: var(--on-surface) !important;
+  font-family: var(--ff-sans) !important;
+}
+.lumi-page {
+  width: 100% !important; max-width: 1296px !important; margin-inline: auto !important; padding: 28px !important; box-sizing: border-box !important;
+}
+.lumi-caption { font-size: 13px; line-height: 20px; color: var(--on-surface-variant); }
+.lumi-headline-l { font-size: 1.75rem; line-height: 2.25rem; font-weight: 350; }
+.lumi-headline-m { font-size: 1.5rem; line-height: 1.75rem; font-weight: 380; }
+.lumi-headline-s { font-size: 1.25rem; line-height: 1.5rem; font-weight: 470; }
+.lumi-body-l { font-size: 1.0625rem; line-height: 1.5rem; }
+.lumi-body-m { font-size: 0.9375rem; line-height: 1.25rem; }
+.lumi-body-s { font-size: 0.8125rem; line-height: 1.0625rem; }
+.lumi-body-l-emphasized, .lumi-body-m-emphasized { font-weight: 540; }
+.lumi-tldr { font-size: 19px; line-height: 28px; font-weight: 380; }
+.lumi-takeaway { font-size: 17px; line-height: 24px; }
+.lumi-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 24px; border-radius: 999px; border: none; cursor: pointer; text-decoration: none; }
+.lumi-btn--accent { background-color: var(--accent); color: #000; }
+.lumi-btn--tonal { background-color: var(--surface-dim); color: #000; }
+.lumi-btn--small { min-height: 36px; padding: 0 16px; font-size: 13px; }
+.lumi-btn:disabled { opacity: 0.38; cursor: not-allowed; }
+.lumi-pros-cons { display: flex; flex-direction: column; gap: 24px; width: 100%; }
+@media (min-width: 600px) { .lumi-pros-cons { flex-direction: row; } }
+.lumi-pc-column { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+.lumi-pc-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.lumi-pc-list li { display: flex; gap: 12px; align-items: flex-start; }
+.lumi-callout { display: flex; flex-direction: column; gap: 4px; width: 100%; padding: 16px; background: var(--surface-dim); border-radius: 16px; }
+.lumi-sequence { display: flex; flex-direction: column; width: 100%; list-style: none; padding: 0; margin: 0; }
+.lumi-seq-step { display: flex; gap: 16px; position: relative; padding-bottom: 24px; }
+.lumi-seq-num { width: 20px; height: 20px; border-radius: 50%; border: 1.3px solid var(--on-surface); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.lumi-seq-num span { font-size: 13px; }
+.lumi-table { width: 100%; border-collapse: collapse; text-align: left; }
+.lumi-table th { padding: 12px 16px; font-size: 14px; font-weight: 600; border-bottom: 1px solid var(--on-surface-low); }
+.lumi-table td { padding: 14px 16px; font-size: 14px; border-bottom: 1px solid var(--on-surface-low); }
+.lumi-timeline { display: flex; flex-direction: column; width: 100%; position: relative; }
+.lumi-timeline-item { display: flex; gap: 16px; position: relative; padding-bottom: 16px; }
+.lumi-time-marker { width: 24px; height: 24px; position: relative; display: flex; align-items: center; justify-content: center; }
+.lumi-time-marker::before { content: ''; width: 16px; height: 16px; border-radius: 50%; border: 1.3px solid var(--on-surface); }
+.lumi-pullquote { display: flex; gap: 20px; width: 100%; margin: 0; }
+.lumi-pullquote-text { font-style: italic; font-size: 22px !important; line-height: 30px !important; font-weight: 300; }
+</style>
+<script>
+(function(){
+  function syncSlider(el){
+    if(!el || el.type !== 'range') return;
+    var min = parseFloat(el.min || 0), max = parseFloat(el.max || 100), val = parseFloat(el.value || 0);
+    var pct = (max > min) ? ((val - min) / (max - min)) * 100 : 50;
+    el.style.setProperty('--progress', pct.toFixed(2) + '%');
+  }
+  document.addEventListener('input', function(e){ syncSlider(e.target); }, true);
+})();
+</script>
+</head>
+<body class="lumi-theme-light">
+  <main class="lumi-page">
+    
+    <!-- Executive Header & Positioning -->
+    <header style="margin-bottom: 24px; border-bottom: 1px solid var(--on-surface-low); padding-bottom: 16px;">
+      <span class="lumi-caption">LECTURE SLIDE DECK & AUDIT FRAMEWORK · CIRCULAR ECONOMY ENGINEERING</span>
+      <h1 class="lumi-headline-l" style="margin-top: 4px;">The Greenfield Illusion vs. Brownfield Reality</h1>
+      <p class="lumi-body-l" style="color: var(--on-surface-variant); margin-top: 8px;">
+        Why Idealized Recycling Models Collapse Against Legacy Collection Systems (The Collection Bottleneck)
+      </p>
+    </header>
+
+    <!-- Slide Deck Controls & Top Status Bar -->
+    <div class="toolbar-row">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span class="lumi-body-m-emphasized" id="slide-tracker-text">Slide 1 of 16</span>
+        <div class="slide-progress-track">
+          <div class="slide-progress-fill" id="slide-progress-bar"></div>
+        </div>
+      </div>
+
+      <div class="nav-btn-group">
+        <button class="lumi-btn lumi-btn--tonal lumi-btn--small" id="prev-slide-btn" onclick="navSlide(-1)" disabled>
+          Previous
+        </button>
+        <button class="lumi-btn lumi-btn--accent lumi-btn--small" id="next-slide-btn" onclick="navSlide(1)">
+          Next Slide
+        </button>
+      </div>
+    </div>
+
+    <!-- Slide Deck Interactive Viewport -->
+    <div class="deck-container">
+      <div class="slide-viewer" id="main-slide-viewer">
+        
+        <!-- SLIDE 1: Title & Positioning -->
+        <div class="slide-content-pane active" id="slide-pane-1">
+          <div class="slide-header">
+            <div>
+              <span class="lumi-caption">SLIDE 01 / 16 · INTRODUCTION</span>
+              <h2 class="lumi-headline-m">The Greenfield Illusion in Plastics Circularity</h2>
+            </div>
+            <span class="slide-number-badge">01 / 16</span>
+          </div>
+          <div class="slide-body">
+            <p class="lumi-tldr">
+              Higher recycling quotas and polymer depolymerization chemistry fail in practice when they collide with unyielding legacy collection architecture.
+            </p>
+            <div class="lumi-section" style="margin-top: 12px;">
+              <h3 class="lumi-headline-s">Core Lecture Positioning</h3>
+              <ul style="margin-top: 8px; display: flex; flex-direction: column; gap: 8px; padding-left: 20px;">
+                <li class="lumi-body-l"><strong>The Academic Fallacy:</strong> Textbooks assume zero-friction greenfield environments with pure feedstock streams.</li>
+                <li class="lumi-body-l"><strong>The Industrial Reality:</strong> Engineers always operate inside legacy brownfield infrastructure with pre-existing contracts, legacy sorting facilities, and contaminated material flows.</li>
+                <li class="lumi-body-l"><strong>The Paradigm Shift:</strong> Stop designing ideal reactors for non-existent pristine streams. Start engineering for messy, legacy realities.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="speaker-notes-card">
+            <span class="lumi-caption" style="display: block; margin-bottom: 4px; font-weight: 600;">PROFESSOR'S LECTURE NOTES</span>
+            <p class="lumi-body-s" style="color: var(--on-surface-variant);">
+              "You have been taught that circular economy is a matter of setting higher recycling quotas and designing better polymers. Today, we dismantle that assumption. We examine why state-of-the-art chemical and mechanical recycling technologies fail in practice—not because the chemistry is flawed, but because they collide with existing brownfield collection infrastructure."
+            </p>
+          </div>
+        </div>
+
+        <!-- SLIDE 2: The Core Premise -->
+        <div class="slide-content-pane" id="slide-pane-2">
+          <div class="slide-header">
+            <div>
+              <span class="lumi-caption">SLIDE 02 / 16 · EPISTEMIC CONSTRAINTS</span>
+              <h2 class="lumi-headline-m">The Core Premise: Engineering vs. Reality</h2>
+            </div>
+            <span class="slide-number-badge">02 / 16</span>
+          </div>
+          <div class="slide-body">
+            <div class="lumi-pros-cons">
+              <div class="lumi-pc-column">
+                <h4 class="lumi-body-l-emphasized">Greenfield Teaching (The Happy Path)</h4>
+                <ul class="lumi-pc-list cons">
+                  <li><span class="lumi-body-l-emphasized">−</span> <span class="lumi-body-l">Assumes zero initial physical friction</span></li>
+                  <li><span class="lumi-body-l-emphasized">−</span> <span class="lumi-body-l">Guarantees clean, homogeneous polymer input</span></li>
+                  <li><span class="lumi-body-l-emphasized">−</span> <span class="lumi-body-l">Unbounded design freedom and floating site boundaries</span></li>
+                  <li><span class="lumi-body-l-emphasized">−</span> <span class="lumi-body-l">Solves deterministic mass-balance equations</span></li>
+                </ul>
+              </div>
+              <div class="lumi-pc-column">
+                <h4 class="lumi-body-l-emphasized">Brownfield Reality (The Industrial Field)</h4>
+                <ul class="lumi-pc-list pros">
+                  <li><span class="lumi-body-l-emphasized">+</span> <span class="lumi-body-l">Must plug into decades-old municipal networks</span></li>
+                  <li><span class="lumi-body-l-emphasized">+</span> <span class="lumi-body-l">Handles stochastically variable material streams</span></li>
+                  <li><span class="lumi-body-l-emphasized">+</span> <span class="lumi-body-l">Constrained by long-term incineration concessions</span></li>
+                  <li><span class="lumi-body-l-emphasized">+</span> <span class="lumi-body-l">Absorbs legacy chemical additives and PFAs</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="lumi-callout">
+              <p class="lumi-body-l-emphasized">The Core Engineering Verdict</p>
+              <p class="lumi-takeaway">
+                If your circular economy model requires a greenfield society to function, it is not an engineering solution; it is a laboratory fantasy.
+              </p>
+            </div>
+          </div>
+          <div class="speaker-notes-card">
+            <span class="lumi-caption" style="display: block; margin-bottom: 4px; font-weight: 600;">PROFESSOR'S LECTURE NOTES</span>
+            <p class="lumi-body-s" style="color: var(--on-surface-variant);">
+              "In university exercises, we give you clean boundary conditions so you can practice solving the math. The danger is when you graduate and think the world looks like those exercises. When you enter industry, there is always an existing hall, an existing waste collection contract, and an established logistics operator who owns the bin."
+            </p>
+          </div>
+        </div>
+
+        <!-- SLIDE 3: The Plastics Paradox -->
+        <div class="slide-content-pane" id="slide-pane-3">
+          <div class="slide-header">
+            <div>
+              <span class="lumi-caption">SLIDE 03 / 16 · SCALING FAILURE</span>
+              <h2 class="lumi-headline-m">The Plastics Paradox: Lab Ideals vs. Scaled Failure</h2>
+            </div>
+            <span class="slide-number-badge">03 / 16</span>
+          </div>
+          <div class="slide-body">
+            <p class="lumi-body-l">
+              Despite billions in capital expenditures for advanced chemical recycling pilots and strict European legislative quotas, actual closed-loop plastic recycling rates remain under 10%.
+            </p>
+            
+            <!-- Chart Container for Plastics Yield Discrepancy -->
+            <div style="height: 240px; width: 100%; position: relative; margin-top: 12px;">
+              <canvas id="plasticsYieldChart"></canvas>
+            </div>
+
+            <p class="lumi-caption" style="text-align: center; color: var(--on-surface-variant);">
+              Discrepancy between lab-rated chemical reactor conversion efficiencies and real post-consumer waste yields due to collection contamination.
+            </p>
+          </div>
+          <div class="speaker-notes-card">
+            <span class="lumi-caption" style="display: block; margin-bottom: 4px; font-weight: 600;">PROFESSOR'S LECTURE NOTES</span>
+            <p class="lumi-body-s" style="color: var(--on-surface-variant);">
+              "Look at chemical recycling pilot plants across Europe. The chemistry works in the lab at 95% efficiency. But when scaled up to a commercial 50,000-ton plant fed by municipal solid waste, yield drops to 30% or the plant shuts down entirely because PVC trace levels poison the catalysts. The problem wasn't the chemical reactor—it was the collection input."
+            </p>
+          </div>
+        </div>
+
+        <!-- SLIDE 4: The Greenfield/Brownfield Matrix -->
+        <div class="slide-content-pane" id="slide-pane-4">
+          <div class="slide-header">
+            <div>
+              <span class="lumi-caption">SLIDE 04 / 16 · SYSTEMIC DIAGNOSTIC</span>
+              <h2 class="lumi-headline-m">The Greenfield/Brownfield Matrix for Circular Economy</h2>
+            </div>
+            <span class="slide-number-badge">04 / 16</span>
+          </div>
+          <div class="slide-body">
+            <p class="lumi-body-l">
+              Classification of circular engineering challenges across physical infrastructure and material feedstock variance:
+            </p>
+
+            <div class="matrix-grid">
+              <div class="matrix-cell">
+                <span class="lumi-caption">CELL 1: GREENFIELD PILOT (LAB)</span>
+                <p class="lumi-body-m-emphasized">New Site + Pure Feedstock</p>
+                <p class="lumi-body-s" style="color: var(--on-surface-variant);">
+                  Academic textbook problems. Pyrolysis of pure industrial offcuts (PIR) in custom facility.
+                </p>
+              </div>
+
+              <div class="matrix-cell">
+                <span class="lumi-caption">CELL 2: INDUSTRIAL GREENFIELD</span>
+                <p class="lumi-body-m-emphasized">New Site + Uncertain Feedstock</p>
+                <p class="lumi-body-s" style="color: var(--on-surface-variant);">
+                  Commercial plant built for municipal waste. Fails due to unexpected input contamination.
+                </p>
+              </div>
+
+              <div class="matrix-cell">
+                <span class="lumi-caption">CELL 3: BROWNFIELD RETROFIT</span>
+                <p class="lumi-body-m-emphasized">Existing Site + Pure Feedstock</p>
+                <p class="lumi-body-s" style="color: var(--on-surface-variant);">
+                  Retrofitting clean industrial offcut collection into established plant floor space.
+                </p>
+              </div>
+
+              <div class="matrix-cell highlight">
+                <span class="lumi-caption" style="color: var(--accent-fixed); font-weight: 600;">CELL 4: REAL-WORLD LEGACY REALITY</span>
+                <p class="lumi-body-m-emphasized">Existing Site + Mixed Legacy Feedstock</p>
+                <p class="lumi-body-s">
+                  <strong>Where Circular Economy Actually Happens:</strong> Integrating multi-layer consumer packaging into entrenched municipal sorting rules and long-term contracts.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="speaker-notes-card">
+            <span class="lumi-caption" style="display: block; margin-bottom: 4px; font-weight: 600;">PROFESSOR'S LECTURE NOTES</span>
+            <p class="lumi-body-s" style="color: var(--on-surface-variant);">
+              "Students always design for Cell 1. But real engineering practice takes place in Cell 4. Notice that Cell 4 forces you to deal with physical constraints (the existing sorting hall) AND material constraints (the dirty yellow bin)."
+            </p>
+          </div>
+        </div>
+
+        <!-- SLIDE 5: Chapter Focus — The Collection Bottleneck -->
+        <div class="slide-content-pane" id="slide-pane-5">
+          <div class="slide-header">
+            <div>
+              <span class="lumi-caption">SLIDE 05 / 16 · SYSTEMIC FOCUS</span>
+              <h2 class="lumi-headline-m">Chapter Focus: The Collection Bottleneck</h2>
+            </div>
+            <span class="slide-number-badge">05 / 16</span>
+          </div>
+          <div class="slide-body">
+            <div class="lumi-column">
+              <p class="lumi-tldr">
+                Collection is not a trivial transport vector. It is an entrenched socio-technical regime optimized for linear mass disposal, not material purity.
+              </p>
+            </div>
+
+            <!-- Structural Architecture Diagram for Collection Flow -->
+            <div style="width: 100%; overflow-x: auto; margin-top: 12px;">
+              <svg viewBox="0 0 640 180" style="width: 100%; max-width: 640px; height: auto; display: block; margin: 0 auto;">
+                <defs>
+                  <marker id="lumi-caret" viewBox="0 0 10 10" refX="7.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto">
+                    <path d="M 3 1.2 L 7.5 5 L 3 8.8" fill="none" stroke="var(--on-surface)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                  </marker>
+                </defs>
+                <!-- Consumer Node -->
+                <rect x="20" y="50" width="140" height="70" rx="35" fill="var(--surface-dim)" stroke="var(--stroke-default)" />
+                <text x="90" y="80" text-anchor="middle" font-family="var(--ff-sans)" font-size="14" fill="var(--on-surface)">Consumer Product</text>
+                <text x="90" y="98" text-anchor="middle" font-family="var(--ff-mono)" font-size="11" font-style="italic" fill="var(--on-surface-variant)">Multi-Layer Plastic</text>
+
+                <!-- Dotted Connector 1 -->
+                <path d="M 160 85 L 230 85" fill="none" stroke="var(--on-surface)" stroke-width="1.3" stroke-dasharray="0 4" stroke-linecap="round" marker-end="url(#lumi-caret)" />
+
+                <!-- Legacy Collection Node (Focal Problem) -->
+                <rect x="240" y="45" width="160" height="80" rx="40" fill="var(--accent-container)" stroke="var(--primary)" />
+                <text x="320" y="78" text-anchor="middle" font-family="var(--ff-sans)" font-size="14" font-weight="500" fill="var(--on-surface)">Legacy Collection</text>
+                <text x="320" y="96" text-anchor="middle" font-family="var(--ff-mono)" font-size="11" font-style="italic" fill="var(--on-surface)">Compacting & Contamination</text>
+
+                <!-- Dotted Connector 2 -->
+                <path d="M 400 85 L 470 85" fill="none" stroke="var(--on-surface)" stroke-width="1.3" stroke-dasharray="0 4" stroke-linecap="round" marker-end="url(#lumi-caret)" />
+
+                <!-- Recycler Crash Node -->
+                <rect x="480" y="50" width="140" height="70" rx="35" fill="var(--surface-container)" stroke="var(--outline)" />
+                <text x="550" y="80" text-anchor="middle" font-family="var(--ff-sans)" font-size="14" fill="var(--on-surface)">Recycling Plant</text>
+                <text x="550" y="98" text-anchor="middle" font-family="var(--ff-mono)" font-size="11" font-style="italic" fill="var(--error)">Reactor Poisoning</text>
+              </svg>
+            </div>
+
+            <ul style="display: flex; flex-direction: column; gap: 8px; padding-left: 20px; margin-top: 12px;">
+              <li class="lumi-body-m">Municipal waste systems were engineered to maximize throughput per vehicle-hour, not polymer purity.</li>
+              <li class="lumi-body-m">Waste collection trucks compact mixed garbage, crushing glass into plastic pores and embedding organic sludge.</li>
+            </ul>
+          </div>
+          <div class="speaker-notes-card">
+            <span class="lumi-caption" style="display: block; margin-bottom: 4px; font-weight: 600;">PROFESSOR'S LECTURE NOTES</span>
+            <p class="lumi-body-s" style="color: var(--on-surface-variant);">
+              "We are in the 'Collection' chapter of this course. Students often assume collection is just logistics: trucks picking up bins. But collection is where the material identity is corrupted. Compacting mixed waste in a rear-loader truck creates a physical bond between contaminants and polymers that no washing line can undo."
+            </p>
+          </div>
+        </div>
+
+        <!-- SLIDE 6: Anatomy of Legacy Collection Systems -->
+        <div class="slide-content-pane" id="slide-pane-6">
+          <div class="slide-header">
+            <div>
+              <span class="lumi-caption">SLIDE 06 / 16 · INFRASTRUCTURE INERTIA</span>
+              <h2 class="lumi-headline-m">Anatomy of Legacy Collection Systems</h2>
+            </div>
+            <span class="slide-number-badge">06 / 16</span>
+          </div>
+          <div class="slide-body">
+            <ol class="lumi-sequence">
+              <li class="lumi-seq-step">
+                <div class="lumi-seq-num"><span>1</span></div>
+                <div class="lumi-seq-content">
+                  <h4 class="lumi-body-l-emphasized">Material Recovery Facility (MRF) Mechanical Limits</h4>
+                  <p class="lumi-body-l">Sorting plants built 20 years ago use optical near-infrared (NIR) scanners set for rigid PET/HDPE bottles. Flexible films wrap around rotating trommel screens, causing daily operational shutdowns.</p>
+                </div>
+              </li>
+              <li class="lumi-seq-step">
+                <div class="lumi-seq-num"><span>2</span></div>
+                <div class="lumi-seq-content">
+                  <h4 class="lumi-body-l-emphasized">Contamination by Compression</h4>
+                  <p class="lumi-body-l">Collection compaction hydraulic rams embed paper fibers and trace PVC into soft polyolefins, increasing cross-contamination before sorting even begins.</p>
+                </div>
+              </li>
+              <li class="lumi-seq-step">
+                <div class="lumi-seq-num"><span>3</span></div>
+                <div class="lumi-seq-content">
+                  <h4 class="lumi-body-l-emphasized">Contractual and Financial Lock-In</h4>
+                  <p class="lumi-body-l">Municipalities operate under 15-to-25-year Waste-to-Energy (incineration) contracts with strict minimum-tonnage guarantees (pay-or-play penalties), financially penalizing material diversion.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+          <div class="speaker-notes-card">
+            <span class="lumi-caption" style="display: block; margin-bottom: 4px; font-weight: 600;">PROFESSOR'S LECTURE NOTES</span>
+            <p class="lumi-body-s" style="color: var(--on-surface-variant);">
+              "Even if you design a perfect recycling method, you cannot simply ask a municipality to change its sorting trucks or cancel a 20-year incineration contract. The city will face multi-million euro penalties. Your engineering solution must work within these legal and contractual walls."
+            </p>
+          </div>
+        </div>
+
+        <!-- SLIDE 7: The Multi-Layer Problem -->
+        <div class="slide-content-pane" id="slide-pane-7">
+          <div class="slide-header">
+            <div>
+              <span class="lumi-caption">SLIDE 07 / 16 · MATERIAL FRICTION</span>
+              <h2 class="lumi-headline-m">The Multi-Layer Problem: Trapped Polymers</h2>
+            </div>
+            <span class="slide-number-badge">07 / 16</span>
+          </div>
+          <div class="slide-body">
+            <p class="lumi-body-l">
+              Modern food packaging uses multi-layer films (e.g., PET / EVOH / PE) to extend shelf life. Legacy optical collection sorting treats these as homogenous waste.
+            </p>
+
+            <div class="lumi-table-widget" style="margin-top: 12px;">
+              <table class="lumi-table">
+                <thead>
+                  <tr>
+                    <th>Packaging Layer</th>
+                    <th>Material Function</th>
+                    <th>Recycling Failure Mode in Legacy Streams</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Outer Layer (PET)</td>
+                    <td>Printability & Structural Rigidity</td>
+                    <td>Optical scanner reads PET, routes whole film to rigid stream.</td>
+                  </tr>
+                  <tr>
+                    <td>Middle Layer (EVOH)</td>
+                    <td>Oxygen & Moisture Barrier</td>
+                    <td>Thermally degrades at PE melting temps; discolors melt stream.</td>
+                  </tr>
+                  <tr>
+                    <td>Inner Layer (PE)</td>
+                    <td>Heat-Sealing Capability</td>
+                    <td>Incompatible polymer phase separation; causes structural cracking in recyclate.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="lumi-callout" style="margin-top: 12px;">
+              <p class="lumi-body-l-emphasized">Resulting Engineering Breakdown</p>
+              <p class="lumi-takeaway">
+                Without specialized chemical delamination or pure source separation, multi-layer films destroy the economic value of mechanical recyclate streams.
+              </p>
+            </div>
+          </div>
+          <div class="speaker-notes-card">
+            <span class="lumi-caption" style="display: block; margin-bottom: 4px; font-weight: 600;">PROFESSOR'S LECTURE NOTES</span>
+            <p class="lumi-body-s" style="color: var(--on-surface-variant);">
+              "Food packaging is a marvel of materials science: 5 distinct polymer layers bonded together in a sheet thinner than a human hair. But to a legacy collection scanner, it's just 'plastic'. When melted down, PE and PET don't mix—they behave like oil and water, leaving brittle inclusions."
+            </p>
+          </div>
+        </div>
+
+        <!-- SLIDE 8: Why Recycling Projects Fail -->
+        <div class="slide-content-pane" id="slide-pane-8">
+          <div class="slide-header">
+            <div>
+              <span class="lumi-caption">SLIDE 08 / 16 · ROOT CAUSE DIAGNOSIS</span>
+              <h2 class="lumi-headline-m">Why Recycling Projects Fail: Failure Mode Analysis</h2>
+            </div>
+            <span class="slide-number-badge">08 / 16</span>
+          </div>
+          <div class="slide-body">
+            <div class="lumi-section">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+                
+                <div style="padding: 16px; background: var(--surface-dim); border-radius: var(--r-m);">
+                  <span class="lumi-caption" style="color: var(--error);">FAILURE MODE 1</span>
+                  <h4 class="lumi-body-l-emphasized" style="margin-top: 4px;">Feedstock Starvation</h4>
+                  <p class="lumi-body-s" style="color: var(--on-surface-variant); margin-top: 8px;">
+                    Plants built for 50,000 tons/year operate at 20% capacity because municipal collection streams are tied up in exclusive legacy contracts with rival disposal hubs.
+                  </p>
+                </div>
+
+                <div style="padding: 16px; background: var(--surface-dim); border-radius: var(--r-m);">
+                  <span class="lumi-caption" style="color: var(--error);">FAILURE MODE 2</span>
+                  <h4 class="lumi-body-l-emphasized" style="margin-top: 4px;">Catalyst Poisoning</h4>
+                  <p class="lumi-body-s" style="color: var(--on-surface-variant); margin-top: 8px;">
+                    Trace levels of halogenated flame retardants and PVC (>0.5%) in mixed municipal collection permanently poison chemical depolymerization catalysts.
+                  </p>
+                </div>
+
+                <div style="padding: 16px; background: var(--surface-dim); border-radius: var(--r-m);">
+                  <span class="lumi-caption" style="color: var(--error);">FAILURE MODE 3</span>
+                  <h4 class="lumi-body-l-emphasized" style="margin-top: 4px;">Cost-Margin Collapse</h4>
+                  <p class="lumi-body-s" style="color: var(--on-surface-variant); margin-top: 8px;">
+                    The energy required to clean and sort contaminated post-consumer collection exceeds the market price of virgin polymer when crude oil prices fall.
+                  </p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="speaker-notes-card">
+            <span class="lumi-caption" style="display: block; margin-bottom: 4px; font-weight: 600;">PROFESSOR'S LECTURE NOTES</span>
+            <p class="lumi-body-s" style="color: var(--on-surface-variant);">
+              "Notice that none of these three failure modes are chemical or mechanical reactor failures. They are all collection, legal, and feedstock pricing failures. You can be the best chemical engineer in the world, but if your feedstock drops by 50% or contains 1% PVC, your plant goes bankrupt."
+            </p>
+          </div>
+        </div>
+
+        <!-- SLIDE 9: The Planning Fallacy in Logistics and Waste -->
+        <div class="slide-content-pane" id="slide-pane-9">
+          <div class="slide-header">
+            <div>
+              <span class="lumi-caption">SLIDE 09 / 16 · LOGISTICS CONSTRAINTS</span>
+              <h2 class="lumi-headline-m">The Planning Fallacy in Logistics and Waste</h2>
+            </div>
+            <span class="slide-number-badge">09 / 16</span>
+          </div>
+          <div class="slide-body">
+            <p class="lumi-tldr">
+              Material balance equations on paper do not guarantee physical material movement in existing urban transportation networks.
+            </p>
+
+            <div class="lumi-timeline" style="margin-top: 16px;">
+              <div class="lumi-timeline-item">
+                <div class="lumi-time-marker"></div>
+                <div class="lumi-time-content">
+                  <h4 class="lumi-body-l-emphasized">Spatial & Structural Limits</h4>
+                  <span class="lumi-caption">Urban Density Constraints</span>
+                  <p class="lumi-body-l">Existing waste transfer stations in dense cities have zero physical footprint available for additional sorting optical lines or washing bays.</p>
+                </div>
+              </div>
+
+              <div class="lumi-timeline-item">
+                <div class="lumi-time-marker"></div>
+                <div class="lumi-time-content">
+                  <h4 class="lumi-body-l-emphasized">Axle-Load & Truck-Volume Limits</h4>
+                  <span class="lumi-caption">Transport Economics</span>
+                  <p class="lumi-body-l">Uncompacted plastic waste is extremely low density (~30 kg/m³). Transporting uncompacted clean plastic over 100 km burns more diesel energy than the plastic saves in virgin manufacturing.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="speaker-notes-card">
+            <span class="lumi-caption" style="display: block; margin-bottom: 4px; font-weight: 600;">PROFESSOR'S LECTURE NOTES</span>
+            <p class="lumi-body-s" style="color: var(--on-surface-variant);">
+              "In logistics, we call this 'shipping air'. Plastic bottles and film are light but bulky. If you don't compact them, you are paying a truck driver to transport air across Germany. But if you DO compact them, you crush contaminants into the plastic. That is the brownfield paradox."
+            </p>
+          </div>
+        </div>
+
+        <!-- SLIDE 10: Systemic Boundaries -->
+        <div class="slide-content-pane" id="slide-pane-10">
+          <div class="slide-header">
+            <div>
+              <span class="lumi-caption">SLIDE 10 / 16 · SYSTEM REALISM</span>
+              <h2 class="lumi-headline-m">Systemic Boundaries: System Realism Index (SRI)</h2>
+            </div>
+            <span class="slide-number-badge">10 / 16</span>
+          </div>
+          <div class="slide-body">
+            <p class="lumi-body-l">
+              To evaluate whether a circular engineering design is grounded in brownfield reality or greenfield illusion, students calculate the <strong>System Realism Index (SRI)</strong>:
+            </p>
+
+            <div class="sri-box">
+              <span class="lumi-caption">QUANTITATIVE SYSTEM REALISM METRIC</span>
+              
+              <!-- MathML Core Native Equations -->
+              <div style="font-size: 20px; margin: 8px 0;">
+                <math display="block">
+                  <mrow>
+                    <mtext>SRI</mtext>
+                    <mo>=</mo>
+                    <mn>1</mn>
+                    <mo>−</mo>
+                    <mfrac>
+                      <mrow>
+                        <mo>∑</mo>
+                        <mtext>Ignored External Constraints</mtext>
+                      </mrow>
+                      <mrow>
+                        <mo>∑</mo>
+                        <mtext>Total System Boundary Variables</mtext>
+                      </mrow>
+                    </mfrac>
+                  </mrow>
+                </math>
+              </div>
+
+              <span class="lumi-caption" style="color: var(--on-surface-variant);">
+                Where Constraints include existing waste contracts, physical space limits, feedstock impurity variances, and transport emissions.
+              </span>
+            </div>
+
+            <div class="lumi-table-widget" style="margin-top: 12px;">
+              <table class="lumi-table">
+                <thead>
+                  <tr>
+                    <th>SRI Score Range</th>
+                    <th>System Classification</th>
+                    <th>Engineering Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>0.80 – 1.00</strong></td>
+                    <td>Brownfield-Validated System</td>
+                    <td>Ready for industrial pilot deployment.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>0.40 – 0.79</strong></td>
+                    <td>Vulnerable Prototype</td>
+                    <td>Must expand system boundaries to incorporate collection constraints.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>&lt; 0.40</strong></td>
+                    <td>Academic Greenfield Trap</td>
+                    <td>Reject proposal; model fails outside laboratory conditions.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="speaker-notes-card">
+            <span class="lumi-caption" style="display: block; margin-bottom: 4px; font-weight: 600;">PROFESSOR'S LECTURE NOTES</span>
+            <p class="lumi-body-s" style="color: var(--on-surface-variant);">
+              "From now on in this course, whenever you present a recycling design, you must present its SRI score. If you assume a pristine 99% pure input stream without explaining which existing collection infrastructure delivers it, your SRI is zero."
+            </p>
+          </div>
+        </div>
+
+        <!-- SLIDE 11: Redesigning Problem-Solving Approach -->
+        <div class="slide-content-pane" id="slide-pane-11">
+          <div class="slide-header">
+            <div>
+              <span class="lumi-caption">SLIDE 11 / 16 · METHODOLOGY SHIFT</span>
+              <h2 class="lumi-headline-m">Redesigning the Engineer’s Problem-Solving Approach</h2>
+            </div>
+            <span class="slide-number-badge">11 / 16</span>
+          </div>
+          <div class="slide-body">
+            <div class="lumi-pros-cons">
+              <div class="lumi-pc-column">
+                <h4 class="lumi-body-l-emphasized">Old Mindset (The Greenfield Assumption)</h4>
+                <p class="lumi-body-l" style="margin-top: 8px;">
+                  "I will design an optimal chemical reactor or sorting process, and the surrounding logistics world will adapt to supply me with clean feedstock."
+                </p>
+              </div>
+              <div class="lumi-pc-column">
+                <h4 class="lumi-body-l-emphasized">New Mindset (Brownfield Realism)</h4>
+                <p class="lumi-body-l" style="margin-top: 8px;">
+                  "What is currently in the yellow bin? What sorting contracts exist today? What contamination level must my process survive from day one?"
+                </p>
+              </div>
+            </div>
+
+            <div class="lumi-callout" style="margin-top: 16px;">
+              <p class="lumi-body-l-emphasized">Rule of Engineering Robustness</p>
+              <p class="lumi-takeaway">
+                Engineers must design for the <strong>worst-case legacy feedstock stream</strong>, not the best-case laboratory sample.
+              </p>
+            </div>
+          </div>
+          <div class="speaker-notes-card">
+            <span class="lumi-caption" style="display: block; margin-bottom: 4px; font-weight: 600;">PROFESSOR'S LECTURE NOTES</span>
+            <p class="lumi-body-s" style="color: var(--on-surface-variant);">
+              "I want you to invert your design process. Do not start at the factory gate. Start at the municipal household bin. Map the material journey backwards through the existing trucks and sorting plants. Your plant is merely an extension of that legacy pipeline."
+            </p>
+          </div>
+        </div>
+
+        <!-- SLIDE 12: The Legacy Hook — Operational Audit Checklist -->
+        <div class="slide-content-pane" id="slide-pane-12">
+          <div class="slide-header">
+            <div>
+              <span class="lumi-caption">SLIDE 12 / 16 · OPERATIONAL CHECKLIST</span>
+              <h2 class="lumi-headline-m">The Legacy Hook: Operational Audit Checklist</h2>
+            </div>
+            <span class="slide-number-badge">12 / 16</span>
+          </div>
+          <div class="slide-body">
+            <p class="lumi-body-l">
+              Before proposing any recycling solution, engineers must answer these four mandatory operational questions (click each item to expand details):
+            </p>
+
+            <div style="margin-top: 12px;">
+              <div class="checklist-item-interactive" onclick="toggleChecklist(this)">
+                <div class="checklist-header">
+                  <span class="lumi-body-l-emphasized">1. The Physical Collection Hook</span>
+                  <span class="lumi-caption">Click to Expand</span>
+                </div>
+                <div class="checklist-details">
+                  Exactly which existing collection truck, bin type, or sorting facility feeds this system? What is its maximum physical throughput and spatial clearance?
+                </div>
+              </div>
+
+              <div class="checklist-item-interactive" onclick="toggleChecklist(this)">
+                <div class="checklist-header">
+                  <span class="lumi-body-l-emphasized">2. The Contamination Threshold</span>
+                  <span class="lumi-caption">Click to Expand</span>
+                </div>
+                <div class="checklist-details">
+                  What happens to your reactor or process when the input stream contains 15% unauthorized polymers (e.g., PVC or multilayer barrier films)? Does it fail gracefully or catastrophically?
+                </div>
+              </div>
+
+              <div class="checklist-item-interactive" onclick="toggleChecklist(this)">
+                <div class="checklist-header">
+                  <span class="lumi-body-l-emphasized">3. The Contractual Barrier</span>
+                  <span class="lumi-caption">Click to Expand</span>
+                </div>
+                <div class="checklist-details">
+                  Which existing long-term municipal or private waste contracts (e.g., incineration minimum tonnage guarantees) must be broken or renegotiated?
+                </div>
+              </div>
+
+              <div class="checklist-item-interactive" onclick="toggleChecklist(this)">
+                <div class="checklist-header">
+                  <span class="lumi-body-l-emphasized">4. The Scale & Density Mismatch</span>
+                  <span class="lumi-caption">Click to Expand</span>
+                </div>
+                <div class="checklist-details">
+                  Does your solution require rebuilding an entire city's waste collection infrastructure just to process a single plant's annual output?
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="speaker-notes-card">
+            <span class="lumi-caption" style="display: block; margin-bottom: 4px; font-weight: 600;">PROFESSOR'S LECTURE NOTES</span>
+            <p class="lumi-body-s" style="color: var(--on-surface-variant);">
+              "This checklist is your exam tool. When you present your term project, I will ask you these four questions. If you cannot point to the exact physical collection bin and contract lock-in, your project will be sent back for re-engineering."
+            </p>
+          </div>
+        </div>
+
+        <!-- SLIDE 13: Conclusion — Welcome to the Real World -->
+        <div class="slide-content-pane" id="slide-pane-13">
+          <div class="slide-header">
+            <div>
+              <span class="lumi-caption">SLIDE 13 / 16 · LECTURE CONCLUSION</span>
+              <h2 class="lumi-headline-m">Conclusion: Welcome to the Real World</h2>
+            </div>
+            <span class="slide-number-badge">13 / 16</span>
+          </div>
+          <div class="slide-body">
+            <blockquote class="lumi-pullquote">
+              <div class="lumi-pullquote-body">
+                <p class="lumi-pullquote-text">
+                  "I am not here to give you comfortable illusions or neat formulas that only work in textbook pilots. I am here to give you the constraints. The plastics crisis will not be solved by more slides about ideal recycling quotas—it will be solved by engineers who master legacy brownfield reality."
+                </p>
+                <cite class="lumi-pullquote-cite">
+                  <span class="lumi-body-l-emphasized">Course Professorship Manifesto</span>
+                  <span class="lumi-body-s lumi-de-emphasis">Circular Economy Engineering & Logistics Planning</span>
+                </cite>
+              </div>
+            </blockquote>
+
+            <div class="lumi-callout" style="margin-top: 16px;">
+              <p class="lumi-body-l-emphasized">Final Takeaway for Students</p>
+              <p class="lumi-takeaway">
+                Stop engineering for the empty field. Start engineering for the messy, legacy reality.
+              </p>
+            </div>
+          </div>
+          <div class="speaker-notes-card">
+            <span class="lumi-caption" style="display: block; margin-bottom: 4px; font-weight: 600;">PROFESSOR'S LECTURE NOTES</span>
+            <p class="lumi-body-s" style="color: var(--on-surface-variant);">
+              "Thank you for your attention. For next week's seminar, take your proposed term assignment topic and run it through the Slide 12 Legacy Hook Checklist. See you next class."
+            </p>
+          </div>
+        </div>
+
+        <!-- SLIDE 14: NEW - Material on the Yard (English) -->
+        <div class="slide-content-pane" id="slide-pane-14">
+          <div class="slide-header">
+            <div>
+              <span class="lumi-caption">SLIDE 14 / 16 · OUTLOOK & BOUNDARY CONDITIONS</span>
+              <h2 class="lumi-headline-m">Outlook: The Material is on the Yard</h2>
+            </div>
+            <span class="slide-number-badge">14 / 16</span>
+          </div>
+          <div class="slide-body">
+            <p class="lumi-tldr">
+              Collection is complete – the material is secured on-site. Now we face the critical challenges of downstream processing.
+            </p>
+            <div class="lumi-section" style="margin-top: 12px;">
+              <h3 class="lumi-headline-s">Bridging Collection to Upcycling</h3>
+              <ul style="margin-top: 8px; display: flex; flex-direction: column; gap: 8px; padding-left: 20px;">
+                <li class="lumi-body-l"><strong>Current Baseline:</strong> Up to this point, our scope focused strictly on collection streams and logistics networks.</li>
+                <li class="lumi-body-l"><strong>The Core Dilemma:</strong> What is the value of high collection quotas if the delivered material cannot be smoothly processed?</li>
+                <li class="lumi-body-l"><strong>Plenum Audit:</strong> Peer review of student-submitted flow diagrams. Which assumptions survive industrial reality tests?</li>
+              </ul>
+            </div>
+          </div>
+          <div class="speaker-notes-card">
+            <span class="lumi-caption" style="display: block; margin-bottom: 4px; font-weight: 600;">PROFESSOR'S LECTURE NOTES</span>
+            <p class="lumi-body-s" style="color: var(--on-surface-variant);">
+              "Alright everyone, the material is now sitting on our yard. Let's look at what you drafted in your process flow diagrams—or didn't draft. If your diagrams are blank, that is your liability. From here onward, we must address how subsequent processing actually functions."
+            </p>
+          </div>
+        </div>
+
+        <!-- SLIDE 15: NEW - Upcoming Sessions Roadmap (English) -->
+        <div class="slide-content-pane" id="slide-pane-15">
+          <div class="slide-header">
+            <div>
+              <span class="lumi-caption">SLIDE 15 / 16 · UPCOMING SESSIONS ROADMAP</span>
+              <h2 class="lumi-headline-m">Post-Intake Technical Bottlenecks</h2>
+            </div>
+            <span class="slide-number-badge">15 / 16</span>
+          </div>
+          <div class="slide-body">
+            <div class="lumi-section">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+                
+                <div style="padding: 16px; background: var(--surface-dim); border-radius: var(--r-m);">
+                  <span class="lumi-caption" style="color: var(--primary);">SESSION FOCUS 1</span>
+                  <h4 class="lumi-body-l-emphasized" style="margin-top: 4px;">Sorting & System Integration</h4>
+                  <p class="lumi-body-s" style="color: var(--on-surface-variant); margin-top: 8px;">
+                    How automated sorting (e.g., NIR optical scanners) operates and how collection and upgrading integrate in upcoming sessions.
+                  </p>
+                </div>
+
+                <div style="padding: 16px; background: var(--surface-dim); border-radius: var(--r-m);">
+                  <span class="lumi-caption" style="color: var(--primary);">SESSION FOCUS 2</span>
+                  <h4 class="lumi-body-l-emphasized" style="margin-top: 4px;">Materials Science Limits</h4>
+                  <p class="lumi-body-s" style="color: var(--on-surface-variant); margin-top: 8px;">
+                    Processing and blending boundaries of polymers, thermomechanical degradation (chain scission), and real recyclate quality.
+                  </p>
+                </div>
+
+                <div style="padding: 16px; background: var(--surface-dim); border-radius: var(--r-m);">
+                  <span class="lumi-caption" style="color: var(--primary);">SESSION FOCUS 3</span>
+                  <h4 class="lumi-body-l-emphasized" style="margin-top: 4px;">Economic Framework</h4>
+                  <p class="lumi-body-s" style="color: var(--on-surface-variant); margin-top: 8px;">
+                    Market volatility, virgin polymer pricing dynamics, and financial viability as separate contextual constraints.
+                  </p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="speaker-notes-card">
+            <span class="lumi-caption" style="display: block; margin-bottom: 4px; font-weight: 600;">PROFESSOR'S LECTURE NOTES</span>
+            <p class="lumi-body-s" style="color: var(--on-surface-variant);">
+              "These are precisely the topics we will unpack in subsequent weeks. We cannot solve sorting, polymer breakdown, and commodity pricing all in a single hour—but you must recognize them as the immediate next milestones."
+            </p>
+          </div>
+        </div>
+
+        <!-- SLIDE 16: NEW - Design Framework Paradigm Shift (English) -->
+        <div class="slide-content-pane" id="slide-pane-16">
+          <div class="slide-header">
+            <div>
+              <span class="lumi-caption">SLIDE 16 / 16 · DESIGN FRAMEWORK</span>
+              <h2 class="lumi-headline-m">Design Paradigm: Design for vs. Design from Recycling</h2>
+            </div>
+            <span class="slide-number-badge">16 / 16</span>
+          </div>
+          <div class="slide-body">
+            <div class="lumi-pros-cons">
+              <div class="lumi-pc-column">
+                <h4 class="lumi-body-l-emphasized">Design for Recycling (End-of-Life Focus)</h4>
+                <p class="lumi-body-l" style="margin-top: 8px;">
+                  Engineering products so they can be easily processed within existing recovery infrastructure at the end of their lifecycle.
+                </p>
+              </div>
+              <div class="lumi-pc-column">
+                <h4 class="lumi-body-l-emphasized">Design from Recycling (The New Approach)</h4>
+                <p class="lumi-body-l" style="margin-top: 8px;">
+                  <strong>The Paradigm Shift:</strong> Intentionally engineering new products based on the <em>actual, imperfect material properties</em> of recyclates rather than ideal virgin polymers.
+                </p>
+              </div>
+            </div>
+
+            <div class="lumi-callout" style="margin-top: 16px;">
+              <p class="lumi-body-l-emphasized">Concluding Design Takeaway</p>
+              <p class="lumi-takeaway">
+                Design outward from the recyclate. Only when product design embraces secondary material tolerances do we truly close the brownfield loop.
+              </p>
+            </div>
+          </div>
+          <div class="speaker-notes-card">
+            <span class="lumi-caption" style="display: block; margin-bottom: 4px; font-weight: 600;">PROFESSOR'S LECTURE NOTES</span>
+            <p class="lumi-body-s" style="color: var(--on-surface-variant);">
+              "The critical parting thought of this lecture series: Move beyond simply 'Design for Recycling'. We must embrace 'Design from Recycling'. Use the actual stochastic properties of secondary raw materials as your foundational design parameters."
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Slide Navigation & Controls Footer -->
+      <div class="slide-footer">
+        <div>
+          <span class="lumi-caption" style="display: block;">PRESENTATION MODE CONTROLS</span>
+          <span class="lumi-body-s" style="color: var(--on-surface-variant);">Use keyboard Arrow Left / Right to navigate slides.</span>
+        </div>
+
+        <div style="display: flex; gap: 8px;">
+          <button class="lumi-btn lumi-btn--tonal lumi-btn--small" onclick="jumpToSlide(1)">First Slide</button>
+          <button class="lumi-btn lumi-btn--tonal lumi-btn--small" onclick="jumpToSlide(14)">Outlook & Next Steps</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // State management for 16-slide interactive presentation
+    let currentSlide = 1;
+    const totalSlides = 16;
+    let yieldChartInstance = null;
+
+    function updateSlideUI() {
+      // Hide all panes
+      for (let i = 1; i <= totalSlides; i++) {
+        const pane = document.getElementById(`slide-pane-${i}`);
+        if (pane) pane.classList.remove('active');
+      }
+
+      // Show active pane
+      const activePane = document.getElementById(`slide-pane-${currentSlide}`);
+      if (activePane) activePane.classList.add('active');
+
+      // Update text tracker and progress bar
+      document.getElementById('slide-tracker-text').textContent = `Slide ${currentSlide} of ${totalSlides}`;
+      const progressPct = (currentSlide / totalSlides) * 100;
+      document.getElementById('slide-progress-bar').style.width = `${progressPct}%`;
+
+      // Update buttons state
+      document.getElementById('prev-slide-btn').disabled = (currentSlide === 1);
+      document.getElementById('next-slide-btn').disabled = (currentSlide === totalSlides);
+
+      // Render chart on Slide 3 if active
+      if (currentSlide === 3) {
+        setTimeout(initPlasticsChart, 50);
+      }
+    }
+
+    function navSlide(direction) {
+      const next = currentSlide + direction;
+      if (next >= 1 && next <= totalSlides) {
+        currentSlide = next;
+        updateSlideUI();
+      }
+    }
+
+    function jumpToSlide(slideNum) {
+      if (slideNum >= 1 && slideNum <= totalSlides) {
+        currentSlide = slideNum;
+        updateSlideUI();
+      }
+    }
+
+    function toggleChecklist(el) {
+      el.classList.toggle('active');
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight' || e.key === 'Space') {
+        navSlide(1);
+      } else if (e.key === 'ArrowLeft') {
+        navSlide(-1);
+      }
+    });
+
+    // Token runtime ingestion & Chart.js Initialization for Slide 3
+    function getLumiChartTokens() {
+      const cs = getComputedStyle(document.documentElement);
+      return {
+        fontFamily: cs.getPropertyValue('--ff-sans').trim() || "'Google Sans Flex', sans-serif",
+        monoFamily: cs.getPropertyValue('--ff-mono').trim() || "'Google Sans Code', monospace",
+        textColor: cs.getPropertyValue('--on-surface').trim() || '#000000',
+        deEmphasisColor: cs.getPropertyValue('--on-surface-variant').trim() || 'rgba(0,0,0,0.55)',
+        gridColor: cs.getPropertyValue('--stroke-default').trim() || 'rgba(0,0,0,0.08)',
+        surfaceColor: cs.getPropertyValue('--surface').trim() || '#ffffff',
+        series: ['#2575fc', '#5b6e9e', '#228a49', '#62991b']
+      };
+    }
+
+    function initPlasticsChart() {
+      const canvas = document.getElementById('plasticsYieldChart');
+      if (!canvas || typeof Chart === 'undefined') return;
+
+      if (yieldChartInstance) {
+        yieldChartInstance.destroy();
+      }
+
+      const t = getLumiChartTokens();
+      const ctx = canvas.getContext('2d');
+
+      yieldChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Virgin Polymer', 'Lab Chem-Recycling', 'Clean PIR Industrial', 'Mixed Post-Consumer Bin'],
+          datasets: [{
+            label: 'Conversion Yield (%)',
+            data: [99, 94, 78, 22],
+            backgroundColor: [t.series[0], t.series[1], t.series[2], '#de2d29'],
+            borderRadius: { topLeft: 99, topRight: 99, bottomLeft: 0, bottomRight: 0 },
+            maxBarThickness: 36,
+            categoryPercentage: 0.65,
+            barPercentage: 0.85
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { duration: 0 },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: t.surfaceColor,
+              titleColor: t.textColor,
+              bodyColor: t.deEmphasisColor,
+              borderColor: t.gridColor,
+              borderWidth: 1,
+              cornerRadius: 8,
+              padding: 12
+            }
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              border: { display: false },
+              ticks: {
+                padding: 12,
+                font: { family: t.fontFamily, size: 12 },
+                color: t.deEmphasisColor
+              }
+            },
+            y: {
+              grid: { color: t.gridColor, drawBorder: false },
+              border: { display: false },
+              ticks: {
+                padding: 12,
+                font: { family: t.monoFamily, size: 12 },
+                color: t.deEmphasisColor,
+                maxTicksLimit: 5
+              },
+              max: 100
+            }
+          }
+        }
+      });
+    }
+
+    // Initial state set
+    document.addEventListener('DOMContentLoaded', function() {
+      updateSlideUI();
+    });
+  </script>
+</body>
+</html>
