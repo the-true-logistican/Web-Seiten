@@ -4,30 +4,1610 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Master Glossary: Circular Economy & Recycling of Polymers and Composites</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Font Awesome Icons CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              50: '#f0fdf4',
-              100: '#dcfce7',
-              500: '#22c55e',
-              600: '#16a34a',
-              700: '#15803d',
-              800: '#166534',
-              900: '#14532d',
-            }
-          }
+  <!-- Compiled Tailwind CSS, embedded for reliable offline use -->
+  <style id="compiled-tailwind">/*! tailwindcss v4.1.10 | MIT License | https://tailwindcss.com */
+@layer properties;
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --color-amber-50: oklch(98.7% 0.022 95.277);
+    --color-amber-100: oklch(96.2% 0.059 95.617);
+    --color-amber-200: oklch(92.4% 0.12 95.746);
+    --color-amber-300: oklch(87.9% 0.169 91.605);
+    --color-amber-400: oklch(82.8% 0.189 84.429);
+    --color-amber-500: oklch(76.9% 0.188 70.08);
+    --color-amber-700: oklch(55.5% 0.163 48.998);
+    --color-amber-800: oklch(47.3% 0.137 46.201);
+    --color-amber-900: oklch(41.4% 0.112 45.904);
+    --color-amber-950: oklch(27.9% 0.077 45.635);
+    --color-emerald-100: oklch(95% 0.052 163.051);
+    --color-emerald-200: oklch(90.5% 0.093 164.15);
+    --color-emerald-300: oklch(84.5% 0.143 164.978);
+    --color-emerald-400: oklch(76.5% 0.177 163.223);
+    --color-emerald-500: oklch(69.6% 0.17 162.48);
+    --color-emerald-800: oklch(43.2% 0.095 166.913);
+    --color-emerald-900: oklch(37.8% 0.077 168.94);
+    --color-blue-100: oklch(93.2% 0.032 255.585);
+    --color-blue-200: oklch(88.2% 0.059 254.128);
+    --color-blue-300: oklch(80.9% 0.105 251.813);
+    --color-blue-400: oklch(70.7% 0.165 254.624);
+    --color-blue-500: oklch(62.3% 0.214 259.815);
+    --color-blue-800: oklch(42.4% 0.199 265.638);
+    --color-blue-900: oklch(37.9% 0.146 265.522);
+    --color-purple-100: oklch(94.6% 0.033 307.174);
+    --color-purple-200: oklch(90.2% 0.063 306.703);
+    --color-purple-300: oklch(82.7% 0.119 306.383);
+    --color-purple-400: oklch(71.4% 0.203 305.504);
+    --color-purple-500: oklch(62.7% 0.265 303.9);
+    --color-purple-800: oklch(43.8% 0.218 303.724);
+    --color-purple-900: oklch(38.1% 0.176 304.987);
+    --color-slate-50: oklch(98.4% 0.003 247.858);
+    --color-slate-100: oklch(96.8% 0.007 247.896);
+    --color-slate-200: oklch(92.9% 0.013 255.508);
+    --color-slate-300: oklch(86.9% 0.022 252.894);
+    --color-slate-400: oklch(70.4% 0.04 256.788);
+    --color-slate-500: oklch(55.4% 0.046 257.417);
+    --color-slate-600: oklch(44.6% 0.043 257.281);
+    --color-slate-700: oklch(37.2% 0.044 257.287);
+    --color-slate-800: oklch(27.9% 0.041 260.031);
+    --color-slate-900: oklch(20.8% 0.042 265.755);
+    --color-white: #fff;
+    --spacing: 0.25rem;
+    --container-md: 28rem;
+    --container-2xl: 42rem;
+    --container-7xl: 80rem;
+    --text-xs: 0.75rem;
+    --text-xs--line-height: calc(1 / 0.75);
+    --text-sm: 0.875rem;
+    --text-sm--line-height: calc(1.25 / 0.875);
+    --text-base: 1rem;
+    --text-base--line-height: calc(1.5 / 1);
+    --text-lg: 1.125rem;
+    --text-lg--line-height: calc(1.75 / 1.125);
+    --text-xl: 1.25rem;
+    --text-xl--line-height: calc(1.75 / 1.25);
+    --text-2xl: 1.5rem;
+    --text-2xl--line-height: calc(2 / 1.5);
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --tracking-wide: 0.025em;
+    --tracking-wider: 0.05em;
+    --leading-relaxed: 1.625;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    --blur-sm: 8px;
+    --default-transition-duration: 150ms;
+    --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+    --color-brand-100: #dcfce7;
+    --color-brand-500: #22c55e;
+    --color-brand-600: #16a34a;
+    --color-brand-700: #15803d;
+    --color-brand-800: #166534;
+    --color-brand-900: #14532d;
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities {
+  .pointer-events-none {
+    pointer-events: none;
+  }
+  .invisible {
+    visibility: hidden;
+  }
+  .visible {
+    visibility: visible;
+  }
+  .not-sr-only {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+  .absolute {
+    position: absolute;
+  }
+  .fixed {
+    position: fixed;
+  }
+  .relative {
+    position: relative;
+  }
+  .static {
+    position: static;
+  }
+  .sticky {
+    position: sticky;
+  }
+  .inset-0 {
+    inset: calc(var(--spacing) * 0);
+  }
+  .inset-y-0 {
+    inset-block: calc(var(--spacing) * 0);
+  }
+  .top-0 {
+    top: calc(var(--spacing) * 0);
+  }
+  .right-0 {
+    right: calc(var(--spacing) * 0);
+  }
+  .left-0 {
+    left: calc(var(--spacing) * 0);
+  }
+  .isolate {
+    isolation: isolate;
+  }
+  .z-30 {
+    z-index: 30;
+  }
+  .z-50 {
+    z-index: 50;
+  }
+  .mx-auto {
+    margin-inline: auto;
+  }
+  .mt-0\.5 {
+    margin-top: calc(var(--spacing) * 0.5);
+  }
+  .mt-1 {
+    margin-top: calc(var(--spacing) * 1);
+  }
+  .mt-2 {
+    margin-top: calc(var(--spacing) * 2);
+  }
+  .mt-3 {
+    margin-top: calc(var(--spacing) * 3);
+  }
+  .mt-4 {
+    margin-top: calc(var(--spacing) * 4);
+  }
+  .mt-auto {
+    margin-top: auto;
+  }
+  .mr-1 {
+    margin-right: calc(var(--spacing) * 1);
+  }
+  .mb-1 {
+    margin-bottom: calc(var(--spacing) * 1);
+  }
+  .mb-2 {
+    margin-bottom: calc(var(--spacing) * 2);
+  }
+  .mb-4 {
+    margin-bottom: calc(var(--spacing) * 4);
+  }
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+  .block {
+    display: block;
+  }
+  .flex {
+    display: flex;
+  }
+  .grid {
+    display: grid;
+  }
+  .hidden {
+    display: none;
+  }
+  .inline-flex {
+    display: inline-flex;
+  }
+  .h-16 {
+    height: calc(var(--spacing) * 16);
+  }
+  .max-h-\[90vh\] {
+    max-height: 90vh;
+  }
+  .min-h-screen {
+    min-height: 100vh;
+  }
+  .w-16 {
+    width: calc(var(--spacing) * 16);
+  }
+  .w-full {
+    width: 100%;
+  }
+  .max-w-2xl {
+    max-width: var(--container-2xl);
+  }
+  .max-w-7xl {
+    max-width: var(--container-7xl);
+  }
+  .max-w-md {
+    max-width: var(--container-md);
+  }
+  .flex-1 {
+    flex: 1;
+  }
+  .scale-95 {
+    --tw-scale-x: 95%;
+    --tw-scale-y: 95%;
+    --tw-scale-z: 95%;
+    scale: var(--tw-scale-x) var(--tw-scale-y);
+  }
+  .scale-100 {
+    --tw-scale-x: 100%;
+    --tw-scale-y: 100%;
+    --tw-scale-z: 100%;
+    scale: var(--tw-scale-x) var(--tw-scale-y);
+  }
+  .transform {
+    transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
+  }
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  .grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  .flex-col {
+    flex-direction: column;
+  }
+  .items-center {
+    align-items: center;
+  }
+  .items-start {
+    align-items: flex-start;
+  }
+  .items-stretch {
+    align-items: stretch;
+  }
+  .justify-between {
+    justify-content: space-between;
+  }
+  .justify-center {
+    justify-content: center;
+  }
+  .gap-1 {
+    gap: calc(var(--spacing) * 1);
+  }
+  .gap-1\.5 {
+    gap: calc(var(--spacing) * 1.5);
+  }
+  .gap-2 {
+    gap: calc(var(--spacing) * 2);
+  }
+  .gap-3 {
+    gap: calc(var(--spacing) * 3);
+  }
+  .gap-4 {
+    gap: calc(var(--spacing) * 4);
+  }
+  .space-y-4 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 4) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 4) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .overflow-hidden {
+    overflow: hidden;
+  }
+  .overflow-x-auto {
+    overflow-x: auto;
+  }
+  .overflow-y-auto {
+    overflow-y: auto;
+  }
+  .rounded {
+    border-radius: 0.25rem;
+  }
+  .rounded-full {
+    border-radius: calc(infinity * 1px);
+  }
+  .rounded-lg {
+    border-radius: var(--radius-lg);
+  }
+  .rounded-xl {
+    border-radius: var(--radius-xl);
+  }
+  .border {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+  }
+  .border-t {
+    border-top-style: var(--tw-border-style);
+    border-top-width: 1px;
+  }
+  .border-b {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 1px;
+  }
+  .border-amber-200 {
+    border-color: var(--color-amber-200);
+  }
+  .border-amber-200\/60 {
+    border-color: color-mix(in srgb, oklch(92.4% 0.12 95.746) 60%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-amber-200) 60%, transparent);
+    }
+  }
+  .border-amber-300 {
+    border-color: var(--color-amber-300);
+  }
+  .border-blue-200 {
+    border-color: var(--color-blue-200);
+  }
+  .border-emerald-200 {
+    border-color: var(--color-emerald-200);
+  }
+  .border-purple-200 {
+    border-color: var(--color-purple-200);
+  }
+  .border-slate-100 {
+    border-color: var(--color-slate-100);
+  }
+  .border-slate-200 {
+    border-color: var(--color-slate-200);
+  }
+  .border-slate-300 {
+    border-color: var(--color-slate-300);
+  }
+  .bg-amber-50 {
+    background-color: var(--color-amber-50);
+  }
+  .bg-amber-50\/50 {
+    background-color: color-mix(in srgb, oklch(98.7% 0.022 95.277) 50%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-amber-50) 50%, transparent);
+    }
+  }
+  .bg-amber-100 {
+    background-color: var(--color-amber-100);
+  }
+  .bg-blue-100 {
+    background-color: var(--color-blue-100);
+  }
+  .bg-brand-100 {
+    background-color: var(--color-brand-100);
+  }
+  .bg-brand-600 {
+    background-color: var(--color-brand-600);
+  }
+  .bg-emerald-100 {
+    background-color: var(--color-emerald-100);
+  }
+  .bg-purple-100 {
+    background-color: var(--color-purple-100);
+  }
+  .bg-slate-50 {
+    background-color: var(--color-slate-50);
+  }
+  .bg-slate-50\/50 {
+    background-color: color-mix(in srgb, oklch(98.4% 0.003 247.858) 50%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-slate-50) 50%, transparent);
+    }
+  }
+  .bg-slate-100 {
+    background-color: var(--color-slate-100);
+  }
+  .bg-slate-200 {
+    background-color: var(--color-slate-200);
+  }
+  .bg-slate-900\/60 {
+    background-color: color-mix(in srgb, oklch(20.8% 0.042 265.755) 60%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-slate-900) 60%, transparent);
+    }
+  }
+  .bg-white {
+    background-color: var(--color-white);
+  }
+  .bg-white\/90 {
+    background-color: color-mix(in srgb, #fff 90%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-white) 90%, transparent);
+    }
+  }
+  .p-1 {
+    padding: calc(var(--spacing) * 1);
+  }
+  .p-2 {
+    padding: calc(var(--spacing) * 2);
+  }
+  .p-3 {
+    padding: calc(var(--spacing) * 3);
+  }
+  .p-4 {
+    padding: calc(var(--spacing) * 4);
+  }
+  .p-5 {
+    padding: calc(var(--spacing) * 5);
+  }
+  .p-6 {
+    padding: calc(var(--spacing) * 6);
+  }
+  .px-1\.5 {
+    padding-inline: calc(var(--spacing) * 1.5);
+  }
+  .px-2 {
+    padding-inline: calc(var(--spacing) * 2);
+  }
+  .px-2\.5 {
+    padding-inline: calc(var(--spacing) * 2.5);
+  }
+  .px-3 {
+    padding-inline: calc(var(--spacing) * 3);
+  }
+  .px-3\.5 {
+    padding-inline: calc(var(--spacing) * 3.5);
+  }
+  .px-4 {
+    padding-inline: calc(var(--spacing) * 4);
+  }
+  .py-0\.5 {
+    padding-block: calc(var(--spacing) * 0.5);
+  }
+  .py-1 {
+    padding-block: calc(var(--spacing) * 1);
+  }
+  .py-1\.5 {
+    padding-block: calc(var(--spacing) * 1.5);
+  }
+  .py-2 {
+    padding-block: calc(var(--spacing) * 2);
+  }
+  .py-2\.5 {
+    padding-block: calc(var(--spacing) * 2.5);
+  }
+  .py-4 {
+    padding-block: calc(var(--spacing) * 4);
+  }
+  .py-6 {
+    padding-block: calc(var(--spacing) * 6);
+  }
+  .py-16 {
+    padding-block: calc(var(--spacing) * 16);
+  }
+  .pt-2 {
+    padding-top: calc(var(--spacing) * 2);
+  }
+  .pt-3 {
+    padding-top: calc(var(--spacing) * 3);
+  }
+  .pr-1 {
+    padding-right: calc(var(--spacing) * 1);
+  }
+  .pr-3 {
+    padding-right: calc(var(--spacing) * 3);
+  }
+  .pr-10 {
+    padding-right: calc(var(--spacing) * 10);
+  }
+  .pb-1 {
+    padding-bottom: calc(var(--spacing) * 1);
+  }
+  .pl-3 {
+    padding-left: calc(var(--spacing) * 3);
+  }
+  .pl-10 {
+    padding-left: calc(var(--spacing) * 10);
+  }
+  .text-center {
+    text-align: center;
+  }
+  .text-left {
+    text-align: left;
+  }
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+  .font-sans {
+    font-family: var(--font-sans);
+  }
+  .text-2xl {
+    font-size: var(--text-2xl);
+    line-height: var(--tw-leading, var(--text-2xl--line-height));
+  }
+  .text-base {
+    font-size: var(--text-base);
+    line-height: var(--tw-leading, var(--text-base--line-height));
+  }
+  .text-lg {
+    font-size: var(--text-lg);
+    line-height: var(--tw-leading, var(--text-lg--line-height));
+  }
+  .text-sm {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+  }
+  .text-xl {
+    font-size: var(--text-xl);
+    line-height: var(--tw-leading, var(--text-xl--line-height));
+  }
+  .text-xs {
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
+  }
+  .text-\[10px\] {
+    font-size: 10px;
+  }
+  .text-\[11px\] {
+    font-size: 11px;
+  }
+  .leading-relaxed {
+    --tw-leading: var(--leading-relaxed);
+    line-height: var(--leading-relaxed);
+  }
+  .font-bold {
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+  }
+  .font-light {
+    --tw-font-weight: var(--font-weight-light);
+    font-weight: var(--font-weight-light);
+  }
+  .font-medium {
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
+  }
+  .font-normal {
+    --tw-font-weight: var(--font-weight-normal);
+    font-weight: var(--font-weight-normal);
+  }
+  .font-semibold {
+    --tw-font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-semibold);
+  }
+  .tracking-wide {
+    --tw-tracking: var(--tracking-wide);
+    letter-spacing: var(--tracking-wide);
+  }
+  .tracking-wider {
+    --tw-tracking: var(--tracking-wider);
+    letter-spacing: var(--tracking-wider);
+  }
+  .whitespace-nowrap {
+    white-space: nowrap;
+  }
+  .text-amber-500 {
+    color: var(--color-amber-500);
+  }
+  .text-amber-800 {
+    color: var(--color-amber-800);
+  }
+  .text-amber-900 {
+    color: var(--color-amber-900);
+  }
+  .text-blue-500 {
+    color: var(--color-blue-500);
+  }
+  .text-blue-800 {
+    color: var(--color-blue-800);
+  }
+  .text-brand-600 {
+    color: var(--color-brand-600);
+  }
+  .text-brand-700 {
+    color: var(--color-brand-700);
+  }
+  .text-brand-800 {
+    color: var(--color-brand-800);
+  }
+  .text-emerald-500 {
+    color: var(--color-emerald-500);
+  }
+  .text-emerald-800 {
+    color: var(--color-emerald-800);
+  }
+  .text-purple-500 {
+    color: var(--color-purple-500);
+  }
+  .text-purple-800 {
+    color: var(--color-purple-800);
+  }
+  .text-slate-400 {
+    color: var(--color-slate-400);
+  }
+  .text-slate-500 {
+    color: var(--color-slate-500);
+  }
+  .text-slate-600 {
+    color: var(--color-slate-600);
+  }
+  .text-slate-700 {
+    color: var(--color-slate-700);
+  }
+  .text-slate-800 {
+    color: var(--color-slate-800);
+  }
+  .text-slate-900 {
+    color: var(--color-slate-900);
+  }
+  .text-white {
+    color: var(--color-white);
+  }
+  .uppercase {
+    text-transform: uppercase;
+  }
+  .italic {
+    font-style: italic;
+  }
+  .placeholder-slate-400 {
+    &::placeholder {
+      color: var(--color-slate-400);
+    }
+  }
+  .opacity-0 {
+    opacity: 0%;
+  }
+  .shadow-2xl {
+    --tw-shadow: 0 25px 50px -12px var(--tw-shadow-color, rgb(0 0 0 / 0.25));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-sm {
+    --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .filter {
+    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
+  }
+  .backdrop-blur {
+    --tw-backdrop-blur: blur(8px);
+    -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+    backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+  }
+  .backdrop-blur-sm {
+    --tw-backdrop-blur: blur(var(--blur-sm));
+    -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+    backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+  }
+  .transition {
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, visibility, content-visibility, overlay, pointer-events;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .transition-colors {
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .transition-opacity {
+    transition-property: opacity;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .transition-transform {
+    transition-property: transform, translate, scale, rotate;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .duration-200 {
+    --tw-duration: 200ms;
+    transition-duration: 200ms;
+  }
+  .group-hover\:translate-x-0\.5 {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        --tw-translate-x: calc(var(--spacing) * 0.5);
+        translate: var(--tw-translate-x) var(--tw-translate-y);
+      }
+    }
+  }
+  .group-hover\:text-brand-600 {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        color: var(--color-brand-600);
+      }
+    }
+  }
+  .hover\:border-amber-400 {
+    &:hover {
+      @media (hover: hover) {
+        border-color: var(--color-amber-400);
+      }
+    }
+  }
+  .hover\:border-blue-400 {
+    &:hover {
+      @media (hover: hover) {
+        border-color: var(--color-blue-400);
+      }
+    }
+  }
+  .hover\:border-emerald-400 {
+    &:hover {
+      @media (hover: hover) {
+        border-color: var(--color-emerald-400);
+      }
+    }
+  }
+  .hover\:border-purple-400 {
+    &:hover {
+      @media (hover: hover) {
+        border-color: var(--color-purple-400);
+      }
+    }
+  }
+  .hover\:border-slate-400 {
+    &:hover {
+      @media (hover: hover) {
+        border-color: var(--color-slate-400);
+      }
+    }
+  }
+  .hover\:bg-brand-700 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-brand-700);
+      }
+    }
+  }
+  .hover\:bg-slate-50 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-slate-50);
+      }
+    }
+  }
+  .hover\:bg-slate-100 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-slate-100);
+      }
+    }
+  }
+  .hover\:bg-slate-200 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-slate-200);
+      }
+    }
+  }
+  .hover\:bg-slate-300 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-slate-300);
+      }
+    }
+  }
+  .hover\:text-slate-600 {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-slate-600);
+      }
+    }
+  }
+  .hover\:text-slate-900 {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-slate-900);
+      }
+    }
+  }
+  .hover\:underline {
+    &:hover {
+      @media (hover: hover) {
+        text-decoration-line: underline;
+      }
+    }
+  }
+  .hover\:shadow-md {
+    &:hover {
+      @media (hover: hover) {
+        --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+        box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+      }
+    }
+  }
+  .focus\:ring-2 {
+    &:focus {
+      --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
+      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    }
+  }
+  .focus\:ring-brand-500 {
+    &:focus {
+      --tw-ring-color: var(--color-brand-500);
+    }
+  }
+  .focus\:outline-none {
+    &:focus {
+      --tw-outline-style: none;
+      outline-style: none;
+    }
+  }
+  .sm\:flex-row {
+    @media (width >= 40rem) {
+      flex-direction: row;
+    }
+  }
+  .sm\:px-6 {
+    @media (width >= 40rem) {
+      padding-inline: calc(var(--spacing) * 6);
+    }
+  }
+  .sm\:text-2xl {
+    @media (width >= 40rem) {
+      font-size: var(--text-2xl);
+      line-height: var(--tw-leading, var(--text-2xl--line-height));
+    }
+  }
+  .sm\:text-sm {
+    @media (width >= 40rem) {
+      font-size: var(--text-sm);
+      line-height: var(--tw-leading, var(--text-sm--line-height));
+    }
+  }
+  .md\:grid-cols-2 {
+    @media (width >= 48rem) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .md\:flex-row {
+    @media (width >= 48rem) {
+      flex-direction: row;
+    }
+  }
+  .md\:items-center {
+    @media (width >= 48rem) {
+      align-items: center;
+    }
+  }
+  .md\:justify-between {
+    @media (width >= 48rem) {
+      justify-content: space-between;
+    }
+  }
+  .lg\:grid-cols-3 {
+    @media (width >= 64rem) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .lg\:px-8 {
+    @media (width >= 64rem) {
+      padding-inline: calc(var(--spacing) * 8);
+    }
+  }
+  .dark\:border-amber-700 {
+    &:where(.dark, .dark *) {
+      border-color: var(--color-amber-700);
+    }
+  }
+  .dark\:border-amber-800 {
+    &:where(.dark, .dark *) {
+      border-color: var(--color-amber-800);
+    }
+  }
+  .dark\:border-amber-800\/50 {
+    &:where(.dark, .dark *) {
+      border-color: color-mix(in srgb, oklch(47.3% 0.137 46.201) 50%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        border-color: color-mix(in oklab, var(--color-amber-800) 50%, transparent);
+      }
+    }
+  }
+  .dark\:border-blue-800 {
+    &:where(.dark, .dark *) {
+      border-color: var(--color-blue-800);
+    }
+  }
+  .dark\:border-emerald-800 {
+    &:where(.dark, .dark *) {
+      border-color: var(--color-emerald-800);
+    }
+  }
+  .dark\:border-purple-800 {
+    &:where(.dark, .dark *) {
+      border-color: var(--color-purple-800);
+    }
+  }
+  .dark\:border-slate-600 {
+    &:where(.dark, .dark *) {
+      border-color: var(--color-slate-600);
+    }
+  }
+  .dark\:border-slate-700 {
+    &:where(.dark, .dark *) {
+      border-color: var(--color-slate-700);
+    }
+  }
+  .dark\:border-slate-700\/40 {
+    &:where(.dark, .dark *) {
+      border-color: color-mix(in srgb, oklch(37.2% 0.044 257.287) 40%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        border-color: color-mix(in oklab, var(--color-slate-700) 40%, transparent);
+      }
+    }
+  }
+  .dark\:border-slate-700\/50 {
+    &:where(.dark, .dark *) {
+      border-color: color-mix(in srgb, oklch(37.2% 0.044 257.287) 50%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        border-color: color-mix(in oklab, var(--color-slate-700) 50%, transparent);
+      }
+    }
+  }
+  .dark\:border-slate-700\/60 {
+    &:where(.dark, .dark *) {
+      border-color: color-mix(in srgb, oklch(37.2% 0.044 257.287) 60%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        border-color: color-mix(in oklab, var(--color-slate-700) 60%, transparent);
+      }
+    }
+  }
+  .dark\:border-slate-700\/80 {
+    &:where(.dark, .dark *) {
+      border-color: color-mix(in srgb, oklch(37.2% 0.044 257.287) 80%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        border-color: color-mix(in oklab, var(--color-slate-700) 80%, transparent);
+      }
+    }
+  }
+  .dark\:bg-amber-900\/50 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, oklch(41.4% 0.112 45.904) 50%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-amber-900) 50%, transparent);
+      }
+    }
+  }
+  .dark\:bg-amber-900\/60 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, oklch(41.4% 0.112 45.904) 60%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-amber-900) 60%, transparent);
+      }
+    }
+  }
+  .dark\:bg-amber-950\/30 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, oklch(27.9% 0.077 45.635) 30%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-amber-950) 30%, transparent);
+      }
+    }
+  }
+  .dark\:bg-blue-900\/50 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, oklch(37.9% 0.146 265.522) 50%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-blue-900) 50%, transparent);
+      }
+    }
+  }
+  .dark\:bg-brand-900\/50 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, #14532d 50%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-brand-900) 50%, transparent);
+      }
+    }
+  }
+  .dark\:bg-brand-900\/60 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, #14532d 60%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-brand-900) 60%, transparent);
+      }
+    }
+  }
+  .dark\:bg-emerald-900\/50 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, oklch(37.8% 0.077 168.94) 50%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-emerald-900) 50%, transparent);
+      }
+    }
+  }
+  .dark\:bg-purple-900\/50 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, oklch(38.1% 0.176 304.987) 50%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-purple-900) 50%, transparent);
+      }
+    }
+  }
+  .dark\:bg-slate-700 {
+    &:where(.dark, .dark *) {
+      background-color: var(--color-slate-700);
+    }
+  }
+  .dark\:bg-slate-700\/60 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, oklch(37.2% 0.044 257.287) 60%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-slate-700) 60%, transparent);
+      }
+    }
+  }
+  .dark\:bg-slate-800 {
+    &:where(.dark, .dark *) {
+      background-color: var(--color-slate-800);
+    }
+  }
+  .dark\:bg-slate-800\/50 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, oklch(27.9% 0.041 260.031) 50%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-slate-800) 50%, transparent);
+      }
+    }
+  }
+  .dark\:bg-slate-800\/80 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, oklch(27.9% 0.041 260.031) 80%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-slate-800) 80%, transparent);
+      }
+    }
+  }
+  .dark\:bg-slate-800\/90 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, oklch(27.9% 0.041 260.031) 90%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-slate-800) 90%, transparent);
+      }
+    }
+  }
+  .dark\:bg-slate-900 {
+    &:where(.dark, .dark *) {
+      background-color: var(--color-slate-900);
+    }
+  }
+  .dark\:bg-slate-900\/60 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, oklch(20.8% 0.042 265.755) 60%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-slate-900) 60%, transparent);
+      }
+    }
+  }
+  .dark\:bg-slate-900\/70 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, oklch(20.8% 0.042 265.755) 70%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-slate-900) 70%, transparent);
+      }
+    }
+  }
+  .dark\:text-amber-200 {
+    &:where(.dark, .dark *) {
+      color: var(--color-amber-200);
+    }
+  }
+  .dark\:text-amber-300 {
+    &:where(.dark, .dark *) {
+      color: var(--color-amber-300);
+    }
+  }
+  .dark\:text-amber-400 {
+    &:where(.dark, .dark *) {
+      color: var(--color-amber-400);
+    }
+  }
+  .dark\:text-blue-300 {
+    &:where(.dark, .dark *) {
+      color: var(--color-blue-300);
+    }
+  }
+  .dark\:text-emerald-300 {
+    &:where(.dark, .dark *) {
+      color: var(--color-emerald-300);
+    }
+  }
+  .dark\:text-purple-300 {
+    &:where(.dark, .dark *) {
+      color: var(--color-purple-300);
+    }
+  }
+  .dark\:text-slate-100 {
+    &:where(.dark, .dark *) {
+      color: var(--color-slate-100);
+    }
+  }
+  .dark\:text-slate-200 {
+    &:where(.dark, .dark *) {
+      color: var(--color-slate-200);
+    }
+  }
+  .dark\:text-slate-300 {
+    &:where(.dark, .dark *) {
+      color: var(--color-slate-300);
+    }
+  }
+  .dark\:text-slate-400 {
+    &:where(.dark, .dark *) {
+      color: var(--color-slate-400);
+    }
+  }
+  .dark\:text-white {
+    &:where(.dark, .dark *) {
+      color: var(--color-white);
+    }
+  }
+  .dark\:hover\:bg-slate-600 {
+    &:where(.dark, .dark *) {
+      &:hover {
+        @media (hover: hover) {
+          background-color: var(--color-slate-600);
         }
       }
     }
-  </script>
+  }
+  .dark\:hover\:bg-slate-700 {
+    &:where(.dark, .dark *) {
+      &:hover {
+        @media (hover: hover) {
+          background-color: var(--color-slate-700);
+        }
+      }
+    }
+  }
+  .dark\:hover\:text-slate-200 {
+    &:where(.dark, .dark *) {
+      &:hover {
+        @media (hover: hover) {
+          color: var(--color-slate-200);
+        }
+      }
+    }
+  }
+  .dark\:hover\:text-white {
+    &:where(.dark, .dark *) {
+      &:hover {
+        @media (hover: hover) {
+          color: var(--color-white);
+        }
+      }
+    }
+  }
+}
+@property --tw-scale-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
+@property --tw-scale-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
+@property --tw-scale-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
+@property --tw-rotate-x {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-rotate-y {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-rotate-z {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-skew-x {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-skew-y {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-space-y-reverse {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
+@property --tw-leading {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-tracking {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-inset-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-inset-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-inset-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-ring-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-ring-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-inset-ring-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-inset-ring-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-ring-inset {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-ring-offset-width {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+@property --tw-ring-offset-color {
+  syntax: "*";
+  inherits: false;
+  initial-value: #fff;
+}
+@property --tw-ring-offset-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-blur {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-brightness {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-contrast {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-grayscale {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-hue-rotate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-invert {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-opacity {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-saturate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-sepia {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-drop-shadow {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-drop-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-drop-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-drop-shadow-size {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-blur {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-brightness {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-contrast {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-grayscale {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-hue-rotate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-invert {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-opacity {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-saturate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-sepia {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-duration {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-translate-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@layer properties {
+  @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
+    *, ::before, ::after, ::backdrop {
+      --tw-scale-x: 1;
+      --tw-scale-y: 1;
+      --tw-scale-z: 1;
+      --tw-rotate-x: initial;
+      --tw-rotate-y: initial;
+      --tw-rotate-z: initial;
+      --tw-skew-x: initial;
+      --tw-skew-y: initial;
+      --tw-space-y-reverse: 0;
+      --tw-border-style: solid;
+      --tw-leading: initial;
+      --tw-font-weight: initial;
+      --tw-tracking: initial;
+      --tw-shadow: 0 0 #0000;
+      --tw-shadow-color: initial;
+      --tw-shadow-alpha: 100%;
+      --tw-inset-shadow: 0 0 #0000;
+      --tw-inset-shadow-color: initial;
+      --tw-inset-shadow-alpha: 100%;
+      --tw-ring-color: initial;
+      --tw-ring-shadow: 0 0 #0000;
+      --tw-inset-ring-color: initial;
+      --tw-inset-ring-shadow: 0 0 #0000;
+      --tw-ring-inset: initial;
+      --tw-ring-offset-width: 0px;
+      --tw-ring-offset-color: #fff;
+      --tw-ring-offset-shadow: 0 0 #0000;
+      --tw-blur: initial;
+      --tw-brightness: initial;
+      --tw-contrast: initial;
+      --tw-grayscale: initial;
+      --tw-hue-rotate: initial;
+      --tw-invert: initial;
+      --tw-opacity: initial;
+      --tw-saturate: initial;
+      --tw-sepia: initial;
+      --tw-drop-shadow: initial;
+      --tw-drop-shadow-color: initial;
+      --tw-drop-shadow-alpha: 100%;
+      --tw-drop-shadow-size: initial;
+      --tw-backdrop-blur: initial;
+      --tw-backdrop-brightness: initial;
+      --tw-backdrop-contrast: initial;
+      --tw-backdrop-grayscale: initial;
+      --tw-backdrop-hue-rotate: initial;
+      --tw-backdrop-invert: initial;
+      --tw-backdrop-opacity: initial;
+      --tw-backdrop-saturate: initial;
+      --tw-backdrop-sepia: initial;
+      --tw-duration: initial;
+      --tw-translate-x: 0;
+      --tw-translate-y: 0;
+      --tw-translate-z: 0;
+    }
+  }
+}
+</style>
+  <!-- Font Awesome enhances icons when a network connection is available -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
     .custom-scrollbar::-webkit-scrollbar {
       width: 6px;
@@ -52,14 +1632,14 @@
         <!-- Course Title -->
         <div>
           <div class="flex items-center gap-2">
-            <span class="bg-brand-600 text-white text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">Master Course Reference</span>
+            <span class="bg-brand-600 text-white text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">Master Course Reference (V3.3)</span>
             <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">HS Kaiserslautern • Prof. Dr.-Ing. M. Wölker</span>
           </div>
           <h1 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
-            Circular Economy & Recycling Glossary
+            Circular Economy & Polymer Recycling Glossary
           </h1>
           <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-            Comprehensive terminology library across polymers, logistics, processing, and regulations (148 Terms).
+            Comprehensive terminology library across polymers, logistics, processing, law, and system methodology (<span id="header-total-count">0</span> Terms).
           </p>
         </div>
 
@@ -85,7 +1665,7 @@
           <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
             <i class="fa-solid fa-magnifying-glass"></i>
           </div>
-          <input type="text" id="search-input" placeholder="Search terms, acronyms (PET, EPR), German terms (Kreislaufwirtschaft), or descriptions..." class="w-full pl-10 pr-10 py-2.5 text-sm bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-900 dark:text-white placeholder-slate-400 transition" />
+          <input type="text" id="search-input" placeholder="Search all terms, acronyms, German translations, or definitions..." class="w-full pl-10 pr-10 py-2.5 text-sm bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-900 dark:text-white placeholder-slate-400 transition" />
           <button id="clear-search" class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
             <i class="fa-solid fa-xmark"></i>
           </button>
@@ -100,6 +1680,8 @@
         </div>
 
       </div>
+
+      <div id="data-quality-status" role="status" aria-live="polite" class="hidden mt-3 p-3 rounded-lg border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/30 text-amber-900 dark:text-amber-200 text-xs"></div>
 
       <!-- Category Filter Tabs -->
       <div class="flex items-center gap-1.5 overflow-x-auto custom-scrollbar mt-3 pb-1 text-sm font-medium">
@@ -152,7 +1734,7 @@
   </main>
 
   <!-- Detail Modal -->
-  <div id="modal-backdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-200 flex items-center justify-center p-4">
+  <div id="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-term" aria-hidden="true" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-200 flex items-center justify-center p-4">
     <div id="modal-box" class="bg-white dark:bg-slate-800 rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden border border-slate-200 dark:border-slate-700 transform scale-95 transition-transform duration-200">
       
       <!-- Modal Header -->
@@ -161,6 +1743,7 @@
           <div class="flex items-center gap-2 mb-1">
             <span id="modal-category-badge" class="px-2.5 py-0.5 rounded-full text-xs font-semibold"></span>
             <span id="modal-acronym-badge" class="px-2 py-0.5 rounded text-xs font-mono font-bold bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300"></span>
+            <span id="modal-anchor-badge" class="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-brand-100 dark:bg-brand-900/50 text-brand-800 dark:text-brand-300 hidden"></span>
           </div>
           <h2 id="modal-term" class="text-2xl font-bold text-slate-900 dark:text-white"></h2>
           <p id="modal-german" class="text-sm font-medium text-slate-500 dark:text-slate-400 mt-0.5"></p>
@@ -173,7 +1756,7 @@
       <!-- Modal Body -->
       <div class="p-6 overflow-y-auto space-y-4 custom-scrollbar text-slate-700 dark:text-slate-300 text-sm leading-relaxed">
         <div>
-          <h4 class="text-xs uppercase font-semibold text-slate-400 tracking-wider mb-1">Synthesized Technical Definition</h4>
+          <h4 class="text-xs uppercase font-semibold text-slate-400 tracking-wider mb-1">Technical Definition</h4>
           <p id="modal-definition" class="text-base text-slate-800 dark:text-slate-100 font-normal"></p>
         </div>
 
@@ -213,12 +1796,11 @@
     </div>
   </footer>
 
-  <!-- Glossary Comprehensive Dataset & Logic Script -->
+  <!-- Glossary Comprehensive Dataset & Logic Script (164 Master Terms) -->
   <script>
-    // Master Dataset of 148 Detailed Glossary Terms (Unified Superset)
     const glossaryData = [
       // -------------------------------------------------------------
-      // CATEGORY 1: MATERIAL & POLYMER LEVEL (material - 58 terms)
+      // CATEGORY 1: MATERIAL & POLYMER LEVEL (material)
       // -------------------------------------------------------------
       {
         id: "abs",
@@ -263,8 +1845,8 @@
         acronym: "CB",
         german: "Industrieruß / Carbon Black",
         category: "material",
-        definition: "A paracrystalline carbon pigment and reinforcing filler added to rubbers and engineering plastics.",
-        context: "Carbon black absorbs near-infrared (NIR) radiation completely, rendering black plastic fragments invisible to conventional NIR sorting lines, necessitating THz, MIR, or AI vision alternative identification."
+        definition: "A fine particulate form of elemental carbon used as a black pigment and reinforcing or conductive filler in polymer compounds.",
+        context: "Carbon black can strongly absorb near-infrared radiation, making conventional NIR identification of black plastic fragments difficult; alternative sensing methods may be needed."
       },
       {
         id: "cfrp",
@@ -322,6 +1904,17 @@
         definition: "Reducing interfacial tension and stabilizing phase morphology in immiscible polymer blends using block copolymers, graft copolymers, or reactive coupling agents (e.g., maleic anhydride grafts).",
         context: "Compatibilizers must be matched to blend compositions, which fluctuate continuously in real waste. Compatibilizer dosing is a control problem with varying inputs, and the agent adds virgin cost.",
         question: "Was the compatibilizer system validated across variable feedstock compositions, or only with a fixed laboratory blend?"
+      },
+      {
+        id: "designed-in-complexity",
+        term: "Designed-In Recycling Complexity",
+        acronym: "DRC",
+        german: "Konstruktiv bedingte Recyclingkomplexität",
+        anchor: "Session 8",
+        category: "material",
+        definition: "Recycling difficulty determined upstream at product design: multilayers, adhesives, inorganic fillers, coloring pigments, multi-material joining, and inseparable components.",
+        context: "Reverses Session 5: not how the recycler can solve sorting, but how product design created the barrier. Many recycling bottlenecks are design decisions visible years later.",
+        question: "How much recycling complexity was designed into the product, and what functional advantage did it buy during use?"
       },
       {
         id: "elastomers",
@@ -520,6 +2113,17 @@
         context: "Targeted for marine-degradable application niches, but acts as an impurity in conventional PET or polyolefin mechanical sorting streams."
       },
       {
+        id: "physical-limits",
+        term: "Physical Limits of Closure",
+        acronym: "PLC",
+        german: "Physikalische Grenzen der Kreislaufschliessung",
+        anchor: "Session 2",
+        category: "material",
+        definition: "Thermodynamic and material barriers preventing perfect 100% circularity: dissipative losses/abrasion, cumulative quality degradation, stock growth (demand exceeding returns), and long product lifetimes creating decade-long delays.",
+        context: "The meaningful metric is not whether a loop is formally closed, but how much primary input, material loss, and burden are avoided. Growing material stocks cap maximum recycled content.",
+        question: "What is the stock growth rate and product lifetime, and what theoretical recycled-content ceiling follows from these physical limits?"
+      },
+      {
         id: "pigments",
         term: "Pigments and Colorants",
         acronym: "PIG",
@@ -596,9 +2200,9 @@
         id: "rpet",
         term: "Recycled Polyethylene Terephthalate",
         acronym: "rPET",
-        german: "Rezyklierbares / Rezykliertes PET",
+        german: "Rezykliertes Polyethylenterephthalat",
         category: "material",
-        definition: "Secondary PET resin produced from post-consumer PET bottle flakes that have undergone decontamination and decontamination extrusion.",
+        definition: "Secondary PET resin produced from post-consumer PET bottle flakes that have undergone decontamination and controlled melt extrusion.",
         context: "Subject to strict regulatory EFSA/FDA safety standards for food-contact applications; often commands prices higher than virgin PET due to EU quotas."
       },
       {
@@ -621,28 +2225,42 @@
         context: "No remelting route exists. Comminuted thermoset functions only as low-value filler; chemical recovery requires aggressive conditions that often destroy reinforcement fibers.",
         question: "Is the claimed recovery product a material-grade secondary polymer or a filler/fuel, and what is its market price compared to virgin substitutes?"
       },
+      {
+        id: "three-dim-recycling-space",
+        term: "Three-Dimensional Recycling Space",
+        acronym: "TRS",
+        german: "Dreidimensionaler Recycling-Raum",
+        anchor: "Session 5",
+        category: "material",
+        definition: "Analytical framework defining recycling feasibility as a function of Material Identity (X: polymer family, thermoplastic, thermoset, composite) × Material Origin (Y: scrap stream, commercial mono-stream, packaging, durables) × Composition & Condition (Z: purity, additives, fillers, joining, degradation).",
+        context: "Answers why 'Can plastic be recycled?' is invalid. There is no universal recycling process for plastic as such, only tailored pathways for sufficiently characterized material spaces.",
+        question: "Which exact material, from which specific source, with what condition and contamination profile, can be turned into a secondary material for a defined application?"
+      },
 
       // -------------------------------------------------------------
-      // CATEGORY 2: LOGISTICS & SYSTEMS LEVEL (logistics - 46 terms)
+      // CATEGORY 2: LOGISTICS & SYSTEMS LEVEL (logistics)
       // -------------------------------------------------------------
       {
         id: "balloon-effect",
         term: "Balloon Effect in Waste Trade",
         acronym: "BE",
         german: "Ballon-Effekt (Verlagerungseffekt)",
+        anchor: "Session 3",
         category: "logistics",
-        definition: "The systemic phenomenon where restricting a waste import route or trade corridor in one country causes waste flows to divert to neighboring under-regulated regions.",
-        context: "Demonstrated after China's National Sword policy (2018), when massive plastic waste exports shifted rapidly to Malaysia, Vietnam, and Indonesia."
+        definition: "The systemic phenomenon where restricting a waste import route or trade corridor in one country causes waste flows to divert to neighboring under-regulated regions or sinks.",
+        context: "Demonstrated after China's National Sword policy (2018), when massive plastic waste exports shifted rapidly to Malaysia, Vietnam, and Indonesia.",
+        question: "Where did the redirected waste volumes physically go, and did the global environmental outcome improve?"
       },
       {
         id: "burden-shifting",
-        term: "Burden Shifting",
+        term: "Burden Shifting & Informal Recycling",
         acronym: "BSH",
-        german: "Lastenverschiebung / Burden Shifting",
+        german: "Lastenverschiebung und informeller Sektor",
+        anchor: "Session 3 & 12",
         category: "logistics",
-        definition: "Displacement of environmental or social impacts across life-cycle stages, impact categories, regions, or time without achieving a net global impact reduction.",
-        context: "e.g., Exporting plastic scrap to regions with weak environmental controls, or reducing GWP at the expense of aquatic ecotoxicity or heavy water consumption.",
-        question: "Where do processing residues and wash effluents physically end up, and under which regulatory standards are they treated?"
+        definition: "Displacement of environmental, health, or social burdens across geographical regions, life-cycle stages, or impact categories. Informal recycling recovers valuable fractions via low-capital labour with severe exposure risks.",
+        context: "A low processing cost often signals externalized human and environmental costs. Unwanted residues end up where regulatory control is weakest.",
+        question: "Which part of the chain captures economic value, and who physically carries the toxic residues and worker exposure?"
       },
       {
         id: "cascading-use",
@@ -652,6 +2270,28 @@
         category: "logistics",
         definition: "The sequential utilization of material resources across multiple iterations, prioritizing highest structural value before chemical recovery and eventual energy recovery.",
         context: "e.g., Virgin PET bottle → rPET bottle → thermoformed tray → textile fibre → energy incineration."
+      },
+      {
+        id: "chain-of-non-equivalences",
+        term: "Chain of Non-Equivalences",
+        acronym: "CNE",
+        german: "Kette der Nicht-Äquivalenzen",
+        anchor: "Session 1 & 13",
+        category: "logistics",
+        definition: "The foundational course thesis that technical feasibility, logistical feasibility, economic feasibility, and actual circularity are four completely separate conditions, where success in one implies nothing about the next.",
+        context: "A recycling process can exist (technical) without collection (logistical), without a paying buyer (economic), and without substituting virgin material (actual circularity).",
+        question: "Which of the four distinct feasibilities does the provided evidence actually demonstrate, and which are merely assumed?"
+      },
+      {
+        id: "circular-diagram-hypothesis",
+        term: "Circular Diagram as Hypothesis",
+        acronym: "CDH",
+        german: "Kreislauf-Diagramm als Hypothese",
+        anchor: "Session 2",
+        category: "logistics",
+        definition: "The methodological principle that a closed-loop schematic is a hypothesis about material flows with defined system boundaries, not an empirical record of operational reality.",
+        context: "Diagrams hide unmeasured losses, cross-border leakage, stock accumulation, and non-substituting uses. Drawing an arrow costs nothing; moving physical mass does.",
+        question: "For each arrow in the diagram: what measured mass flows through it, who pays for its movement, and where does physical leakage go?"
       },
       {
         id: "closed-loop",
@@ -693,13 +2333,14 @@
       },
       {
         id: "dissipative-loss",
-        term: "Dissipative Material Loss",
+        term: "Dissipative Material Loss & Ocean Leakage",
         acronym: "DML",
-        german: "Dissipative Verluste",
+        german: "Dissipative Verluste und Meeresumwelteintrag",
+        anchor: "Session 3 & 12",
         category: "logistics",
-        definition: "Unrecoverable loss of material into the environment during product use due to abrasion, dispersion, or microparticulate release (tire wear, microfibres).",
-        context: "These flows lie completely outside collection systems; no end-of-life recycling infrastructure can capture them. Source reduction is the sole available mitigation lever.",
-        question: "What fraction of the product's initial mass is released dissipatively during use, and does the circularity claim account for it?"
+        definition: "Material dispersed into the environment beyond collection reach during use (tire wear, paint particles, microfibers, and marine plastic waste fed by river pathways and industrial fishing).",
+        context: "These flows lie completely outside collection systems; cleanup deals with dispersed, degraded matter at high cost per unit, whereas prevention acts at concentrated sources.",
+        question: "What is the marginal environmental benefit per unit cost of cleanup versus upstream prevention, and what sources does the claimed intervention miss?"
       },
       {
         id: "downcycling",
@@ -709,6 +2350,17 @@
         category: "logistics",
         definition: "The conversion of waste materials into secondary materials or products of lower mechanical quality, functionality, or economic value.",
         context: "Processing mixed post-consumer packaging into park benches or thick drainage pipes due to cross-polymer contamination."
+      },
+      {
+        id: "eight-block-gap-test",
+        term: "Eight-Block Gap Test",
+        acronym: "8BT",
+        german: "Acht-Block-Lückentest",
+        anchor: "Session 13",
+        category: "logistics",
+        definition: "The comprehensive integration framework verifying a real industrial system across eight dimensions: concept/limits, global flows, market pull/financing, responsibility/evidence, taxonomy, purity/sorting, maturity, and economics.",
+        context: "A circular system exists only if the complete chain functions. An unanswerable question exposes an unresolved system gap; solving one link does not close the loop.",
+        question: "Which of the eight blocks cannot be answered for this industrial system, and who would have to close that structural gap?"
       },
       {
         id: "epr",
@@ -782,6 +2434,17 @@
         category: "logistics",
         definition: "A systematic analytical method mapping physical flows and stock accumulation of materials within a defined spatial and temporal system boundary.",
         context: "The core tool for logistics engineers to track loss points, domestic accumulation, exports, and mass balances across regional circular economies."
+      },
+      {
+        id: "mfa-vs-lca",
+        term: "MFA vs. LCA and Circularity Indicators",
+        acronym: "MAL",
+        german: "MFA vs. Ökobilanz und Zirkularitätsindikatoren",
+        anchor: "Session 12",
+        category: "logistics",
+        definition: "Material Flow Analysis tracks physical mass, whereas LCA evaluates environmental impacts over a functional unit and system boundary. Circularity indicators summarize flows without capturing impact.",
+        context: "Higher circularity scores do not prove better environmental outcomes. Transport energy, burden shifting, and market rebound can reverse apparent per-tonne advantages.",
+        question: "Can the conclusion be stated as 'more circular, environmental benefit not yet established', and what LCA evidence would confirm it?"
       },
       {
         id: "missing-economic-pull",
@@ -863,10 +2526,11 @@
         term: "System Boundary Definition",
         acronym: "SBD",
         german: "Systemgrenzen-Definition",
+        anchor: "Session 2, 3 & 12",
         category: "logistics",
-        definition: "Conceptual boundary specifying which life-cycle steps, transport stages, energy inputs, residue treatments, and geographic regions are included in LCA or MFA models.",
-        context: "Results are boundary-dependent. Omitting wash-water drying, residue landfilling, or overseas shipping routes can reverse environmental conclusions.",
-        question: "Which specific material and energy flows were excluded from the system boundary, and does the conclusion survive allocation adjustments?"
+        definition: "Delineation of processes, geographies, time horizons, and legal jurisdictions included in assessments. Geographically, a domestic loop often becomes a global linear flow when expanded across borders.",
+        context: "An export arrow labeled 'recycling' ends national statistics but not physical flows. Excluded pretreatment, drying, residues, and overseas destinations reverse conclusions.",
+        question: "What happens to the material after the last recorded transfer, and does the environmental claim survive extending boundaries globally?"
       },
       {
         id: "take-back-system",
@@ -905,18 +2569,30 @@
         context: "Treating construction demolition waste and electrical networks as rich secondary resource reserves competing with primary mining."
       },
       {
+        id: "value-retention",
+        term: "Value-Retention Strategies",
+        acronym: "VRS",
+        german: "Werteserhaltungsstrategien (R-Strategien)",
+        anchor: "Session 9",
+        category: "logistics",
+        definition: "Strategies preserving product, component, and manufacturing identity (reuse, repair, refurbishment, remanufacturing) before material recycling destroys component structure.",
+        context: "Returned products with residual value create organic market pull. Before asking how to chemically or mechanically recycle an object, analyze why its function was destroyed.",
+        question: "Is function or component value retained at lower total burden than material recovery, given return condition and market demand?"
+      },
+      {
         id: "yield-loss-cascade",
         term: "Yield Loss Cascade",
         acronym: "YLC",
         german: "Multiplikative Kaskade der Ausbeuteverluste",
+        anchor: "Session 3",
         category: "logistics",
-        definition: "The multiplicative chain of sub-efficiencies (capture rate × sorting efficiency × process yield × quality acceptance) determining actual material return.",
-        context: "Individually high stage efficiencies (80% × 80% × 80% × 80%) multiply to an overall end-to-end mass recovery yield of only 41%.",
-        question: "At which specific measurement point is the reported recycling rate measured, and what is the true end-to-end mass yield into new products?"
+        definition: "Multiplicative chain of stage efficiencies (generated → collected → sorted → accepted as feedstock → processed → recyclate produced → sold → virgin substituted) with efficiency ≤ 100% at each step.",
+        context: "Individually high stage efficiencies multiply into a low end-to-end figure. Material leaves the loop as sorting rejects, storage, downcycling, or disposal.",
+        question: "At which specific step in the cascade is the reported rate measured, and what absolute mass reaches the final substitution step?"
       },
 
       // -------------------------------------------------------------
-      // CATEGORY 3: PROCESSING & ANALYTICS LEVEL (processing - 24 terms)
+      // CATEGORY 3: PROCESSING & ANALYTICS LEVEL (processing)
       // -------------------------------------------------------------
       {
         id: "air-classification",
@@ -947,12 +2623,14 @@
       },
       {
         id: "digital-product-passport",
-        term: "Digital Product Passport",
+        term: "Digital Product Passport Limits",
         acronym: "DPP",
-        german: "Digitaler Produktpass (DPP)",
+        german: "Grenzen des Digitalen Produktpasses",
+        anchor: "Session 11",
         category: "processing",
-        definition: "A standardized digital data record accessible via data carriers (QR code, RFID) providing complete supply chain composition, repairability, and dismantling data.",
-        context: "Preserves product identity from manufacturing to end-of-life, eliminating reliance on surface spectroscopy after product dismantling."
+        definition: "Standardized digital record preserving component and material composition data. Its limits include physical link breakage, data granularity, legacy stock, unreadable tags, and physical inseparability in mixed waste.",
+        context: "A DPP informs recyclers what is present but cannot physically unglue multilayers. Information improves routing and sort decisions, but cannot process matter.",
+        question: "For what share of the physical waste stock does a DPP actually exist, and which physical separation constraint remains after reading data?"
       },
       {
         id: "electrostatic-separation",
@@ -1009,6 +2687,17 @@
         context: "Combines 2D computer vision geometry with chemical identification, allowing high-speed sorting robots to identify polymer type and component shape simultaneously."
       },
       {
+        id: "identification-sortability",
+        term: "Identification, Detectability and Sortability",
+        acronym: "IDS",
+        german: "Identifikation, Detektierbarkeit und Sortierbarkeit",
+        anchor: "Session 11",
+        category: "processing",
+        definition: "Distinction between identifying material identity, lab-scale detectability, and industrial sortability (requiring physical ejection at belt speed with target purity and recovery).",
+        context: "Knowing what an object is does not mean it can be separated economically. Raising purity thresholds lowers mass recovery, making identification accuracy an economic variable.",
+        question: "What purity and mass recovery were achieved at industrial belt speed on real waste feed, and how much sorting accuracy is economically viable?"
+      },
+      {
         id: "libs",
         term: "Laser-Induced Breakdown Spectroscopy",
         acronym: "LIBS",
@@ -1016,6 +2705,17 @@
         category: "processing",
         definition: "An atomic emission spectroscopy method focusing high-energy laser pulses onto a sample surface to form micro-plasmas and determine elemental composition.",
         context: "Used to detect heavy metals, glass fiber elemental content, and specific inorganic flame retardant elements in moving plastic shredder streams."
+      },
+      {
+        id: "maturity-scale",
+        term: "Maturity Scale (Level A–E) and TRL",
+        acronym: "TRL",
+        german: "Reifegradskala (Stufe A–E) und TRL",
+        anchor: "Session 5 & 13",
+        category: "processing",
+        definition: "Course framework classifying maturity into A (mature closed-loop), B (mature open-loop), C (commercial niche), D (FOAK demonstrator), and E (lab pilot). Complemented by 9-stage TRL scale.",
+        context: "A chemical reaction is not a recycling process, and a process is not a commercial industrial system. Process integration studies often omit preprocessing and washing from boundaries.",
+        question: "What exact maturity has been demonstrated: a reaction, a process, a pilot, an industrial plant, or a mature system, on which feedstock?"
       },
       {
         id: "mechanical-recycling",
@@ -1046,39 +2746,47 @@
       },
       {
         id: "nir",
-        term: "Near-Infrared Spectroscopy",
+        term: "Near-Infrared Spectroscopy & Black Plastics",
         acronym: "NIR",
-        german: "Nahes Infrarot (NIR-Spektroskopie)",
+        german: "NIR-Spektroskopie und Schwarze Kunststoffe",
+        anchor: "Session 11",
         category: "processing",
-        definition: "Optical reflection spectroscopy operating in the 780–2500 nm range, measuring overtone and combination molecular vibrations.",
-        context: "The workhorse technology of automated Material Recovery Facilities (MRFs), identifying polymer types on conveyor belts operating up to 3 m/s."
+        definition: "Optical reflection sorting operating at 780–2500 nm. Carbon-black pigments absorb NIR radiation entirely, rendering black plastic objects completely invisible to standard optical sorters.",
+        context: "Sorting performance depends on real waste conditions (dirt, moisture, thin multilayers). When NIR fails on dark plastics, secondary modalities must be added at significant capital cost.",
+        question: "What exact share of the target waste stream is dark, soiled, or multilayer and thus invisible to standard NIR detection?"
       },
       {
         id: "pyrolysis",
-        term: "Thermal Pyrolysis",
+        term: "Thermal Pyrolysis & Chemical Claims",
         acronym: "PYR",
-        german: "Pyrolyse (Thermolyse)",
+        german: "Pyrolyse und Chemische Recyclingansprüche",
+        anchor: "Session 5",
         category: "processing",
-        definition: "Thermal degradation of organic polymers at elevated temperatures (400–800°C) in the complete absence of oxygen, yielding liquid pyrolytic oil, gas, and solid char.",
-        context: "Converts mixed polyolefin waste into synthetic oil feedstock co-fed into steam crackers to manufacture virgin-grade secondary plastics."
+        definition: "Thermal polymer degradation (400–800°C) without oxygen into oil, gas, and char. Requires targeted feedstock; contaminants like chlorine, nitrogen, and metals poison catalysts.",
+        context: "Laboratory claims use idealized clean feedstocks. 'Pyrolysis solves mixed plastic waste' is false; chlorine and moisture destroy cracker yield, routing mass into fuel or char.",
+        question: "Which feedstock specification does the plant actually require, and what mass share becomes chemical material rather than low-value fuel or gas?"
       },
       {
         id: "raman-spectroscopy",
-        term: "Raman Spectroscopy",
-        acronym: "RAM",
-        german: "Raman-Spektroskopie",
+        term: "Raman, LIBS, XRF, THz & Hyperspectral",
+        acronym: "ADV",
+        german: "Erweiterte Sensorik (Raman, LIBS, XRF, THz)",
+        anchor: "Session 11",
         category: "processing",
-        definition: "Spectroscopic technique measuring inelastic scattering of monochromatic laser light, probing molecular vibrational and rotational modes.",
-        context: "Highly specific chemical fingerprints immune to water interference; used to differentiate dark polymers, structural additives, and complex copolymers."
+        definition: "Advanced sensor modalities: Raman provides structural fingerprinting (including black plastics) but trades speed; LIBS/XRF measure elemental composition (Br, Cl, Sb); THz and hyperspectral image sub-surface properties.",
+        context: "No single sensor is robust for all waste streams. Unsolvable sorting tasks require multi-sensor combinations, adding capital cost, calibration effort, and throughput bottlenecks.",
+        question: "Which material property does the sorting claim require, and does the named sensor modality measure it at required industrial belt speed?"
       },
       {
         id: "sensor-fusion",
-        term: "Multisensor Fusion",
-        acronym: "SF",
-        german: "Sensordatenfusion",
+        term: "Sensor Fusion and AI Limits",
+        acronym: "SFI",
+        german: "Sensordatenfusion und KI-Grenzen",
+        anchor: "Session 11",
         category: "processing",
-        definition: "Algorithmic combination of data streams from multiple distinct sensor modalities (e.g., NIR + RGB Camera + XRF + 3D Laser) to evaluate material identity.",
-        context: "Overcomes single-sensor limitations, allowing sorting lines to classify complex items like black glass-filled flame-retarded electronic housings."
+        definition: "Algorithmic combination of multi-sensor data streams (NIR, RGB, XRF, 3D laser) with machine learning classifiers. AI interprets sensor data but cannot create physical information sensors never measured.",
+        context: "'AI can sort all waste' is marketing hype. Added sensors increase capital cost and calibration drift when waste streams shift seasonally.",
+        question: "How much sorting accuracy does each added sensor buy, at what capital cost, and how does the classifier perform on out-of-distribution waste?"
       },
       {
         id: "sink-float",
@@ -1108,24 +2816,6 @@
         context: "Separates multilayer film layers (PE from PA) or purifies target resins from insoluble additives, pigments, and metallic foils."
       },
       {
-        id: "terahertz-sensing",
-        term: "Terahertz Sensing",
-        acronym: "THz",
-        german: "Terahertz-Messtechnik",
-        category: "processing",
-        definition: "Nondestructive sensing utilizing sub-millimeter electromagnetic waves (0.1–10 THz) penetrating non-conducting materials.",
-        context: "Emerging industrial sensor capability capable of penetrating surface grime and identifying carbon-black-filled plastics transparent to THz radiation."
-      },
-      {
-        id: "trl",
-        term: "Technology Readiness Level",
-        acronym: "TRL",
-        german: "Technologischer Reifegrad (TRL)",
-        category: "processing",
-        definition: "A formal 9-stage scale estimating technology maturity from basic scientific principles (TRL 1) to proven operational deployment in commercial operation (TRL 9).",
-        context: "Prevents confusing laboratory chemical reactions (TRL 3-4) with industrially mature recycling systems (TRL 8-9)."
-      },
-      {
         id: "xrf",
         term: "X-Ray Fluorescence",
         acronym: "XRF",
@@ -1136,16 +2826,18 @@
       },
 
       // -------------------------------------------------------------
-      // CATEGORY 4: LAW, REGULATION & POLICY LEVEL (law - 20 terms)
+      // CATEGORY 4: LAW, REGULATION & POLICY LEVEL (law)
       // -------------------------------------------------------------
       {
         id: "basel-convention",
-        term: "Basel Convention",
-        acronym: "BC",
-        german: "Basler Übereinkommen",
+        term: "Basel Convention & WSR Enforcement",
+        acronym: "BCW",
+        german: "Basler Übereinkommen und Abfallverbringung",
+        anchor: "Session 4",
         category: "law",
-        definition: "A global multilateral environmental treaty regulating transboundary movements of hazardous and specific non-hazardous waste streams.",
-        context: "The 2019 Plastic Amendments subjected non-hazardous, un-sorted plastic waste exports to strict Prior Informed Consent (PIC) procedures worldwide."
+        definition: "International and EU treaties governing transboundary waste movements. The Basel plastic amendments (2021) and EU WSR 2024/1157 enforce strict prior informed consent (PIC) and ban plastic waste exports to non-OECD countries.",
+        context: "Waste retains legal status at borders. Illegal shipments trigger mandatory take-back liability for notifiers. Exporting waste no longer serves as proof of responsible treatment.",
+        question: "How is compliance with purity criteria verified at national borders, and who bears financial take-back liability if destination processing fails?"
       },
       {
         id: "cbam",
@@ -1155,6 +2847,17 @@
         category: "law",
         definition: "An EU climate measure levying a carbon price on imported carbon-intensive goods equivalent to the carbon cost born by domestic EU producers under the ETS.",
         context: "Directly impacts international trade of primary polymers, secondary recyclates, and finished goods, penalizing imports from high-emission jurisdictions."
+      },
+      {
+        id: "circularity-vs-sustainability",
+        term: "Circularity vs. Sustainability",
+        acronym: "CVS",
+        german: "Zirkularität vs. Nachhaltigkeit",
+        anchor: "Session 2 & 12",
+        category: "law",
+        definition: "Conceptual distinction where circularity is an operational instrument to reduce resource extraction and waste at constant function, whereas sustainability is the environmental outcome.",
+        context: "Higher circularity indicator scores do not establish better environmental results. Transport energy, chemical processing, and rebound effects can offset resource savings.",
+        question: "Which impact category and functional unit demonstrate that the more circular option is environmentally superior, and which impacts were omitted?"
       },
       {
         id: "csddd",
@@ -1175,6 +2878,17 @@
         context: "Establishes transparent technical data sheets for secondary polymers, reducing transaction risk between recyclers and industrial buyers."
       },
       {
+        id: "dual-flow-info",
+        term: "Dual Flow: Material and Legal Information",
+        acronym: "DFI",
+        german: "Duale Ströme: Material- und Rechtsinformation",
+        anchor: "Session 4 & 11",
+        category: "law",
+        definition: "The principle that every physical waste chain is accompanied by a mandatory legal information flow (origins, classification, holder, carrier, destination, treatment evidence).",
+        context: "Documentation compliance is a real operational cost. Missing or inconsistent records make otherwise valuable material legally untradeable or subject to confiscation.",
+        question: "Can the organization reconstruct what happened to the material from origin to lawful final treatment with retained documentary evidence?"
+      },
+      {
         id: "ecodesign-espr",
         term: "Ecodesign for Sustainable Products Regulation",
         acronym: "ESPR",
@@ -1191,6 +2905,17 @@
         category: "law",
         definition: "Legal conditions under which a waste material that has undergone recovery ceases to be classified legally as waste and becomes a secondary raw material.",
         context: "Once EoW criteria are satisfied (e.g., standard purity met), onerous waste transport permissions and hazardous waste tracking duties no longer apply."
+      },
+      {
+        id: "epr-modulation",
+        term: "EPR Fee Modulation & Incentives",
+        acronym: "EPR",
+        german: "EPR-Gebührenmodulation",
+        anchor: "Session 10",
+        category: "law",
+        definition: "Mechanism adjusting extended producer responsibility fees based on recyclability, disassembly ease, or recycled content to incentivize better upstream product design.",
+        context: "If fee differentials are trivial compared to product margins, eco-design incentives fail. Theoretical criteria often reward paper compliance rather than real recycling.",
+        question: "What is the fee differential as a share of product cost, and does the criterion measure actual recycling performance or design theory?"
       },
       {
         id: "ewc-avv",
@@ -1220,31 +2945,81 @@
         context: "Transposes the EU Waste Framework Directive into national law, establishing statutory legal duties for original waste producers and holders."
       },
       {
-        id: "pic-procedure",
-        term: "Prior Informed Consent",
-        acronym: "PIC",
-        german: "Verfahren der vorherigen Zustimmung (PIC)",
+        id: "market-vs-institutional-pull",
+        term: "Market Pull vs. Institutionally Created Pull",
+        acronym: "MIP",
+        german: "Markt-Nachfrage vs. Institutioneller Zwang",
+        anchor: "Session 4 & 10",
         category: "law",
-        definition: "A regulatory control procedure requiring exporting states to obtain formal authorization from importing and transit states before shipping controlled wastes.",
-        context: "Mandatory under the Basel Convention and EU Waste Shipment Regulation for shipping hazardous or mixed plastic waste fractions across international borders."
+        definition: "Distinction between organic market demand (buyers paying cost-covering prices for high-value scrap) and institutional pull created by laws, deposits, mandates, or EPR.",
+        context: "In many polymer waste streams, regulation is the sole mechanism making reverse logistics exist. A system unable to explain its physical motivation is incomplete.",
+        question: "For each movement in the chain: is motivation driven by market price, legal obligation, or subsidy, and what happens if removed?"
       },
       {
-        id: "polluter-pays",
-        term: "Polluter Pays Principle",
-        acronym: "PPP",
-        german: "Verursacherprinzip",
+        id: "producer-due-diligence",
+        term: "Producer/Holder Responsibility & Due Diligence",
+        acronym: "PDD",
+        german: "Besitzerverantwortung und Sorgfaltspflichten",
+        anchor: "Session 4",
         category: "law",
-        definition: "The foundational environmental policy principle dictating that the costs of preventing, controlling, and remediating pollution must be borne by the polluter.",
-        context: "Provides the philosophical and legal backing for implementing mandatory Extended Producer Responsibility fees and virgin material environmental levies."
+        definition: "Statutory duty under EU/German law where original waste producers/holders remain legally accountable for proper recovery. Transfer to third parties does not extinguish liability.",
+        context: "'We hired a certified collector' is legally insufficient. Due diligence requires classification and checks before transfer, documentation during, and retained evidence after.",
+        question: "What due diligence was required before transfer, what was documented during transport, and what evidentiary trail remains after treatment?"
       },
       {
-        id: "ppwr",
-        term: "Packaging and Packaging Waste Regulation",
-        acronym: "PPWR",
-        german: "EU-Verpackungsverordnung (PPWR 2025/40)",
+        id: "private-vs-social-cost",
+        term: "Private vs. Social Cost",
+        acronym: "PSC",
+        german: "Private vs. Soziale Kosten",
+        anchor: "Session 10 & 12",
         category: "law",
-        definition: "Overarching EU regulation establishing mandatory packaging reduction targets, 100% recyclability requirements by 2030, and binding PCR content quotas.",
-        context: "Replaces national directives with binding federal law across Europe, mandating up to 35% PCR content in plastic packaging by 2030 and 65% by 2040."
+        definition: "Economic discrepancy where environmental externalities exclude social costs from virgin material prices, making primary polymers artificially cheaper than their societal impact.",
+        context: "Rejects two false extremes: that every recycling mandate is desirable, or that recycling costs more than virgin and is irrational. Policy tests social cost efficiency.",
+        question: "What does the policy instrument cost per unit of avoided environmental burden compared with alternative prevention instruments?"
+      },
+      {
+        id: "recycling-calc-point",
+        term: "Recycling Rate Calculation Point",
+        acronym: "RCP",
+        german: "Berechnungspunkt der Recyclingquote",
+        anchor: "Session 3",
+        category: "law",
+        definition: "The exact stage where recycled quantity is officially counted: input mass to a recycling plant versus output mass of material substituting primary raw material.",
+        context: "Input-based counting books sorting residues and contamination as recycled. Output-based counting is harder to audit and exposes significantly lower real rates.",
+        question: "What mass is counted, at which processing stage, against what denominator, and within what geographic boundary?"
+      },
+      {
+        id: "recycled-content-mandate",
+        term: "Target vs. Recycled-Content Mandate",
+        acronym: "RCM",
+        german: "Recyclingquote vs. Rezyklat-Einsatzquote",
+        anchor: "Session 10",
+        category: "law",
+        definition: "Policy shift from recycling targets (forcing waste collection supply) to recycled-content mandates (forcing manufacturing demand), recognizing collection alone does not create markets.",
+        context: "Mandates prove secondary markets do not close automatically. Mandates without compliant supply trigger price spikes; targets without demand trigger stockpiles and illegal exports.",
+        question: "Which side of the market does this regulatory instrument create, and is the opposing market side structurally sufficient?"
+      },
+      {
+        id: "regulatory-compliance-value",
+        term: "Regulatory Compliance Value",
+        acronym: "RCV",
+        german: "Regulatorischer Konformitätswert",
+        anchor: "Session 6",
+        category: "law",
+        definition: "Economic premium commanded by certified recyclate because it enables buyers to fulfill legal recycled-content mandates or market claims.",
+        context: "Where mandated demand exceeds compliant supply, recyclate prices can exceed virgin resin. The price reflects legal scarcity and compliance function, not inherent quality.",
+        question: "Is the price premium paid for inherent material quality, or purely for a compliance certificate on a scarce regulated category?"
+      },
+      {
+        id: "realistic-alternative",
+        term: "Realistic-Alternative Comparison",
+        acronym: "RAC",
+        german: "Vergleich mit realistischen Alternativen",
+        anchor: "Session 7",
+        category: "law",
+        definition: "Evaluation methodology assessing waste treatment options against realistic operational alternatives for that stream (e.g., export, landfill, incineration) rather than an imaginary perfect loop.",
+        context: "The waste hierarchy is a heuristic, not an automatic rule. For contaminated negative-value streams, the alternative to domestic incineration may be illegal export or dumping.",
+        question: "What happens to this specific waste stream under each realistic alternative, including residue management and lock-in effects?"
       },
       {
         id: "reach",
@@ -1256,13 +3031,15 @@
         context: "Creates severe compliance barriers for recyclers when legacy restricted substances (e.g., phthalate plasticisers) are present in post-consumer feedstocks."
       },
       {
-        id: "recycled-content-mandate",
-        term: "Recycled-Content Mandate",
-        acronym: "RCM",
-        german: "Rezyklat-Einsatzquote / Pflichtquote",
+        id: "source-interpretation-conclusion",
+        term: "Source – Interpretation – Conclusion",
+        acronym: "SIC",
+        german: "Quelle – Interpretation – Schlussfolgerung",
+        anchor: "Session 1",
         category: "law",
-        definition: "A statutory regulatory requirement forcing manufacturers to incorporate a minimum percentage of verified post-consumer recycled polymer into new products.",
-        context: "Shifts legal intervention from waste generation (supply) to industrial production (demand), artificially creating guaranteed market pull for secondary plastics."
+        definition: "Scientific research methodology separating primary source data from researcher interpretation and final conclusions, requiring explicit traceability in evidence tables.",
+        context: "Prevents AI or researchers from making unsupported claims look authoritative. Agreement between multiple AI outputs is convergence, not verified empirical evidence.",
+        question: "Can another person locate the exact source, and does the cited text support this specific claim rather than a generalized assertion?"
       },
       {
         id: "supd",
@@ -1292,6 +3069,17 @@
         context: "Demonstrates that recycling is not the ultimate circular objective, but an intermediate step after prevention and reuse options are exhausted."
       },
       {
+        id: "waste-vs-secondary",
+        term: "Waste vs. Secondary Raw Material Status",
+        acronym: "VSR",
+        german: "Abfall vs. Sekundärrohstoff-Status",
+        anchor: "Session 3",
+        category: "law",
+        definition: "Legal and economic status of traded materials. A clean mono-polymer bale behaves like a commodity, whereas contaminated bales carry negative value, yet both share customs codes.",
+        context: "A recorded export statistic for 'recycling' is not proof of recycling. Trade codes record customs categories, not polymer composition, contamination, or treatment quality.",
+        question: "What is physically traded, is the destination buying a resource or accepting a disposal burden, and what happens to non-recyclable rejects?"
+      },
+      {
         id: "weee-directive",
         term: "WEEE Directive",
         acronym: "WEEE",
@@ -1311,40 +3099,46 @@
       }
     ];
 
-    // State Variables
+    // Application state
     let currentCategory = 'all';
     let currentLetter = 'all';
     let searchQuery = '';
+    let closeTimer = null;
+    let openTimer = null;
 
-    // Category Styling Definitions
     const categoryConfig = {
       material: {
-        label: "Material & Polymer",
-        badgeBg: "bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800",
-        icon: "fa-flask text-emerald-500",
-        borderHover: "hover:border-emerald-400"
+        label: 'Material & Polymer',
+        badgeBg: 'bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800',
+        icon: 'fa-flask text-emerald-500',
+        borderHover: 'hover:border-emerald-400'
       },
       logistics: {
-        label: "Logistics & Systems",
-        badgeBg: "bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 border-blue-200 dark:border-blue-800",
-        icon: "fa-truck-ramp-box text-blue-500",
-        borderHover: "hover:border-blue-400"
+        label: 'Logistics & Systems',
+        badgeBg: 'bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 border-blue-200 dark:border-blue-800',
+        icon: 'fa-truck-ramp-box text-blue-500',
+        borderHover: 'hover:border-blue-400'
       },
       processing: {
-        label: "Processing & Analytics",
-        badgeBg: "bg-purple-100 dark:bg-purple-900/50 text-purple-800 dark:text-purple-300 border-purple-200 dark:border-purple-800",
-        icon: "fa-microscope text-purple-500",
-        borderHover: "hover:border-purple-400"
+        label: 'Processing & Analytics',
+        badgeBg: 'bg-purple-100 dark:bg-purple-900/50 text-purple-800 dark:text-purple-300 border-purple-200 dark:border-purple-800',
+        icon: 'fa-microscope text-purple-500',
+        borderHover: 'hover:border-purple-400'
       },
       law: {
-        label: "Law & Regulation",
-        badgeBg: "bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800",
-        icon: "fa-scale-balanced text-amber-500",
-        borderHover: "hover:border-amber-400"
+        label: 'Law & Regulation',
+        badgeBg: 'bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800',
+        icon: 'fa-scale-balanced text-amber-500',
+        borderHover: 'hover:border-amber-400'
+      },
+      uncategorised: {
+        label: 'Uncategorised',
+        badgeBg: 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-600',
+        icon: 'fa-circle-question text-slate-500',
+        borderHover: 'hover:border-slate-400'
       }
     };
 
-    // DOM Elements
     const gridEl = document.getElementById('glossary-grid');
     const noResultsEl = document.getElementById('no-results');
     const searchInput = document.getElementById('search-input');
@@ -1354,331 +3148,348 @@
     const resetFiltersBtn = document.getElementById('reset-filters');
     const resetSearchBtn = document.getElementById('reset-search-btn');
     const alphaBar = document.getElementById('alpha-bar');
+    const qualityStatus = document.getElementById('data-quality-status');
 
-    // Init App
-    document.addEventListener('DOMContentLoaded', () => {
-      initTheme();
-      buildAlphabetBar();
-      updateCategoryCounts();
-      renderGrid();
-      setupEventListeners();
-    });
-
-    // Theme Switcher Logic
-    function initTheme() {
-      const themeToggleBtn = document.getElementById('theme-toggle');
-      const darkIcon = document.getElementById('theme-toggle-dark-icon');
-      const lightIcon = document.getElementById('theme-toggle-light-icon');
-
-      if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
-        lightIcon.classList.remove('hidden');
-        darkIcon.classList.add('hidden');
-      } else {
-        document.documentElement.classList.remove('dark');
-        darkIcon.classList.remove('hidden');
-        lightIcon.classList.add('hidden');
-      }
-
-      themeToggleBtn.addEventListener('click', () => {
-        darkIcon.classList.toggle('hidden');
-        lightIcon.classList.toggle('hidden');
-        if (document.documentElement.classList.contains('dark')) {
-          document.documentElement.classList.remove('dark');
-          localStorage.setItem('color-theme', 'light');
-        } else {
-          document.documentElement.classList.add('dark');
-          localStorage.setItem('color-theme', 'dark');
-        }
-      });
+    function safeString(value) {
+      return value == null ? '' : String(value);
     }
 
-    // Build Alphabet Bar Dynamically
-    function buildAlphabetBar() {
-      const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-      alphabet.forEach(letter => {
-        const btn = document.createElement('button');
-        btn.dataset.letter = letter;
-        btn.className = "alpha-btn px-2 py-0.5 rounded font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition";
-        btn.innerText = letter;
-        alphaBar.appendChild(btn);
-      });
+    function escapeHTML(value) {
+      return safeString(value).replace(/[&<>"']/g, char => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[char]));
     }
 
-    // Update Category Item Counters
-    function updateCategoryCounts() {
-      totalCountEl.innerText = glossaryData.length;
-      document.getElementById('count-all').innerText = glossaryData.length;
-      ['material', 'logistics', 'processing', 'law'].forEach(cat => {
-        const count = glossaryData.filter(item => item.category === cat).length;
-        document.getElementById(`count-${cat}`).innerText = count;
-      });
+    function getCategoryConfig(category) {
+      return categoryConfig[category] || categoryConfig.uncategorised;
     }
 
-    // Filter Logic
-    function getFilteredData() {
-      return glossaryData.filter(item => {
-        // Category Match
-        const matchCat = (currentCategory === 'all' || item.category === currentCategory);
-        
-        // Alphabet Match
-        const matchLetter = (currentLetter === 'all' || item.term.toUpperCase().startsWith(currentLetter) || item.acronym.toUpperCase().startsWith(currentLetter));
-        
-        // Search Query Match (fuzzy search across fields)
-        const q = searchQuery.toLowerCase().trim();
-        const matchSearch = !q || (
-          item.term.toLowerCase().includes(q) ||
-          item.acronym.toLowerCase().includes(q) ||
-          item.german.toLowerCase().includes(q) ||
-          item.definition.toLowerCase().includes(q) ||
-          item.context.toLowerCase().includes(q)
-        );
-
-        return matchCat && matchLetter && matchSearch;
-      }).sort((a, b) => a.term.localeCompare(b.term));
-    }
-
-    // Render Grid Cards
-    function renderGrid() {
-      const filtered = getFilteredData();
-      visibleCountEl.innerText = filtered.length;
-
-      // Toggle Reset Filters button state
-      if (currentCategory !== 'all' || currentLetter !== 'all' || searchQuery !== '') {
-        resetFiltersBtn.classList.remove('hidden');
-      } else {
-        resetFiltersBtn.classList.add('hidden');
-      }
-
-      if (filtered.length === 0) {
-        gridEl.innerHTML = '';
-        noResultsEl.classList.remove('hidden');
+    function setQualityStatus(messages) {
+      if (!messages.length) {
+        qualityStatus.textContent = '';
+        qualityStatus.classList.add('hidden');
         return;
       }
+      qualityStatus.textContent = 'Data validation: ' + messages.join(' | ');
+      qualityStatus.classList.remove('hidden');
+    }
 
-      noResultsEl.classList.add('hidden');
-      
+    function validateGlossaryData() {
+      const problems = [];
+      const ids = new Set();
+      let invalidCategories = 0;
+      let missingFields = 0;
+      let duplicateIds = 0;
+
+      glossaryData.forEach((item, index) => {
+        if (!item || typeof item !== 'object') {
+          missingFields++;
+          console.error('Invalid glossary item', index, item);
+          return;
+        }
+        if (!item.id || ids.has(item.id)) {
+          duplicateIds++;
+          console.error('Missing or duplicate glossary ID', index, item.id);
+        } else ids.add(item.id);
+        if (!Object.prototype.hasOwnProperty.call(categoryConfig, item.category) || item.category === 'uncategorised') {
+          invalidCategories++;
+          console.error('Missing or invalid glossary category', item.id, item.category);
+        }
+        for (const field of ['term', 'acronym', 'german', 'definition', 'context']) {
+          if (!safeString(item[field]).trim()) {
+            missingFields++;
+            console.warn('Missing glossary field', item.id, field);
+          }
+        }
+      });
+      if (invalidCategories) problems.push(`${invalidCategories} invalid category assignment(s)`);
+      if (duplicateIds) problems.push(`${duplicateIds} missing or duplicate ID(s)`);
+      if (missingFields) problems.push(`${missingFields} missing required field(s)`);
+      setQualityStatus(problems);
+      return { count: glossaryData.length, invalidCategories, duplicateIds, missingFields };
+    }
+
+    function initTheme() {
+      const toggle = document.getElementById('theme-toggle');
+      const darkIcon = document.getElementById('theme-toggle-dark-icon');
+      const lightIcon = document.getElementById('theme-toggle-light-icon');
+      let savedTheme = null;
+      try { savedTheme = localStorage.getItem('color-theme'); }
+      catch (error) { console.warn('Theme preferences unavailable:', error); }
+      const systemDark = !!window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+      const dark = savedTheme === 'dark' || (savedTheme !== 'light' && systemDark);
+      document.documentElement.classList.toggle('dark', dark);
+      darkIcon.classList.toggle('hidden', dark);
+      lightIcon.classList.toggle('hidden', !dark);
+
+      toggle.addEventListener('click', () => {
+        const nextDark = document.documentElement.classList.toggle('dark');
+        darkIcon.classList.toggle('hidden', nextDark);
+        lightIcon.classList.toggle('hidden', !nextDark);
+        try { localStorage.setItem('color-theme', nextDark ? 'dark' : 'light'); }
+        catch (error) { console.warn('Could not persist theme choice:', error); }
+      });
+    }
+
+    function buildAlphabetBar() {
+      const fragment = document.createDocumentFragment();
+      for (const letter of 'ABCDEFGHIJKLMNOPQRSTUVWXYZ') {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.dataset.letter = letter;
+        btn.className = 'alpha-btn px-2 py-0.5 rounded font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition';
+        btn.textContent = letter;
+        fragment.appendChild(btn);
+      }
+      alphaBar.appendChild(fragment);
+    }
+
+    function updateCategoryCounts() {
+      totalCountEl.textContent = glossaryData.length;
+      document.getElementById('header-total-count').textContent = glossaryData.length;
+      document.getElementById('count-all').textContent = glossaryData.length;
+      for (const category of ['material', 'logistics', 'processing', 'law']) {
+        document.getElementById(`count-${category}`).textContent = glossaryData.filter(item => item?.category === category).length;
+      }
+    }
+
+    function getFilteredData() {
+      const q = searchQuery.toLocaleLowerCase().trim();
+      return glossaryData.filter(item => {
+        if (!item || typeof item !== 'object') return false;
+        const matchCat = currentCategory === 'all' || item.category === currentCategory;
+        const term = safeString(item.term);
+        const acronym = safeString(item.acronym);
+        const matchLetter = currentLetter === 'all' || term.toUpperCase().startsWith(currentLetter) || acronym.toUpperCase().startsWith(currentLetter);
+        const matchSearch = !q || ['term', 'acronym', 'german', 'definition', 'context', 'anchor'].some(field => safeString(item[field]).toLocaleLowerCase().includes(q));
+        return matchCat && matchLetter && matchSearch;
+      }).sort((a, b) => safeString(a.term).localeCompare(safeString(b.term), 'en'));
+    }
+
+    function renderGrid() {
+      const filtered = getFilteredData();
+      visibleCountEl.textContent = filtered.length;
+      const hasFilters = currentCategory !== 'all' || currentLetter !== 'all' || searchQuery.trim() !== '';
+      resetFiltersBtn.classList.toggle('hidden', !hasFilters);
+      noResultsEl.classList.toggle('hidden', filtered.length !== 0);
+      if (!filtered.length) {
+        gridEl.innerHTML = '';
+        return;
+      }
       gridEl.innerHTML = filtered.map(item => {
-        const cfg = categoryConfig[item.category];
+        const cfg = getCategoryConfig(item.category);
+        const hasAnchor = !!item.anchor;
         const hasQuestion = !!item.question;
         return `
-          <div class="glossary-card bg-white dark:bg-slate-800 rounded-xl p-5 border border-slate-200 dark:border-slate-700/80 shadow-sm ${cfg.borderHover} hover:shadow-md transition duration-200 flex flex-col justify-between cursor-pointer group" onclick="openModal('${item.id}')">
+          <button type="button" data-glossary-id="${escapeHTML(item.id)}" class="glossary-card w-full text-left bg-white dark:bg-slate-800 rounded-xl p-5 border border-slate-200 dark:border-slate-700/80 shadow-sm ${cfg.borderHover} hover:shadow-md transition duration-200 flex flex-col justify-between cursor-pointer group">
             <div>
               <div class="flex items-center justify-between gap-2 mb-2">
-                <span class="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600">
-                  ${item.acronym}
-                </span>
+                <span class="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600">${escapeHTML(item.acronym)}</span>
                 <div class="flex items-center gap-1">
-                  ${hasQuestion ? `<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300" title="Includes Critical Engineering Question"><i class="fa-solid fa-circle-question"></i></span>` : ''}
-                  <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold border ${cfg.badgeBg} flex items-center gap-1">
-                    <i class="fa-solid ${cfg.icon}"></i> ${cfg.label}
-                  </span>
+                  ${hasAnchor ? `<span class="px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-brand-100 dark:bg-brand-900/60 text-brand-800 dark:text-brand-300" title="Course Anchor: ${escapeHTML(item.anchor)}">${escapeHTML(item.anchor)}</span>` : ''}
+                  ${hasQuestion ? '<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300" title="Includes Critical Engineering Question"><i class="fa-solid fa-circle-question"></i></span>' : ''}
+                  <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold border ${cfg.badgeBg} flex items-center gap-1"><i class="fa-solid ${cfg.icon}"></i> ${cfg.label}</span>
                 </div>
               </div>
-              <h3 class="text-base font-bold text-slate-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">
-                ${item.term}
-              </h3>
-              <p class="text-xs font-medium text-slate-500 dark:text-slate-400 mt-0.5 mb-2 italic">
-                DE: ${item.german}
-              </p>
-              <p class="text-xs text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed">
-                ${item.definition}
-              </p>
+              <h3 class="text-base font-bold text-slate-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">${escapeHTML(item.term)}</h3>
+              <p class="text-xs font-medium text-slate-500 dark:text-slate-400 mt-0.5 mb-2 italic">DE: ${escapeHTML(item.german)}</p>
+              <p class="text-xs text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed">${escapeHTML(item.definition)}</p>
             </div>
-            
-            <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between text-xs text-brand-600 dark:text-brand-400 font-semibold group-hover:translate-x-0.5 transition-transform">
-              <span>View Context & Detail</span>
-              <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </div>
-          </div>
-        `;
+            <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between text-xs text-brand-600 dark:text-brand-400 font-semibold group-hover:translate-x-0.5 transition-transform"><span>View Context &amp; Detail</span><i class="fa-solid fa-arrow-right text-[10px]"></i></div>
+          </button>`;
       }).join('');
     }
 
-    // Modal Control Logic
     function openModal(id) {
-      const item = glossaryData.find(x => x.id === id);
+      const item = glossaryData.find(x => x?.id === id);
       if (!item) return;
-
-      const cfg = categoryConfig[item.category];
-      document.getElementById('modal-term').innerText = item.term;
-      document.getElementById('modal-acronym-badge').innerText = item.acronym;
-      document.getElementById('modal-german').innerText = `DE: ${item.german}`;
-      document.getElementById('modal-definition').innerText = item.definition;
-      document.getElementById('modal-context').innerText = item.context;
-
+      clearTimeout(closeTimer);
+      clearTimeout(openTimer);
+      const cfg = getCategoryConfig(item.category);
+      document.getElementById('modal-term').textContent = safeString(item.term);
+      document.getElementById('modal-acronym-badge').textContent = safeString(item.acronym);
+      document.getElementById('modal-german').textContent = `DE: ${safeString(item.german)}`;
+      document.getElementById('modal-definition').textContent = safeString(item.definition);
+      document.getElementById('modal-context').textContent = safeString(item.context);
+      const anchorBadge = document.getElementById('modal-anchor-badge');
+      anchorBadge.textContent = `Anchor: ${safeString(item.anchor)}`;
+      anchorBadge.classList.toggle('hidden', !item.anchor);
       const qContainer = document.getElementById('modal-question-container');
-      const qText = document.getElementById('modal-question');
-      if (item.question) {
-        qText.innerText = item.question;
-        qContainer.classList.remove('hidden');
-      } else {
-        qContainer.classList.add('hidden');
-      }
-
+      document.getElementById('modal-question').textContent = safeString(item.question);
+      qContainer.classList.toggle('hidden', !item.question);
       const badge = document.getElementById('modal-category-badge');
       badge.className = `px-2.5 py-0.5 rounded-full text-xs font-semibold border ${cfg.badgeBg}`;
-      badge.innerText = cfg.label;
-
+      badge.textContent = cfg.label;
       const backdrop = document.getElementById('modal-backdrop');
       const box = document.getElementById('modal-box');
-      
       backdrop.classList.remove('hidden');
-      setTimeout(() => {
+      backdrop.setAttribute('aria-hidden', 'false');
+      backdrop.dataset.activeId = id;
+      openTimer = setTimeout(() => {
         backdrop.classList.remove('opacity-0');
         box.classList.remove('scale-95');
         box.classList.add('scale-100');
       }, 10);
-
-      // Store current item for copy action
-      backdrop.dataset.activeId = id;
     }
 
     function closeModal() {
+      clearTimeout(openTimer);
+      clearTimeout(closeTimer);
       const backdrop = document.getElementById('modal-backdrop');
+      if (backdrop.classList.contains('hidden')) return;
       const box = document.getElementById('modal-box');
-      
       box.classList.remove('scale-100');
       box.classList.add('scale-95');
       backdrop.classList.add('opacity-0');
-      
-      setTimeout(() => {
-        backdrop.classList.add('hidden');
-      }, 200);
+      backdrop.setAttribute('aria-hidden', 'true');
+      closeTimer = setTimeout(() => backdrop.classList.add('hidden'), 200);
     }
 
-    // Copy Summary Helper
-    function copyVisibleSummary() {
-      const visibleData = getFilteredData();
-      if (visibleData.length === 0) return;
-
-      const text = visibleData.map(item => {
-        let entry = `${item.acronym} - ${item.term} (DE: ${item.german})\nDefinition: ${item.definition}\nContext: ${item.context}`;
-        if (item.question) entry += `\nCritical Question: ${item.question}`;
-        return entry;
-      }).join('\n\n---\n\n');
-      
-      navigator.clipboard.writeText(text).then(() => {
-        const btn = document.getElementById('copy-summary-btn');
-        const origHTML = btn.innerHTML;
-        btn.innerHTML = `<i class="fa-solid fa-check text-emerald-500"></i> Copied (${visibleData.length})`;
-        setTimeout(() => {
-          btn.innerHTML = origHTML;
-        }, 2000);
-      });
+    function entryAsText(item) {
+      let entry = `${safeString(item.acronym)} - ${safeString(item.term)} (DE: ${safeString(item.german)})\nDefinition: ${safeString(item.definition)}\nContext: ${safeString(item.context)}`;
+      if (item.anchor) entry += `\nCourse Anchor: ${safeString(item.anchor)}`;
+      if (item.question) entry += `\nCritical Question: ${safeString(item.question)}`;
+      return entry;
     }
 
-    // Event Listeners Registration
-    function setupEventListeners() {
-      // Search Input
-      searchInput.addEventListener('input', (e) => {
-        searchQuery = e.target.value;
-        if (searchQuery) {
-          clearSearchBtn.classList.remove('hidden');
-        } else {
-          clearSearchBtn.classList.add('hidden');
-        }
-        renderGrid();
-      });
+    async function copyText(text) {
+      if (navigator.clipboard?.writeText) {
+        try { await navigator.clipboard.writeText(text); return true; }
+        catch (error) { console.warn('Clipboard API unavailable; trying legacy copy:', error); }
+      }
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.cssText = 'position:fixed;left:-9999px;top:0;';
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      let copied = false;
+      try { copied = !!document.execCommand?.('copy'); }
+      catch (error) { console.warn('Legacy copy failed:', error); }
+      textarea.remove();
+      return copied;
+    }
 
-      clearSearchBtn.addEventListener('click', () => {
-        searchInput.value = '';
-        searchQuery = '';
-        clearSearchBtn.classList.add('hidden');
-        renderGrid();
-      });
+    function flashButton(button, message) {
+      const previous = button.innerHTML;
+      button.textContent = message;
+      setTimeout(() => { button.innerHTML = previous; }, 1800);
+    }
 
-      // Category Buttons
+    async function copyVisibleSummary() {
+      const visible = getFilteredData();
+      if (!visible.length) return;
+      const text = visible.map(entryAsText).join('\n\n---\n\n');
+      const ok = await copyText(text);
+      flashButton(document.getElementById('copy-summary-btn'), ok ? `Copied (${visible.length})` : 'Copy unavailable');
+    }
+
+    function setActiveCategoryButton(selected) {
       document.querySelectorAll('.category-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.category-btn').forEach(b => {
-            b.classList.remove('bg-brand-600', 'text-white', 'shadow-sm', 'active');
-            b.classList.add('bg-slate-100', 'dark:bg-slate-700/60', 'text-slate-600', 'dark:text-slate-300');
-          });
-          btn.classList.remove('bg-slate-100', 'dark:bg-slate-700/60', 'text-slate-600', 'dark:text-slate-300');
-          btn.classList.add('bg-brand-600', 'text-white', 'shadow-sm', 'active');
-          
-          currentCategory = btn.dataset.category;
-          renderGrid();
-        });
+        const active = btn === selected;
+        btn.classList.toggle('bg-brand-600', active);
+        btn.classList.toggle('text-white', active);
+        btn.classList.toggle('shadow-sm', active);
+        btn.classList.toggle('active', active);
+        btn.classList.toggle('bg-slate-100', !active);
+        btn.classList.toggle('dark:bg-slate-700/60', !active);
+        btn.classList.toggle('text-slate-600', !active);
+        btn.classList.toggle('dark:text-slate-300', !active);
       });
+    }
 
-      // Alphabet Buttons
-      alphaBar.addEventListener('click', (e) => {
-        if (e.target.classList.contains('alpha-btn')) {
-          document.querySelectorAll('.alpha-btn').forEach(b => {
-            b.classList.remove('bg-slate-200', 'dark:bg-slate-700', 'text-slate-800', 'dark:text-white', 'active');
-            b.classList.add('text-slate-600', 'dark:text-slate-400');
-          });
-          e.target.classList.add('bg-slate-200', 'dark:bg-slate-700', 'text-slate-800', 'dark:text-white', 'active');
-          e.target.classList.remove('text-slate-600', 'dark:text-slate-400');
-
-          currentLetter = e.target.dataset.letter;
-          renderGrid();
-        }
+    function setActiveAlphabetButton(selected) {
+      document.querySelectorAll('.alpha-btn').forEach(btn => {
+        const active = btn === selected;
+        btn.classList.toggle('bg-slate-200', active);
+        btn.classList.toggle('dark:bg-slate-700', active);
+        btn.classList.toggle('text-slate-800', active);
+        btn.classList.toggle('dark:text-white', active);
+        btn.classList.toggle('active', active);
+        btn.classList.toggle('text-slate-600', !active);
+        btn.classList.toggle('dark:text-slate-400', !active);
       });
+    }
 
-      // Reset Buttons
-      const resetAll = () => {
-        currentCategory = 'all';
-        currentLetter = 'all';
+    function resetAll() {
+      currentCategory = 'all';
+      currentLetter = 'all';
+      searchQuery = '';
+      searchInput.value = '';
+      clearSearchBtn.classList.add('hidden');
+      setActiveCategoryButton(document.querySelector('.category-btn[data-category="all"]'));
+      setActiveAlphabetButton(document.querySelector('.alpha-btn[data-letter="all"]'));
+      renderGrid();
+    }
+
+    function setupEventListeners() {
+      searchInput.addEventListener('input', () => {
+        searchQuery = searchInput.value;
+        clearSearchBtn.classList.toggle('hidden', !searchQuery);
+        renderGrid();
+      });
+      clearSearchBtn.addEventListener('click', () => {
         searchQuery = '';
         searchInput.value = '';
         clearSearchBtn.classList.add('hidden');
-
-        // Reset Category Buttons
-        document.querySelectorAll('.category-btn').forEach(b => {
-          b.classList.remove('bg-brand-600', 'text-white', 'active');
-          b.classList.add('bg-slate-100', 'dark:bg-slate-700/60', 'text-slate-600', 'dark:text-slate-300');
-        });
-        document.querySelector('.category-btn[data-category="all"]').classList.add('bg-brand-600', 'text-white', 'active');
-
-        // Reset Alpha Buttons
-        document.querySelectorAll('.alpha-btn').forEach(b => {
-          b.classList.remove('bg-slate-200', 'dark:bg-slate-700', 'text-slate-800', 'dark:text-white', 'active');
-          b.classList.add('text-slate-600', 'dark:text-slate-400');
-        });
-        document.querySelector('.alpha-btn[data-letter="all"]').classList.add('bg-slate-200', 'dark:bg-slate-700', 'text-slate-800', 'dark:text-white', 'active');
-
         renderGrid();
-      };
-
+        searchInput.focus();
+      });
+      document.querySelectorAll('.category-btn').forEach(btn => btn.addEventListener('click', () => {
+        currentCategory = btn.dataset.category;
+        setActiveCategoryButton(btn);
+        renderGrid();
+      }));
+      alphaBar.addEventListener('click', event => {
+        const btn = event.target.closest('.alpha-btn');
+        if (!btn) return;
+        currentLetter = btn.dataset.letter;
+        setActiveAlphabetButton(btn);
+        renderGrid();
+      });
+      gridEl.addEventListener('click', event => {
+        const card = event.target.closest('[data-glossary-id]');
+        if (card) openModal(card.dataset.glossaryId);
+      });
       resetFiltersBtn.addEventListener('click', resetAll);
       resetSearchBtn.addEventListener('click', resetAll);
-
-      // Copy Summary
       document.getElementById('copy-summary-btn').addEventListener('click', copyVisibleSummary);
-
-      // Modal Closures
       document.getElementById('close-modal').addEventListener('click', closeModal);
       document.getElementById('close-modal-btn').addEventListener('click', closeModal);
-      document.getElementById('modal-backdrop').addEventListener('click', (e) => {
-        if (e.target.id === 'modal-backdrop') closeModal();
+      document.getElementById('modal-backdrop').addEventListener('click', event => {
+        if (event.target.id === 'modal-backdrop') closeModal();
       });
-
-      // Copy Modal Entry
-      document.getElementById('copy-modal-text').addEventListener('click', () => {
+      document.getElementById('copy-modal-text').addEventListener('click', async () => {
         const id = document.getElementById('modal-backdrop').dataset.activeId;
-        const item = glossaryData.find(x => x.id === id);
+        const item = glossaryData.find(x => x?.id === id);
         if (!item) return;
-
-        let text = `${item.acronym} - ${item.term} (DE: ${item.german})\nDefinition: ${item.definition}\nContext: ${item.context}`;
-        if (item.question) text += `\nCritical Question: ${item.question}`;
-
-        navigator.clipboard.writeText(text).then(() => {
-          const btn = document.getElementById('copy-modal-text');
-          btn.innerHTML = `<i class="fa-solid fa-check text-emerald-500"></i> Entry Copied!`;
-          setTimeout(() => {
-            btn.innerHTML = `<i class="fa-regular fa-copy"></i> Copy Entry Text`;
-          }, 2000);
-        });
+        const ok = await copyText(entryAsText(item));
+        flashButton(document.getElementById('copy-modal-text'), ok ? 'Entry copied' : 'Copy unavailable');
       });
-
-      // Keyboard Esc to close Modal
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeModal();
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') closeModal();
       });
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Independent startup steps: failure in one should not suppress all controls.
+      for (const [name, init] of [
+        ['Theme', initTheme],
+        ['Alphabet bar', buildAlphabetBar],
+        ['Event listeners', setupEventListeners],
+        ['Data validation', validateGlossaryData],
+        ['Category counts', updateCategoryCounts],
+        ['Grid rendering', renderGrid]
+      ]) {
+        try { init(); }
+        catch (error) {
+          console.error(`${name} initialization failed:`, error);
+          qualityStatus.textContent = `${name} initialization failed. See browser console for details.`;
+          qualityStatus.classList.remove('hidden');
+        }
+      }
+    });
   </script>
 </body>
 </html>
