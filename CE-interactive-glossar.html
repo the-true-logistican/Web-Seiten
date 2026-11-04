@@ -1,0 +1,1684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Master Glossary: Circular Economy & Recycling of Polymers and Composites</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(156, 163, 175, 0.5);
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-200 min-h-screen flex flex-col font-sans">
+
+  <!-- Header & Navigation -->
+  <header class="sticky top-0 z-30 bg-white/90 dark:bg-slate-800/90 backdrop-blur border-b border-slate-200 dark:border-slate-700 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        
+        <!-- Course Title -->
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="bg-brand-600 text-white text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">Master Course Reference</span>
+            <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">HS Kaiserslautern • Prof. Dr.-Ing. M. Wölker</span>
+          </div>
+          <h1 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
+            Circular Economy & Recycling Glossary
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+            Comprehensive terminology library across polymers, logistics, processing, and regulations (148 Terms).
+          </p>
+        </div>
+
+        <!-- Utility Buttons -->
+        <div class="flex items-center gap-2">
+          <button id="copy-summary-btn" class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 hover:bg-slate-50 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 shadow-sm transition">
+            <i class="fa-regular font-normal fa-copy"></i> Copy Visible List
+          </button>
+
+          <button id="theme-toggle" class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition" title="Toggle Theme">
+            <i id="theme-toggle-dark-icon" class="fa-solid fa-moon text-lg hidden"></i>
+            <i id="theme-toggle-light-icon" class="fa-solid fa-sun text-lg"></i>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Controls & Search Bar -->
+      <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/50 flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+        
+        <!-- Search Input -->
+        <div class="relative flex-1">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+          <input type="text" id="search-input" placeholder="Search terms, acronyms (PET, EPR), German terms (Kreislaufwirtschaft), or descriptions..." class="w-full pl-10 pr-10 py-2.5 text-sm bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-900 dark:text-white placeholder-slate-400 transition" />
+          <button id="clear-search" class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- Filter Stats & Clear Filters -->
+        <div class="flex items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
+          <span>Showing <strong id="visible-count" class="text-slate-900 dark:text-white font-semibold">0</strong> of <span id="total-count">0</span> terms</span>
+          <button id="reset-filters" class="text-brand-600 dark:text-brand-400 hover:underline hidden font-medium">
+            Reset Filters
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="flex items-center gap-1.5 overflow-x-auto custom-scrollbar mt-3 pb-1 text-sm font-medium">
+        <button data-category="all" class="category-btn active bg-brand-600 text-white px-3.5 py-1.5 rounded-lg whitespace-nowrap shadow-sm transition">
+          All Categories (<span id="count-all">0</span>)
+        </button>
+        <button data-category="material" class="category-btn bg-slate-100 dark:bg-slate-700/60 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 px-3.5 py-1.5 rounded-lg whitespace-nowrap transition">
+          <i class="fa-solid fa-flask text-xs mr-1 text-emerald-500"></i> Material & Polymer (<span id="count-material">0</span>)
+        </button>
+        <button data-category="logistics" class="category-btn bg-slate-100 dark:bg-slate-700/60 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 px-3.5 py-1.5 rounded-lg whitespace-nowrap transition">
+          <i class="fa-solid fa-truck-ramp-box text-xs mr-1 text-blue-500"></i> Logistics & Systems (<span id="count-logistics">0</span>)
+        </button>
+        <button data-category="processing" class="category-btn bg-slate-100 dark:bg-slate-700/60 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 px-3.5 py-1.5 rounded-lg whitespace-nowrap transition">
+          <i class="fa-solid fa-microscope text-xs mr-1 text-purple-500"></i> Processing & Analytics (<span id="count-processing">0</span>)
+        </button>
+        <button data-category="law" class="category-btn bg-slate-100 dark:bg-slate-700/60 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 px-3.5 py-1.5 rounded-lg whitespace-nowrap transition">
+          <i class="fa-solid fa-scale-balanced text-xs mr-1 text-amber-500"></i> Law & Regulation (<span id="count-law">0</span>)
+        </button>
+      </div>
+
+      <!-- Alphabetical Filter Ribbon -->
+      <div id="alpha-bar" class="flex items-center gap-1 overflow-x-auto custom-scrollbar mt-2 pt-2 border-t border-slate-100 dark:border-slate-700/40 text-xs">
+        <span class="text-slate-400 font-semibold uppercase pr-1 text-[10px]">Filter Letter:</span>
+        <button data-letter="all" class="alpha-btn active px-2 py-0.5 rounded font-medium bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-white">All</button>
+        <!-- Letters inserted dynamically -->
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Main Grid Content -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div id="glossary-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- Glossary Term Cards Rendered Dynamically -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="no-results" class="hidden text-center py-16 px-4">
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 mb-4 text-2xl">
+        <i class="fa-solid fa-magnifying-glass font-light"></i>
+      </div>
+      <h3 class="text-lg font-bold text-slate-800 dark:text-white">No terms found</h3>
+      <p class="text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-md mx-auto">
+        No glossary entries match your search parameters. Try searching for a broader term or reset the category/alphabet filters.
+      </p>
+      <button id="reset-search-btn" class="mt-4 inline-flex items-center px-4 py-2 text-xs font-semibold rounded-lg bg-brand-600 hover:bg-brand-700 text-white transition">
+        Reset All Filters
+      </button>
+    </div>
+  </main>
+
+  <!-- Detail Modal -->
+  <div id="modal-backdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-200 flex items-center justify-center p-4">
+    <div id="modal-box" class="bg-white dark:bg-slate-800 rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden border border-slate-200 dark:border-slate-700 transform scale-95 transition-transform duration-200">
+      
+      <!-- Modal Header -->
+      <div class="p-6 border-b border-slate-100 dark:border-slate-700 flex items-start justify-between bg-slate-50/50 dark:bg-slate-800/50">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span id="modal-category-badge" class="px-2.5 py-0.5 rounded-full text-xs font-semibold"></span>
+            <span id="modal-acronym-badge" class="px-2 py-0.5 rounded text-xs font-mono font-bold bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300"></span>
+          </div>
+          <h2 id="modal-term" class="text-2xl font-bold text-slate-900 dark:text-white"></h2>
+          <p id="modal-german" class="text-sm font-medium text-slate-500 dark:text-slate-400 mt-0.5"></p>
+        </div>
+        <button id="close-modal" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xl p-1 rounded-lg transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 overflow-y-auto space-y-4 custom-scrollbar text-slate-700 dark:text-slate-300 text-sm leading-relaxed">
+        <div>
+          <h4 class="text-xs uppercase font-semibold text-slate-400 tracking-wider mb-1">Synthesized Technical Definition</h4>
+          <p id="modal-definition" class="text-base text-slate-800 dark:text-slate-100 font-normal"></p>
+        </div>
+
+        <div class="p-4 rounded-lg bg-slate-50 dark:bg-slate-900/70 border border-slate-100 dark:border-slate-700/60">
+          <h4 class="text-xs uppercase font-semibold text-brand-700 dark:text-brand-400 tracking-wider mb-1 flex items-center gap-1.5">
+            <i class="fa-solid fa-diagram-project"></i> Systemic Trade-Off & Bottleneck
+          </h4>
+          <p id="modal-context" class="text-slate-700 dark:text-slate-300 italic"></p>
+        </div>
+
+        <div id="modal-question-container" class="p-4 rounded-lg bg-amber-50/50 dark:bg-amber-950/30 border border-amber-200/60 dark:border-amber-800/50 hidden">
+          <h4 class="text-xs uppercase font-semibold text-amber-800 dark:text-amber-400 tracking-wider mb-1 flex items-center gap-1.5">
+            <i class="fa-solid fa-circle-question"></i> Critical Analytical Question for Engineers
+          </h4>
+          <p id="modal-question" class="text-amber-900 dark:text-amber-200 font-medium"></p>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-4 border-t border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 flex items-center justify-between">
+        <button id="copy-modal-text" class="text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white inline-flex items-center gap-1.5">
+          <i class="fa-regular fa-copy"></i> Copy Entry Text
+        </button>
+        <button id="close-modal-btn" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-white text-xs font-semibold rounded-lg transition">
+          Close
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="mt-auto bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 py-4">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <p>© 2026 Hochschule Kaiserslautern — Department of Logistics Engineering</p>
+      <p>Course: <em>Circular Economy and Recycling of Polymers and Composites</em></p>
+    </div>
+  </footer>
+
+  <!-- Glossary Comprehensive Dataset & Logic Script -->
+  <script>
+    // Master Dataset of 148 Detailed Glossary Terms (Unified Superset)
+    const glossaryData = [
+      // -------------------------------------------------------------
+      // CATEGORY 1: MATERIAL & POLYMER LEVEL (material - 58 terms)
+      // -------------------------------------------------------------
+      {
+        id: "abs",
+        term: "Acrylonitrile Butadiene Styrene",
+        acronym: "ABS",
+        german: "Acrylnitril-Butadien-Styrol-Copolymer",
+        category: "material",
+        definition: "An amorphous engineering thermoplastic resin known for high impact resistance, rigidity, and dimensional stability.",
+        context: "Commonly used in automotive parts, electronic housings (WEEE), and appliances. Requires sensor fusion or chemical identification to isolate from PC/ABS blends in shredder residues."
+      },
+      {
+        id: "additives",
+        term: "Polymer Additives",
+        acronym: "ADD",
+        german: "Kunststoff-Additive / Hilfsstoffe",
+        category: "material",
+        definition: "Chemical compounds added to polymers during formulation to modify properties (e.g., plasticisers, stabilisers, flame retardants, UV absorbers, pigments).",
+        context: "Additives directly impact recycling economics. Unintended additive migration or legacy chemical accumulation (e.g., banned BFRs) can disqualify secondary polymers from high-value applications."
+      },
+      {
+        id: "additive-accumulation",
+        term: "Additive Accumulation",
+        acronym: "AAC",
+        german: "Additive-Akkumulation / Anreicherung",
+        category: "material",
+        definition: "Concentration build-up of non-polymeric constituents (stabilizers, pigments, fillers, flame retardants, plasticizers, slip agents) across successive life cycles when materials are blended without chemical purification.",
+        context: "Mechanical recycling does not separate additives. Unlike polymer chains, additives do not degrade away; they accumulate or dilute unpredictably, preventing stable secondary formulation.",
+        question: "Which additive classes were quantified in the output recyclate, and what would their steady-state concentration be after n cycles of the same closed loop?"
+      },
+      {
+        id: "bfr",
+        term: "Brominated Flame Retardants",
+        acronym: "BFR",
+        german: "Bromierte Flammschutzmittel",
+        category: "material",
+        definition: "Organobromine compounds incorporated into electrical equipment and plastics to inhibit ignition.",
+        context: "Subject to strict regulatory limits under RoHS and POPs directives. BFR-containing plastics must be sorted out using XRF spectroscopy to prevent contamination of recyclates."
+      },
+      {
+        id: "carbon-black",
+        term: "Carbon Black",
+        acronym: "CB",
+        german: "Industrieruß / Carbon Black",
+        category: "material",
+        definition: "A paracrystalline carbon pigment and reinforcing filler added to rubbers and engineering plastics.",
+        context: "Carbon black absorbs near-infrared (NIR) radiation completely, rendering black plastic fragments invisible to conventional NIR sorting lines, necessitating THz, MIR, or AI vision alternative identification."
+      },
+      {
+        id: "cfrp",
+        term: "Carbon-Fibre-Reinforced Polymer",
+        acronym: "CFRP",
+        german: "Kohlenstofffaserverstärkter Kunststoff (CFK)",
+        category: "material",
+        definition: "A high-performance composite combining carbon fibres with a polymer matrix (usually epoxy thermosets or high-temp thermoplastics).",
+        context: "Recycling CFRP requires thermochemical processes like pyrolysis or solvolysis to reclaim expensive carbon fibres while sacrificing or upgrading the matrix."
+      },
+      {
+        id: "chain-branching",
+        term: "Cross-Linking and Chain Branching",
+        acronym: "CLB",
+        german: "Kettenvernetzung und Langkettenverzweigung",
+        category: "material",
+        definition: "Radical recombination forming covalent inter-chain links (gel formation) or long-chain branches, common in polyethylenes and polybutadiene-containing systems during thermo-mechanical processing.",
+        context: "In PE films, gels cause physical defects, melt filtration blockages, and bubble instability. Because scission and cross-linking occur simultaneously, MFI alone is a misleading quality metric.",
+        question: "Does the reported MFI hide a bimodal population of scissioned and cross-linked chains, and what do rheology and gel content show?"
+      },
+      {
+        id: "chain-extender",
+        term: "Chain Extenders",
+        acronym: "CE",
+        german: "Kettenverlängerer",
+        category: "material",
+        definition: "Low molecular weight difunctional or polyfunctional additives that react with end-groups of degraded polymers to rebuild molecular weight during extrusion.",
+        context: "Crucial chemical additive in mechanical reprocessing of PET and polyamides to restore melt viscosity degraded by hydrolytic scission during thermal reprocessing."
+      },
+      {
+        id: "chain-scission",
+        term: "Chain Scission (Thermo-Mechanical)",
+        acronym: "CSC",
+        german: "Thermomechanischer Kettenabbau",
+        category: "material",
+        definition: "Homolytic cleavage of backbone covalent bonds under high shear and temperature during melt processing, producing lower-molecular-weight chains and reactive radical end-groups.",
+        context: "Mechanical recycling is a finite-cycle process. Scission irreversibly lowers melt viscosity, impact strength, and elongation at break. Thermal history is rarely documented in PCR feedstocks.",
+        question: "How many documented melt-processing cycles lie behind the claimed property retention, and was it measured on a real post-consumer stream or a virgin-spiked lab sample?"
+      },
+      {
+        id: "commodity-thermoplastics",
+        term: "Commodity Thermoplastics",
+        acronym: "CTP",
+        german: "Standardkunststoffe / Massenkunststoffe",
+        category: "material",
+        definition: "High-volume polymers produced in large quantities for widespread packaging, consumer, and construction goods (e.g., PE, PP, PET, PVC, PS).",
+        context: "Make up over 70% of plastic waste flows. Highly dependent on automated optical sorting lines to separate mixed post-consumer packaging streams."
+      },
+      {
+        id: "compatibilisers",
+        term: "Compatibilisation & Compatibilisers",
+        acronym: "COMP",
+        german: "Verträglichkeitsvermittlung",
+        category: "material",
+        definition: "Reducing interfacial tension and stabilizing phase morphology in immiscible polymer blends using block copolymers, graft copolymers, or reactive coupling agents (e.g., maleic anhydride grafts).",
+        context: "Compatibilizers must be matched to blend compositions, which fluctuate continuously in real waste. Compatibilizer dosing is a control problem with varying inputs, and the agent adds virgin cost.",
+        question: "Was the compatibilizer system validated across variable feedstock compositions, or only with a fixed laboratory blend?"
+      },
+      {
+        id: "elastomers",
+        term: "Elastomers & Devulcanization Limits",
+        acronym: "EL",
+        german: "Elastomere / Devulkanisation",
+        category: "material",
+        definition: "Cross-linked polymers displaying large reversible elastic deformations. Devulcanization aims to selectively cleave sulfur/peroxide cross-links without severing the carbon backbone.",
+        context: "Selectivity for S–S/C–S bonds over C–C backbone bonds is limited; devulcanizate is typically blended in small proportions. Tire-wear particles represent a major dissipative loss outside collection.",
+        question: "What fraction of cross-links is cleaved versus backbone scission, and in what maximum proportion can it be blended into a safety-critical component?"
+      },
+      {
+        id: "engineering-thermoplastics",
+        term: "Engineering Thermoplastics",
+        acronym: "ETP",
+        german: "Technische Kunststoffe",
+        category: "material",
+        definition: "Polymers engineered for higher thermal, mechanical, or chemical performance (e.g., ABS, PC, PA, PMMA, PBT).",
+        context: "High intrinsic material value makes secondary recovery economically attractive, but complex additive packages and long product lifetimes increase variability."
+      },
+      {
+        id: "eps",
+        term: "Expanded Polystyrene",
+        acronym: "EPS",
+        german: "Expandiertes Polystyrol (Styropor)",
+        category: "material",
+        definition: "A rigid, cellular foam plastic produced from expanded polystyrene beads.",
+        context: "Logistically challenging due to low density (<98% air). Demands compaction or solvent-based dissolution (CreaSolv) at collection points to justify transport costs."
+      },
+      {
+        id: "fibre-composites-limits",
+        term: "Fiber-Reinforced Composites (CFRP/GFRP) Limits",
+        acronym: "FRC",
+        german: "Recyclinggrenzen faserverstärkter Kunststoffe",
+        category: "material",
+        definition: "Heterogeneous composites of continuous or discontinuous fibers (carbon, glass) in a thermoset or thermoplastic matrix subject to mechanical, thermal, or solvolytic recovery.",
+        context: "Reclaimed fibers lose length, sizing, alignment, and tensile strength (downgrading to short-fiber applications). Low virgin glass costs make GFRP recycling economically weaker than CFRP.",
+        question: "Which retained mechanical properties and fiber architecture were measured on the recovered fiber, and what is the demand-side application with its price?"
+      },
+      {
+        id: "fillers",
+        term: "Fillers and Minerals",
+        acronym: "FIL",
+        german: "Füllstoffe (z. B. Talkum, Kreide)",
+        category: "material",
+        definition: "Inorganic particles (calcium carbonate, talc, mica) added to plastics to lower cost, increase stiffness, or alter thermal conductivity.",
+        context: "Substantially alters particle density, causing filled polyolefins (e.g., PP-T30) to sink during density-based sink-float separation despite being polyolefins."
+      },
+      {
+        id: "gfrp",
+        term: "Glass-Fibre-Reinforced Polymer",
+        acronym: "GFRP",
+        german: "Glasfaserverstärkter Kunststoff (GFK)",
+        category: "material",
+        definition: "A composite material combining structural glass fibres with a thermosetting (epoxy/polyester) or thermoplastic matrix.",
+        context: "Found in wind turbine blades, boat hulls, and auto bodies. Hard to recycle; current industrial routes involve cement kiln co-processing (silica source + fuel replacement)."
+      },
+      {
+        id: "hdpe",
+        term: "High-Density Polyethylene",
+        acronym: "HDPE",
+        german: "Polyethylen hoher Dichte (PE-HD)",
+        category: "material",
+        definition: "A thermoplastic polymer with a high strength-to-density ratio produced from ethylene monomers.",
+        context: "Widely used in rigid bottles, drums, and pipes. Mechanical recycling is mature for controlled bottle streams; post-consumer household streams suffer from cross-grade MFI variation."
+      },
+      {
+        id: "hydrolytic-degradation",
+        term: "Hydrolytic Degradation",
+        acronym: "HYD",
+        german: "Hydrolytischer Polymerabbau",
+        category: "material",
+        definition: "Water-mediated cleavage of hydrolyzable linkages (esters in PET/PBT/PLA, amides in PA, carbonates in PC) at elevated melt temperatures, catalyzed by acid end-groups.",
+        context: "Moisture in flakes at melt temperature causes catastrophic intrinsic viscosity (IV) loss, enforcing intensive desiccant drying whose energy demand is often omitted from LCAs.",
+        question: "What residual moisture level at extruder feed is assumed, and does the energy balance include the drying process?"
+      },
+      {
+        id: "ldpe",
+        term: "Low-Density Polyethylene",
+        acronym: "LDPE",
+        german: "Polyethylen niederer Dichte (PE-LD)",
+        category: "material",
+        definition: "A highly branched semi-rigid thermoplastic polymer characterized by high flexibility and clarity.",
+        context: "Dominates flexible film packaging. Sorting and mechanical wash lines suffer high moisture retention and shredder jamming, requiring specialized film washing lines."
+      },
+      {
+        id: "legacy-substances",
+        term: "Legacy Substances",
+        acronym: "LEG",
+        german: "Altstoffe / Historische Schadstoffe",
+        category: "material",
+        definition: "Hazardous substances restricted or banned after original product manufacture (e.g., PBDEs, HBCDD, lead/cadmium stabilizers, phthalates) that remain in active product stocks.",
+        context: "Recycling reintroduces historic toxic chemistry into new products. Stock exhaustion lags regulation by decades; contamination forces costly removal or incineration.",
+        question: "What is the stock-age distribution of the feedstock, and what measured fraction exceeds legal thresholds?"
+      },
+      {
+        id: "lldpe",
+        term: "Linear Low-Density Polyethylene",
+        acronym: "LLDPE",
+        german: "Lineares Polyethylen niederer Dichte (PE-LLD)",
+        category: "material",
+        definition: "A substantially linear polymer with short branches, offering higher tensile strength and puncture resistance than LDPE.",
+        context: "Dominant in industrial stretch wraps and agricultural films. Clean commercial mono-streams provide high-quality feedstock for film-to-film recycling."
+      },
+      {
+        id: "migration-nias",
+        term: "Migration and NIAS",
+        acronym: "NIA",
+        german: "Migration und NIAS (Nicht beabsichtigte Stoffe)",
+        category: "material",
+        definition: "Mass transfer of low-molecular-weight species from polymers into contact media. NIAS (Non-Intentionally Added Substances) are degradation by-products, impurities, and reaction products.",
+        context: "Degradation expands the NIAS spectrum. Unknown substances cannot be evaluated by targeted analysis alone, restricting food-contact approval for recyclates outside bottle rPET.",
+        question: "Does the safety claim rest on targeted analysis of known substances or on non-targeted screening, and for which polymer is the challenge test validated?"
+      },
+      {
+        id: "molecular-weight-distribution",
+        term: "Molecular Weight Distribution (MWD) Shift",
+        acronym: "MWD",
+        german: "Verschiebung der Molmassenverteilung",
+        category: "material",
+        definition: "Change in the full spectrum of chain lengths (Mn, Mw, dispersity Đ) through scission, branching, or blending of material fractions with differing thermal histories.",
+        context: "Average metrics (Mw, IV) hide distribution tails. Low-Mw fractions act as plasticizers and migration channels; high-Mw/gel fractions cause extrusion defects.",
+        question: "Is the material specification based on mean values only, and what do GPC (SEC) data show about distribution width and tails?"
+      },
+      {
+        id: "multilayer-packaging",
+        term: "Multilayer Packaging & Tie Layers",
+        acronym: "MLF",
+        german: "Mehrschicht-Verpackungen und Haftvermittler",
+        category: "material",
+        definition: "Co-extruded or laminated structures combining polymers (PE/PA, PET/PE, EVOH) and aluminum layers, bonded by adhesive tie layers for maximum barrier protection.",
+        context: "Designing for ultra-low mass and extended shelf life reduces mechanical recyclability to near zero. Layers cannot be physically delaminated and form incompatible blends on melting.",
+        question: "What is the net environmental trade-off between barrier shelf-life protection and loss of recyclability at total system level?"
+      },
+      {
+        id: "pa",
+        term: "Polyamide (Nylon)",
+        acronym: "PA",
+        german: "Polyamid",
+        category: "material",
+        definition: "A family of semi-crystalline synthetic engineering thermoplastics featuring repeating amide linkages (PA6, PA66).",
+        context: "Used in automotive parts, packaging barrier layers, and textiles. Thermally stable but hygroscopic; requires intensive drying before reprocessing to prevent hydrolytic degradation."
+      },
+      {
+        id: "pbat",
+        term: "Polybutylene Adipate Terephthalate",
+        acronym: "PBAT",
+        german: "Polybutylenadipat-Terephthalat",
+        category: "material",
+        definition: "A biodegradable random copolymer designed to offer flexible film properties similar to LDPE.",
+        context: "Must be kept isolated from conventional PE/PP recycling streams, as biodegradable polymers contaminate traditional polyolefin mechanical recycling batches."
+      },
+      {
+        id: "pbt",
+        term: "Polybutylene Terephthalate",
+        acronym: "PBT",
+        german: "Polybutylenterephthalat",
+        category: "material",
+        definition: "A semi-crystalline engineering thermoplastic polyester featuring high electrical insulation properties and chemical resistance.",
+        context: "Widely used in electrical connectors and automotive light housings. Susceptible to moisture degradation during recycling."
+      },
+      {
+        id: "pc",
+        term: "Polycarbonate",
+        acronym: "PC",
+        german: "Polycarbonat",
+        category: "material",
+        definition: "An amorphous, high-clarity engineering thermoplastic offering outstanding optical transparency and extreme impact strength.",
+        context: "Used in optical lenses, automotive headlights, and structural glazing. Secondary PC requires careful decontamination and flame retardant screening."
+      },
+      {
+        id: "pcr",
+        term: "Post-Consumer Resin",
+        acronym: "PCR",
+        german: "Post-Consumer-Rezyklat (PCR)",
+        category: "material",
+        definition: "Material originating from products that have completed their intended service life as consumer or commercial goods.",
+        context: "Highly variable in composition, contamination, and thermal history. Requires intensive sorting, washing, and compounding to qualify as an industrial raw material."
+      },
+      {
+        id: "pet",
+        term: "Polyethylene Terephthalate",
+        acronym: "PET",
+        german: "Polyethylenterephthalat",
+        category: "material",
+        definition: "A semi-crystalline thermoplastic polyester widely used in beverage bottles, thermoformed trays, and synthetic fibres (polyester).",
+        context: "The gold standard of mechanical closed-loop bottle-to-bottle recycling (rPET), enabled by deposit systems, optical sorting, and solid-state polycondensation (SSP)."
+      },
+      {
+        id: "pha",
+        term: "Polyhydroxyalkanoates",
+        acronym: "PHA",
+        german: "Polyhydroxyalkanoate",
+        category: "material",
+        definition: "A class of bio-based, biodegradable polyesters synthesized naturally by bacterial fermentation of sugars or lipids.",
+        context: "Targeted for marine-degradable application niches, but acts as an impurity in conventional PET or polyolefin mechanical sorting streams."
+      },
+      {
+        id: "pigments",
+        term: "Pigments and Colorants",
+        acronym: "PIG",
+        german: "Farbpigmente / Farbstoffe",
+        category: "material",
+        definition: "Insoluble organic or inorganic color particles blended into polymers to impart color.",
+        context: "Mixed-color sorting results in grey/dark recyclates, severely limiting market value. Recyclers prefer clear or mono-color collection streams to preserve color flexibility."
+      },
+      {
+        id: "pir",
+        term: "Post-Industrial Resin",
+        acronym: "PIR",
+        german: "Post-Industrial-Rezyklat / Pre-Consumer-Abfall",
+        category: "material",
+        definition: "Polymer scrap reclaimed from manufacturing conversion processes (sprues, trim, off-spec batches) prior to consumer distribution.",
+        context: "Clean, homogeneous, and well-characterized. Highly sought after by processors; commands premium prices compared to post-consumer resin (PCR)."
+      },
+      {
+        id: "pla",
+        term: "Polylactic Acid",
+        acronym: "PLA",
+        german: "Polymilchsäure",
+        category: "material",
+        definition: "A bio-based, industrially compostable thermoplastic aliphatic polyester derived from renewable plant starches.",
+        context: "Melts at lower temperatures than PET. If mis-sorted into PET bottle streams, PLA melts and chars, ruining entire batches of recycled PET flakes."
+      },
+      {
+        id: "pmma",
+        term: "Polymethyl Methacrylate (Acrylic)",
+        acronym: "PMMA",
+        german: "Polymethylmethacrylat (Acrylglas)",
+        category: "material",
+        definition: "A transparent, rigid amorphous thermoplastic used as a lightweight glass substitute.",
+        context: "Highly suitable for thermal depolymerisation (monomer casting back to MMA) with exceptional recovery yields (>90%)."
+      },
+      {
+        id: "polymer-immiscibility",
+        term: "Polymer Blend Immiscibility (Flory–Huggins Limits)",
+        acronym: "FHL",
+        german: "Unverträglichkeit von Polymermischungen",
+        category: "material",
+        definition: "For high-molecular-weight polymers, combinatorial entropy of mixing is negligible; miscibility is dictated by interaction parameter χ. Most polymer pairs have positive enthalpy of mixing and phase-separate.",
+        context: "Mixed-polymer recyclate forms coarse, weakly bonded phase domains. Interfacial voids act as crack initiators; low impurity levels (e.g., PP in PE) cause sudden mechanical failure.",
+        question: "What is the tolerance threshold for the cross-contaminant, and what is the morphology (domain size, interfacial adhesion) at that contamination level?"
+      },
+      {
+        id: "pp",
+        term: "Polypropylene",
+        acronym: "PP",
+        german: "Polypropylen",
+        category: "material",
+        definition: "A semi-crystalline commodity thermoplastic characterized by low density, high chemical resistance, and good flexural strength.",
+        context: "Widely used in food tubs, caps, automotive parts, and textiles. Post-consumer PP often suffers from severe odor contamination, requiring advanced stripping technologies."
+      },
+      {
+        id: "ps",
+        term: "Polystyrene",
+        acronym: "PS",
+        german: "Polystyrol",
+        category: "material",
+        definition: "An amorphous, clear, brittle commodity thermoplastic derived from monomeric styrene.",
+        context: "Used in yogurt pots, cutlery, and electronics housings. Depolymerisation to high-purity styrene monomer is industrially viable via thermal pyrolysis."
+      },
+      {
+        id: "pvc",
+        term: "Polyvinyl Chloride",
+        acronym: "PVC",
+        german: "Polyvinylchlorid",
+        category: "material",
+        definition: "A high-density synthetic polymer containing halogenated chlorine, produced in rigid and flexible forms.",
+        context: "Releases corrosive HCl gas during incineration or high-temp processing. Rigid construction PVC (window profiles) has an established high-yield recycling loop."
+      },
+      {
+        id: "rpet",
+        term: "Recycled Polyethylene Terephthalate",
+        acronym: "rPET",
+        german: "Rezyklierbares / Rezykliertes PET",
+        category: "material",
+        definition: "Secondary PET resin produced from post-consumer PET bottle flakes that have undergone decontamination and decontamination extrusion.",
+        context: "Subject to strict regulatory EFSA/FDA safety standards for food-contact applications; often commands prices higher than virgin PET due to EU quotas."
+      },
+      {
+        id: "thermo-oxidative-degradation",
+        term: "Thermo-Oxidative Degradation",
+        acronym: "TOD",
+        german: "Thermooxidativer Polymerabbau",
+        category: "material",
+        definition: "Radical chain autoxidation (initiation, propagation via peroxy radicals, termination) accelerated by heat, oxygen, trace metal ions, and residual catalysts.",
+        context: "Damage accumulates during product service (UV, heat) and melt reprocessing. Carbonyl index, color shift, and odor are late indicators; antioxidant depletion is invisible to NIR sorting.",
+        question: "What is the oxidation induction time (OIT) of the recyclate, and what stabilizer re-dosing is needed to reach a second service life?"
+      },
+      {
+        id: "thermosets",
+        term: "Thermosetting Polymers & Irreversible Networks",
+        acronym: "TS",
+        german: "Duroplaste / Kovalente Netzwerke",
+        category: "material",
+        definition: "Irreversibly cross-linked chemical polymer networks that decompose rather than melt upon heating (epoxies, polyurethanes, phenolic resins).",
+        context: "No remelting route exists. Comminuted thermoset functions only as low-value filler; chemical recovery requires aggressive conditions that often destroy reinforcement fibers.",
+        question: "Is the claimed recovery product a material-grade secondary polymer or a filler/fuel, and what is its market price compared to virgin substitutes?"
+      },
+
+      // -------------------------------------------------------------
+      // CATEGORY 2: LOGISTICS & SYSTEMS LEVEL (logistics - 46 terms)
+      // -------------------------------------------------------------
+      {
+        id: "balloon-effect",
+        term: "Balloon Effect in Waste Trade",
+        acronym: "BE",
+        german: "Ballon-Effekt (Verlagerungseffekt)",
+        category: "logistics",
+        definition: "The systemic phenomenon where restricting a waste import route or trade corridor in one country causes waste flows to divert to neighboring under-regulated regions.",
+        context: "Demonstrated after China's National Sword policy (2018), when massive plastic waste exports shifted rapidly to Malaysia, Vietnam, and Indonesia."
+      },
+      {
+        id: "burden-shifting",
+        term: "Burden Shifting",
+        acronym: "BSH",
+        german: "Lastenverschiebung / Burden Shifting",
+        category: "logistics",
+        definition: "Displacement of environmental or social impacts across life-cycle stages, impact categories, regions, or time without achieving a net global impact reduction.",
+        context: "e.g., Exporting plastic scrap to regions with weak environmental controls, or reducing GWP at the expense of aquatic ecotoxicity or heavy water consumption.",
+        question: "Where do processing residues and wash effluents physically end up, and under which regulatory standards are they treated?"
+      },
+      {
+        id: "cascading-use",
+        term: "Cascading Material Use",
+        acronym: "CMU",
+        german: "Kaskadennutzung",
+        category: "logistics",
+        definition: "The sequential utilization of material resources across multiple iterations, prioritizing highest structural value before chemical recovery and eventual energy recovery.",
+        context: "e.g., Virgin PET bottle → rPET bottle → thermoformed tray → textile fibre → energy incineration."
+      },
+      {
+        id: "closed-loop",
+        term: "Closed-Loop Supply Chain",
+        acronym: "CLSC",
+        german: "Geschlossener Wertstoffkreislauf",
+        category: "logistics",
+        definition: "A reverse supply chain designed to recover discarded products and process them back into equivalent high-tier products without material degradation.",
+        context: "Requires strict quality control, standardized returns, and high feedstock purity (e.g., bottle-to-bottle PET systems)."
+      },
+      {
+        id: "collection-density",
+        term: "Collection Density & Haul Distance",
+        acronym: "CDH",
+        german: "Sammeldichte und Transportdistanz",
+        category: "logistics",
+        definition: "Mass of target material accessible per unit area or route, dictating collection cost per tonne and the spatial catchment needed for plant economies of scale.",
+        context: "Low-bulk-density items (films, foams, composites) have adverse transport economics. Large plants gain processing scale but expand catchment radius, increasing transport emissions.",
+        question: "What catchment radius is required to supply the plant's nameplate capacity, and what share of the claimed supply is physically accessible?"
+      },
+      {
+        id: "deposit-refund",
+        term: "Deposit-Refund System",
+        acronym: "DRS",
+        german: "Pfandsystem / Einwegpfand",
+        category: "logistics",
+        definition: "An economic instrument combining a surcharge on product purchase with a refund upon returning the spent packaging to an authorized collection point.",
+        context: "Consistently delivers the highest return rates (>90-95%) and ultra-clean mono-material packaging streams essential for food-grade mechanical recycling."
+      },
+      {
+        id: "displacement-factor",
+        term: "Displacement (Substitution) Factor",
+        acronym: "DSF",
+        german: "Substitutionsfaktor / Verdrängungsrate",
+        category: "logistics",
+        definition: "The ratio of primary virgin material production displaced per unit of secondary recyclate consumed in manufacturing (rarely 1:1 due to property downgrading).",
+        context: "LCAs frequently assume a 1:1 displacement ratio. If secondary plastic substitutes for concrete/wood or opens new low-tier consumption, net avoided virgin impact drops significantly.",
+        question: "What primary material does the recyclate actually replace in the market, and what empirical evidence supports the assumed substitution ratio?"
+      },
+      {
+        id: "dissipative-loss",
+        term: "Dissipative Material Loss",
+        acronym: "DML",
+        german: "Dissipative Verluste",
+        category: "logistics",
+        definition: "Unrecoverable loss of material into the environment during product use due to abrasion, dispersion, or microparticulate release (tire wear, microfibres).",
+        context: "These flows lie completely outside collection systems; no end-of-life recycling infrastructure can capture them. Source reduction is the sole available mitigation lever.",
+        question: "What fraction of the product's initial mass is released dissipatively during use, and does the circularity claim account for it?"
+      },
+      {
+        id: "downcycling",
+        term: "Downcycling",
+        acronym: "DC",
+        german: "Downcycling (Kaskadierung mit Qualitätsverlust)",
+        category: "logistics",
+        definition: "The conversion of waste materials into secondary materials or products of lower mechanical quality, functionality, or economic value.",
+        context: "Processing mixed post-consumer packaging into park benches or thick drainage pipes due to cross-polymer contamination."
+      },
+      {
+        id: "epr",
+        term: "Extended Producer Responsibility",
+        acronym: "EPR",
+        german: "Erweiterte Herstellerverantwortung",
+        category: "logistics",
+        definition: "An environmental policy approach extending a producer’s financial and physical accountability for a product to the post-consumer stage.",
+        context: "Forces brand owners to fund municipal collection, sorting, and public recycling infrastructure, often managed via Producer Responsibility Organizations (PROs)."
+      },
+      {
+        id: "externalities",
+        term: "Environmental Externalities",
+        acronym: "EXT",
+        german: "Externe Effekte / Umweltfolgekosten",
+        category: "logistics",
+        definition: "Uncompensated environmental or social damage (e.g., marine plastic pollution, GHG emissions) caused by production/disposal not priced into market transactions.",
+        context: "Makes cheap virgin fossil polymer artificially competitive against recyclates unless corrected by virgin material taxes or carbon levies."
+      },
+      {
+        id: "feedstock-variance",
+        term: "Feedstock Variance vs. Mean Quality",
+        acronym: "FVM",
+        german: "Feedstock-Varianz vs. Mittlere Qualität",
+        category: "logistics",
+        definition: "The operational distinction between average composition of a waste stream and its batch-to-batch distribution tail (contaminants, moisture, polymer fractions, MFI).",
+        context: "Industrial converters require tight processing windows. High mean quality yields high scrap rates if tail distribution batches violate processing tolerances.",
+        question: "What are the reported standard deviation and worst-case batch quality, and how often would processing tolerances be violated?"
+      },
+      {
+        id: "feedstock-yield",
+        term: "Feedstock Process Yield",
+        acronym: "FPY",
+        german: "Prozessausbeute (Ausbringen)",
+        category: "logistics",
+        definition: "The weight percentage of saleable, specification-grade secondary material recovered relative to total gross waste mass input.",
+        context: "Gross collection numbers conceal losses; a 100t waste input may yield only 55t saleable PCR pellets after removing moisture, labels, dirt, and mis-sorted plastics."
+      },
+      {
+        id: "informal-recycling",
+        term: "Informal Waste Sector",
+        acronym: "IWS",
+        german: "Informeller Abfallsektor / Müllsammler",
+        category: "logistics",
+        definition: "Unregulated waste picking, sorting, and trading conducted by individuals or small enterprises in developing and transitional economies.",
+        context: "Achieves remarkably high collection rates for valuable rigid plastics (PET, HDPE) but lacks environmental safety controls and worker protections."
+      },
+      {
+        id: "logistics-rights-paradox",
+        term: "Logistics-Rights Paradox in Recycling",
+        acronym: "LRP",
+        german: "Logistik-Paradoxon der Kreislaufwirtschaft",
+        category: "logistics",
+        definition: "The structural mismatch between supply-driven, highly variable waste generation and specification-driven, steady-state industrial manufacturing.",
+        context: "Forward logistics responds to predictable customer orders; reverse logistics must aggregate chaotic, seasonal waste streams into continuous industrial raw feedstocks."
+      },
+      {
+        id: "mass-balance-approach",
+        term: "Mass Balance Approach",
+        acronym: "MBA",
+        german: "Massenbilanzansatz",
+        category: "logistics",
+        definition: "A chain-of-custody tracking method allocating co-fed circular/bio-based raw materials accounting-wise to specific output end products.",
+        context: "Crucial for chemical recycling where pyrolytic oil is co-fed with crude naphtha into steam crackers, making physical traceability in the output polymer impossible."
+      },
+      {
+        id: "material-flow-analysis",
+        term: "Material Flow Analysis",
+        acronym: "MFA",
+        german: "Stoffstromanalyse (MFA)",
+        category: "logistics",
+        definition: "A systematic analytical method mapping physical flows and stock accumulation of materials within a defined spatial and temporal system boundary.",
+        context: "The core tool for logistics engineers to track loss points, domestic accumulation, exports, and mass balances across regional circular economies."
+      },
+      {
+        id: "missing-economic-pull",
+        term: "Missing Economic Pull & Price Coupling",
+        acronym: "MEP",
+        german: "Fehlende Markt-Nachfrage und Preiskopplung",
+        category: "logistics",
+        definition: "Absence of demand mechanisms driving buyers to purchase recyclate at cost-recovering prices, exacerbated by tight empirical coupling of recyclate prices to cheap virgin fossil polymers.",
+        context: "When virgin prices fall, recyclate demand collapses regardless of technical plant maturity. Investment models based on virgin price peaks are structurally fragile.",
+        question: "Does the proposed recycling business model survive a low virgin fossil price scenario without ongoing policy subsidies?"
+      },
+      {
+        id: "missing-customer-problem",
+        term: "Missing Customer Problem",
+        acronym: "MCP",
+        german: "Problem des fehlenden Kunden",
+        category: "logistics",
+        definition: "The economic barrier where waste generated at end-of-life lacks an immediate buyer willing to pay collection and sorting costs.",
+        context: "Reverse supply chains must actively perform sorting, cleaning, and quality assurance to create a marketable material before conventional market pull begins."
+      },
+      {
+        id: "negative-residual-value",
+        term: "Negative Residual Value",
+        acronym: "NRV",
+        german: "Negativer Restwert (Entsorgungsgebühr)",
+        category: "logistics",
+        definition: "Condition where sum of collection, sorting, processing, and residue disposal costs exceeds market revenue of output secondary material (requiring a gate fee to accept material).",
+        context: "Reverse flow cannot self-finance via market pull; it requires policy intervention (EPR, subsidies, mandates) to fund the net operating gap.",
+        question: "What is the break-even recyclate price, and which party pays the financial gap in the proposed circular business model?"
+      },
+      {
+        id: "open-loop",
+        term: "Open-Loop Recycling",
+        acronym: "OLR",
+        german: "Offener Wertstoffkreislauf",
+        category: "logistics",
+        definition: "A recovery pathway where material from one product category is converted into a different product application (e.g., PET beverage bottles into polyester fleece jackets).",
+        context: "Diverts waste from landfills, but often prevents further closed-loop recycling at the secondary product's end-of-life."
+      },
+      {
+        id: "product-service-system",
+        term: "Product-Service System",
+        acronym: "PSS",
+        german: "Produkt-Service-Systeme (Leasing-Modelle)",
+        category: "logistics",
+        definition: "A business model shifting focus from selling physical products to selling access, performance, or service outcomes.",
+        context: "Keeps product ownership with the manufacturer, aligning economic incentives directly with durability, ease of maintenance, and high-yield end-of-life take-back."
+      },
+      {
+        id: "producer-responsibility-org",
+        term: "Producer Responsibility Organization",
+        acronym: "PRO",
+        german: "Rücknahmesystem / Duales System",
+        category: "logistics",
+        definition: "A producer-funded collective entity hired by manufacturers to fulfill their statutory EPR packaging collection, sorting, and recycling targets.",
+        context: "Examples include 'Duales System Deutschland' (Grüner Punkt) managing light packaging collection (Gelber Sack)."
+      },
+      {
+        id: "rebound-effect",
+        term: "Rebound Effect in Circularity",
+        acronym: "REB",
+        german: "Rebound-Effekt",
+        category: "logistics",
+        definition: "Offsetting of expected environmental gains through market responses, such as lower recyclate costs increasing total product consumption or recycling increasing consumer disposability.",
+        context: "Circularity measures reducing unit impact but expanding total sales volume yield less net environmental benefit than static models project.",
+        question: "Does the environmental model assume constant total market demand, and what is the sensitivity to price-elastic consumption growth?"
+      },
+      {
+        id: "reverse-logistics",
+        term: "Reverse Logistics",
+        acronym: "RL",
+        german: "Rückführlogistik / Entsorgungslogistik",
+        category: "logistics",
+        definition: "The process of planning, executing, and controlling the efficient flow of raw materials, in-process inventory, and finished goods from point of consumption to point of recovery or disposal.",
+        context: "Combines collection routing, consolidation, sorting hubs, transport, and inventory control under uncertain return timing and feedstock quality."
+      },
+      {
+        id: "system-boundary",
+        term: "System Boundary Definition",
+        acronym: "SBD",
+        german: "Systemgrenzen-Definition",
+        category: "logistics",
+        definition: "Conceptual boundary specifying which life-cycle steps, transport stages, energy inputs, residue treatments, and geographic regions are included in LCA or MFA models.",
+        context: "Results are boundary-dependent. Omitting wash-water drying, residue landfilling, or overseas shipping routes can reverse environmental conclusions.",
+        question: "Which specific material and energy flows were excluded from the system boundary, and does the conclusion survive allocation adjustments?"
+      },
+      {
+        id: "take-back-system",
+        term: "Take-Back Scheme",
+        acronym: "TBS",
+        german: "Rücknahmesystem",
+        category: "logistics",
+        definition: "An organized reverse logistics channel where retailers or manufacturers accept spent products directly from consumers at retail sites.",
+        context: "Common in WEEE, batteries, and automotive tyres to secure high-purity returns directly at points of retail trade."
+      },
+      {
+        id: "tco",
+        term: "Total Cost of Ownership",
+        acronym: "TCO",
+        german: "Gesamtkosten des Besitzes (TCO)",
+        category: "logistics",
+        definition: "A comprehensive economic assessment of purchasing an input, accounting for purchase price plus testing, machine adaptation, scrap risks, and compliance costs.",
+        context: "Purchasing PCR resin at €900/t might yield a higher TCO than virgin resin at €1,100/t if processing scrap rates rise by 5% and require extra lab validation."
+      },
+      {
+        id: "upcycling",
+        term: "Upcycling",
+        acronym: "UC",
+        german: "Upcycling (Höherwertige Wiederverwertung)",
+        category: "logistics",
+        definition: "A process of converting waste materials into new materials or products of higher quality, improved functionality, or greater structural value.",
+        context: "Advanced chemical recycling converting mixed film waste back into high-purity virgin-grade monomers suitable for medical applications."
+      },
+      {
+        id: "urban-mining",
+        term: "Urban Mining",
+        acronym: "UM",
+        german: "Urban Mining (Anthropogenes Lager)",
+        category: "logistics",
+        definition: "The systematic process of recovering secondary raw materials and energy from man-made structures, infrastructure, and long-term product stocks.",
+        context: "Treating construction demolition waste and electrical networks as rich secondary resource reserves competing with primary mining."
+      },
+      {
+        id: "yield-loss-cascade",
+        term: "Yield Loss Cascade",
+        acronym: "YLC",
+        german: "Multiplikative Kaskade der Ausbeuteverluste",
+        category: "logistics",
+        definition: "The multiplicative chain of sub-efficiencies (capture rate × sorting efficiency × process yield × quality acceptance) determining actual material return.",
+        context: "Individually high stage efficiencies (80% × 80% × 80% × 80%) multiply to an overall end-to-end mass recovery yield of only 41%.",
+        question: "At which specific measurement point is the reported recycling rate measured, and what is the true end-to-end mass yield into new products?"
+      },
+
+      // -------------------------------------------------------------
+      // CATEGORY 3: PROCESSING & ANALYTICS LEVEL (processing - 24 terms)
+      // -------------------------------------------------------------
+      {
+        id: "air-classification",
+        term: "Air Classification & Zig-Zag Separators",
+        acronym: "AC",
+        german: "Windsichtung / Zickzacksichter",
+        category: "processing",
+        definition: "Density separation tech utilizing upward air currents to separate light film, paper, and dust fractions from heavy rigid plastic granules.",
+        context: "Essential pretreatment step in shredder plant processing to clean bottle flake streams from residual paper labels and thin film contaminants."
+      },
+      {
+        id: "decontamination-superclean",
+        term: "Super-Clean Decontamination Process",
+        acronym: "SCD",
+        german: "Super-Clean-Entgiftungsverfahren",
+        category: "processing",
+        definition: "High-temperature, deep-vacuum, or gas-stripping extraction processes designed to purge deep-seated organic volatile contaminants from washed flakes.",
+        context: "Mandatory technology evaluated by EFSA/FDA to grant food-contact safety compliance certificates for mechanical bottle-to-bottle rPET processes."
+      },
+      {
+        id: "depolymerisation",
+        term: "Depolymerisation / Chemolysis",
+        acronym: "DEP",
+        german: "Depolymerisation / Chemischer Abbau",
+        category: "processing",
+        definition: "The chemical cleavage of condensation polymers (PET, PA, PU) back into constituent monomers via reaction with water (hydrolysis), alcohol (alcoholysis), or glycol (glycolysis).",
+        context: "Allows high-yield recovery of pristine virgin-quality monomers from contaminated or multi-color textiles and carpet waste streams."
+      },
+      {
+        id: "digital-product-passport",
+        term: "Digital Product Passport",
+        acronym: "DPP",
+        german: "Digitaler Produktpass (DPP)",
+        category: "processing",
+        definition: "A standardized digital data record accessible via data carriers (QR code, RFID) providing complete supply chain composition, repairability, and dismantling data.",
+        context: "Preserves product identity from manufacturing to end-of-life, eliminating reliance on surface spectroscopy after product dismantling."
+      },
+      {
+        id: "electrostatic-separation",
+        term: "Electrostatic Separation",
+        acronym: "ESS",
+        german: "Elektrostatische Trennung (Tribo-Elektrik)",
+        category: "processing",
+        definition: "Separation technology charging particles triboelectrically; polymers acquire positive or negative surface charges based on work function differences and are deflected in an electric field.",
+        context: "Used to separate mixed plastics with identical densities (e.g., ABS and PS, or PVC and PET mixtures) that sink-float tanks cannot separate."
+      },
+      {
+        id: "enzymatic-recycling",
+        term: "Enzymatic Recycling",
+        acronym: "ENZ",
+        german: "Enzymatisches Recycling",
+        category: "processing",
+        definition: "Biocatalytic breakdown of polymers using specialized engineered enzymes (e.g., PETases) operating at mild temperatures to depolymerize target plastics selectively.",
+        context: "Allows selective breakdown of PET in complex textile blends (cotton-polyester) without damaging co-existing cotton fibres."
+      },
+      {
+        id: "foak-noak",
+        term: "FOAK vs. NOAK Plants",
+        acronym: "FOAK",
+        german: "Erstanlage (FOAK) vs. Ausgereifte Anlage (NOAK)",
+        category: "processing",
+        definition: "Distinguishes a First-Of-A-Kind commercial demonstrator plant (plagued by high CAPEX, unproven uptime) from an Nth-Of-A-Kind mature operational plant.",
+        context: "Crucial metric when evaluating media claims; many advanced chemical recycling announcements refer to unbuilt or high-risk FOAK facilities."
+      },
+      {
+        id: "ftir",
+        term: "Fourier-Transform Infrared Spectroscopy",
+        acronym: "FTIR",
+        german: "Fourier-Transformations-Infrarotspektroskopie",
+        category: "processing",
+        definition: "An analytical spectroscopic technique measuring infrared absorption spectra to identify molecular functional groups and polymer formulations.",
+        context: "The analytical bench reference standard for laboratory identification of polymers, degradation levels, and specific additive formulations."
+      },
+      {
+        id: "gasification",
+        term: "Gasification",
+        acronym: "GAS",
+        german: "Vergasung",
+        category: "processing",
+        definition: "High-temperature (>1,000°C) conversion of organic waste with sub-stoichiometric oxygen/steam into synthesis gas (syngas: CO + H2).",
+        context: "Processes highly contaminated residual plastic waste into fundamental chemical building blocks for methanol or synthetic hydrocarbon synthesis."
+      },
+      {
+        id: "hyperspectral-imaging",
+        term: "Hyperspectral Imaging",
+        acronym: "HSI",
+        german: "Hyperspektrale Bildgebung",
+        category: "processing",
+        definition: "Sensing tech capturing continuous spatial and spectral data across hundreds of contiguous narrow wavebands for every image pixel.",
+        context: "Combines 2D computer vision geometry with chemical identification, allowing high-speed sorting robots to identify polymer type and component shape simultaneously."
+      },
+      {
+        id: "libs",
+        term: "Laser-Induced Breakdown Spectroscopy",
+        acronym: "LIBS",
+        german: "Laser-Emissionsspektrometrie (LIBS)",
+        category: "processing",
+        definition: "An atomic emission spectroscopy method focusing high-energy laser pulses onto a sample surface to form micro-plasmas and determine elemental composition.",
+        context: "Used to detect heavy metals, glass fiber elemental content, and specific inorganic flame retardant elements in moving plastic shredder streams."
+      },
+      {
+        id: "mechanical-recycling",
+        term: "Mechanical Recycling",
+        acronym: "MR",
+        german: "Mechanisches Recycling (Werkstoffliches Recycling)",
+        category: "processing",
+        definition: "Processing waste plastics via sorting, shredding, washing, drying, extruding, and pelletizing without altering the core chemical polymer structure.",
+        context: "The lowest carbon footprint recycling pathway, but strictly limited by polymer degradation, additive build-up, and cross-contamination limits."
+      },
+      {
+        id: "melt-filtration",
+        term: "Melt Filtration",
+        acronym: "MF",
+        german: "Schmelzefiltration",
+        category: "processing",
+        definition: "Passing molten polymer through continuous fine mesh screens during extrusion to filter out unmelted solids, metals, paper, and cross-linked gels.",
+        context: "Vital hardware component on extrusion lines processing post-consumer recyclate to protect injection molds from particulate damage."
+      },
+      {
+        id: "mir",
+        term: "Mid-Infrared Spectroscopy",
+        acronym: "MIR",
+        german: "Mittleres Infrarot (MIR)",
+        category: "processing",
+        definition: "Spectroscopy operating in the 2.5–25 µm spectral region, probing fundamental fundamental vibrational modes of molecules.",
+        context: "Provides higher chemical specificity than NIR, capable of identifying black plastics unaffected by carbon black when using surface reflectance modes."
+      },
+      {
+        id: "nir",
+        term: "Near-Infrared Spectroscopy",
+        acronym: "NIR",
+        german: "Nahes Infrarot (NIR-Spektroskopie)",
+        category: "processing",
+        definition: "Optical reflection spectroscopy operating in the 780–2500 nm range, measuring overtone and combination molecular vibrations.",
+        context: "The workhorse technology of automated Material Recovery Facilities (MRFs), identifying polymer types on conveyor belts operating up to 3 m/s."
+      },
+      {
+        id: "pyrolysis",
+        term: "Thermal Pyrolysis",
+        acronym: "PYR",
+        german: "Pyrolyse (Thermolyse)",
+        category: "processing",
+        definition: "Thermal degradation of organic polymers at elevated temperatures (400–800°C) in the complete absence of oxygen, yielding liquid pyrolytic oil, gas, and solid char.",
+        context: "Converts mixed polyolefin waste into synthetic oil feedstock co-fed into steam crackers to manufacture virgin-grade secondary plastics."
+      },
+      {
+        id: "raman-spectroscopy",
+        term: "Raman Spectroscopy",
+        acronym: "RAM",
+        german: "Raman-Spektroskopie",
+        category: "processing",
+        definition: "Spectroscopic technique measuring inelastic scattering of monochromatic laser light, probing molecular vibrational and rotational modes.",
+        context: "Highly specific chemical fingerprints immune to water interference; used to differentiate dark polymers, structural additives, and complex copolymers."
+      },
+      {
+        id: "sensor-fusion",
+        term: "Multisensor Fusion",
+        acronym: "SF",
+        german: "Sensordatenfusion",
+        category: "processing",
+        definition: "Algorithmic combination of data streams from multiple distinct sensor modalities (e.g., NIR + RGB Camera + XRF + 3D Laser) to evaluate material identity.",
+        context: "Overcomes single-sensor limitations, allowing sorting lines to classify complex items like black glass-filled flame-retarded electronic housings."
+      },
+      {
+        id: "sink-float",
+        term: "Sink-Float Density Separation",
+        acronym: "SFS",
+        german: "Schwimm-Sink-Verfahren",
+        category: "processing",
+        definition: "Density-based separation technique immersing shredded plastic flakes into liquid media (water, salt solutions) of specified specific gravity.",
+        context: "Standard physical separation line dividing light polyolefins (PE/PP, density <1.0 g/cm³) floating on water from heavy polymers (PET/PVC/ABS, density >1.0 g/cm³) sinking to the bottom."
+      },
+      {
+        id: "solid-state-polycondensation",
+        term: "Solid-State Polycondensation",
+        acronym: "SSP",
+        german: "Festphasen-Polykondensation (SSP)",
+        category: "processing",
+        definition: "A process heating polymer pellets or flakes below melting point under high vacuum or inert gas to increase molecular weight and intrinsic viscosity (IV).",
+        context: "Essential post-treatment step in PET bottle-to-bottle recycling to rebuild polymer chain lengths destroyed during product life and melt reprocessing."
+      },
+      {
+        id: "solvolysis",
+        term: "Solvent-Based Extraction / Solvolysis",
+        acronym: "SOLV",
+        german: "Lösemittelbasiertes Recycling / Solvolyse",
+        category: "processing",
+        definition: "Dissolving target polymers selectively out of complex waste mixtures using specific solvents without breaking the core polymer backbone (e.g., CreaSolv process).",
+        context: "Separates multilayer film layers (PE from PA) or purifies target resins from insoluble additives, pigments, and metallic foils."
+      },
+      {
+        id: "terahertz-sensing",
+        term: "Terahertz Sensing",
+        acronym: "THz",
+        german: "Terahertz-Messtechnik",
+        category: "processing",
+        definition: "Nondestructive sensing utilizing sub-millimeter electromagnetic waves (0.1–10 THz) penetrating non-conducting materials.",
+        context: "Emerging industrial sensor capability capable of penetrating surface grime and identifying carbon-black-filled plastics transparent to THz radiation."
+      },
+      {
+        id: "trl",
+        term: "Technology Readiness Level",
+        acronym: "TRL",
+        german: "Technologischer Reifegrad (TRL)",
+        category: "processing",
+        definition: "A formal 9-stage scale estimating technology maturity from basic scientific principles (TRL 1) to proven operational deployment in commercial operation (TRL 9).",
+        context: "Prevents confusing laboratory chemical reactions (TRL 3-4) with industrially mature recycling systems (TRL 8-9)."
+      },
+      {
+        id: "xrf",
+        term: "X-Ray Fluorescence",
+        acronym: "XRF",
+        german: "Röntgenfluoreszenzanalyse (RFA)",
+        category: "processing",
+        definition: "An elemental analytical technique measuring characteristic secondary fluorescent X-rays emitted from a material excited by high-energy X-rays.",
+        context: "Used in automated sorting to detect heavy metal pigments, PVC chlorine content, and brominated flame retardant atoms instantly."
+      },
+
+      // -------------------------------------------------------------
+      // CATEGORY 4: LAW, REGULATION & POLICY LEVEL (law - 20 terms)
+      // -------------------------------------------------------------
+      {
+        id: "basel-convention",
+        term: "Basel Convention",
+        acronym: "BC",
+        german: "Basler Übereinkommen",
+        category: "law",
+        definition: "A global multilateral environmental treaty regulating transboundary movements of hazardous and specific non-hazardous waste streams.",
+        context: "The 2019 Plastic Amendments subjected non-hazardous, un-sorted plastic waste exports to strict Prior Informed Consent (PIC) procedures worldwide."
+      },
+      {
+        id: "cbam",
+        term: "Carbon Border Adjustment Mechanism",
+        acronym: "CBAM",
+        german: "CO2-Grenzausgleichssystem (CBAM)",
+        category: "law",
+        definition: "An EU climate measure levying a carbon price on imported carbon-intensive goods equivalent to the carbon cost born by domestic EU producers under the ETS.",
+        context: "Directly impacts international trade of primary polymers, secondary recyclates, and finished goods, penalizing imports from high-emission jurisdictions."
+      },
+      {
+        id: "csddd",
+        term: "Corporate Sustainability Due Diligence Directive",
+        acronym: "CSDDD",
+        german: "EU-Lieferkettengesetz (CSDDD)",
+        category: "law",
+        definition: "EU directive obligating large corporations to identify, prevent, and mitigate adverse environmental and human rights risks across global supply chains.",
+        context: "Renders European companies legally liable if their waste exports end up illegally dumped or informally burned in receiving non-OECD countries."
+      },
+      {
+        id: "din-spec-91446",
+        term: "DIN SPEC 91446 / EN Standards",
+        acronym: "DIN",
+        german: "DIN SPEC 91446 (Klassifizierung von Rezyklaten)",
+        category: "law",
+        definition: "Standardized classification system categorizing recycled plastics based on defined Data Quality Levels (DQLs) to enable digital trading and quality assurance.",
+        context: "Establishes transparent technical data sheets for secondary polymers, reducing transaction risk between recyclers and industrial buyers."
+      },
+      {
+        id: "ecodesign-espr",
+        term: "Ecodesign for Sustainable Products Regulation",
+        acronym: "ESPR",
+        german: "EU-Ökodesign-Verordnung (ESPR)",
+        category: "law",
+        definition: "EU overarching framework setting mandatory product durability, reusability, repairability, and recycled-content design requirements before market entry.",
+        context: "Moves legislative intervention upstream to the design phase, banning built-in obsolescence and mandatory inclusion of Digital Product Passports."
+      },
+      {
+        id: "end-of-waste",
+        term: "End-of-Waste Criteria",
+        acronym: "EoW",
+        german: "Ende der Abfalleigenschaft",
+        category: "law",
+        definition: "Legal conditions under which a waste material that has undergone recovery ceases to be classified legally as waste and becomes a secondary raw material.",
+        context: "Once EoW criteria are satisfied (e.g., standard purity met), onerous waste transport permissions and hazardous waste tracking duties no longer apply."
+      },
+      {
+        id: "ewc-avv",
+        term: "European Waste Catalogue Codes",
+        acronym: "EWC",
+        german: "Abfallverzeichnis-Verordnung (AVV)",
+        category: "law",
+        definition: "A standardized six-digit numerical classification index identifying waste types and denoting hazardous vs non-hazardous classification.",
+        context: "Legally mandatory on consignment notes; incorrect assignment (e.g., classifying hazardous BFR plastic under non-hazardous EWC 19 12 04) is a criminal offense."
+      },
+      {
+        id: "green-claims-directive",
+        term: "Green Claims Directive",
+        acronym: "GCD",
+        german: "EU-Richtlinie gegen Greenwashing",
+        category: "law",
+        definition: "Proposed EU legislation requiring companies to substantiate environmental claims ('100% Recyclable', 'Ocean Plastic') using standardized LCA methodologies.",
+        context: "Eliminates vague corporate claims by requiring independent verification before marketing products as circular or environmentally superior."
+      },
+      {
+        id: "krwg",
+        term: "German Circular Economy Act",
+        acronym: "KrWG",
+        german: "Kreislaufwirtschaftsgesetz (KrWG)",
+        category: "law",
+        definition: "The core federal environmental statute in Germany governing waste prevention, recovery, disposal, and fundamental actor responsibilities.",
+        context: "Transposes the EU Waste Framework Directive into national law, establishing statutory legal duties for original waste producers and holders."
+      },
+      {
+        id: "pic-procedure",
+        term: "Prior Informed Consent",
+        acronym: "PIC",
+        german: "Verfahren der vorherigen Zustimmung (PIC)",
+        category: "law",
+        definition: "A regulatory control procedure requiring exporting states to obtain formal authorization from importing and transit states before shipping controlled wastes.",
+        context: "Mandatory under the Basel Convention and EU Waste Shipment Regulation for shipping hazardous or mixed plastic waste fractions across international borders."
+      },
+      {
+        id: "polluter-pays",
+        term: "Polluter Pays Principle",
+        acronym: "PPP",
+        german: "Verursacherprinzip",
+        category: "law",
+        definition: "The foundational environmental policy principle dictating that the costs of preventing, controlling, and remediating pollution must be borne by the polluter.",
+        context: "Provides the philosophical and legal backing for implementing mandatory Extended Producer Responsibility fees and virgin material environmental levies."
+      },
+      {
+        id: "ppwr",
+        term: "Packaging and Packaging Waste Regulation",
+        acronym: "PPWR",
+        german: "EU-Verpackungsverordnung (PPWR 2025/40)",
+        category: "law",
+        definition: "Overarching EU regulation establishing mandatory packaging reduction targets, 100% recyclability requirements by 2030, and binding PCR content quotas.",
+        context: "Replaces national directives with binding federal law across Europe, mandating up to 35% PCR content in plastic packaging by 2030 and 65% by 2040."
+      },
+      {
+        id: "reach",
+        term: "REACH Regulation",
+        acronym: "REACH",
+        german: "REACH-Verordnung (EG 1907/2006)",
+        category: "law",
+        definition: "EU regulation governing Registration, Evaluation, Authorisation and Restriction of Chemicals to protect human health and the environment.",
+        context: "Creates severe compliance barriers for recyclers when legacy restricted substances (e.g., phthalate plasticisers) are present in post-consumer feedstocks."
+      },
+      {
+        id: "recycled-content-mandate",
+        term: "Recycled-Content Mandate",
+        acronym: "RCM",
+        german: "Rezyklat-Einsatzquote / Pflichtquote",
+        category: "law",
+        definition: "A statutory regulatory requirement forcing manufacturers to incorporate a minimum percentage of verified post-consumer recycled polymer into new products.",
+        context: "Shifts legal intervention from waste generation (supply) to industrial production (demand), artificially creating guaranteed market pull for secondary plastics."
+      },
+      {
+        id: "supd",
+        term: "Single-Use Plastics Directive",
+        acronym: "SUPD",
+        german: "Einwegkunststoff-Richtlinie (EU 2019/904)",
+        category: "law",
+        definition: "EU directive banning specific single-use plastic items (straws, cutlery), setting mandatory PET bottle collection targets (90% by 2029), and establishing 25% rPET quotas for 2025.",
+        context: "The landmark policy triggering massive price premiums for food-grade rPET across European markets."
+      },
+      {
+        id: "waste-framework-directive",
+        term: "EU Waste Framework Directive",
+        acronym: "WFD",
+        german: "EU-Abfallrahmenrichtlinie (2008/98/EG)",
+        category: "law",
+        definition: "The foundational EU legal legislative framework setting basic waste concepts, definitions, legal actor duties, End-of-Waste criteria, and the 5-step waste hierarchy.",
+        context: "Establishes the binding legal requirement that handing waste to a preliminary transport contractor does not extinguish original producer legal liability."
+      },
+      {
+        id: "waste-hierarchy",
+        term: "The Waste Hierarchy",
+        acronym: "WH",
+        german: "Fünfstufige Abfallhierarchie",
+        category: "law",
+        definition: "The statutory order of environmental priority: 1. Prevention, 2. Preparing for Reuse, 3. Recycling, 4. Other Recovery (Energy), 5. Disposal.",
+        context: "Demonstrates that recycling is not the ultimate circular objective, but an intermediate step after prevention and reuse options are exhausted."
+      },
+      {
+        id: "weee-directive",
+        term: "WEEE Directive",
+        acronym: "WEEE",
+        german: "WEEE-Richtlinie (Elektroaltgeräte-Richtlinie)",
+        category: "law",
+        definition: "EU directive regulating Waste Electrical and Electronic Equipment, mandating separate collection, recovery targets, and producer financing.",
+        context: "Forces specialized logistics treatment of complex flame-retarded plastics (ABS, PC/ABS) sourced from discarded IT and consumer electronics."
+      },
+      {
+        id: "wsr",
+        term: "EU Waste Shipment Regulation",
+        acronym: "WSR",
+        german: "EU-Abfallverbringungsverordnung (EG 2024/1157)",
+        category: "law",
+        definition: "Updated EU regulation governing transboundary movements of waste, introducing strict audit rules and banning plastic waste exports to non-OECD countries by Nov 2026.",
+        context: "Forces European waste producers to process plastic waste within OECD boundaries, terminating historical burden shifting to developing nations."
+      }
+    ];
+
+    // State Variables
+    let currentCategory = 'all';
+    let currentLetter = 'all';
+    let searchQuery = '';
+
+    // Category Styling Definitions
+    const categoryConfig = {
+      material: {
+        label: "Material & Polymer",
+        badgeBg: "bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800",
+        icon: "fa-flask text-emerald-500",
+        borderHover: "hover:border-emerald-400"
+      },
+      logistics: {
+        label: "Logistics & Systems",
+        badgeBg: "bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 border-blue-200 dark:border-blue-800",
+        icon: "fa-truck-ramp-box text-blue-500",
+        borderHover: "hover:border-blue-400"
+      },
+      processing: {
+        label: "Processing & Analytics",
+        badgeBg: "bg-purple-100 dark:bg-purple-900/50 text-purple-800 dark:text-purple-300 border-purple-200 dark:border-purple-800",
+        icon: "fa-microscope text-purple-500",
+        borderHover: "hover:border-purple-400"
+      },
+      law: {
+        label: "Law & Regulation",
+        badgeBg: "bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800",
+        icon: "fa-scale-balanced text-amber-500",
+        borderHover: "hover:border-amber-400"
+      }
+    };
+
+    // DOM Elements
+    const gridEl = document.getElementById('glossary-grid');
+    const noResultsEl = document.getElementById('no-results');
+    const searchInput = document.getElementById('search-input');
+    const clearSearchBtn = document.getElementById('clear-search');
+    const visibleCountEl = document.getElementById('visible-count');
+    const totalCountEl = document.getElementById('total-count');
+    const resetFiltersBtn = document.getElementById('reset-filters');
+    const resetSearchBtn = document.getElementById('reset-search-btn');
+    const alphaBar = document.getElementById('alpha-bar');
+
+    // Init App
+    document.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      buildAlphabetBar();
+      updateCategoryCounts();
+      renderGrid();
+      setupEventListeners();
+    });
+
+    // Theme Switcher Logic
+    function initTheme() {
+      const themeToggleBtn = document.getElementById('theme-toggle');
+      const darkIcon = document.getElementById('theme-toggle-dark-icon');
+      const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+      if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        lightIcon.classList.remove('hidden');
+        darkIcon.classList.add('hidden');
+      } else {
+        document.documentElement.classList.remove('dark');
+        darkIcon.classList.remove('hidden');
+        lightIcon.classList.add('hidden');
+      }
+
+      themeToggleBtn.addEventListener('click', () => {
+        darkIcon.classList.toggle('hidden');
+        lightIcon.classList.toggle('hidden');
+        if (document.documentElement.classList.contains('dark')) {
+          document.documentElement.classList.remove('dark');
+          localStorage.setItem('color-theme', 'light');
+        } else {
+          document.documentElement.classList.add('dark');
+          localStorage.setItem('color-theme', 'dark');
+        }
+      });
+    }
+
+    // Build Alphabet Bar Dynamically
+    function buildAlphabetBar() {
+      const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+      alphabet.forEach(letter => {
+        const btn = document.createElement('button');
+        btn.dataset.letter = letter;
+        btn.className = "alpha-btn px-2 py-0.5 rounded font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition";
+        btn.innerText = letter;
+        alphaBar.appendChild(btn);
+      });
+    }
+
+    // Update Category Item Counters
+    function updateCategoryCounts() {
+      totalCountEl.innerText = glossaryData.length;
+      document.getElementById('count-all').innerText = glossaryData.length;
+      ['material', 'logistics', 'processing', 'law'].forEach(cat => {
+        const count = glossaryData.filter(item => item.category === cat).length;
+        document.getElementById(`count-${cat}`).innerText = count;
+      });
+    }
+
+    // Filter Logic
+    function getFilteredData() {
+      return glossaryData.filter(item => {
+        // Category Match
+        const matchCat = (currentCategory === 'all' || item.category === currentCategory);
+        
+        // Alphabet Match
+        const matchLetter = (currentLetter === 'all' || item.term.toUpperCase().startsWith(currentLetter) || item.acronym.toUpperCase().startsWith(currentLetter));
+        
+        // Search Query Match (fuzzy search across fields)
+        const q = searchQuery.toLowerCase().trim();
+        const matchSearch = !q || (
+          item.term.toLowerCase().includes(q) ||
+          item.acronym.toLowerCase().includes(q) ||
+          item.german.toLowerCase().includes(q) ||
+          item.definition.toLowerCase().includes(q) ||
+          item.context.toLowerCase().includes(q)
+        );
+
+        return matchCat && matchLetter && matchSearch;
+      }).sort((a, b) => a.term.localeCompare(b.term));
+    }
+
+    // Render Grid Cards
+    function renderGrid() {
+      const filtered = getFilteredData();
+      visibleCountEl.innerText = filtered.length;
+
+      // Toggle Reset Filters button state
+      if (currentCategory !== 'all' || currentLetter !== 'all' || searchQuery !== '') {
+        resetFiltersBtn.classList.remove('hidden');
+      } else {
+        resetFiltersBtn.classList.add('hidden');
+      }
+
+      if (filtered.length === 0) {
+        gridEl.innerHTML = '';
+        noResultsEl.classList.remove('hidden');
+        return;
+      }
+
+      noResultsEl.classList.add('hidden');
+      
+      gridEl.innerHTML = filtered.map(item => {
+        const cfg = categoryConfig[item.category];
+        const hasQuestion = !!item.question;
+        return `
+          <div class="glossary-card bg-white dark:bg-slate-800 rounded-xl p-5 border border-slate-200 dark:border-slate-700/80 shadow-sm ${cfg.borderHover} hover:shadow-md transition duration-200 flex flex-col justify-between cursor-pointer group" onclick="openModal('${item.id}')">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600">
+                  ${item.acronym}
+                </span>
+                <div class="flex items-center gap-1">
+                  ${hasQuestion ? `<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300" title="Includes Critical Engineering Question"><i class="fa-solid fa-circle-question"></i></span>` : ''}
+                  <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold border ${cfg.badgeBg} flex items-center gap-1">
+                    <i class="fa-solid ${cfg.icon}"></i> ${cfg.label}
+                  </span>
+                </div>
+              </div>
+              <h3 class="text-base font-bold text-slate-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">
+                ${item.term}
+              </h3>
+              <p class="text-xs font-medium text-slate-500 dark:text-slate-400 mt-0.5 mb-2 italic">
+                DE: ${item.german}
+              </p>
+              <p class="text-xs text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed">
+                ${item.definition}
+              </p>
+            </div>
+            
+            <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between text-xs text-brand-600 dark:text-brand-400 font-semibold group-hover:translate-x-0.5 transition-transform">
+              <span>View Context & Detail</span>
+              <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Modal Control Logic
+    function openModal(id) {
+      const item = glossaryData.find(x => x.id === id);
+      if (!item) return;
+
+      const cfg = categoryConfig[item.category];
+      document.getElementById('modal-term').innerText = item.term;
+      document.getElementById('modal-acronym-badge').innerText = item.acronym;
+      document.getElementById('modal-german').innerText = `DE: ${item.german}`;
+      document.getElementById('modal-definition').innerText = item.definition;
+      document.getElementById('modal-context').innerText = item.context;
+
+      const qContainer = document.getElementById('modal-question-container');
+      const qText = document.getElementById('modal-question');
+      if (item.question) {
+        qText.innerText = item.question;
+        qContainer.classList.remove('hidden');
+      } else {
+        qContainer.classList.add('hidden');
+      }
+
+      const badge = document.getElementById('modal-category-badge');
+      badge.className = `px-2.5 py-0.5 rounded-full text-xs font-semibold border ${cfg.badgeBg}`;
+      badge.innerText = cfg.label;
+
+      const backdrop = document.getElementById('modal-backdrop');
+      const box = document.getElementById('modal-box');
+      
+      backdrop.classList.remove('hidden');
+      setTimeout(() => {
+        backdrop.classList.remove('opacity-0');
+        box.classList.remove('scale-95');
+        box.classList.add('scale-100');
+      }, 10);
+
+      // Store current item for copy action
+      backdrop.dataset.activeId = id;
+    }
+
+    function closeModal() {
+      const backdrop = document.getElementById('modal-backdrop');
+      const box = document.getElementById('modal-box');
+      
+      box.classList.remove('scale-100');
+      box.classList.add('scale-95');
+      backdrop.classList.add('opacity-0');
+      
+      setTimeout(() => {
+        backdrop.classList.add('hidden');
+      }, 200);
+    }
+
+    // Copy Summary Helper
+    function copyVisibleSummary() {
+      const visibleData = getFilteredData();
+      if (visibleData.length === 0) return;
+
+      const text = visibleData.map(item => {
+        let entry = `${item.acronym} - ${item.term} (DE: ${item.german})\nDefinition: ${item.definition}\nContext: ${item.context}`;
+        if (item.question) entry += `\nCritical Question: ${item.question}`;
+        return entry;
+      }).join('\n\n---\n\n');
+      
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copy-summary-btn');
+        const origHTML = btn.innerHTML;
+        btn.innerHTML = `<i class="fa-solid fa-check text-emerald-500"></i> Copied (${visibleData.length})`;
+        setTimeout(() => {
+          btn.innerHTML = origHTML;
+        }, 2000);
+      });
+    }
+
+    // Event Listeners Registration
+    function setupEventListeners() {
+      // Search Input
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        if (searchQuery) {
+          clearSearchBtn.classList.remove('hidden');
+        } else {
+          clearSearchBtn.classList.add('hidden');
+        }
+        renderGrid();
+      });
+
+      clearSearchBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        searchQuery = '';
+        clearSearchBtn.classList.add('hidden');
+        renderGrid();
+      });
+
+      // Category Buttons
+      document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.category-btn').forEach(b => {
+            b.classList.remove('bg-brand-600', 'text-white', 'shadow-sm', 'active');
+            b.classList.add('bg-slate-100', 'dark:bg-slate-700/60', 'text-slate-600', 'dark:text-slate-300');
+          });
+          btn.classList.remove('bg-slate-100', 'dark:bg-slate-700/60', 'text-slate-600', 'dark:text-slate-300');
+          btn.classList.add('bg-brand-600', 'text-white', 'shadow-sm', 'active');
+          
+          currentCategory = btn.dataset.category;
+          renderGrid();
+        });
+      });
+
+      // Alphabet Buttons
+      alphaBar.addEventListener('click', (e) => {
+        if (e.target.classList.contains('alpha-btn')) {
+          document.querySelectorAll('.alpha-btn').forEach(b => {
+            b.classList.remove('bg-slate-200', 'dark:bg-slate-700', 'text-slate-800', 'dark:text-white', 'active');
+            b.classList.add('text-slate-600', 'dark:text-slate-400');
+          });
+          e.target.classList.add('bg-slate-200', 'dark:bg-slate-700', 'text-slate-800', 'dark:text-white', 'active');
+          e.target.classList.remove('text-slate-600', 'dark:text-slate-400');
+
+          currentLetter = e.target.dataset.letter;
+          renderGrid();
+        }
+      });
+
+      // Reset Buttons
+      const resetAll = () => {
+        currentCategory = 'all';
+        currentLetter = 'all';
+        searchQuery = '';
+        searchInput.value = '';
+        clearSearchBtn.classList.add('hidden');
+
+        // Reset Category Buttons
+        document.querySelectorAll('.category-btn').forEach(b => {
+          b.classList.remove('bg-brand-600', 'text-white', 'active');
+          b.classList.add('bg-slate-100', 'dark:bg-slate-700/60', 'text-slate-600', 'dark:text-slate-300');
+        });
+        document.querySelector('.category-btn[data-category="all"]').classList.add('bg-brand-600', 'text-white', 'active');
+
+        // Reset Alpha Buttons
+        document.querySelectorAll('.alpha-btn').forEach(b => {
+          b.classList.remove('bg-slate-200', 'dark:bg-slate-700', 'text-slate-800', 'dark:text-white', 'active');
+          b.classList.add('text-slate-600', 'dark:text-slate-400');
+        });
+        document.querySelector('.alpha-btn[data-letter="all"]').classList.add('bg-slate-200', 'dark:bg-slate-700', 'text-slate-800', 'dark:text-white', 'active');
+
+        renderGrid();
+      };
+
+      resetFiltersBtn.addEventListener('click', resetAll);
+      resetSearchBtn.addEventListener('click', resetAll);
+
+      // Copy Summary
+      document.getElementById('copy-summary-btn').addEventListener('click', copyVisibleSummary);
+
+      // Modal Closures
+      document.getElementById('close-modal').addEventListener('click', closeModal);
+      document.getElementById('close-modal-btn').addEventListener('click', closeModal);
+      document.getElementById('modal-backdrop').addEventListener('click', (e) => {
+        if (e.target.id === 'modal-backdrop') closeModal();
+      });
+
+      // Copy Modal Entry
+      document.getElementById('copy-modal-text').addEventListener('click', () => {
+        const id = document.getElementById('modal-backdrop').dataset.activeId;
+        const item = glossaryData.find(x => x.id === id);
+        if (!item) return;
+
+        let text = `${item.acronym} - ${item.term} (DE: ${item.german})\nDefinition: ${item.definition}\nContext: ${item.context}`;
+        if (item.question) text += `\nCritical Question: ${item.question}`;
+
+        navigator.clipboard.writeText(text).then(() => {
+          const btn = document.getElementById('copy-modal-text');
+          btn.innerHTML = `<i class="fa-solid fa-check text-emerald-500"></i> Entry Copied!`;
+          setTimeout(() => {
+            btn.innerHTML = `<i class="fa-regular fa-copy"></i> Copy Entry Text`;
+          }, 2000);
+        });
+      });
+
+      // Keyboard Esc to close Modal
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+      });
+    }
+  </script>
+</body>
+</html>
