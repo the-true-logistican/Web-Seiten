@@ -1798,66 +1798,67 @@
 
   <!-- Glossary Comprehensive Dataset & Logic Script (164 Master Terms) -->
   <script>
-    const glossaryData = [
-      // -------------------------------------------------------------
-      // CATEGORY 1: MATERIAL & POLYMER LEVEL (material)
-      // -------------------------------------------------------------
-      {
+    const glossaryData = [      {
         id: "abs",
         term: "Acrylonitrile Butadiene Styrene",
         acronym: "ABS",
         german: "Acrylnitril-Butadien-Styrol-Copolymer",
         category: "material",
         definition: "An amorphous engineering thermoplastic resin known for high impact resistance, rigidity, and dimensional stability.",
-        context: "Commonly used in automotive parts, electronic housings (WEEE), and appliances. Requires sensor fusion or chemical identification to isolate from PC/ABS blends in shredder residues."
-      },
-      {
+        context: "Commonly used in automotive parts, electronic housings (WEEE), and appliances. Requires sensor fusion or chemical identification to isolate from PC/ABS blends in shredder residues.",
+        anchor: "Session 5 & 11",
+        question: "What sorting method distinguishes ABS from PC/ABS blends and flame-retarded housings at the required throughput?"
+      },      {
         id: "additives",
         term: "Polymer Additives",
         acronym: "ADD",
         german: "Kunststoff-Additive / Hilfsstoffe",
         category: "material",
         definition: "Chemical compounds added to polymers during formulation to modify properties (e.g., plasticisers, stabilisers, flame retardants, UV absorbers, pigments).",
-        context: "Additives directly impact recycling economics. Unintended additive migration or legacy chemical accumulation (e.g., banned BFRs) can disqualify secondary polymers from high-value applications."
-      },
-      {
+        context: "Additives directly impact recycling economics. Unintended additive migration or legacy chemical accumulation (e.g., banned BFRs) can disqualify secondary polymers from high-value applications.",
+        anchor: "Session 5 & 8",
+        question: "Which additives are present, and can the recovered polymer meet the next application specification without removing them?"
+      },      {
         id: "additive-accumulation",
         term: "Additive Accumulation",
         acronym: "AAC",
         german: "Additive-Akkumulation / Anreicherung",
         category: "material",
-        definition: "Concentration build-up of non-polymeric constituents (stabilizers, pigments, fillers, flame retardants, plasticizers, slip agents) across successive life cycles when materials are blended without chemical purification.",
-        context: "Mechanical recycling does not separate additives. Unlike polymer chains, additives do not degrade away; they accumulate or dilute unpredictably, preventing stable secondary formulation.",
-        question: "Which additive classes were quantified in the output recyclate, and what would their steady-state concentration be after n cycles of the same closed loop?"
-      },
-      {
+        definition: "Potential build-up, depletion, transformation or dilution of non-polymeric constituents (stabilisers, pigments, fillers, flame retardants and plasticisers) when different formulations enter successive recycling cycles.",
+        context: "Mechanical recycling does not generally purify individual additives. Their concentrations depend on input mix, losses, chemistry and new additions; assuming either universal accumulation or complete removal would be misleading.",
+        question: "Which additive classes were quantified in the output recyclate, and what would their steady-state concentration be after n cycles of the same closed loop?",
+        anchor: "Session 5 & 8"
+      },      {
         id: "bfr",
         term: "Brominated Flame Retardants",
         acronym: "BFR",
         german: "Bromierte Flammschutzmittel",
         category: "material",
         definition: "Organobromine compounds incorporated into electrical equipment and plastics to inhibit ignition.",
-        context: "Subject to strict regulatory limits under RoHS and POPs directives. BFR-containing plastics must be sorted out using XRF spectroscopy to prevent contamination of recyclates."
-      },
-      {
+        context: "Some brominated flame retardants are restricted under specific chemical and product rules, but not all are prohibited. XRF can screen for bromine; compound-specific identification and legal-limit assessment may require further analysis.",
+        anchor: "Session 5 & 11",
+        question: "Does an elemental bromine signal identify a restricted substance, or is compound-specific analysis still required?"
+      },      {
         id: "carbon-black",
         term: "Carbon Black",
         acronym: "CB",
         german: "Industrieruß / Carbon Black",
         category: "material",
         definition: "A fine particulate form of elemental carbon used as a black pigment and reinforcing or conductive filler in polymer compounds.",
-        context: "Carbon black can strongly absorb near-infrared radiation, making conventional NIR identification of black plastic fragments difficult; alternative sensing methods may be needed."
-      },
-      {
+        context: "Carbon black strongly absorbs conventional NIR signals, making identification difficult for many black plastic fractions. Alternative optical design, Raman or complementary sensor modalities may improve discrimination but have their own limitations and cost.",
+        anchor: "Session 5 & 11",
+        question: "Which identification method can classify the carbon-black-filled fraction at industrial belt speed and acceptable cost?"
+      },      {
         id: "cfrp",
         term: "Carbon-Fibre-Reinforced Polymer",
         acronym: "CFRP",
         german: "Kohlenstofffaserverstärkter Kunststoff (CFK)",
         category: "material",
         definition: "A high-performance composite combining carbon fibres with a polymer matrix (usually epoxy thermosets or high-temp thermoplastics).",
-        context: "Recycling CFRP requires thermochemical processes like pyrolysis or solvolysis to reclaim expensive carbon fibres while sacrificing or upgrading the matrix."
-      },
-      {
+        context: "Recycling CFRP requires thermochemical processes like pyrolysis or solvolysis to reclaim expensive carbon fibres while sacrificing or upgrading the matrix.",
+        anchor: "Session 5 & 8",
+        question: "What recovered fibre length, strength and surface condition can the process guarantee for an actual customer?"
+      },      {
         id: "chain-branching",
         term: "Cross-Linking and Chain Branching",
         acronym: "CLB",
@@ -1865,37 +1866,39 @@
         category: "material",
         definition: "Radical recombination forming covalent inter-chain links (gel formation) or long-chain branches, common in polyethylenes and polybutadiene-containing systems during thermo-mechanical processing.",
         context: "In PE films, gels cause physical defects, melt filtration blockages, and bubble instability. Because scission and cross-linking occur simultaneously, MFI alone is a misleading quality metric.",
-        question: "Does the reported MFI hide a bimodal population of scissioned and cross-linked chains, and what do rheology and gel content show?"
-      },
-      {
+        question: "Does the reported MFI hide a bimodal population of scissioned and cross-linked chains, and what do rheology and gel content show?",
+        anchor: "Session 5"
+      },      {
         id: "chain-extender",
         term: "Chain Extenders",
         acronym: "CE",
         german: "Kettenverlängerer",
         category: "material",
         definition: "Low molecular weight difunctional or polyfunctional additives that react with end-groups of degraded polymers to rebuild molecular weight during extrusion.",
-        context: "Crucial chemical additive in mechanical reprocessing of PET and polyamides to restore melt viscosity degraded by hydrolytic scission during thermal reprocessing."
-      },
-      {
+        context: "Reactive chain extension can raise molecular weight or melt strength in certain condensation polymers, but cannot automatically undo contaminants, mixed grades or every form of degradation; product properties still require measurement.",
+        anchor: "Session 5 & 6",
+        question: "Do restored melt-flow properties also predict adequate mechanical strength and long-term stability?"
+      },      {
         id: "chain-scission",
         term: "Chain Scission (Thermo-Mechanical)",
         acronym: "CSC",
         german: "Thermomechanischer Kettenabbau",
         category: "material",
-        definition: "Homolytic cleavage of backbone covalent bonds under high shear and temperature during melt processing, producing lower-molecular-weight chains and reactive radical end-groups.",
-        context: "Mechanical recycling is a finite-cycle process. Scission irreversibly lowers melt viscosity, impact strength, and elongation at break. Thermal history is rarely documented in PCR feedstocks.",
-        question: "How many documented melt-processing cycles lie behind the claimed property retention, and was it measured on a real post-consumer stream or a virgin-spiked lab sample?"
-      },
-      {
+        definition: "Cleavage of polymer backbone bonds during use or processing, promoted by heat, shear, oxygen and, for susceptible polymers, moisture. Mechanisms and rates depend on the material and operating conditions.",
+        context: "Scission can lower molecular weight and change viscosity and mechanical properties. However, the extent of degradation per cycle is not universal; stabilisation, reprocessing conditions and input history determine achievable recyclate quality.",
+        question: "How many documented melt-processing cycles lie behind the claimed property retention, and was it measured on a real post-consumer stream or a virgin-spiked lab sample?",
+        anchor: "Session 5"
+      },      {
         id: "commodity-thermoplastics",
         term: "Commodity Thermoplastics",
         acronym: "CTP",
         german: "Standardkunststoffe / Massenkunststoffe",
         category: "material",
         definition: "High-volume polymers produced in large quantities for widespread packaging, consumer, and construction goods (e.g., PE, PP, PET, PVC, PS).",
-        context: "Make up over 70% of plastic waste flows. Highly dependent on automated optical sorting lines to separate mixed post-consumer packaging streams."
-      },
-      {
+        context: "Make up over 70% of plastic waste flows. Highly dependent on automated optical sorting lines to separate mixed post-consumer packaging streams.",
+        anchor: "Session 5",
+        question: "Which commodity polymer grades can be sorted into specification-grade feedstock from this particular collection system?"
+      },      {
         id: "compatibilisers",
         term: "Compatibilisation & Compatibilisers",
         acronym: "COMP",
@@ -1903,9 +1906,9 @@
         category: "material",
         definition: "Reducing interfacial tension and stabilizing phase morphology in immiscible polymer blends using block copolymers, graft copolymers, or reactive coupling agents (e.g., maleic anhydride grafts).",
         context: "Compatibilizers must be matched to blend compositions, which fluctuate continuously in real waste. Compatibilizer dosing is a control problem with varying inputs, and the agent adds virgin cost.",
-        question: "Was the compatibilizer system validated across variable feedstock compositions, or only with a fixed laboratory blend?"
-      },
-      {
+        question: "Was the compatibilizer system validated across variable feedstock compositions, or only with a fixed laboratory blend?",
+        anchor: "Session 5 & 8"
+      },      {
         id: "designed-in-complexity",
         term: "Designed-In Recycling Complexity",
         acronym: "DRC",
@@ -1915,8 +1918,7 @@
         definition: "Recycling difficulty determined upstream at product design: multilayers, adhesives, inorganic fillers, coloring pigments, multi-material joining, and inseparable components.",
         context: "Reverses Session 5: not how the recycler can solve sorting, but how product design created the barrier. Many recycling bottlenecks are design decisions visible years later.",
         question: "How much recycling complexity was designed into the product, and what functional advantage did it buy during use?"
-      },
-      {
+      },      {
         id: "elastomers",
         term: "Elastomers & Devulcanization Limits",
         acronym: "EL",
@@ -1924,27 +1926,29 @@
         category: "material",
         definition: "Cross-linked polymers displaying large reversible elastic deformations. Devulcanization aims to selectively cleave sulfur/peroxide cross-links without severing the carbon backbone.",
         context: "Selectivity for S–S/C–S bonds over C–C backbone bonds is limited; devulcanizate is typically blended in small proportions. Tire-wear particles represent a major dissipative loss outside collection.",
-        question: "What fraction of cross-links is cleaved versus backbone scission, and in what maximum proportion can it be blended into a safety-critical component?"
-      },
-      {
+        question: "What fraction of cross-links is cleaved versus backbone scission, and in what maximum proportion can it be blended into a safety-critical component?",
+        anchor: "Session 5 & 8"
+      },      {
         id: "engineering-thermoplastics",
         term: "Engineering Thermoplastics",
         acronym: "ETP",
         german: "Technische Kunststoffe",
         category: "material",
         definition: "Polymers engineered for higher thermal, mechanical, or chemical performance (e.g., ABS, PC, PA, PMMA, PBT).",
-        context: "High intrinsic material value makes secondary recovery economically attractive, but complex additive packages and long product lifetimes increase variability."
-      },
-      {
+        context: "High intrinsic material value makes secondary recovery economically attractive, but complex additive packages and long product lifetimes increase variability.",
+        anchor: "Session 5",
+        question: "Can the target grade be reliably identified despite blends, fillers, pigments and ageing?"
+      },      {
         id: "eps",
         term: "Expanded Polystyrene",
         acronym: "EPS",
         german: "Expandiertes Polystyrol (Styropor)",
         category: "material",
         definition: "A rigid, cellular foam plastic produced from expanded polystyrene beads.",
-        context: "Logistically challenging due to low density (<98% air). Demands compaction or solvent-based dissolution (CreaSolv) at collection points to justify transport costs."
-      },
-      {
+        context: "Logistically challenging due to low density (<98% air). Demands compaction or solvent-based dissolution (CreaSolv) at collection points to justify transport costs.",
+        anchor: "Session 5",
+        question: "Does the recovered value justify the handling, densification and transport costs of this low-bulk-density stream?"
+      },      {
         id: "fibre-composites-limits",
         term: "Fiber-Reinforced Composites (CFRP/GFRP) Limits",
         acronym: "FRC",
@@ -1952,36 +1956,39 @@
         category: "material",
         definition: "Heterogeneous composites of continuous or discontinuous fibers (carbon, glass) in a thermoset or thermoplastic matrix subject to mechanical, thermal, or solvolytic recovery.",
         context: "Reclaimed fibers lose length, sizing, alignment, and tensile strength (downgrading to short-fiber applications). Low virgin glass costs make GFRP recycling economically weaker than CFRP.",
-        question: "Which retained mechanical properties and fiber architecture were measured on the recovered fiber, and what is the demand-side application with its price?"
-      },
-      {
+        question: "Which retained mechanical properties and fiber architecture were measured on the recovered fiber, and what is the demand-side application with its price?",
+        anchor: "Session 5 & 8"
+      },      {
         id: "fillers",
         term: "Fillers and Minerals",
         acronym: "FIL",
         german: "Füllstoffe (z. B. Talkum, Kreide)",
         category: "material",
         definition: "Inorganic particles (calcium carbonate, talc, mica) added to plastics to lower cost, increase stiffness, or alter thermal conductivity.",
-        context: "Substantially alters particle density, causing filled polyolefins (e.g., PP-T30) to sink during density-based sink-float separation despite being polyolefins."
-      },
-      {
+        context: "Substantially alters particle density, causing filled polyolefins (e.g., PP-T30) to sink during density-based sink-float separation despite being polyolefins.",
+        anchor: "Session 5 & 11",
+        question: "How does the filler content change density separation, melt processing and the target application?"
+      },      {
         id: "gfrp",
         term: "Glass-Fibre-Reinforced Polymer",
         acronym: "GFRP",
         german: "Glasfaserverstärkter Kunststoff (GFK)",
         category: "material",
         definition: "A composite material combining structural glass fibres with a thermosetting (epoxy/polyester) or thermoplastic matrix.",
-        context: "Found in wind turbine blades, boat hulls, and auto bodies. Hard to recycle; current industrial routes involve cement kiln co-processing (silica source + fuel replacement)."
-      },
-      {
+        context: "Found in wind turbine blades, boat hulls, and auto bodies. Hard to recycle; current industrial routes involve cement kiln co-processing (silica source + fuel replacement).",
+        anchor: "Session 5 & 8",
+        question: "Does the recovered glass-fibre value cover matrix removal and fibre-quality losses compared with low-cost virgin glass fibre?"
+      },      {
         id: "hdpe",
         term: "High-Density Polyethylene",
         acronym: "HDPE",
         german: "Polyethylen hoher Dichte (PE-HD)",
         category: "material",
         definition: "A thermoplastic polymer with a high strength-to-density ratio produced from ethylene monomers.",
-        context: "Widely used in rigid bottles, drums, and pipes. Mechanical recycling is mature for controlled bottle streams; post-consumer household streams suffer from cross-grade MFI variation."
-      },
-      {
+        context: "Widely used in rigid bottles, drums, and pipes. Mechanical recycling is mature for controlled bottle streams; post-consumer household streams suffer from cross-grade MFI variation.",
+        anchor: "Session 5",
+        question: "What share of the collected HDPE stream meets the specified grade, colour and contamination limits after sorting?"
+      },      {
         id: "hydrolytic-degradation",
         term: "Hydrolytic Degradation",
         acronym: "HYD",
@@ -1989,47 +1996,49 @@
         category: "material",
         definition: "Water-mediated cleavage of hydrolyzable linkages (esters in PET/PBT/PLA, amides in PA, carbonates in PC) at elevated melt temperatures, catalyzed by acid end-groups.",
         context: "Moisture in flakes at melt temperature causes catastrophic intrinsic viscosity (IV) loss, enforcing intensive desiccant drying whose energy demand is often omitted from LCAs.",
-        question: "What residual moisture level at extruder feed is assumed, and does the energy balance include the drying process?"
-      },
-      {
+        question: "What residual moisture level at extruder feed is assumed, and does the energy balance include the drying process?",
+        anchor: "Session 5"
+      },      {
         id: "ldpe",
         term: "Low-Density Polyethylene",
         acronym: "LDPE",
         german: "Polyethylen niederer Dichte (PE-LD)",
         category: "material",
         definition: "A highly branched semi-rigid thermoplastic polymer characterized by high flexibility and clarity.",
-        context: "Dominates flexible film packaging. Sorting and mechanical wash lines suffer high moisture retention and shredder jamming, requiring specialized film washing lines."
-      },
-      {
+        context: "Dominates flexible film packaging. Sorting and mechanical wash lines suffer high moisture retention and shredder jamming, requiring specialized film washing lines.",
+        anchor: "Session 5",
+        question: "Can films be collected, cleaned and extruded with sufficient yield to offset high contamination and transport costs?"
+      },      {
         id: "legacy-substances",
         term: "Legacy Substances",
         acronym: "LEG",
         german: "Altstoffe / Historische Schadstoffe",
         category: "material",
         definition: "Hazardous substances restricted or banned after original product manufacture (e.g., PBDEs, HBCDD, lead/cadmium stabilizers, phthalates) that remain in active product stocks.",
-        context: "Recycling reintroduces historic toxic chemistry into new products. Stock exhaustion lags regulation by decades; contamination forces costly removal or incineration.",
-        question: "What is the stock-age distribution of the feedstock, and what measured fraction exceeds legal thresholds?"
-      },
-      {
+        context: "Long-lived products can return as waste after applicable substance rules have changed. XRF can screen for some elements, but it cannot identify every restricted organic compound; analytical method and legal threshold must be selected for the actual substance.",
+        question: "What is the stock-age distribution of the feedstock, and what measured fraction exceeds legal thresholds?",
+        anchor: "Session 5 & 8"
+      },      {
         id: "lldpe",
         term: "Linear Low-Density Polyethylene",
         acronym: "LLDPE",
         german: "Lineares Polyethylen niederer Dichte (PE-LLD)",
         category: "material",
         definition: "A substantially linear polymer with short branches, offering higher tensile strength and puncture resistance than LDPE.",
-        context: "Dominant in industrial stretch wraps and agricultural films. Clean commercial mono-streams provide high-quality feedstock for film-to-film recycling."
-      },
-      {
+        context: "Dominant in industrial stretch wraps and agricultural films. Clean commercial mono-streams provide high-quality feedstock for film-to-film recycling.",
+        anchor: "Session 5",
+        question: "Can the mixed PE-film stream meet mechanical-property requirements when LDPE and LLDPE grades are blended?"
+      },      {
         id: "migration-nias",
         term: "Migration and NIAS",
         acronym: "NIA",
         german: "Migration und NIAS (Nicht beabsichtigte Stoffe)",
         category: "material",
         definition: "Mass transfer of low-molecular-weight species from polymers into contact media. NIAS (Non-Intentionally Added Substances) are degradation by-products, impurities, and reaction products.",
-        context: "Degradation expands the NIAS spectrum. Unknown substances cannot be evaluated by targeted analysis alone, restricting food-contact approval for recyclates outside bottle rPET.",
-        question: "Does the safety claim rest on targeted analysis of known substances or on non-targeted screening, and for which polymer is the challenge test validated?"
-      },
-      {
+        context: "Recycling can alter the mixture of migrating substances. Food-contact use requires a process- and application-specific safety assessment under applicable law; neither targeted screening alone nor the fact that a material is rPET automatically proves suitability.",
+        question: "Does the safety claim rest on targeted analysis of known substances or on non-targeted screening, and for which polymer is the challenge test validated?",
+        anchor: "Session 5 & 6"
+      },      {
         id: "molecular-weight-distribution",
         term: "Molecular Weight Distribution (MWD) Shift",
         acronym: "MWD",
@@ -2037,9 +2046,9 @@
         category: "material",
         definition: "Change in the full spectrum of chain lengths (Mn, Mw, dispersity Đ) through scission, branching, or blending of material fractions with differing thermal histories.",
         context: "Average metrics (Mw, IV) hide distribution tails. Low-Mw fractions act as plasticizers and migration channels; high-Mw/gel fractions cause extrusion defects.",
-        question: "Is the material specification based on mean values only, and what do GPC (SEC) data show about distribution width and tails?"
-      },
-      {
+        question: "Is the material specification based on mean values only, and what do GPC (SEC) data show about distribution width and tails?",
+        anchor: "Session 5 & 6"
+      },      {
         id: "multilayer-packaging",
         term: "Multilayer Packaging & Tie Layers",
         acronym: "MLF",
@@ -2047,72 +2056,79 @@
         category: "material",
         definition: "Co-extruded or laminated structures combining polymers (PE/PA, PET/PE, EVOH) and aluminum layers, bonded by adhesive tie layers for maximum barrier protection.",
         context: "Designing for ultra-low mass and extended shelf life reduces mechanical recyclability to near zero. Layers cannot be physically delaminated and form incompatible blends on melting.",
-        question: "What is the net environmental trade-off between barrier shelf-life protection and loss of recyclability at total system level?"
-      },
-      {
+        question: "What is the net environmental trade-off between barrier shelf-life protection and loss of recyclability at total system level?",
+        anchor: "Session 5 & 8"
+      },      {
         id: "pa",
         term: "Polyamide (Nylon)",
         acronym: "PA",
         german: "Polyamid",
         category: "material",
         definition: "A family of semi-crystalline synthetic engineering thermoplastics featuring repeating amide linkages (PA6, PA66).",
-        context: "Used in automotive parts, packaging barrier layers, and textiles. Thermally stable but hygroscopic; requires intensive drying before reprocessing to prevent hydrolytic degradation."
-      },
-      {
+        context: "Used in automotive parts, packaging barrier layers, and textiles. Thermally stable but hygroscopic; requires intensive drying before reprocessing to prevent hydrolytic degradation.",
+        anchor: "Session 5",
+        question: "How do moisture history, fibre reinforcement and polymer grade affect the feasible recycling route?"
+      },      {
         id: "pbat",
         term: "Polybutylene Adipate Terephthalate",
         acronym: "PBAT",
         german: "Polybutylenadipat-Terephthalat",
         category: "material",
         definition: "A biodegradable random copolymer designed to offer flexible film properties similar to LDPE.",
-        context: "Must be kept isolated from conventional PE/PP recycling streams, as biodegradable polymers contaminate traditional polyolefin mechanical recycling batches."
-      },
-      {
+        context: "Must be kept isolated from conventional PE/PP recycling streams, as biodegradable polymers contaminate traditional polyolefin mechanical recycling batches.",
+        anchor: "Session 5",
+        question: "Which certified treatment conditions are available, and would separate collection or mechanical recycling be preferable?"
+      },      {
         id: "pbt",
         term: "Polybutylene Terephthalate",
         acronym: "PBT",
         german: "Polybutylenterephthalat",
         category: "material",
         definition: "A semi-crystalline engineering thermoplastic polyester featuring high electrical insulation properties and chemical resistance.",
-        context: "Widely used in electrical connectors and automotive light housings. Susceptible to moisture degradation during recycling."
-      },
-      {
+        context: "Widely used in electrical connectors and automotive light housings. Susceptible to moisture degradation during recycling.",
+        anchor: "Session 5",
+        question: "What moisture and additive limits are required before remelting the collected technical PBT fraction?"
+      },      {
         id: "pc",
         term: "Polycarbonate",
         acronym: "PC",
         german: "Polycarbonat",
         category: "material",
         definition: "An amorphous, high-clarity engineering thermoplastic offering outstanding optical transparency and extreme impact strength.",
-        context: "Used in optical lenses, automotive headlights, and structural glazing. Secondary PC requires careful decontamination and flame retardant screening."
-      },
-      {
+        context: "Used in optical lenses, automotive headlights, and structural glazing. Secondary PC requires careful decontamination and flame retardant screening.",
+        anchor: "Session 5",
+        question: "Can PC be separated from PC/ABS blends and checked for legacy additives before recycling?"
+      },      {
         id: "pcr",
         term: "Post-Consumer Resin",
         acronym: "PCR",
         german: "Post-Consumer-Rezyklat (PCR)",
         category: "material",
         definition: "Material originating from products that have completed their intended service life as consumer or commercial goods.",
-        context: "Highly variable in composition, contamination, and thermal history. Requires intensive sorting, washing, and compounding to qualify as an industrial raw material."
-      },
-      {
+        context: "Highly variable in composition, contamination, and thermal history. Requires intensive sorting, washing, and compounding to qualify as an industrial raw material.",
+        anchor: "Session 5 & 6",
+        question: "Which upstream collection and sorting operations justify the claimed PCR origin, purity and traceability?"
+      },      {
         id: "pet",
         term: "Polyethylene Terephthalate",
         acronym: "PET",
         german: "Polyethylenterephthalat",
         category: "material",
         definition: "A semi-crystalline thermoplastic polyester widely used in beverage bottles, thermoformed trays, and synthetic fibres (polyester).",
-        context: "The gold standard of mechanical closed-loop bottle-to-bottle recycling (rPET), enabled by deposit systems, optical sorting, and solid-state polycondensation (SSP)."
-      },
-      {
+        context: "The gold standard of mechanical closed-loop bottle-to-bottle recycling (rPET), enabled by deposit systems, optical sorting, and solid-state polycondensation (SSP).",
+        anchor: "Session 5",
+        question: "How does the recovery pathway differ for deposit bottles, trays, textiles and multilayer PET?"
+      },      {
         id: "pha",
         term: "Polyhydroxyalkanoates",
         acronym: "PHA",
         german: "Polyhydroxyalkanoate",
         category: "material",
         definition: "A class of bio-based, biodegradable polyesters synthesized naturally by bacterial fermentation of sugars or lipids.",
-        context: "Targeted for marine-degradable application niches, but acts as an impurity in conventional PET or polyolefin mechanical sorting streams."
-      },
-      {
+        context: "Targeted for marine-degradable application niches, but acts as an impurity in conventional PET or polyolefin mechanical sorting streams.",
+        anchor: "Session 5",
+        question: "Does the claimed degradation pathway occur under the actual environmental conditions and available infrastructure?"
+      },      {
         id: "physical-limits",
         term: "Physical Limits of Closure",
         acronym: "PLC",
@@ -2120,92 +2136,99 @@
         anchor: "Session 2",
         category: "material",
         definition: "Thermodynamic and material barriers preventing perfect 100% circularity: dissipative losses/abrasion, cumulative quality degradation, stock growth (demand exceeding returns), and long product lifetimes creating decade-long delays.",
-        context: "The meaningful metric is not whether a loop is formally closed, but how much primary input, material loss, and burden are avoided. Growing material stocks cap maximum recycled content.",
+        context: "A circular system must account for dissipation, quality loss, growing in-use stocks, time delays and the energy needed for collection and processing. The relevant test is the reduction in primary inputs and impacts, not a literally perfect closed loop.",
         question: "What is the stock growth rate and product lifetime, and what theoretical recycled-content ceiling follows from these physical limits?"
-      },
-      {
+      },      {
         id: "pigments",
         term: "Pigments and Colorants",
         acronym: "PIG",
         german: "Farbpigmente / Farbstoffe",
         category: "material",
         definition: "Insoluble organic or inorganic color particles blended into polymers to impart color.",
-        context: "Mixed-color sorting results in grey/dark recyclates, severely limiting market value. Recyclers prefer clear or mono-color collection streams to preserve color flexibility."
-      },
-      {
+        context: "Mixed-color sorting results in grey/dark recyclates, severely limiting market value. Recyclers prefer clear or mono-color collection streams to preserve color flexibility.",
+        anchor: "Session 5 & 8",
+        question: "Do pigments interfere with sensor identification or restrict the colour and value of the recovered product?"
+      },      {
         id: "pir",
         term: "Post-Industrial Resin",
         acronym: "PIR",
         german: "Post-Industrial-Rezyklat / Pre-Consumer-Abfall",
         category: "material",
         definition: "Polymer scrap reclaimed from manufacturing conversion processes (sprues, trim, off-spec batches) prior to consumer distribution.",
-        context: "Clean, homogeneous, and well-characterized. Highly sought after by processors; commands premium prices compared to post-consumer resin (PCR)."
-      },
-      {
+        context: "Clean, homogeneous, and well-characterized. Highly sought after by processors; commands premium prices compared to post-consumer resin (PCR).",
+        anchor: "Session 5 & 6",
+        question: "Is the waste genuinely pre-consumer and traceable, and does its use displace otherwise-needed virgin material?"
+      },      {
         id: "pla",
         term: "Polylactic Acid",
         acronym: "PLA",
         german: "Polymilchsäure",
         category: "material",
         definition: "A bio-based, industrially compostable thermoplastic aliphatic polyester derived from renewable plant starches.",
-        context: "Melts at lower temperatures than PET. If mis-sorted into PET bottle streams, PLA melts and chars, ruining entire batches of recycled PET flakes."
-      },
-      {
+        context: "Melts at lower temperatures than PET. If mis-sorted into PET bottle streams, PLA melts and chars, ruining entire batches of recycled PET flakes.",
+        anchor: "Session 5",
+        question: "Is this PLA stream managed separately, mechanically recycled, industrially composted or lost in mixed plastics?"
+      },      {
         id: "pmma",
         term: "Polymethyl Methacrylate (Acrylic)",
         acronym: "PMMA",
         german: "Polymethylmethacrylat (Acrylglas)",
         category: "material",
         definition: "A transparent, rigid amorphous thermoplastic used as a lightweight glass substitute.",
-        context: "Highly suitable for thermal depolymerisation (monomer casting back to MMA) with exceptional recovery yields (>90%)."
-      },
-      {
+        context: "Highly suitable for thermal depolymerisation (monomer casting back to MMA) with exceptional recovery yields (>90%).",
+        anchor: "Session 5",
+        question: "What purity and process conditions are needed to recover PMMA with useful optical or molecular properties?"
+      },      {
         id: "polymer-immiscibility",
         term: "Polymer Blend Immiscibility (Flory–Huggins Limits)",
         acronym: "FHL",
         german: "Unverträglichkeit von Polymermischungen",
         category: "material",
         definition: "For high-molecular-weight polymers, combinatorial entropy of mixing is negligible; miscibility is dictated by interaction parameter χ. Most polymer pairs have positive enthalpy of mixing and phase-separate.",
-        context: "Mixed-polymer recyclate forms coarse, weakly bonded phase domains. Interfacial voids act as crack initiators; low impurity levels (e.g., PP in PE) cause sudden mechanical failure.",
-        question: "What is the tolerance threshold for the cross-contaminant, and what is the morphology (domain size, interfacial adhesion) at that contamination level?"
-      },
-      {
+        context: "Many high-molecular-weight polymer combinations phase-separate and create weak interfaces unless morphology and adhesion are controlled. The compatibility and tolerable contamination depend on the specific pair, temperature, composition and intended application; a few percent is not a universal failure threshold.",
+        question: "What is the tolerance threshold for the cross-contaminant, and what is the morphology (domain size, interfacial adhesion) at that contamination level?",
+        anchor: "Session 5 & 8"
+      },      {
         id: "pp",
         term: "Polypropylene",
         acronym: "PP",
         german: "Polypropylen",
         category: "material",
         definition: "A semi-crystalline commodity thermoplastic characterized by low density, high chemical resistance, and good flexural strength.",
-        context: "Widely used in food tubs, caps, automotive parts, and textiles. Post-consumer PP often suffers from severe odor contamination, requiring advanced stripping technologies."
-      },
-      {
+        context: "Widely used in food tubs, caps, automotive parts, and textiles. Post-consumer PP often suffers from severe odor contamination, requiring advanced stripping technologies.",
+        anchor: "Session 5",
+        question: "Which fraction of the PP stream can achieve the required quality despite grade, filler and additive variation?"
+      },      {
         id: "ps",
         term: "Polystyrene",
         acronym: "PS",
         german: "Polystyrol",
         category: "material",
         definition: "An amorphous, clear, brittle commodity thermoplastic derived from monomeric styrene.",
-        context: "Used in yogurt pots, cutlery, and electronics housings. Depolymerisation to high-purity styrene monomer is industrially viable via thermal pyrolysis."
-      },
-      {
+        context: "Used in yogurt pots, cutlery, and electronics housings. Depolymerisation to high-purity styrene monomer is industrially viable via thermal pyrolysis.",
+        anchor: "Session 5",
+        question: "Is recycling viable for this PS stream given contamination, form factor and local offtake demand?"
+      },      {
         id: "pvc",
         term: "Polyvinyl Chloride",
         acronym: "PVC",
         german: "Polyvinylchlorid",
         category: "material",
         definition: "A high-density synthetic polymer containing halogenated chlorine, produced in rigid and flexible forms.",
-        context: "Releases corrosive HCl gas during incineration or high-temp processing. Rigid construction PVC (window profiles) has an established high-yield recycling loop."
-      },
-      {
+        context: "Releases corrosive HCl gas during incineration or high-temp processing. Rigid construction PVC (window profiles) has an established high-yield recycling loop.",
+        anchor: "Session 5",
+        question: "How are PVC grades and restricted legacy stabilisers identified, and which applications may legally accept the output?"
+      },      {
         id: "rpet",
         term: "Recycled Polyethylene Terephthalate",
         acronym: "rPET",
         german: "Rezykliertes Polyethylenterephthalat",
         category: "material",
         definition: "Secondary PET resin produced from post-consumer PET bottle flakes that have undergone decontamination and controlled melt extrusion.",
-        context: "Subject to strict regulatory EFSA/FDA safety standards for food-contact applications; often commands prices higher than virgin PET due to EU quotas."
-      },
-      {
+        context: "Quality and authorised food-contact uses depend on the recycling process, feedstock, decontamination validation and applicable regulations. Price relative to virgin PET varies with market demand, grade and recycled-content requirements.",
+        anchor: "Session 5 & 6",
+        question: "Does this rPET meet a defined application specification and the applicable authorisation requirements for food contact?"
+      },      {
         id: "thermo-oxidative-degradation",
         term: "Thermo-Oxidative Degradation",
         acronym: "TOD",
@@ -2213,9 +2236,9 @@
         category: "material",
         definition: "Radical chain autoxidation (initiation, propagation via peroxy radicals, termination) accelerated by heat, oxygen, trace metal ions, and residual catalysts.",
         context: "Damage accumulates during product service (UV, heat) and melt reprocessing. Carbonyl index, color shift, and odor are late indicators; antioxidant depletion is invisible to NIR sorting.",
-        question: "What is the oxidation induction time (OIT) of the recyclate, and what stabilizer re-dosing is needed to reach a second service life?"
-      },
-      {
+        question: "What is the oxidation induction time (OIT) of the recyclate, and what stabilizer re-dosing is needed to reach a second service life?",
+        anchor: "Session 5"
+      },      {
         id: "thermosets",
         term: "Thermosetting Polymers & Irreversible Networks",
         acronym: "TS",
@@ -2223,9 +2246,9 @@
         category: "material",
         definition: "Irreversibly cross-linked chemical polymer networks that decompose rather than melt upon heating (epoxies, polyurethanes, phenolic resins).",
         context: "No remelting route exists. Comminuted thermoset functions only as low-value filler; chemical recovery requires aggressive conditions that often destroy reinforcement fibers.",
-        question: "Is the claimed recovery product a material-grade secondary polymer or a filler/fuel, and what is its market price compared to virgin substitutes?"
-      },
-      {
+        question: "Is the claimed recovery product a material-grade secondary polymer or a filler/fuel, and what is its market price compared to virgin substitutes?",
+        anchor: "Session 5 & 8"
+      },      {
         id: "three-dim-recycling-space",
         term: "Three-Dimensional Recycling Space",
         acronym: "TRS",
@@ -2236,10 +2259,6 @@
         context: "Answers why 'Can plastic be recycled?' is invalid. There is no universal recycling process for plastic as such, only tailored pathways for sufficiently characterized material spaces.",
         question: "Which exact material, from which specific source, with what condition and contamination profile, can be turned into a secondary material for a defined application?"
       },
-
-      // -------------------------------------------------------------
-      // CATEGORY 2: LOGISTICS & SYSTEMS LEVEL (logistics)
-      // -------------------------------------------------------------
       {
         id: "balloon-effect",
         term: "Balloon Effect in Waste Trade",
@@ -2247,11 +2266,10 @@
         german: "Ballon-Effekt (Verlagerungseffekt)",
         anchor: "Session 3",
         category: "logistics",
-        definition: "The systemic phenomenon where restricting a waste import route or trade corridor in one country causes waste flows to divert to neighboring under-regulated regions or sinks.",
-        context: "Demonstrated after China's National Sword policy (2018), when massive plastic waste exports shifted rapidly to Malaysia, Vietnam, and Indonesia.",
+        definition: "Redistribution of international waste flows when a major receiving market or trade corridor restricts imports, rather than disappearance of the underlying waste stream.",
+        context: "China's Green Fence and National Sword policies illustrate a reverse-logistics resilience problem: losing a major downstream outlet shifts demand to alternative receivers, which may face capacity, quality or regulatory constraints. Rerouting alone does not show whether the global environmental outcome improved.",
         question: "Where did the redirected waste volumes physically go, and did the global environmental outcome improve?"
-      },
-      {
+      },      {
         id: "burden-shifting",
         term: "Burden Shifting & Informal Recycling",
         acronym: "BSH",
@@ -2261,17 +2279,17 @@
         definition: "Displacement of environmental, health, or social burdens across geographical regions, life-cycle stages, or impact categories. Informal recycling recovers valuable fractions via low-capital labour with severe exposure risks.",
         context: "A low processing cost often signals externalized human and environmental costs. Unwanted residues end up where regulatory control is weakest.",
         question: "Which part of the chain captures economic value, and who physically carries the toxic residues and worker exposure?"
-      },
-      {
+      },      {
         id: "cascading-use",
         term: "Cascading Material Use",
         acronym: "CMU",
         german: "Kaskadennutzung",
         category: "logistics",
         definition: "The sequential utilization of material resources across multiple iterations, prioritizing highest structural value before chemical recovery and eventual energy recovery.",
-        context: "e.g., Virgin PET bottle → rPET bottle → thermoformed tray → textile fibre → energy incineration."
-      },
-      {
+        context: "e.g., Virgin PET bottle → rPET bottle → thermoformed tray → textile fibre → energy incineration.",
+        anchor: "Session 9",
+        question: "Does the cascade genuinely retain utility, or does it simply postpone disposal without replacing other materials?"
+      },      {
         id: "chain-of-non-equivalences",
         term: "Chain of Non-Equivalences",
         acronym: "CNE",
@@ -2281,8 +2299,7 @@
         definition: "The foundational course thesis that technical feasibility, logistical feasibility, economic feasibility, and actual circularity are four completely separate conditions, where success in one implies nothing about the next.",
         context: "A recycling process can exist (technical) without collection (logistical), without a paying buyer (economic), and without substituting virgin material (actual circularity).",
         question: "Which of the four distinct feasibilities does the provided evidence actually demonstrate, and which are merely assumed?"
-      },
-      {
+      },      {
         id: "circular-diagram-hypothesis",
         term: "Circular Diagram as Hypothesis",
         acronym: "CDH",
@@ -2292,17 +2309,17 @@
         definition: "The methodological principle that a closed-loop schematic is a hypothesis about material flows with defined system boundaries, not an empirical record of operational reality.",
         context: "Diagrams hide unmeasured losses, cross-border leakage, stock accumulation, and non-substituting uses. Drawing an arrow costs nothing; moving physical mass does.",
         question: "For each arrow in the diagram: what measured mass flows through it, who pays for its movement, and where does physical leakage go?"
-      },
-      {
+      },      {
         id: "closed-loop",
         term: "Closed-Loop Supply Chain",
         acronym: "CLSC",
         german: "Geschlossener Wertstoffkreislauf",
         category: "logistics",
         definition: "A reverse supply chain designed to recover discarded products and process them back into equivalent high-tier products without material degradation.",
-        context: "Requires strict quality control, standardized returns, and high feedstock purity (e.g., bottle-to-bottle PET systems)."
-      },
-      {
+        context: "Requires strict quality control, standardized returns, and high feedstock purity (e.g., bottle-to-bottle PET systems).",
+        anchor: "Session 2 & 13",
+        question: "What measured share of the output returns to an equivalent application and replaces primary material?"
+      },      {
         id: "collection-density",
         term: "Collection Density & Haul Distance",
         acronym: "CDH",
@@ -2310,18 +2327,19 @@
         category: "logistics",
         definition: "Mass of target material accessible per unit area or route, dictating collection cost per tonne and the spatial catchment needed for plant economies of scale.",
         context: "Low-bulk-density items (films, foams, composites) have adverse transport economics. Large plants gain processing scale but expand catchment radius, increasing transport emissions.",
-        question: "What catchment radius is required to supply the plant's nameplate capacity, and what share of the claimed supply is physically accessible?"
-      },
-      {
+        question: "What catchment radius is required to supply the plant's nameplate capacity, and what share of the claimed supply is physically accessible?",
+        anchor: "Session 4"
+      },      {
         id: "deposit-refund",
         term: "Deposit-Refund System",
         acronym: "DRS",
         german: "Pfandsystem / Einwegpfand",
         category: "logistics",
         definition: "An economic instrument combining a surcharge on product purchase with a refund upon returning the spent packaging to an authorized collection point.",
-        context: "Consistently delivers the highest return rates (>90-95%) and ultra-clean mono-material packaging streams essential for food-grade mechanical recycling."
-      },
-      {
+        context: "Consistently delivers the highest return rates (>90-95%) and ultra-clean mono-material packaging streams essential for food-grade mechanical recycling.",
+        anchor: "Session 4 & 10",
+        question: "How do the refund level, return convenience and financing rules affect capture, contamination and total system cost?"
+      },      {
         id: "displacement-factor",
         term: "Displacement (Substitution) Factor",
         acronym: "DSF",
@@ -2329,9 +2347,9 @@
         category: "logistics",
         definition: "The ratio of primary virgin material production displaced per unit of secondary recyclate consumed in manufacturing (rarely 1:1 due to property downgrading).",
         context: "LCAs frequently assume a 1:1 displacement ratio. If secondary plastic substitutes for concrete/wood or opens new low-tier consumption, net avoided virgin impact drops significantly.",
-        question: "What primary material does the recyclate actually replace in the market, and what empirical evidence supports the assumed substitution ratio?"
-      },
-      {
+        question: "What primary material does the recyclate actually replace in the market, and what empirical evidence supports the assumed substitution ratio?",
+        anchor: "Session 12"
+      },      {
         id: "dissipative-loss",
         term: "Dissipative Material Loss & Ocean Leakage",
         acronym: "DML",
@@ -2341,17 +2359,17 @@
         definition: "Material dispersed into the environment beyond collection reach during use (tire wear, paint particles, microfibers, and marine plastic waste fed by river pathways and industrial fishing).",
         context: "These flows lie completely outside collection systems; cleanup deals with dispersed, degraded matter at high cost per unit, whereas prevention acts at concentrated sources.",
         question: "What is the marginal environmental benefit per unit cost of cleanup versus upstream prevention, and what sources does the claimed intervention miss?"
-      },
-      {
+      },      {
         id: "downcycling",
         term: "Downcycling",
         acronym: "DC",
         german: "Downcycling (Kaskadierung mit Qualitätsverlust)",
         category: "logistics",
         definition: "The conversion of waste materials into secondary materials or products of lower mechanical quality, functionality, or economic value.",
-        context: "Processing mixed post-consumer packaging into park benches or thick drainage pipes due to cross-polymer contamination."
-      },
-      {
+        context: "Processing mixed post-consumer packaging into park benches or thick drainage pipes due to cross-polymer contamination.",
+        anchor: "Session 5 & 9",
+        question: "What function and material value are lost compared with a feasible higher-grade recovery pathway?"
+      },      {
         id: "eight-block-gap-test",
         term: "Eight-Block Gap Test",
         acronym: "8BT",
@@ -2361,26 +2379,27 @@
         definition: "The comprehensive integration framework verifying a real industrial system across eight dimensions: concept/limits, global flows, market pull/financing, responsibility/evidence, taxonomy, purity/sorting, maturity, and economics.",
         context: "A circular system exists only if the complete chain functions. An unanswerable question exposes an unresolved system gap; solving one link does not close the loop.",
         question: "Which of the eight blocks cannot be answered for this industrial system, and who would have to close that structural gap?"
-      },
-      {
+      },      {
         id: "epr",
         term: "Extended Producer Responsibility",
         acronym: "EPR",
         german: "Erweiterte Herstellerverantwortung",
         category: "logistics",
         definition: "An environmental policy approach extending a producer’s financial and physical accountability for a product to the post-consumer stage.",
-        context: "Forces brand owners to fund municipal collection, sorting, and public recycling infrastructure, often managed via Producer Responsibility Organizations (PROs)."
-      },
-      {
+        context: "Forces brand owners to fund municipal collection, sorting, and public recycling infrastructure, often managed via Producer Responsibility Organizations (PROs).",
+        anchor: "Session 4 & 10",
+        question: "Who is legally responsible for each stage, who finances it, and how is actual treatment verified?"
+      },      {
         id: "externalities",
         term: "Environmental Externalities",
         acronym: "EXT",
         german: "Externe Effekte / Umweltfolgekosten",
         category: "logistics",
         definition: "Uncompensated environmental or social damage (e.g., marine plastic pollution, GHG emissions) caused by production/disposal not priced into market transactions.",
-        context: "Makes cheap virgin fossil polymer artificially competitive against recyclates unless corrected by virgin material taxes or carbon levies."
-      },
-      {
+        context: "Makes cheap virgin fossil polymer artificially competitive against recyclates unless corrected by virgin material taxes or carbon levies.",
+        anchor: "Session 10 & 12",
+        question: "Which environmental or social costs are absent from the market price, and how would including them change the decision?"
+      },      {
         id: "feedstock-variance",
         term: "Feedstock Variance vs. Mean Quality",
         acronym: "FVM",
@@ -2388,54 +2407,59 @@
         category: "logistics",
         definition: "The operational distinction between average composition of a waste stream and its batch-to-batch distribution tail (contaminants, moisture, polymer fractions, MFI).",
         context: "Industrial converters require tight processing windows. High mean quality yields high scrap rates if tail distribution batches violate processing tolerances.",
-        question: "What are the reported standard deviation and worst-case batch quality, and how often would processing tolerances be violated?"
-      },
-      {
+        question: "What are the reported standard deviation and worst-case batch quality, and how often would processing tolerances be violated?",
+        anchor: "Session 6"
+      },      {
         id: "feedstock-yield",
         term: "Feedstock Process Yield",
         acronym: "FPY",
         german: "Prozessausbeute (Ausbringen)",
         category: "logistics",
         definition: "The weight percentage of saleable, specification-grade secondary material recovered relative to total gross waste mass input.",
-        context: "Gross collection numbers conceal losses; a 100t waste input may yield only 55t saleable PCR pellets after removing moisture, labels, dirt, and mis-sorted plastics."
-      },
-      {
+        context: "Gross collection numbers conceal losses; a 100t waste input may yield only 55t saleable PCR pellets after removing moisture, labels, dirt, and mis-sorted plastics.",
+        anchor: "Session 3 & 6",
+        question: "What fraction of input mass becomes specification-compliant saleable output after every reject and loss?"
+      },      {
         id: "informal-recycling",
         term: "Informal Waste Sector",
         acronym: "IWS",
         german: "Informeller Abfallsektor / Müllsammler",
         category: "logistics",
         definition: "Unregulated waste picking, sorting, and trading conducted by individuals or small enterprises in developing and transitional economies.",
-        context: "Achieves remarkably high collection rates for valuable rigid plastics (PET, HDPE) but lacks environmental safety controls and worker protections."
-      },
-      {
+        context: "Achieves remarkably high collection rates for valuable rigid plastics (PET, HDPE) but lacks environmental safety controls and worker protections.",
+        anchor: "Session 3",
+        question: "Which materials are economically recovered, and what happens to rejected residues and worker exposures?"
+      },      {
         id: "logistics-rights-paradox",
         term: "Logistics-Rights Paradox in Recycling",
         acronym: "LRP",
         german: "Logistik-Paradoxon der Kreislaufwirtschaft",
         category: "logistics",
         definition: "The structural mismatch between supply-driven, highly variable waste generation and specification-driven, steady-state industrial manufacturing.",
-        context: "Forward logistics responds to predictable customer orders; reverse logistics must aggregate chaotic, seasonal waste streams into continuous industrial raw feedstocks."
-      },
-      {
+        context: "Forward logistics responds to predictable customer orders; reverse logistics must aggregate chaotic, seasonal waste streams into continuous industrial raw feedstocks.",
+        anchor: "Session 4",
+        question: "Which requirement - material, quantity, quality, place, time or cost - fails first for this waste stream?"
+      },      {
         id: "mass-balance-approach",
         term: "Mass Balance Approach",
         acronym: "MBA",
         german: "Massenbilanzansatz",
         category: "logistics",
-        definition: "A chain-of-custody tracking method allocating co-fed circular/bio-based raw materials accounting-wise to specific output end products.",
-        context: "Crucial for chemical recycling where pyrolytic oil is co-fed with crude naphtha into steam crackers, making physical traceability in the output polymer impossible."
-      },
-      {
+        definition: "A chain-of-custody accounting method that records eligible recycled or bio-based inputs and attributes defined quantities to outputs under specified allocation and verification rules when physical streams are mixed.",
+        context: "For pyrolysis oil co-processed with fossil feedstock, attributed recycled content is not the same as measuring recycled molecules in each polymer item. System boundaries, conversion losses, accounting period, treatment of fuels/energy and certification determine the credibility of the claim.",
+        anchor: "Session 5 & 12",
+        question: "What allocation standard, accounting period, conversion factors and fuel exclusions justify the recycled-content claim?"
+      },      {
         id: "material-flow-analysis",
         term: "Material Flow Analysis",
         acronym: "MFA",
         german: "Stoffstromanalyse (MFA)",
         category: "logistics",
         definition: "A systematic analytical method mapping physical flows and stock accumulation of materials within a defined spatial and temporal system boundary.",
-        context: "The core tool for logistics engineers to track loss points, domestic accumulation, exports, and mass balances across regional circular economies."
-      },
-      {
+        context: "The core tool for logistics engineers to track loss points, domestic accumulation, exports, and mass balances across regional circular economies.",
+        anchor: "Session 3 & 12",
+        question: "Are stock changes, imports, exports, residues and dissipation included in the mass balance?"
+      },      {
         id: "mfa-vs-lca",
         term: "MFA vs. LCA and Circularity Indicators",
         acronym: "MAL",
@@ -2445,27 +2469,27 @@
         definition: "Material Flow Analysis tracks physical mass, whereas LCA evaluates environmental impacts over a functional unit and system boundary. Circularity indicators summarize flows without capturing impact.",
         context: "Higher circularity scores do not prove better environmental outcomes. Transport energy, burden shifting, and market rebound can reverse apparent per-tonne advantages.",
         question: "Can the conclusion be stated as 'more circular, environmental benefit not yet established', and what LCA evidence would confirm it?"
-      },
-      {
+      },      {
         id: "missing-economic-pull",
         term: "Missing Economic Pull & Price Coupling",
         acronym: "MEP",
         german: "Fehlende Markt-Nachfrage und Preiskopplung",
         category: "logistics",
-        definition: "Absence of demand mechanisms driving buyers to purchase recyclate at cost-recovering prices, exacerbated by tight empirical coupling of recyclate prices to cheap virgin fossil polymers.",
-        context: "When virgin prices fall, recyclate demand collapses regardless of technical plant maturity. Investment models based on virgin price peaks are structurally fragile.",
-        question: "Does the proposed recycling business model survive a low virgin fossil price scenario without ongoing policy subsidies?"
-      },
-      {
+        definition: "Insufficient willingness to buy recovered material at prices that cover its complete recovery cost. Recyclate prices can be influenced by virgin-polymer markets, grade, supply, regulations and certified recycled-content demand.",
+        context: "Falling virgin prices can undermine some recycling business models, but price coupling is neither universal nor fixed. A recycled-content mandate may increase demand for qualifying material without ensuring the competitiveness of domestic recycling capacity.",
+        question: "Does the proposed recycling business model survive a low virgin fossil price scenario without ongoing policy subsidies?",
+        anchor: "Session 6 & 10"
+      },      {
         id: "missing-customer-problem",
         term: "Missing Customer Problem",
         acronym: "MCP",
         german: "Problem des fehlenden Kunden",
         category: "logistics",
         definition: "The economic barrier where waste generated at end-of-life lacks an immediate buyer willing to pay collection and sorting costs.",
-        context: "Reverse supply chains must actively perform sorting, cleaning, and quality assurance to create a marketable material before conventional market pull begins."
-      },
-      {
+        context: "Reverse supply chains must actively perform sorting, cleaning, and quality assurance to create a marketable material before conventional market pull begins.",
+        anchor: "Session 4",
+        question: "Who buys the output of each reverse-logistics stage at a price that covers the next step?"
+      },      {
         id: "negative-residual-value",
         term: "Negative Residual Value",
         acronym: "NRV",
@@ -2473,36 +2497,39 @@
         category: "logistics",
         definition: "Condition where sum of collection, sorting, processing, and residue disposal costs exceeds market revenue of output secondary material (requiring a gate fee to accept material).",
         context: "Reverse flow cannot self-finance via market pull; it requires policy intervention (EPR, subsidies, mandates) to fund the net operating gap.",
-        question: "What is the break-even recyclate price, and which party pays the financial gap in the proposed circular business model?"
-      },
-      {
+        question: "What is the break-even recyclate price, and which party pays the financial gap in the proposed circular business model?",
+        anchor: "Session 4"
+      },      {
         id: "open-loop",
         term: "Open-Loop Recycling",
         acronym: "OLR",
         german: "Offener Wertstoffkreislauf",
         category: "logistics",
         definition: "A recovery pathway where material from one product category is converted into a different product application (e.g., PET beverage bottles into polyester fleece jackets).",
-        context: "Diverts waste from landfills, but often prevents further closed-loop recycling at the secondary product's end-of-life."
-      },
-      {
+        context: "Diverts waste from landfills, but often prevents further closed-loop recycling at the secondary product's end-of-life.",
+        anchor: "Session 5 & 9",
+        question: "What application receives the recycled material, and how much virgin production does it demonstrably replace?"
+      },      {
         id: "product-service-system",
         term: "Product-Service System",
         acronym: "PSS",
         german: "Produkt-Service-Systeme (Leasing-Modelle)",
         category: "logistics",
         definition: "A business model shifting focus from selling physical products to selling access, performance, or service outcomes.",
-        context: "Keeps product ownership with the manufacturer, aligning economic incentives directly with durability, ease of maintenance, and high-yield end-of-life take-back."
-      },
-      {
+        context: "Keeps product ownership with the manufacturer, aligning economic incentives directly with durability, ease of maintenance, and high-yield end-of-life take-back.",
+        anchor: "Session 9 & 10",
+        question: "Does retaining product ownership create measurable incentives for longer life and recovery, or mainly shift costs?"
+      },      {
         id: "producer-responsibility-org",
         term: "Producer Responsibility Organization",
         acronym: "PRO",
         german: "Rücknahmesystem / Duales System",
         category: "logistics",
         definition: "A producer-funded collective entity hired by manufacturers to fulfill their statutory EPR packaging collection, sorting, and recycling targets.",
-        context: "Examples include 'Duales System Deutschland' (Grüner Punkt) managing light packaging collection (Gelber Sack)."
-      },
-      {
+        context: "Examples include 'Duales System Deutschland' (Grüner Punkt) managing light packaging collection (Gelber Sack).",
+        anchor: "Session 4 & 10",
+        question: "What performance data and oversight show that the organisation finances actual collection and treatment?"
+      },      {
         id: "rebound-effect",
         term: "Rebound Effect in Circularity",
         acronym: "REB",
@@ -2510,18 +2537,19 @@
         category: "logistics",
         definition: "Offsetting of expected environmental gains through market responses, such as lower recyclate costs increasing total product consumption or recycling increasing consumer disposability.",
         context: "Circularity measures reducing unit impact but expanding total sales volume yield less net environmental benefit than static models project.",
-        question: "Does the environmental model assume constant total market demand, and what is the sensitivity to price-elastic consumption growth?"
-      },
-      {
+        question: "Does the environmental model assume constant total market demand, and what is the sensitivity to price-elastic consumption growth?",
+        anchor: "Session 12"
+      },      {
         id: "reverse-logistics",
         term: "Reverse Logistics",
         acronym: "RL",
         german: "Rückführlogistik / Entsorgungslogistik",
         category: "logistics",
         definition: "The process of planning, executing, and controlling the efficient flow of raw materials, in-process inventory, and finished goods from point of consumption to point of recovery or disposal.",
-        context: "Combines collection routing, consolidation, sorting hubs, transport, and inventory control under uncertain return timing and feedstock quality."
-      },
-      {
+        context: "Combines collection routing, consolidation, sorting hubs, transport, and inventory control under uncertain return timing and feedstock quality.",
+        anchor: "Session 4",
+        question: "How are uncertain return volume, quality, timing and destination coordinated with downstream demand?"
+      },      {
         id: "system-boundary",
         term: "System Boundary Definition",
         acronym: "SBD",
@@ -2531,44 +2559,47 @@
         definition: "Delineation of processes, geographies, time horizons, and legal jurisdictions included in assessments. Geographically, a domestic loop often becomes a global linear flow when expanded across borders.",
         context: "An export arrow labeled 'recycling' ends national statistics but not physical flows. Excluded pretreatment, drying, residues, and overseas destinations reverse conclusions.",
         question: "What happens to the material after the last recorded transfer, and does the environmental claim survive extending boundaries globally?"
-      },
-      {
+      },      {
         id: "take-back-system",
         term: "Take-Back Scheme",
         acronym: "TBS",
         german: "Rücknahmesystem",
         category: "logistics",
         definition: "An organized reverse logistics channel where retailers or manufacturers accept spent products directly from consumers at retail sites.",
-        context: "Common in WEEE, batteries, and automotive tyres to secure high-purity returns directly at points of retail trade."
-      },
-      {
+        context: "Common in WEEE, batteries, and automotive tyres to secure high-purity returns directly at points of retail trade.",
+        anchor: "Session 4 & 10",
+        question: "Who pays for take-back, and what evidence demonstrates that returned items were actually reused or recycled?"
+      },      {
         id: "tco",
         term: "Total Cost of Ownership",
         acronym: "TCO",
         german: "Gesamtkosten des Besitzes (TCO)",
         category: "logistics",
-        definition: "A comprehensive economic assessment of purchasing an input, accounting for purchase price plus testing, machine adaptation, scrap risks, and compliance costs.",
-        context: "Purchasing PCR resin at €900/t might yield a higher TCO than virgin resin at €1,100/t if processing scrap rates rise by 5% and require extra lab validation."
-      },
-      {
+        definition: "A purchaser's comparison of the complete cost of using a material, including delivered price, qualification, testing, process adjustments, yield loss, rejects, downtime, supply-security risk, documentation and compliance.",
+        context: "A lower recyclate price per tonne does not necessarily mean a lower cost per tonne of specification-compliant finished product. Compare virgin and recycled grades at the same functional and quality requirements, including usable output yield.",
+        anchor: "Session 6",
+        question: "What is the total delivered cost per tonne of usable material after testing, rejects, downtime and supply risk?"
+      },      {
         id: "upcycling",
         term: "Upcycling",
         acronym: "UC",
         german: "Upcycling (Höherwertige Wiederverwertung)",
         category: "logistics",
         definition: "A process of converting waste materials into new materials or products of higher quality, improved functionality, or greater structural value.",
-        context: "Advanced chemical recycling converting mixed film waste back into high-purity virgin-grade monomers suitable for medical applications."
-      },
-      {
+        context: "Advanced chemical recycling converting mixed film waste back into high-purity virgin-grade monomers suitable for medical applications.",
+        anchor: "Session 9",
+        question: "Is the increased product value demonstrated by an actual buyer, or merely asserted from the process description?"
+      },      {
         id: "urban-mining",
         term: "Urban Mining",
         acronym: "UM",
         german: "Urban Mining (Anthropogenes Lager)",
         category: "logistics",
         definition: "The systematic process of recovering secondary raw materials and energy from man-made structures, infrastructure, and long-term product stocks.",
-        context: "Treating construction demolition waste and electrical networks as rich secondary resource reserves competing with primary mining."
-      },
-      {
+        context: "Treating construction demolition waste and electrical networks as rich secondary resource reserves competing with primary mining.",
+        anchor: "Session 3 & 9",
+        question: "How much recoverable material is accessible within the defined stock, and at what collection and separation cost?"
+      },      {
         id: "value-retention",
         term: "Value-Retention Strategies",
         acronym: "VRS",
@@ -2578,8 +2609,7 @@
         definition: "Strategies preserving product, component, and manufacturing identity (reuse, repair, refurbishment, remanufacturing) before material recycling destroys component structure.",
         context: "Returned products with residual value create organic market pull. Before asking how to chemically or mechanically recycle an object, analyze why its function was destroyed.",
         question: "Is function or component value retained at lower total burden than material recovery, given return condition and market demand?"
-      },
-      {
+      },      {
         id: "yield-loss-cascade",
         term: "Yield Loss Cascade",
         acronym: "YLC",
@@ -2590,10 +2620,6 @@
         context: "Individually high stage efficiencies multiply into a low end-to-end figure. Material leaves the loop as sorting rejects, storage, downcycling, or disposal.",
         question: "At which specific step in the cascade is the reported rate measured, and what absolute mass reaches the final substitution step?"
       },
-
-      // -------------------------------------------------------------
-      // CATEGORY 3: PROCESSING & ANALYTICS LEVEL (processing)
-      // -------------------------------------------------------------
       {
         id: "air-classification",
         term: "Air Classification & Zig-Zag Separators",
@@ -2601,92 +2627,100 @@
         german: "Windsichtung / Zickzacksichter",
         category: "processing",
         definition: "Density separation tech utilizing upward air currents to separate light film, paper, and dust fractions from heavy rigid plastic granules.",
-        context: "Essential pretreatment step in shredder plant processing to clean bottle flake streams from residual paper labels and thin film contaminants."
-      },
-      {
+        context: "Essential pretreatment step in shredder plant processing to clean bottle flake streams from residual paper labels and thin film contaminants.",
+        anchor: "Session 5 & 11",
+        question: "What particle size, shape and density variability determines the purity and recovery of the air-separated fraction?"
+      },      {
         id: "decontamination-superclean",
         term: "Super-Clean Decontamination Process",
         acronym: "SCD",
         german: "Super-Clean-Entgiftungsverfahren",
         category: "processing",
         definition: "High-temperature, deep-vacuum, or gas-stripping extraction processes designed to purge deep-seated organic volatile contaminants from washed flakes.",
-        context: "Mandatory technology evaluated by EFSA/FDA to grant food-contact safety compliance certificates for mechanical bottle-to-bottle rPET processes."
-      },
-      {
+        context: "Mandatory technology evaluated by EFSA/FDA to grant food-contact safety compliance certificates for mechanical bottle-to-bottle rPET processes.",
+        anchor: "Session 5 & 11",
+        question: "Which contaminants are removed, how is performance validated and what is the energy use per qualified tonne?"
+      },      {
         id: "depolymerisation",
         term: "Depolymerisation / Chemolysis",
         acronym: "DEP",
         german: "Depolymerisation / Chemischer Abbau",
         category: "processing",
-        definition: "The chemical cleavage of condensation polymers (PET, PA, PU) back into constituent monomers via reaction with water (hydrolysis), alcohol (alcoholysis), or glycol (glycolysis).",
-        context: "Allows high-yield recovery of pristine virgin-quality monomers from contaminated or multi-color textiles and carpet waste streams."
-      },
-      {
+        definition: "Chemical cleavage of polymer chains into monomers or other smaller molecules. Suitable routes depend on polymer chemistry and can include hydrolysis, glycolysis, methanolysis and other reactions.",
+        context: "PET and selected other condensation polymers can be depolymerised, but high-purity reusable building blocks require appropriate feedstock, reaction control, separation and purification. Laboratory conversion yield does not establish continuous economic recycling on mixed waste.",
+        anchor: "Session 5",
+        question: "What monomer purity and saleable yield are achieved on realistic feedstock after purification and residue treatment?"
+      },      {
         id: "digital-product-passport",
         term: "Digital Product Passport Limits",
         acronym: "DPP",
         german: "Grenzen des Digitalen Produktpasses",
         anchor: "Session 11",
         category: "processing",
-        definition: "Standardized digital record preserving component and material composition data. Its limits include physical link breakage, data granularity, legacy stock, unreadable tags, and physical inseparability in mixed waste.",
-        context: "A DPP informs recyclers what is present but cannot physically unglue multilayers. Information improves routing and sort decisions, but cannot process matter.",
+        definition: "A digital information system linking a product or component to selected identification, composition or sustainability data. Its practical limits include loss of the physical identifier, insufficient material-level granularity, legacy products, unreliable or inaccessible data, inseparable assemblies, mixed waste streams and processing cost.",
+        context: "A DPP can improve decisions before dismantling, but cannot guarantee fragment-level identification after shredding or physically separate bonded materials. Data completeness, access and verification must be assessed together with actual sorting and recovery performance.",
         question: "For what share of the physical waste stock does a DPP actually exist, and which physical separation constraint remains after reading data?"
-      },
-      {
+      },      {
         id: "electrostatic-separation",
         term: "Electrostatic Separation",
         acronym: "ESS",
         german: "Elektrostatische Trennung (Tribo-Elektrik)",
         category: "processing",
         definition: "Separation technology charging particles triboelectrically; polymers acquire positive or negative surface charges based on work function differences and are deflected in an electric field.",
-        context: "Used to separate mixed plastics with identical densities (e.g., ABS and PS, or PVC and PET mixtures) that sink-float tanks cannot separate."
-      },
-      {
+        context: "Used to separate mixed plastics with identical densities (e.g., ABS and PS, or PVC and PET mixtures) that sink-float tanks cannot separate.",
+        anchor: "Session 5 & 11",
+        question: "How sensitive is the measured separation performance to humidity, surface contamination and particle conditioning?"
+      },      {
         id: "enzymatic-recycling",
         term: "Enzymatic Recycling",
         acronym: "ENZ",
         german: "Enzymatisches Recycling",
         category: "processing",
         definition: "Biocatalytic breakdown of polymers using specialized engineered enzymes (e.g., PETases) operating at mild temperatures to depolymerize target plastics selectively.",
-        context: "Allows selective breakdown of PET in complex textile blends (cotton-polyester) without damaging co-existing cotton fibres."
-      },
-      {
+        context: "Allows selective breakdown of PET in complex textile blends (cotton-polyester) without damaging co-existing cotton fibres.",
+        anchor: "Session 5",
+        question: "At what throughput, feedstock preparation cost and operating lifetime has the enzyme process been demonstrated?"
+      },      {
         id: "foak-noak",
         term: "FOAK vs. NOAK Plants",
         acronym: "FOAK",
         german: "Erstanlage (FOAK) vs. Ausgereifte Anlage (NOAK)",
         category: "processing",
-        definition: "Distinguishes a First-Of-A-Kind commercial demonstrator plant (plagued by high CAPEX, unproven uptime) from an Nth-Of-A-Kind mature operational plant.",
-        context: "Crucial metric when evaluating media claims; many advanced chemical recycling announcements refer to unbuilt or high-risk FOAK facilities."
-      },
-      {
+        definition: "FOAK (First-of-a-Kind) denotes an initial industrial implementation of a process; NOAK (Nth-of-a-Kind) denotes subsequent replicated installations used in more mature cost and performance estimates.",
+        context: "Announcements, nameplate capacities, construction, commissioning, sustained operation and profitability are different evidence levels. An assumed NOAK cost is not evidence of achieved FOAK performance, and a FOAK plant is not necessarily only a demonstrator.",
+        anchor: "Session 5",
+        question: "Are throughput, uptime, cost and product quality measured at a continuously operating facility or projected for future replications?"
+      },      {
         id: "ftir",
         term: "Fourier-Transform Infrared Spectroscopy",
         acronym: "FTIR",
         german: "Fourier-Transformations-Infrarotspektroskopie",
         category: "processing",
         definition: "An analytical spectroscopic technique measuring infrared absorption spectra to identify molecular functional groups and polymer formulations.",
-        context: "The analytical bench reference standard for laboratory identification of polymers, degradation levels, and specific additive formulations."
-      },
-      {
+        context: "The analytical bench reference standard for laboratory identification of polymers, degradation levels, and specific additive formulations.",
+        anchor: "Session 11",
+        question: "Does the laboratory identification result remain reliable on dirty, dark or multilayer particles at sorting-line speed?"
+      },      {
         id: "gasification",
         term: "Gasification",
         acronym: "GAS",
         german: "Vergasung",
         category: "processing",
         definition: "High-temperature (>1,000°C) conversion of organic waste with sub-stoichiometric oxygen/steam into synthesis gas (syngas: CO + H2).",
-        context: "Processes highly contaminated residual plastic waste into fundamental chemical building blocks for methanol or synthetic hydrocarbon synthesis."
-      },
-      {
+        context: "Processes highly contaminated residual plastic waste into fundamental chemical building blocks for methanol or synthetic hydrocarbon synthesis.",
+        anchor: "Session 5 & 7",
+        question: "Which product stream is used as chemical feedstock rather than fuel, and how are emissions and gas cleaning included?"
+      },      {
         id: "hyperspectral-imaging",
         term: "Hyperspectral Imaging",
         acronym: "HSI",
         german: "Hyperspektrale Bildgebung",
         category: "processing",
         definition: "Sensing tech capturing continuous spatial and spectral data across hundreds of contiguous narrow wavebands for every image pixel.",
-        context: "Combines 2D computer vision geometry with chemical identification, allowing high-speed sorting robots to identify polymer type and component shape simultaneously."
-      },
-      {
+        context: "Combines 2D computer vision geometry with chemical identification, allowing high-speed sorting robots to identify polymer type and component shape simultaneously.",
+        anchor: "Session 11",
+        question: "How does classification accuracy translate into saleable fraction purity and recovery at belt speed?"
+      },      {
         id: "identification-sortability",
         term: "Identification, Detectability and Sortability",
         acronym: "IDS",
@@ -2696,17 +2730,17 @@
         definition: "Distinction between identifying material identity, lab-scale detectability, and industrial sortability (requiring physical ejection at belt speed with target purity and recovery).",
         context: "Knowing what an object is does not mean it can be separated economically. Raising purity thresholds lowers mass recovery, making identification accuracy an economic variable.",
         question: "What purity and mass recovery were achieved at industrial belt speed on real waste feed, and how much sorting accuracy is economically viable?"
-      },
-      {
+      },      {
         id: "libs",
         term: "Laser-Induced Breakdown Spectroscopy",
         acronym: "LIBS",
         german: "Laser-Emissionsspektrometrie (LIBS)",
         category: "processing",
         definition: "An atomic emission spectroscopy method focusing high-energy laser pulses onto a sample surface to form micro-plasmas and determine elemental composition.",
-        context: "Used to detect heavy metals, glass fiber elemental content, and specific inorganic flame retardant elements in moving plastic shredder streams."
-      },
-      {
+        context: "Used to detect heavy metals, glass fiber elemental content, and specific inorganic flame retardant elements in moving plastic shredder streams.",
+        anchor: "Session 11",
+        question: "Which chemical elements can LIBS distinguish, and is its surface measurement adequate for this material mixture?"
+      },      {
         id: "maturity-scale",
         term: "Maturity Scale (Level A–E) and TRL",
         acronym: "TRL",
@@ -2714,37 +2748,39 @@
         anchor: "Session 5 & 13",
         category: "processing",
         definition: "Course framework classifying maturity into A (mature closed-loop), B (mature open-loop), C (commercial niche), D (FOAK demonstrator), and E (lab pilot). Complemented by 9-stage TRL scale.",
-        context: "A chemical reaction is not a recycling process, and a process is not a commercial industrial system. Process integration studies often omit preprocessing and washing from boundaries.",
+        context: "The A-E classification is a course-specific teaching framework, not an official TRL standard. TRLs measure technology readiness but do not by themselves establish feedstock availability, uptime, unit economics, customer demand or overall recycling-system maturity.",
         question: "What exact maturity has been demonstrated: a reaction, a process, a pilot, an industrial plant, or a mature system, on which feedstock?"
-      },
-      {
+      },      {
         id: "mechanical-recycling",
         term: "Mechanical Recycling",
         acronym: "MR",
         german: "Mechanisches Recycling (Werkstoffliches Recycling)",
         category: "processing",
         definition: "Processing waste plastics via sorting, shredding, washing, drying, extruding, and pelletizing without altering the core chemical polymer structure.",
-        context: "The lowest carbon footprint recycling pathway, but strictly limited by polymer degradation, additive build-up, and cross-contamination limits."
-      },
-      {
+        context: "The lowest carbon footprint recycling pathway, but strictly limited by polymer degradation, additive build-up, and cross-contamination limits.",
+        anchor: "Session 5",
+        question: "What fraction of the feedstock becomes consistent, specification-grade recyclate rather than rejects or degraded output?"
+      },      {
         id: "melt-filtration",
         term: "Melt Filtration",
         acronym: "MF",
         german: "Schmelzefiltration",
         category: "processing",
         definition: "Passing molten polymer through continuous fine mesh screens during extrusion to filter out unmelted solids, metals, paper, and cross-linked gels.",
-        context: "Vital hardware component on extrusion lines processing post-consumer recyclate to protect injection molds from particulate damage."
-      },
-      {
+        context: "Vital hardware component on extrusion lines processing post-consumer recyclate to protect injection molds from particulate damage.",
+        anchor: "Session 5 & 11",
+        question: "Which impurities are removed, which dissolved contaminants remain and what are filtration losses and downtime?"
+      },      {
         id: "mir",
         term: "Mid-Infrared Spectroscopy",
         acronym: "MIR",
         german: "Mittleres Infrarot (MIR)",
         category: "processing",
         definition: "Spectroscopy operating in the 2.5–25 µm spectral region, probing fundamental fundamental vibrational modes of molecules.",
-        context: "Provides higher chemical specificity than NIR, capable of identifying black plastics unaffected by carbon black when using surface reflectance modes."
-      },
-      {
+        context: "Provides higher chemical specificity than NIR, capable of identifying black plastics unaffected by carbon black when using surface reflectance modes.",
+        anchor: "Session 11",
+        question: "What sampling geometry and surface preparation would be required for the intended industrial throughput?"
+      },      {
         id: "nir",
         term: "Near-Infrared Spectroscopy & Black Plastics",
         acronym: "NIR",
@@ -2754,19 +2790,17 @@
         definition: "Optical reflection sorting operating at 780–2500 nm. Carbon-black pigments absorb NIR radiation entirely, rendering black plastic objects completely invisible to standard optical sorters.",
         context: "Sorting performance depends on real waste conditions (dirt, moisture, thin multilayers). When NIR fails on dark plastics, secondary modalities must be added at significant capital cost.",
         question: "What exact share of the target waste stream is dark, soiled, or multilayer and thus invisible to standard NIR detection?"
-      },
-      {
+      },      {
         id: "pyrolysis",
         term: "Thermal Pyrolysis & Chemical Claims",
         acronym: "PYR",
         german: "Pyrolyse und Chemische Recyclingansprüche",
         anchor: "Session 5",
         category: "processing",
-        definition: "Thermal polymer degradation (400–800°C) without oxygen into oil, gas, and char. Requires targeted feedstock; contaminants like chlorine, nitrogen, and metals poison catalysts.",
-        context: "Laboratory claims use idealized clean feedstocks. 'Pyrolysis solves mixed plastic waste' is false; chlorine and moisture destroy cracker yield, routing mass into fuel or char.",
+        definition: "Thermal decomposition of organic material in little or no oxygen, producing varying mixtures of oil, gas, wax and solid residues. Product distribution depends on polymer chemistry, conditions and feedstock composition.",
+        context: "Polyolefin-rich inputs are often more favourable than unsorted mixtures. PVC-derived chlorine, other heteroatoms, metals and contamination can require pretreatment and extensive product upgrading. Oil is not automatically cracker-grade feedstock, and fuel output must be distinguished from material recycling.",
         question: "Which feedstock specification does the plant actually require, and what mass share becomes chemical material rather than low-value fuel or gas?"
-      },
-      {
+      },      {
         id: "raman-spectroscopy",
         term: "Raman, LIBS, XRF, THz & Hyperspectral",
         acronym: "ADV",
@@ -2776,8 +2810,7 @@
         definition: "Advanced sensor modalities: Raman provides structural fingerprinting (including black plastics) but trades speed; LIBS/XRF measure elemental composition (Br, Cl, Sb); THz and hyperspectral image sub-surface properties.",
         context: "No single sensor is robust for all waste streams. Unsolvable sorting tasks require multi-sensor combinations, adding capital cost, calibration effort, and throughput bottlenecks.",
         question: "Which material property does the sorting claim require, and does the named sensor modality measure it at required industrial belt speed?"
-      },
-      {
+      },      {
         id: "sensor-fusion",
         term: "Sensor Fusion and AI Limits",
         acronym: "SFI",
@@ -2787,47 +2820,47 @@
         definition: "Algorithmic combination of multi-sensor data streams (NIR, RGB, XRF, 3D laser) with machine learning classifiers. AI interprets sensor data but cannot create physical information sensors never measured.",
         context: "'AI can sort all waste' is marketing hype. Added sensors increase capital cost and calibration drift when waste streams shift seasonally.",
         question: "How much sorting accuracy does each added sensor buy, at what capital cost, and how does the classifier perform on out-of-distribution waste?"
-      },
-      {
+      },      {
         id: "sink-float",
         term: "Sink-Float Density Separation",
         acronym: "SFS",
         german: "Schwimm-Sink-Verfahren",
         category: "processing",
         definition: "Density-based separation technique immersing shredded plastic flakes into liquid media (water, salt solutions) of specified specific gravity.",
-        context: "Standard physical separation line dividing light polyolefins (PE/PP, density <1.0 g/cm³) floating on water from heavy polymers (PET/PVC/ABS, density >1.0 g/cm³) sinking to the bottom."
-      },
-      {
+        context: "Standard physical separation line dividing light polyolefins (PE/PP, density <1.0 g/cm³) floating on water from heavy polymers (PET/PVC/ABS, density >1.0 g/cm³) sinking to the bottom.",
+        anchor: "Session 5 & 11",
+        question: "Can density separation still distinguish polymers when fillers, additives and reinforcement change their densities?"
+      },      {
         id: "solid-state-polycondensation",
         term: "Solid-State Polycondensation",
         acronym: "SSP",
         german: "Festphasen-Polykondensation (SSP)",
         category: "processing",
         definition: "A process heating polymer pellets or flakes below melting point under high vacuum or inert gas to increase molecular weight and intrinsic viscosity (IV).",
-        context: "Essential post-treatment step in PET bottle-to-bottle recycling to rebuild polymer chain lengths destroyed during product life and melt reprocessing."
-      },
-      {
+        context: "Essential post-treatment step in PET bottle-to-bottle recycling to rebuild polymer chain lengths destroyed during product life and melt reprocessing.",
+        anchor: "Session 5",
+        question: "What molecular-weight gain is achieved, and what are the residence time, energy and feedstock requirements?"
+      },      {
         id: "solvolysis",
-        term: "Solvent-Based Extraction / Solvolysis",
+        term: "Solvolysis and Selective Dissolution",
         acronym: "SOLV",
-        german: "Lösemittelbasiertes Recycling / Solvolyse",
+        german: "Solvolyse und selektive Polymerauflösung",
         category: "processing",
-        definition: "Dissolving target polymers selectively out of complex waste mixtures using specific solvents without breaking the core polymer backbone (e.g., CreaSolv process).",
-        context: "Separates multilayer film layers (PE from PA) or purifies target resins from insoluble additives, pigments, and metallic foils."
-      },
-      {
+        definition: "Solvolysis uses a reactive solvent to cleave chemical bonds in a polymer or matrix; selective dissolution dissolves an intact target polymer in a solvent, followed by recovery without intended backbone cleavage. These are distinct recycling mechanisms.",
+        context: "Both can separate certain complex feedstocks, but solvent choice, contamination, residual solvents, separation selectivity and solvent recovery determine the actual industrial and environmental performance.",
+        anchor: "Session 5",
+        question: "Is the process selectively dissolving intact polymer or chemically cleaving its bonds, and how are solvents recovered?"
+      },      {
         id: "xrf",
         term: "X-Ray Fluorescence",
         acronym: "XRF",
         german: "Röntgenfluoreszenzanalyse (RFA)",
         category: "processing",
         definition: "An elemental analytical technique measuring characteristic secondary fluorescent X-rays emitted from a material excited by high-energy X-rays.",
-        context: "Used in automated sorting to detect heavy metal pigments, PVC chlorine content, and brominated flame retardant atoms instantly."
+        context: "Used in automated sorting to detect heavy metal pigments, PVC chlorine content, and brominated flame retardant atoms instantly.",
+        anchor: "Session 11",
+        question: "Does the XRF signal quantify a regulated compound or only an element used to screen for further testing?"
       },
-
-      // -------------------------------------------------------------
-      // CATEGORY 4: LAW, REGULATION & POLICY LEVEL (law)
-      // -------------------------------------------------------------
       {
         id: "basel-convention",
         term: "Basel Convention & WSR Enforcement",
@@ -2835,20 +2868,20 @@
         german: "Basler Übereinkommen und Abfallverbringung",
         anchor: "Session 4",
         category: "law",
-        definition: "International and EU treaties governing transboundary waste movements. The Basel plastic amendments (2021) and EU WSR 2024/1157 enforce strict prior informed consent (PIC) and ban plastic waste exports to non-OECD countries.",
-        context: "Waste retains legal status at borders. Illegal shipments trigger mandatory take-back liability for notifiers. Exporting waste no longer serves as proof of responsible treatment.",
+        definition: "The Basel Convention regulates transboundary movements of hazardous and certain other wastes. The plastic-waste amendments took effect in 2021 and the e-waste amendments in 2025; classification determines which prior-notification and consent controls apply. EU Regulation 2024/1157 adds EU-specific shipment obligations.",
+        context: "Waste retains its legal classification at borders. Composition and contamination affect the shipment route; unauthorised or failed shipments may trigger take-back obligations under the applicable rules and actor responsibilities. Legal compliance must be established for each actual movement.",
         question: "How is compliance with purity criteria verified at national borders, and who bears financial take-back liability if destination processing fails?"
-      },
-      {
+      },      {
         id: "cbam",
         term: "Carbon Border Adjustment Mechanism",
         acronym: "CBAM",
         german: "CO2-Grenzausgleichssystem (CBAM)",
         category: "law",
         definition: "An EU climate measure levying a carbon price on imported carbon-intensive goods equivalent to the carbon cost born by domestic EU producers under the ETS.",
-        context: "Directly impacts international trade of primary polymers, secondary recyclates, and finished goods, penalizing imports from high-emission jurisdictions."
-      },
-      {
+        context: "Directly impacts international trade of primary polymers, secondary recyclates, and finished goods, penalizing imports from high-emission jurisdictions.",
+        anchor: "Session 10 & 12",
+        question: "How do covered product scope and embedded-emissions accounting relate to a circular-material decision?"
+      },      {
         id: "circularity-vs-sustainability",
         term: "Circularity vs. Sustainability",
         acronym: "CVS",
@@ -2858,26 +2891,27 @@
         definition: "Conceptual distinction where circularity is an operational instrument to reduce resource extraction and waste at constant function, whereas sustainability is the environmental outcome.",
         context: "Higher circularity indicator scores do not establish better environmental results. Transport energy, chemical processing, and rebound effects can offset resource savings.",
         question: "Which impact category and functional unit demonstrate that the more circular option is environmentally superior, and which impacts were omitted?"
-      },
-      {
+      },      {
         id: "csddd",
         term: "Corporate Sustainability Due Diligence Directive",
         acronym: "CSDDD",
         german: "EU-Lieferkettengesetz (CSDDD)",
         category: "law",
-        definition: "EU directive obligating large corporations to identify, prevent, and mitigate adverse environmental and human rights risks across global supply chains.",
-        context: "Renders European companies legally liable if their waste exports end up illegally dumped or informally burned in receiving non-OECD countries."
-      },
-      {
+        definition: "Directive (EU) 2024/1760 on corporate sustainability due diligence, as amended in 2025 and by Directive (EU) 2026/470, establishes human-rights and environmental due-diligence duties for very large companies within its scope.",
+        context: "The amended framework has a narrower scope and later application than the original 2024 text. Member-State transposition is due by 26 July 2028, with national duties applying from 26 July 2029; it is not a direct substitute for waste-shipment or hazardous-waste law.",
+        anchor: "Session 10",
+        question: "Which firms and chain activities are covered by the amended directive, and when do their duties actually apply?"
+      },      {
         id: "din-spec-91446",
         term: "DIN SPEC 91446 / EN Standards",
         acronym: "DIN",
         german: "DIN SPEC 91446 (Klassifizierung von Rezyklaten)",
         category: "law",
         definition: "Standardized classification system categorizing recycled plastics based on defined Data Quality Levels (DQLs) to enable digital trading and quality assurance.",
-        context: "Establishes transparent technical data sheets for secondary polymers, reducing transaction risk between recyclers and industrial buyers."
-      },
-      {
+        context: "Establishes transparent technical data sheets for secondary polymers, reducing transaction risk between recyclers and industrial buyers.",
+        anchor: "Session 5 & 11",
+        question: "Which published specification and measured properties determine whether the recyclate is accepted by a customer?"
+      },      {
         id: "dual-flow-info",
         term: "Dual Flow: Material and Legal Information",
         acronym: "DFI",
@@ -2887,26 +2921,27 @@
         definition: "The principle that every physical waste chain is accompanied by a mandatory legal information flow (origins, classification, holder, carrier, destination, treatment evidence).",
         context: "Documentation compliance is a real operational cost. Missing or inconsistent records make otherwise valuable material legally untradeable or subject to confiscation.",
         question: "Can the organization reconstruct what happened to the material from origin to lawful final treatment with retained documentary evidence?"
-      },
-      {
+      },      {
         id: "ecodesign-espr",
         term: "Ecodesign for Sustainable Products Regulation",
         acronym: "ESPR",
         german: "EU-Ökodesign-Verordnung (ESPR)",
         category: "law",
         definition: "EU overarching framework setting mandatory product durability, reusability, repairability, and recycled-content design requirements before market entry.",
-        context: "Moves legislative intervention upstream to the design phase, banning built-in obsolescence and mandatory inclusion of Digital Product Passports."
-      },
-      {
+        context: "Moves legislative intervention upstream to the design phase, banning built-in obsolescence and mandatory inclusion of Digital Product Passports.",
+        anchor: "Session 8 & 10",
+        question: "Which product-specific requirements currently apply, and can compliance be demonstrated with traceable data?"
+      },      {
         id: "end-of-waste",
         term: "End-of-Waste Criteria",
         acronym: "EoW",
         german: "Ende der Abfalleigenschaft",
         category: "law",
         definition: "Legal conditions under which a waste material that has undergone recovery ceases to be classified legally as waste and becomes a secondary raw material.",
-        context: "Once EoW criteria are satisfied (e.g., standard purity met), onerous waste transport permissions and hazardous waste tracking duties no longer apply."
-      },
-      {
+        context: "Once EoW criteria are satisfied (e.g., standard purity met), onerous waste transport permissions and hazardous waste tracking duties no longer apply.",
+        anchor: "Session 3 & 4",
+        question: "Which legally applicable end-of-waste criteria are met, and which product obligations then replace waste duties?"
+      },      {
         id: "epr-modulation",
         term: "EPR Fee Modulation & Incentives",
         acronym: "EPR",
@@ -2916,35 +2951,37 @@
         definition: "Mechanism adjusting extended producer responsibility fees based on recyclability, disassembly ease, or recycled content to incentivize better upstream product design.",
         context: "If fee differentials are trivial compared to product margins, eco-design incentives fail. Theoretical criteria often reward paper compliance rather than real recycling.",
         question: "What is the fee differential as a share of product cost, and does the criterion measure actual recycling performance or design theory?"
-      },
-      {
+      },      {
         id: "ewc-avv",
         term: "European Waste Catalogue Codes",
         acronym: "EWC",
         german: "Abfallverzeichnis-Verordnung (AVV)",
         category: "law",
         definition: "A standardized six-digit numerical classification index identifying waste types and denoting hazardous vs non-hazardous classification.",
-        context: "Legally mandatory on consignment notes; incorrect assignment (e.g., classifying hazardous BFR plastic under non-hazardous EWC 19 12 04) is a criminal offense."
-      },
-      {
+        context: "Legally mandatory on consignment notes; incorrect assignment (e.g., classifying hazardous BFR plastic under non-hazardous EWC 19 12 04) is a criminal offense.",
+        anchor: "Session 4",
+        question: "Which evidence supports the assigned waste code and hazardous classification at each transfer?"
+      },      {
         id: "green-claims-directive",
-        term: "Green Claims Directive",
+        term: "Proposed EU Green Claims Directive",
         acronym: "GCD",
         german: "EU-Richtlinie gegen Greenwashing",
         category: "law",
-        definition: "Proposed EU legislation requiring companies to substantiate environmental claims ('100% Recyclable', 'Ocean Plastic') using standardized LCA methodologies.",
-        context: "Eliminates vague corporate claims by requiring independent verification before marketing products as circular or environmentally superior."
-      },
-      {
+        definition: "A pending EU legislative proposal for the substantiation and communication of explicit environmental claims; it is not an enacted directive imposing finalised obligations as of November 2026.",
+        context: "Circularity and recycling claims require attention to evidence, measurement boundaries and existing applicable consumer-protection rules. Do not present obligations from the pending proposal as already in force.",
+        anchor: "Session 12",
+        question: "Is the cited rule already enacted or still a proposal, and what evidence would support the claimed environmental benefit?"
+      },      {
         id: "krwg",
         term: "German Circular Economy Act",
         acronym: "KrWG",
         german: "Kreislaufwirtschaftsgesetz (KrWG)",
         category: "law",
         definition: "The core federal environmental statute in Germany governing waste prevention, recovery, disposal, and fundamental actor responsibilities.",
-        context: "Transposes the EU Waste Framework Directive into national law, establishing statutory legal duties for original waste producers and holders."
-      },
-      {
+        context: "Transposes the EU Waste Framework Directive into national law, establishing statutory legal duties for original waste producers and holders.",
+        anchor: "Session 4",
+        question: "What obligations follow from the actual waste classification and actor roles in this scenario?"
+      },      {
         id: "market-vs-institutional-pull",
         term: "Market Pull vs. Institutionally Created Pull",
         acronym: "MIP",
@@ -2954,8 +2991,7 @@
         definition: "Distinction between organic market demand (buyers paying cost-covering prices for high-value scrap) and institutional pull created by laws, deposits, mandates, or EPR.",
         context: "In many polymer waste streams, regulation is the sole mechanism making reverse logistics exist. A system unable to explain its physical motivation is incomplete.",
         question: "For each movement in the chain: is motivation driven by market price, legal obligation, or subsidy, and what happens if removed?"
-      },
-      {
+      },      {
         id: "producer-due-diligence",
         term: "Producer/Holder Responsibility & Due Diligence",
         acronym: "PDD",
@@ -2965,8 +3001,7 @@
         definition: "Statutory duty under EU/German law where original waste producers/holders remain legally accountable for proper recovery. Transfer to third parties does not extinguish liability.",
         context: "'We hired a certified collector' is legally insufficient. Due diligence requires classification and checks before transfer, documentation during, and retained evidence after.",
         question: "What due diligence was required before transfer, what was documented during transport, and what evidentiary trail remains after treatment?"
-      },
-      {
+      },      {
         id: "private-vs-social-cost",
         term: "Private vs. Social Cost",
         acronym: "PSC",
@@ -2976,8 +3011,7 @@
         definition: "Economic discrepancy where environmental externalities exclude social costs from virgin material prices, making primary polymers artificially cheaper than their societal impact.",
         context: "Rejects two false extremes: that every recycling mandate is desirable, or that recycling costs more than virgin and is irrational. Policy tests social cost efficiency.",
         question: "What does the policy instrument cost per unit of avoided environmental burden compared with alternative prevention instruments?"
-      },
-      {
+      },      {
         id: "recycling-calc-point",
         term: "Recycling Rate Calculation Point",
         acronym: "RCP",
@@ -2987,19 +3021,17 @@
         definition: "The exact stage where recycled quantity is officially counted: input mass to a recycling plant versus output mass of material substituting primary raw material.",
         context: "Input-based counting books sorting residues and contamination as recycled. Output-based counting is harder to audit and exposes significantly lower real rates.",
         question: "What mass is counted, at which processing stage, against what denominator, and within what geographic boundary?"
-      },
-      {
+      },      {
         id: "recycled-content-mandate",
         term: "Target vs. Recycled-Content Mandate",
         acronym: "RCM",
         german: "Recyclingquote vs. Rezyklat-Einsatzquote",
         anchor: "Session 10",
         category: "law",
-        definition: "Policy shift from recycling targets (forcing waste collection supply) to recycled-content mandates (forcing manufacturing demand), recognizing collection alone does not create markets.",
-        context: "Mandates prove secondary markets do not close automatically. Mandates without compliant supply trigger price spikes; targets without demand trigger stockpiles and illegal exports.",
+        definition: "A recycling target sets a required share of waste treated through defined recycling operations, whereas a recycled-content mandate requires a specified share of qualifying secondary material in products. The instruments influence different sides of the material market.",
+        context: "Neither collection nor an input-based recycling statistic guarantees a buyer for specification-grade recyclate. Conversely, mandated recycled content can create demand but requires reliable qualifying supply and defensible traceability.",
         question: "Which side of the market does this regulatory instrument create, and is the opposing market side structurally sufficient?"
-      },
-      {
+      },      {
         id: "regulatory-compliance-value",
         term: "Regulatory Compliance Value",
         acronym: "RCV",
@@ -3009,8 +3041,7 @@
         definition: "Economic premium commanded by certified recyclate because it enables buyers to fulfill legal recycled-content mandates or market claims.",
         context: "Where mandated demand exceeds compliant supply, recyclate prices can exceed virgin resin. The price reflects legal scarcity and compliance function, not inherent quality.",
         question: "Is the price premium paid for inherent material quality, or purely for a compliance certificate on a scarce regulated category?"
-      },
-      {
+      },      {
         id: "realistic-alternative",
         term: "Realistic-Alternative Comparison",
         acronym: "RAC",
@@ -3020,55 +3051,57 @@
         definition: "Evaluation methodology assessing waste treatment options against realistic operational alternatives for that stream (e.g., export, landfill, incineration) rather than an imaginary perfect loop.",
         context: "The waste hierarchy is a heuristic, not an automatic rule. For contaminated negative-value streams, the alternative to domestic incineration may be illegal export or dumping.",
         question: "What happens to this specific waste stream under each realistic alternative, including residue management and lock-in effects?"
-      },
-      {
+      },      {
         id: "reach",
         term: "REACH Regulation",
         acronym: "REACH",
         german: "REACH-Verordnung (EG 1907/2006)",
         category: "law",
         definition: "EU regulation governing Registration, Evaluation, Authorisation and Restriction of Chemicals to protect human health and the environment.",
-        context: "Creates severe compliance barriers for recyclers when legacy restricted substances (e.g., phthalate plasticisers) are present in post-consumer feedstocks."
-      },
-      {
+        context: "Creates severe compliance barriers for recyclers when legacy restricted substances (e.g., phthalate plasticisers) are present in post-consumer feedstocks.",
+        anchor: "Session 8 & 10",
+        question: "Which substance restrictions and information duties apply to this specific recovered material and intended product?"
+      },      {
         id: "source-interpretation-conclusion",
         term: "Source – Interpretation – Conclusion",
         acronym: "SIC",
         german: "Quelle – Interpretation – Schlussfolgerung",
         anchor: "Session 1",
-        category: "law",
+        category: "logistics",
         definition: "Scientific research methodology separating primary source data from researcher interpretation and final conclusions, requiring explicit traceability in evidence tables.",
-        context: "Prevents AI or researchers from making unsupported claims look authoritative. Agreement between multiple AI outputs is convergence, not verified empirical evidence.",
+        context: "A cross-cutting research method for interpreting material-flow, technical and legal evidence in the course. It belongs to systems methodology; the current four-tab interface has no separate Method category. Agreement among AI systems is not independent verification.",
         question: "Can another person locate the exact source, and does the cited text support this specific claim rather than a generalized assertion?"
-      },
-      {
+      },      {
         id: "supd",
         term: "Single-Use Plastics Directive",
         acronym: "SUPD",
         german: "Einwegkunststoff-Richtlinie (EU 2019/904)",
         category: "law",
         definition: "EU directive banning specific single-use plastic items (straws, cutlery), setting mandatory PET bottle collection targets (90% by 2029), and establishing 25% rPET quotas for 2025.",
-        context: "The landmark policy triggering massive price premiums for food-grade rPET across European markets."
-      },
-      {
+        context: "The landmark policy triggering massive price premiums for food-grade rPET across European markets.",
+        anchor: "Session 10",
+        question: "Which plastic packaging category, collection target and recycled-content obligation applies in the relevant year?"
+      },      {
         id: "waste-framework-directive",
         term: "EU Waste Framework Directive",
         acronym: "WFD",
         german: "EU-Abfallrahmenrichtlinie (2008/98/EG)",
         category: "law",
         definition: "The foundational EU legal legislative framework setting basic waste concepts, definitions, legal actor duties, End-of-Waste criteria, and the 5-step waste hierarchy.",
-        context: "Establishes the binding legal requirement that handing waste to a preliminary transport contractor does not extinguish original producer legal liability."
-      },
-      {
+        context: "Establishes the binding legal requirement that handing waste to a preliminary transport contractor does not extinguish original producer legal liability.",
+        anchor: "Session 2 & 4",
+        question: "At which stage does responsibility remain with the producer or holder despite contracting a treatment operator?"
+      },      {
         id: "waste-hierarchy",
         term: "The Waste Hierarchy",
         acronym: "WH",
         german: "Fünfstufige Abfallhierarchie",
         category: "law",
         definition: "The statutory order of environmental priority: 1. Prevention, 2. Preparing for Reuse, 3. Recycling, 4. Other Recovery (Energy), 5. Disposal.",
-        context: "Demonstrates that recycling is not the ultimate circular objective, but an intermediate step after prevention and reuse options are exhausted."
-      },
-      {
+        context: "Demonstrates that recycling is not the ultimate circular objective, but an intermediate step after prevention and reuse options are exhausted.",
+        anchor: "Session 2 & 7 & 9",
+        question: "Is the preferred option environmentally better for the actual waste stream and realistic alternatives?"
+      },      {
         id: "waste-vs-secondary",
         term: "Waste vs. Secondary Raw Material Status",
         acronym: "VSR",
@@ -3078,24 +3111,26 @@
         definition: "Legal and economic status of traded materials. A clean mono-polymer bale behaves like a commodity, whereas contaminated bales carry negative value, yet both share customs codes.",
         context: "A recorded export statistic for 'recycling' is not proof of recycling. Trade codes record customs categories, not polymer composition, contamination, or treatment quality.",
         question: "What is physically traded, is the destination buying a resource or accepting a disposal burden, and what happens to non-recyclable rejects?"
-      },
-      {
+      },      {
         id: "weee-directive",
         term: "WEEE Directive",
         acronym: "WEEE",
         german: "WEEE-Richtlinie (Elektroaltgeräte-Richtlinie)",
         category: "law",
         definition: "EU directive regulating Waste Electrical and Electronic Equipment, mandating separate collection, recovery targets, and producer financing.",
-        context: "Forces specialized logistics treatment of complex flame-retarded plastics (ABS, PC/ABS) sourced from discarded IT and consumer electronics."
-      },
-      {
+        context: "Forces specialized logistics treatment of complex flame-retarded plastics (ABS, PC/ABS) sourced from discarded IT and consumer electronics.",
+        anchor: "Session 4 & 11",
+        question: "How are electrical-device collection, depollution, material sorting and producer financing linked?"
+      },      {
         id: "wsr",
         term: "EU Waste Shipment Regulation",
         acronym: "WSR",
-        german: "EU-Abfallverbringungsverordnung (EG 2024/1157)",
+        german: "EU-Abfallverbringungsverordnung (EU) 2024/1157",
         category: "law",
-        definition: "Updated EU regulation governing transboundary movements of waste, introducing strict audit rules and banning plastic waste exports to non-OECD countries by Nov 2026.",
-        context: "Forces European waste producers to process plastic waste within OECD boundaries, terminating historical burden shifting to developing nations."
+        definition: "Regulation (EU) 2024/1157 governs shipments of waste in and from the EU. Most provisions apply from 21 May 2026; exports of plastic waste to non-OECD countries are prohibited from 21 November 2026 until at least 21 May 2029, with any later exceptions subject to specified assessment and approval.",
+        context: "The rules differ by waste classification and destination; exports to OECD countries remain possible under applicable controls. Prior notification/consent for plastic exports applies from May 2026, and additional audit requirements for authorised exports apply from May 2027. Export alone is not proof of recycling.",
+        anchor: "Session 3 & 4",
+        question: "Which waste classification, destination, application date and shipment procedure govern this specific movement?"
       }
     ];
 
