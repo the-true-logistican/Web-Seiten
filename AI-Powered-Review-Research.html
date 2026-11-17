@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Literature Review & Research Workflow</title>
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
+            --bg-accent: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --accent-blue: #38bdf8;
+            --accent-teal: #2dd4bf;
+            --accent-amber: #fbbf24;
+            --accent-rose: #fb7185;
+            --border-color: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .deck-container {
+            flex: 1;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 3.5rem 4.5rem 3.5rem;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            max-width: 1280px;
+            height: 100%;
+            max-height: 720px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 3rem 4rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            flex-direction: column;
+            justify-content: space-between;
+            animation: fadeIn 0.25s ease-out;
+            position: relative;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header & Footer inside Slide */
+        .slide-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .step-badge {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent-blue);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.8rem;
+            border-radius: 999px;
+            margin-bottom: 0.6rem;
+        }
+
+        .step-badge.reflection {
+            background: rgba(251, 191, 36, 0.15);
+            color: var(--accent-amber);
+            border-color: rgba(251, 191, 36, 0.35);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+        }
+
+        h2 {
+            font-size: 2.05rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--text-primary);
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-top: 0.75rem;
+            line-height: 1.5;
+        }
+
+        .slide-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1.25rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.75rem;
+            align-items: stretch;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .card {
+            background: rgba(15, 23, 42, 0.55);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .card h3 {
+            font-size: 1.15rem;
+            color: var(--accent-blue);
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .card.amber h3 {
+            color: var(--accent-amber);
+        }
+
+        .card.teal h3 {
+            color: var(--accent-teal);
+        }
+
+        ul.bullet-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        ul.bullet-list li {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        ul.bullet-list li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+            font-weight: bold;
+        }
+
+        ul.bullet-list li strong {
+            color: var(--text-primary);
+        }
+
+        /* Overview Steps Grid */
+        .step-tile {
+            background: rgba(15, 23, 42, 0.65);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1rem 1.15rem;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .step-tile:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+            background: rgba(56, 189, 248, 0.08);
+        }
+
+        .step-tile .num {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .step-tile .title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .step-tile .desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.35;
+        }
+
+        .highlight-box {
+            background: rgba(56, 189, 248, 0.08);
+            border-left: 4px solid var(--accent-blue);
+            padding: 1.15rem 1.5rem;
+            border-radius: 0 10px 10px 0;
+            font-size: 1.05rem;
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .highlight-box.amber {
+            background: rgba(251, 191, 36, 0.08);
+            border-left-color: var(--accent-amber);
+        }
+
+        blockquote {
+            background: rgba(15, 23, 42, 0.75);
+            border-left: 4px solid var(--accent-amber);
+            padding: 1.25rem 1.75rem;
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+            font-size: 1.15rem;
+            line-height: 1.55;
+            color: var(--text-primary);
+        }
+
+        blockquote footer {
+            margin-top: 0.6rem;
+            font-style: normal;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--accent-amber);
+        }
+
+        .slide-footer {
+            border-top: 1px solid var(--border-color);
+            padding-top: 0.9rem;
+            margin-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Title Slide Specifics */
+        .title-slide-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            gap: 1.5rem;
+        }
+
+        .meta-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .meta-pill {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        /* Bottom Control Bar */
+        .controls {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3.5rem;
+            background: rgba(15, 23, 42, 0.95);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            z-index: 100;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        button {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 0.45rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        button:hover:not(:disabled) {
+            background: var(--bg-accent);
+            border-color: var(--accent-blue);
+        }
+
+        button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .progress-bar-wrap {
+            flex: 1;
+            max-width: 400px;
+            height: 6px;
+            background: var(--bg-card);
+            border-radius: 999px;
+            overflow: hidden;
+            margin: 0 1.5rem;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--accent-blue);
+            width: 0%;
+            transition: width 0.2s ease;
+        }
+
+        .counter {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            min-width: 80px;
+            text-align: right;
+        }
+
+        @media print {
+            body { overflow: visible; height: auto; background: white; color: black; }
+            .controls { display: none; }
+            .deck-container { display: block; padding: 0; }
+            .slide {
+                display: flex !important;
+                page-break-after: always;
+                box-shadow: none;
+                border: 1px solid #ccc;
+                margin-bottom: 1rem;
+                max-height: none;
+                height: 100vh;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="deck-container">
+
+    <!-- SLIDE 1: TITLE -->
+    <section class="slide active">
+        <div class="title-slide-content">
+            <div>
+                <span class="step-badge">Methodological Walkthrough</span>
+                <h1>AI-Powered Internet Research &amp; Literature Review</h1>
+                <p class="subtitle">A structured 9-step workflow from initial research questions to an evidence-based academic synthesis.</p>
+            </div>
+            <div class="highlight-box">
+                <strong>Applied Case Study:</strong> Recycling Technologies &mdash; demonstrating how multi-LLM triangulation, specialized repositories, and critical self-reflection produce transparent, reproducible teaching and research material.
+            </div>
+            <div class="meta-pills">
+                <div class="meta-pill"><strong>Effort Benchmark:</strong> ~10 Hours Deep Work</div>
+                <div class="meta-pill"><strong>Core Principle:</strong> Multi-Model Verification</div>
+                <div class="meta-pill"><strong>License:</strong> CC BY 4.0</div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span>AI-Powered Research Workflow</span>
+            <span>Slide 1 / 13</span>
+        </div>
+    </section>
+
+    <!-- SLIDE 2: PROCESS OVERVIEW -->
+    <section class="slide">
+        <div class="slide-header">
+            <div>
+                <span class="step-badge">End-to-End Architecture</span>
+                <h2>The 9-Step AI Research Workflow</h2>
+            </div>
+        </div>
+        <div class="slide-body">
+            <div class="grid-3">
+                <div class="step-tile" onclick="goToSlide(2)">
+                    <span class="num">Step 01</span>
+                    <span class="title">Task Alignment</span>
+                    <span class="desc">Course syllabus framing &amp; parallel instructor execution</span>
+                </div>
+                <div class="step-tile" onclick="goToSlide(3)">
+                    <span class="num">Step 02</span>
+                    <span class="title">Question Engineering</span>
+                    <span class="desc">Interactive prompt &amp; research question design via ChatGPT</span>
+                </div>
+                <div class="step-tile" onclick="goToSlide(4)">
+                    <span class="num">Step 03</span>
+                    <span class="title">Evidence Synthesis</span>
+                    <span class="desc">Scientific literature queries in Consensus &amp; Markdown merge</span>
+                </div>
+                <div class="step-tile" onclick="goToSlide(5)">
+                    <span class="num">Step 04</span>
+                    <span class="title">Cross-LLM Audit</span>
+                    <span class="desc">Logical consistency &amp; gap check with Claude / Gemini</span>
+                </div>
+                <div class="step-tile" onclick="goToSlide(6)">
+                    <span class="num">Step 05</span>
+                    <span class="title">Knowledge Repository</span>
+                    <span class="desc">Curated source workspace inside Gemini Notebook</span>
+                </div>
+                <div class="step-tile" onclick="goToSlide(7)">
+                    <span class="num">Step 06</span>
+                    <span class="title">Open-Access Expansion</span>
+                    <span class="desc">Continuous enrichment with downloadable, paywall-free sources</span>
+                </div>
+                <div class="step-tile" onclick="goToSlide(8)">
+                    <span class="num">Step 07</span>
+                    <span class="title">Session Structuring</span>
+                    <span class="desc">Daily lecture preparation &amp; thematic aspect mapping</span>
+                </div>
+                <div class="step-tile" onclick="goToSlide(9)">
+                    <span class="num">Step 08</span>
+                    <span class="title">Evidence-Backed Slides</span>
+                    <span class="desc">Iterative detail verification for technical &amp; economic claims</span>
+                </div>
+                <div class="step-tile" onclick="goToSlide(10)">
+                    <span class="num">Step 09</span>
+                    <span class="title">Position Consolidation</span>
+                    <span class="desc">10-hour synthesis &amp; cross-cultural LLM triangulation</span>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span>Click any tile to jump directly to the corresponding step</span>
+            <span>Slide 2 / 13</span>
+        </div>
+    </section>
+
+    <!-- SLIDE 3: STEP 1 -->
+    <section class="slide">
+        <div class="slide-header">
+            <div>
+                <span class="step-badge">Step 01</span>
+                <h2>Course Syllabus Framing &amp; Parallel Execution</h2>
+            </div>
+        </div>
+        <div class="slide-body">
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Pedagogical Starting Point</h3>
+                    <ul class="bullet-list">
+                        <li><strong>Curriculum Alignment:</strong> Every research assignment begins with a clearly defined course progression and learning objective.</li>
+                        <li><strong>Identical Task Scope:</strong> Students receive a specific research mandate mirroring real-world analytical challenges.</li>
+                    </ul>
+                </div>
+                <div class="card teal">
+                    <h3>Instructor Benchmark Execution</h3>
+                    <ul class="bullet-list">
+                        <li><strong>Walking the Talk:</strong> I complete the exact same research assignment myself every single time.</li>
+                        <li><strong>Quality Calibration:</strong> Experiencing source bottlenecks, ambiguities, and tool limits firsthand sets realistic expectations for student deliverables.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span>Step 01 &mdash; Task Alignment</span>
+            <span>Slide 3 / 13</span>
+        </div>
+    </section>
+
+    <!-- SLIDE 4: STEP 2 -->
+    <section class="slide">
+        <div class="slide-header">
+            <div>
+                <span class="step-badge">Step 02</span>
+                <h2>Interactive Research Question Engineering</h2>
+            </div>
+        </div>
+        <div class="slide-body">
+            <ul class="bullet-list">
+                <li><strong>Conversational Problem Framing:</strong> Using the assignment description and syllabus as input, I enter an interactive dialogue with a general-purpose LLM (typically <strong>ChatGPT</strong>).</li>
+                <li><strong>Iterative Decomposition:</strong> Broad thematic areas are systematically broken down into sharp, testable research questions suitable for scientific search engines.</li>
+                <li><strong>Applied Example (Recycling Technologies):</strong> Through iterative refinement, the domain was structured into <strong>five distinct research questions</strong> specifically tailored for querying <strong>Consensus</strong>.</li>
+            </ul>
+            <div class="highlight-box">
+                <strong>Key Takeaway:</strong> Never paste a vague topic straight into a literature search engine. Use a conversational LLM first to engineer precision queries.
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span>Step 02 &mdash; Question Engineering</span>
+            <span>Slide 4 / 13</span>
+        </div>
+    </section>
+
+    <!-- SLIDE 5: STEP 3 -->
+    <section class="slide">
+        <div class="slide-header">
+            <div>
+                <span class="step-badge">Step 03</span>
+                <h2>Scientific Querying &amp; Markdown Consolidation</h2>
+            </div>
+        </div>
+        <div class="slide-body">
+            <div class="grid-2">
+                <div class="card">
+                    <h3>1. Consensus Literature Runs</h3>
+                    <ul class="bullet-list">
+                        <li>All five engineered research questions are submitted sequentially to <strong>Consensus</strong>.</li>
+                        <li>Generated synthesis reports are skimmed immediately to verify relevance and coverage of core recycling technologies.</li>
+                    </ul>
+                </div>
+                <div class="card teal">
+                    <h3>2. Master Markdown Assembly</h3>
+                    <ul class="bullet-list">
+                        <li>All five individual reports are concatenated into <strong>one unified master Markdown file</strong>.</li>
+                        <li>Creates a single, clean, machine-readable corpus ready for downstream auditing and cross-referencing.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span>Step 03 &mdash; Evidence Synthesis</span>
+            <span>Slide 5 / 13</span>
+        </div>
+    </section>
+
+    <!-- SLIDE 6: STEP 4 -->
+    <section class="slide">
+        <div class="slide-header">
+            <div>
+                <span class="step-badge">Step 04</span>
+                <h2>Cross-LLM Logical Consistency &amp; Gap Audit</h2>
+            </div>
+        </div>
+        <div class="slide-body">
+            <ul class="bullet-list">
+                <li><strong>Managing Source Complexity:</strong> Merging five reports introduces dozens of citations, overlapping claims, and potential contradictions that are hard to spot manually.</li>
+                <li><strong>Second-Opinion Architecture:</strong> The consolidated Markdown file is passed to an analytically strong second model &mdash; primarily <strong>Claude</strong> or <strong>Gemini</strong> &mdash; with an explicit audit prompt: <em>"Analyze this entire corpus. Is it logically consistent? Where are the flaws or blind spots?"</em></li>
+                <li><strong>Preventing Automation Blindness:</strong> Relying on a single AI pipeline invites uncritical acceptance; multi-model cross-checking surfaces hidden inconsistencies early.</li>
+            </ul>
+        </div>
+        <div class="slide-footer">
+            <span>Step 04 &mdash; Cross-LLM Audit</span>
+            <span>Slide 6 / 13</span>
+        </div>
+    </section>
+
+    <!-- SLIDE 7: STEP 5 -->
+    <section class="slide">
+        <div class="slide-header">
+            <div>
+                <span class="step-badge">Step 05</span>
+                <h2>Building a Dedicated Gemini Notebook Repository</h2>
+            </div>
+        </div>
+        <div class="slide-body">
+            <ul class="bullet-list">
+                <li><strong>Structured Knowledge Base First:</strong> Before creating a single presentation slide or handout, I build a dedicated source repository inside <strong>Gemini Notebook</strong> (NotebookLM).</li>
+                <li><strong>Grounded Workspace:</strong> All validated reports, key papers, and technical references for the specific case are indexed in one isolated project environment.</li>
+                <li><strong>Traceable Retrieval:</strong> Every subsequent query, comparison, or slide draft draws directly from verified project documents rather than ungrounded model memory.</li>
+            </ul>
+        </div>
+        <div class="slide-footer">
+            <span>Step 05 &mdash; Knowledge Repository</span>
+            <span>Slide 7 / 13</span>
+        </div>
+    </section>
+
+    <!-- SLIDE 8: STEP 6 -->
+    <section class="slide">
+        <div class="slide-header">
+            <div>
+                <span class="step-badge">Step 06</span>
+                <h2>Continuous Source Expansion &amp; Open-Access Focus</h2>
+            </div>
+        </div>
+        <div class="slide-body">
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Beyond Consensus Defaults</h3>
+                    <ul class="bullet-list">
+                        <li>Continuous monitoring throughout the workflow to identify missing perspectives or niche technical details.</li>
+                        <li>Targeted searches across multiple LLMs to incorporate <strong>specialized primary sources</strong> and broaden the evidence base.</li>
+                    </ul>
+                </div>
+                <div class="card amber">
+                    <h3>Strict No-Paywall Rule</h3>
+                    <ul class="bullet-list">
+                        <li>Every selected source must be <strong>freely downloadable</strong>.</li>
+                        <li>Students must be able to read, verify, and work with the exact same documents without hitting paywall barriers.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span>Step 06 &mdash; Open-Access Expansion</span>
+            <span>Slide 8 / 13</span>
+        </div>
+    </section>
+
+    <!-- SLIDE 9: STEP 7 -->
+    <section class="slide">
+        <div class="slide-header">
+            <div>
+                <span class="step-badge">Step 07</span>
+                <h2>Concrete Session Preparation &amp; Aspect Mapping</h2>
+            </div>
+        </div>
+        <div class="slide-body">
+            <ul class="bullet-list">
+                <li><strong>Transition to Teaching Design:</strong> Moving from broad literature collection into concrete preparation for the specific lecture session.</li>
+                <li><strong>Structured Aspect Inventory:</strong> Synthesizing the accumulated repository into a clear, comprehensive overview list of all topics to be discussed that day.</li>
+                <li><strong>Applied Example:</strong> Systematically mapping the spectrum of <strong>recycling technologies</strong> (mechanical, chemical, thermal, solvent-based) into a logical didactic sequence.</li>
+            </ul>
+        </div>
+        <div class="slide-footer">
+            <span>Step 07 &mdash; Session Structuring</span>
+            <span>Slide 9 / 13</span>
+        </div>
+    </section>
+
+    <!-- SLIDE 10: STEP 8 -->
+    <section class="slide">
+        <div class="slide-header">
+            <div>
+                <span class="step-badge">Step 08</span>
+                <h2>Evidence-Backed Slide Construction</h2>
+            </div>
+        </div>
+        <div class="slide-body">
+            <ul class="bullet-list">
+                <li><strong>Iterative Slide Authoring:</strong> Building out the lecture deck (or modular multi-deck series) section by section from the aspect inventory.</li>
+                <li><strong>Real-Time Fact &amp; Claim Verification:</strong> Continuously querying <strong>Consensus</strong> while drafting to clarify technical mechanisms, yield rates, and boundary conditions.</li>
+                <li><strong>Dual-Dimension Rigor:</strong> Ensuring that both <strong>technical parameters</strong> and <strong>economic assessments</strong> on every slide are anchored in traceable peer-reviewed sources.</li>
+            </ul>
+        </div>
+        <div class="slide-footer">
+            <span>Step 08 &mdash; Evidence-Backed Slides</span>
+            <span>Slide 10 / 13</span>
+        </div>
+    </section>
+
+    <!-- SLIDE 11: STEP 9 -->
+    <section class="slide">
+        <div class="slide-header">
+            <div>
+                <span class="step-badge">Step 09</span>
+                <h2>Position Consolidation &amp; Cross-Cultural Triangulation</h2>
+            </div>
+        </div>
+        <div class="slide-body">
+            <ul class="bullet-list">
+                <li><strong>The 10-Hour Deep-Dive Threshold:</strong> After roughly 10 hours of intensive reading, auditing, and structuring, an informed academic viewpoint (<em>Lehrmeinung</em>) naturally crystallizes.</li>
+                <li><strong>Final Multi-LLM Synthesis:</strong> Engaging in closing synthesis dialogues across diverse models &mdash; including <strong>ChatGPT</strong>, <strong>Gemini</strong>, and <strong>Qwen</strong> (especially for international and Asian market/technology perspectives) &mdash; to stress-test consistency and articulate a coherent concluding position.</li>
+            </ul>
+        </div>
+        <div class="slide-footer">
+            <span>Step 09 &mdash; Position Consolidation</span>
+            <span>Slide 11 / 13</span>
+        </div>
+    </section>
+
+    <!-- SLIDE 12: EPISTEMIC HUMILITY & CRITICAL REFLECTION -->
+    <section class="slide">
+        <div class="slide-header">
+            <div>
+                <span class="step-badge reflection">Epistemic Reflection</span>
+                <h2>Is This "The Truth"? &mdash; The Limits of Any Synthesis</h2>
+            </div>
+        </div>
+        <div class="slide-body">
+            <div class="grid-2">
+                <div class="card amber">
+                    <h3>High Effort &ne; Absolute Truth</h3>
+                    <ul class="bullet-list">
+                        <li>We operate inside a fast-moving, complex research frontier where even 10 hours of rigorous AI-assisted review yields only a <strong>provisional snapshot</strong>.</li>
+                        <li>Is Prof. Rabehl's synthesis the definitive truth of how the world works? <strong>No &mdash; of course not.</strong> It is simply the best evidence I could assemble right now.</li>
+                        <li><strong>Your Mandate:</strong> Question these findings, inspect the open-access sources, and form your own independent scientific judgment.</li>
+                    </ul>
+                </div>
+                <div style="display: flex; flex-direction: column; justify-content: center; gap: 1rem;">
+                    <blockquote>
+                        "The first principle is that you must not fool yourself &mdash; and you are the easiest person to fool. So you have to be very careful about that. After you've not fooled yourself, it's easy not to fool other scientists."
+                        <footer>&mdash; Richard P. Feynman, Caltech Commencement Address (1974)</footer>
+                    </blockquote>
+                    <div class="highlight-box amber">
+                        <strong>Scientific Integrity:</strong> Rigorous self-critique is not a weakness &mdash; it is the defining habit of every credible researcher.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span>Critical Self-Reflection &amp; Intellectual Humility</span>
+            <span>Slide 12 / 13</span>
+        </div>
+    </section>
+
+    <!-- SLIDE 13: CLOSING / SUMMARY -->
+    <section class="slide">
+        <div class="slide-header">
+            <div>
+                <span class="step-badge">Workflow Summary</span>
+                <h2>Core Principles for Your Own Research</h2>
+            </div>
+        </div>
+        <div class="slide-body">
+            <div class="grid-3">
+                <div class="card">
+                    <h3>1. Triangulate Models</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.5; font-size: 1rem;">Never trust a single LLM output. Combine conversational framing (ChatGPT), scientific search (Consensus), logical auditing (Claude/Gemini), and international perspectives (Qwen).</p>
+                </div>
+                <div class="card teal">
+                    <h3>2. Ground in Open Sources</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.5; font-size: 1rem;">Build a verifiable source repository first. Prioritize accessible, downloadable primary literature so every claim can be audited by peers and students.</p>
+                </div>
+                <div class="card amber">
+                    <h3>3. Stay Self-Critical</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.5; font-size: 1rem;">AI accelerates literature synthesis, not wisdom. Treat every review as a provisional map &mdash; verify the territory and form your own reasoned conclusion.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            <span>Ready for Live Demonstration &amp; Q&amp;A</span>
+            <span>Slide 13 / 13</span>
+        </div>
+    </section>
+
+</div>
+
+<!-- NAVIGATION BAR -->
+<div class="controls">
+    <div class="nav-buttons">
+        <button id="btn-prev" onclick="prevSlide()">&#8592; Previous</button>
+        <button id="btn-next" onclick="nextSlide()">Next &#8594;</button>
+        <button onclick="goToSlide(1)" title="Jump to Overview">Overview</button>
+    </div>
+    <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progress-fill"></div>
+    </div>
+    <div class="counter" id="slide-counter">1 / 13</div>
+</div>
+
+<script>
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('btn-prev');
+    const nextBtn = document.getElementById('btn-next');
+    const counter = document.getElementById('slide-counter');
+    const progressFill = document.getElementById('progress-fill');
+    let currentSlide = 0;
+
+    function updateDeck() {
+        slides.forEach((slide, index) => {
+            slide.classList.toggle('active', index === currentSlide);
+        });
+        prevBtn.disabled = currentSlide === 0;
+        nextBtn.disabled = currentSlide === slides.length - 1;
+        counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+        const pct = ((currentSlide + 1) / slides.length) * 100;
+        progressFill.style.width = `${pct}%`;
+    }
+
+    function nextSlide() {
+        if (currentSlide < slides.length - 1) {
+            currentSlide++;
+            updateDeck();
+        }
+    }
+
+    function prevSlide() {
+        if (currentSlide > 0) {
+            currentSlide--;
+            updateDeck();
+        }
+    }
+
+    function goToSlide(index) {
+        if (index >= 0 && index < slides.length) {
+            currentSlide = index;
+            updateDeck();
+        }
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+            e.preventDefault();
+            nextSlide();
+        } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+            e.preventDefault();
+            prevSlide();
+        } else if (e.key === 'Home') {
+            e.preventDefault();
+            goToSlide(0);
+        } else if (e.key === 'End') {
+            e.preventDefault();
+            goToSlide(slides.length - 1);
+        }
+    });
+
+    updateDeck();
+</script>
+
+</body>
+</html>
+ai_research_workflow.html
+ai_research_workflow.html wird angezeigt.
