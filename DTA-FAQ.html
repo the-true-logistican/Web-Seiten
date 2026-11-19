@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deutsches Text-Audit – FAQ 0.9.0</title>
+<title>Deutsches Text-Audit – FAQ 0.10.0</title>
 <style>
 body {
     font-family: Arial, sans-serif;
@@ -360,6 +360,14 @@ h1 {
 }
 
 #faqVersion { color: #555; white-space: nowrap; }
+
+.faq-answer a.glossary-link {
+    color: #15587b;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.faq-answer a.glossary-link:hover { color: #0b3d57; }
+.faq-answer a.glossary-link:focus-visible { outline: 2px solid #15587b; outline-offset: 2px; }
 </style>
 </head>
 <body>
@@ -371,7 +379,7 @@ h1 {
         <button id="closeAllFaq" type="button" class="global-control close-all" title="Alle Antworten schließen" aria-label="Alle Antworten schließen"></button>
     </div>
 </div>
-<div class="faq-compatibility">FAQ 0.9.0 · passend zu DTA 11.1.6 · Skriptstand 19.11.2026</div>
+<div class="faq-compatibility">FAQ 0.10.0 · passend zu DTA 11.1.8 · Skriptstand 19.11.2026</div>
 
 <section class="faq-item" id="faq-why-german">
     <button class="faq-question" type="button" aria-expanded="false" aria-controls="answer-why-german">
@@ -407,7 +415,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-llm">
-        Ein LLM verändert den Text, das DTA analysiert ihn. Ein LLM kann dabei unbemerkt auch fachliche Aussagen verändern. Das DTA arbeitet deterministisch und reproduzierbar und kann deshalb als unabhängiges Messinstrument vor und nach einer Überarbeitung eingesetzt werden.
+        Ein <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=large-language-model-llm" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">LLM</a> verändert den Text, das DTA analysiert ihn. Ein LLM kann dabei unbemerkt auch fachliche Aussagen verändern. Das DTA arbeitet <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=determinismus" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">deterministisch</a> und reproduzierbar und kann deshalb als unabhängiges Messinstrument vor und nach einer Überarbeitung eingesetzt werden.
         <div class="faq-id">ID: faq-llm</div>
     </div>
 </section>
@@ -417,7 +425,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-motivation">
-        Ausgangspunkt war die praktische Arbeit mit Werkzeugen wie Flesch-Index, LIX und BlaBlaMeter zur Analyse eigener und studentischer Texte. Hinzu kam ein sehr praktisches Problem der Lehre: Wenn Studierende Kompetenzen zeigen sollen, müssen sie eigenständige fachliche Produkte und Texte erzeugen. Bei großen Gruppen wird deren differenzierte Prüfung jedoch schnell zu einem erheblichen Korrekturaufwand. Das DTA entstand deshalb nicht als Publikationsidee am Schreibtisch, sondern schrittweise als technisches Hilfsmittel für reale Textarbeit. Es soll Lehrende nicht durch eine automatische Note ersetzen, sondern sprachliche Auffälligkeiten schnell und reproduzierbar sichtbar machen. Besonders unbefriedigend waren dabei einzelne Kennzahlen, deren Entstehung nicht nachvollziehbar ist oder die sich leicht auf einen gewünschten Score optimieren lassen. Das DTA soll deshalb unterschiedliche sprachliche Probleme getrennt anzeigen und begründete Warnsignale liefern, wo ein Text genauer geprüft oder überarbeitet werden sollte.
+        Ausgangspunkt war die praktische Arbeit mit Werkzeugen wie Flesch-Index, LIX und <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=blablameter" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">BlaBlaMeter</a> zur Analyse eigener und studentischer Texte. Hinzu kam ein sehr praktisches Problem der Lehre: Wenn Studierende Kompetenzen zeigen sollen, müssen sie eigenständige fachliche Produkte und Texte erzeugen. Bei großen Gruppen wird deren differenzierte Prüfung jedoch schnell zu einem erheblichen Korrekturaufwand. Das DTA entstand deshalb nicht als Publikationsidee am Schreibtisch, sondern schrittweise als technisches Hilfsmittel für reale Textarbeit. Es soll Lehrende nicht durch eine automatische Note ersetzen, sondern sprachliche Auffälligkeiten schnell und reproduzierbar sichtbar machen. Besonders unbefriedigend waren dabei einzelne Kennzahlen, deren Entstehung nicht nachvollziehbar ist oder die sich leicht auf einen gewünschten Score optimieren lassen. Das DTA soll deshalb unterschiedliche sprachliche Probleme getrennt anzeigen und begründete Warnsignale liefern, wo ein Text genauer geprüft oder überarbeitet werden sollte.
         <div class="faq-id">ID: faq-motivation</div>
     </div>
 </section>
@@ -427,7 +435,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-gute-werte">
-        Günstig sind gleichzeitig kleine P- und Q-Werte. Ein kleiner P-Wert bedeutet, dass die gemeinsame Belastung über die fünf Faktoren gering ist. Ein kleiner P-Wert allein reicht jedoch nicht: Ein einzelner Faktor kann stark ausschlagen, während die anderen niedrig sind. Der Q-Wert erfasst diese Unausgewogenheit. Ein guter Text sollte deshalb sowohl einen niedrigen P-Wert als auch einen niedrigen Q-Wert aufweisen.
+        Günstig sind gleichzeitig kleine P- und <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=q-profilunwucht" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Q-Wert</a>e. Ein kleiner <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=p-parallelkomponente" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">P-Wert</a> bedeutet, dass die gemeinsame Belastung über die fünf Faktoren gering ist. Ein kleiner P-Wert allein reicht jedoch nicht: Ein einzelner Faktor kann stark ausschlagen, während die anderen niedrig sind. Der Q-Wert erfasst diese Unausgewogenheit. Ein guter Text sollte deshalb sowohl einen niedrigen P-Wert als auch einen niedrigen Q-Wert aufweisen.
         <div class="faq-id">ID: faq-gute-werte</div>
     </div>
 </section>
@@ -447,7 +455,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-maximalwert">
-        Die Skala ist bewusst nicht nach oben begrenzt. P und Q sind geometrische Größen aus dem fünfdimensionalen Textprofil und keine Prozentwerte. Im aktuellen V18-Referenzkorpus liegt der Median von P bei etwa 0,947; höhere Werte kommen ebenfalls vor. Ein hoher P-Wert zeigt eine starke gemeinsame Belastung der fünf Dimensionen, ein hoher Q-Wert eine starke Unausgewogenheit zwischen ihnen. Beide Größen sollten deshalb zusammen betrachtet werden. Aus der Verteilung allein lassen sich keine allgemein gültigen Grenzwerte für Textqualität ableiten.
+        Die Skala ist bewusst nicht nach oben begrenzt. P und Q sind geometrische Größen aus dem fünfdimensionalen Textprofil und keine Prozentwerte. Im aktuellen <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=referenzkorpus-trainingskorpus" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">V18-Referenzkorpus</a> liegt der Median von P bei etwa 0,947; höhere Werte kommen ebenfalls vor. Ein hoher P-Wert zeigt eine starke gemeinsame Belastung der fünf Dimensionen, ein hoher Q-Wert eine starke Unausgewogenheit zwischen ihnen. Beide Größen sollten deshalb zusammen betrachtet werden. Aus der Verteilung allein lassen sich keine allgemein gültigen Grenzwerte für Textqualität ableiten.
         <div class="faq-id">ID: faq-maximalwert</div>
     </div>
 </section>
@@ -457,9 +465,9 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-referenzlinien">
-        <p>Die vier diagonalen Linien sind Orientierungshilfen in der P/Q-Darstellung, keine automatisch vergebenen Noten. Die Linie 3 bedeutet sinngemäß „Ziel erreicht“ und wurde in DTA 11.1.6 auf Grundlage des aktuellen V18-Korpus neu positioniert. Dazu wurden Gamma-Verteilungen an die P- und Q-Werte angepasst. Die Summe ihrer beiden Modalwerte bestimmt die Position der dritten Linie: P = 0,7940 und Q = 0,4167, somit <strong>P + Q = 1,2107</strong>.</p>
-        <p>Die Linien 1, 2 und 4 folgen denselben relativen Abständen wie zuvor. Entlang einer solchen Diagonalen können sich P und Q teilweise ausgleichen: Ein höherer P-Wert kann mit einem niedrigeren Q-Wert zusammentreffen und umgekehrt. Die Linien geben nur ein ungefähres Gefühl für die Größenordnung; sie sind keine empirisch validierten Prüfungsnotengrenzen. Der Referenzpunkt aus den einzelnen P- und Q-Maxima ist außerdem nicht zwangsläufig das Maximum der gemeinsamen zweidimensionalen Verteilung.</p>
-        <div class="faq-id">ID: faq-referenzlinien</div>
+<p>Die <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=pq-ebene" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">vier diagonalen Linien</a> sind Orientierungshilfen in der P/Q-Darstellung, keine automatisch vergebenen Noten. Die <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=referenzlinie-3-ziel-erreicht" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Linie 3</a> bedeutet sinngemäß „Ziel erreicht“ und wurde in DTA 11.1.6 auf Grundlage des aktuellen V18-Korpus neu positioniert. Dazu wurden <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=gamma-fit" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Gamma-Verteilungen</a> an die P- und Q-Werte angepasst. Die Summe ihrer beiden <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=modalwert-modus" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Modalwerte</a> bestimmt die Position der dritten Linie: P = 0,7940 und Q = 0,4167, somit <strong>P + Q = 1,2107</strong>.</p>
+<p>Die Linien 1, 2 und 4 folgen denselben relativen Abständen wie zuvor. Entlang einer solchen Diagonalen können sich P und Q teilweise ausgleichen: Ein höherer P-Wert kann mit einem niedrigeren Q-Wert zusammentreffen und umgekehrt. Die Linien geben nur ein ungefähres Gefühl für die Größenordnung; sie sind keine empirisch validierten Prüfungsnotengrenzen. Der Referenzpunkt aus den einzelnen P- und Q-Maxima ist außerdem nicht zwangsläufig das Maximum der gemeinsamen zweidimensionalen Verteilung.</p>
+<div class="faq-id">ID: faq-referenzlinien</div>
     </div>
 </section>
 <section class="faq-item" id="faq-text-ueberarbeiten">
@@ -468,15 +476,15 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-text-ueberarbeiten">
-        <p>Das DTA erschließt dir die Analyse in drei Schritten:</p>
-        <ol>
-            <li><strong>Ergebnisübersicht:</strong> Nach der Analyse erhältst du zunächst einen Überblick über das sprachliche Profil deines Textes.</li>
-            <li><strong>Insights:</strong> Hier kannst du die einzelnen Kennwerte betrachten und nachvollziehen, wie sie zusammenhängen und das Profil deines Textes prägen.</li>
-            <li><strong>Deep Insights:</strong> Hier siehst du im Detail, welche sprachlichen Konstruktionen erkannt wurden und an welchen Stellen sie auftreten. Neben scorewirksamen Befunden wie Passivkonstruktionen, Nominalisierungen, Füllwörtern oder Modalformen zeigt die aktuelle Version auch zusätzliche diagnostische Merkmale wie propositionale und relationale Last, syntaktische Spannweite, Präpositionskaskaden, Nominalgruppenlast, Metadiskurs, epistemische Stapelung, Komplexitätsverlauf und Konstruktionscluster. Mehrere dieser zusätzlichen Merkmale sind bewusst score-neutral und dienen nur der gezielten Textprüfung.</li>
-        </ol>
-        <p>Die Fundstellen kannst du nutzen, um deinen Text gezielt durchzuarbeiten: Ist die jeweilige Konstruktion für die Aussage notwendig? Macht sie den Text präziser, oder gibt es eine klarere, direktere Formulierung? Beispielsweise kannst du prüfen, ob ein aktiver Satz den Handelnden deutlicher benennt, ein Verb eine Nominalkonstruktion ersetzt oder eine Einschränkung tatsächlich gebraucht wird.</p>
-        <p>Ein Treffer ist dabei kein automatischer Fehler und keine Aufforderung, die Formulierung grundsätzlich zu streichen. Entscheidend ist ihre Funktion im konkreten Text. Das DTA liefert dir Anhaltspunkte für diese Prüfung; die sprachliche und fachliche Entscheidung triffst du. Nach der Überarbeitung kannst du den Text erneut analysieren und die Ergebnisse vergleichen. Ziel ist ein verständlicherer und präziserer Text, nicht lediglich ein niedrigerer Zahlenwert.</p>
-        <div class="faq-id">ID: faq-text-ueberarbeiten</div>
+<p>Das DTA erschließt dir die Analyse in drei Schritten:</p>
+<ol>
+<li><strong><a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=ergebnisuebersicht" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Ergebnisübersicht</a>:</strong> Nach der Analyse erhältst du zunächst einen Überblick über das sprachliche Profil deines Textes.</li>
+<li><strong><a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=insights" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Insights</a>:</strong> Hier kannst du die einzelnen Kennwerte betrachten und nachvollziehen, wie sie zusammenhängen und das Profil deines Textes prägen.</li>
+<li><strong><a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=deep-insights" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Deep Insights</a>:</strong> Hier siehst du im Detail, welche sprachlichen Konstruktionen erkannt wurden und an welchen Stellen sie auftreten. Neben scorewirksamen Befunden wie Passivkonstruktionen, Nominalisierungen, Füllwörtern oder Modalformen zeigt die aktuelle Version auch zusätzliche diagnostische Merkmale wie propositionale und relationale Last, syntaktische Spannweite, Präpositionskaskaden, Nominalgruppenlast, Metadiskurs, epistemische Stapelung, <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=komplexitaetsverlauf" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Komplexitätsverlauf</a> und <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=konstruktionscluster" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Konstruktionscluster</a>. Mehrere dieser zusätzlichen Merkmale sind bewusst score-neutral und dienen nur der gezielten Textprüfung.</li>
+</ol>
+<p>Die Fundstellen kannst du nutzen, um deinen Text gezielt durchzuarbeiten: Ist die jeweilige Konstruktion für die Aussage notwendig? Macht sie den Text präziser, oder gibt es eine klarere, direktere Formulierung? Beispielsweise kannst du prüfen, ob ein aktiver Satz den Handelnden deutlicher benennt, ein Verb eine Nominalkonstruktion ersetzt oder eine Einschränkung tatsächlich gebraucht wird.</p>
+<p>Ein Treffer ist dabei kein automatischer Fehler und keine Aufforderung, die Formulierung grundsätzlich zu streichen. Entscheidend ist ihre Funktion im konkreten Text. Das DTA liefert dir Anhaltspunkte für diese Prüfung; die sprachliche und fachliche Entscheidung triffst du. Nach der Überarbeitung kannst du den Text erneut analysieren und die Ergebnisse vergleichen. Ziel ist ein verständlicherer und präziserer Text, nicht lediglich ein niedrigerer Zahlenwert.</p>
+<div class="faq-id">ID: faq-text-ueberarbeiten</div>
     </div>
 </section>
     </div>
@@ -497,43 +505,43 @@ h1 {
     <div class="faq-answer" id="answer-dimensionen">
         Das DTA verwendet fünf getrennte Dimensionen. Drei davon tragen bewusst einprägsame Star-Trek-Namen; die Info-Marker zeigen die fachsprachliche Einordnung.
         <ul class="factor-list">
-            <li>
-                <strong>B – Betazoid</strong>
-                <span class="info-tip" tabindex="0" aria-label="Erklärung Betazoid">i
+<li>
+<strong>B – <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=betazoid" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Betazoid</a></strong>
+<span aria-label="Erklärung Betazoid" class="info-tip" tabindex="0">i
                     <span class="tip-box">Erfasst vor allem ungebundene Abstraktion, phrasenhafte Vagheit, Füll- und Blähsprache sowie geringe konkrete Aussagebindung. Fachsprachlich geht es um lexikalisch-pragmatische Abstraktion und Vagheit, nicht um einzelne „verbotene“ Wörter.</span>
-                </span>
+</span>
                 : inhaltsarme oder schwach gebundene Abstraktion und Phrasensprache.
             </li>
-            <li>
-                <strong>C – Cardassianisch</strong>
-                <span class="info-tip" tabindex="0" aria-label="Erklärung Cardassianisch">i
+<li>
+<strong>C – <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=cardassianisch-c" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Cardassianisch</a></strong>
+<span aria-label="Erklärung Cardassianisch" class="info-tip" tabindex="0">i
                     <span class="tip-box">Erfasst Merkmale des Nominal- und Kanzleistils: Nominalisierungen, Passiv, Funktionsverbgefüge, syntaktische Verdichtung und Akteursentzug. Solche Formen sind in Fachsprache nicht automatisch falsch; relevant sind Häufung und Funktion.</span>
-                </span>
+</span>
                 : bürokratische Verdichtung und sprachlicher Handlungsentzug.
             </li>
-            <li>
-                <strong>F – Ferengi</strong>
-                <span class="info-tip" tabindex="0" aria-label="Erklärung Ferengi">i
+<li>
+<strong>F – <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=ferengi-f" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Ferengi</a></strong>
+<span aria-label="Erklärung Ferengi" class="info-tip" tabindex="0">i
                     <span class="tip-box">Erfasst Hedging und Formen epistemischer, modaler oder konditionaler Absicherung: Relativierungen, Weichmacher und sprachliche Einschränkungen. Notwendige wissenschaftliche oder technische Präzisierung soll dabei von bloßer Ausweichsprache unterschieden werden.</span>
-                </span>
+</span>
                 : Absicherung, Relativierung und geringe Festlegung.
             </li>
-            <li>
-                <strong>LIX</strong>
-                <span class="info-tip" tabindex="0" aria-label="Erklärung LIX">i
+<li>
+<strong><a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=lix" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">LIX</a></strong>
+<span aria-label="Erklärung LIX" class="info-tip" tabindex="0">i
                     <span class="tip-box">Der LIX ist ein etablierter Lesbarkeitsindex. Er verwendet im Kern die durchschnittliche Satzlänge und den Anteil langer Wörter. Im DTA bildet er die formale Lesbarkeitskomplexität als eigene Dimension ab.</span>
-                </span>
+</span>
                 : formale Lesbarkeitskomplexität.
             </li>
-            <li>
-                <strong>ANN – rekonstruiertes BlaBlaMeter</strong>
-                <span class="info-tip" tabindex="0" aria-label="Erklärung ANN">i
-                    <span class="tip-box">Der ANN-Wert rekonstruiert das Verhalten des externen BlaBlaMeters. In DTA 11.1.6 wird dafür ANN V17 mit 22 Eingangsmerkmalen, 12 Hidden-Neuronen und einem Ausgang (22–12–1) verwendet. Das Netz basiert auf den BlaBlaMeter-Ü-Werten des V18-Korpus. Die feste, monotone B50-Korrektur passt die Prognosen zu 50 % an die empirische Zielverteilung an. B, C, F und LIX bleiben eigenständige Analysedimensionen.</span>
-                </span>
-                : Weitere Informationen beim <a href="http://www.blablameter.de/" target="_blank" rel="noopener noreferrer">BlaBlaMeter</a>.
+<li>
+<strong><a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=ann-vergleichswert" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">ANN</a> – rekonstruiertes BlaBlaMeter</strong>
+<span aria-label="Erklärung ANN" class="info-tip" tabindex="0">i
+                    <span class="tip-box">Der ANN-Wert rekonstruiert das Verhalten des externen BlaBlaMeters. In DTA 11.1.8 wird dafür ANN V17 mit 22 Eingangsmerkmalen, 12 Hidden-Neuronen und einem Ausgang (22–12–1) verwendet. Das Netz basiert auf den BlaBlaMeter-Ü-Werten des V18-Korpus. Die feste, monotone B50-Korrektur passt die Prognosen zu 50 % an die empirische Zielverteilung an. B, C, F und LIX bleiben eigenständige Analysedimensionen.</span>
+</span>
+                : Weitere Informationen beim <a href="http://www.blablameter.de/" rel="noopener noreferrer" target="_blank">BlaBlaMeter</a>.
             </li>
-        </ul>
-        <div class="faq-id">ID: faq-dimensionen</div>
+</ul>
+<div class="faq-id">ID: faq-dimensionen</div>
     </div>
 </section>
 <section class="faq-item" id="faq-bestehende-verfahren">
@@ -552,7 +560,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-phrasendrescherei">
-        „Bullshit“ selbst ist keine sinnvolle objektive Messgröße. Messbar sind aber sprachliche Strukturen, die dazu beitragen: ungebundene Abstraktion, unnötige Verdichtung, Akteursentzug, Absicherung oder geringe Aussagebindung. Genau diese Mechanismen versucht das DTA getrennt zu erfassen.
+        „<a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=bullshit-frankfurt" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Bullshit</a>“ selbst ist keine sinnvolle objektive Messgröße. Messbar sind aber sprachliche Strukturen, die dazu beitragen: <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=ungebundene-abstraktion" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">ungebundene Abstraktion</a>, unnötige Verdichtung, <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=akteursentzug" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Akteursentzug</a>, Absicherung oder geringe Aussagebindung. Genau diese Mechanismen versucht das DTA getrennt zu erfassen.
         <div class="faq-id">ID: faq-phrasendrescherei</div>
     </div>
 </section>
@@ -572,7 +580,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-unabhaengigkeit">
-        Nicht vollständig. Sprachliche Merkmale können mehrere Wirkungen gleichzeitig haben; Nominalstil kann beispielsweise auch die Lesbarkeit beeinflussen. Entscheidend ist deshalb nicht vollständige statistische Unabhängigkeit, sondern ob die Dimensionen unterschiedliche diagnostische Informationen liefern. Ihre Zusammenhänge müssen empirisch beobachtet und bei der Interpretation berücksichtigt werden.
+        Nicht vollständig. Sprachliche Merkmale können mehrere Wirkungen gleichzeitig haben; <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=nominalstil-kanzleistil" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Nominalstil</a> kann beispielsweise auch die Lesbarkeit beeinflussen. Entscheidend ist deshalb nicht vollständige statistische Unabhängigkeit, sondern ob die Dimensionen unterschiedliche diagnostische Informationen liefern. Ihre Zusammenhänge müssen empirisch beobachtet und bei der Interpretation berücksichtigt werden.
         <div class="faq-id">ID: faq-unabhaengigkeit</div>
     </div>
 </section>
@@ -582,7 +590,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-ann-deterministisch">
-        Das neuronale Netz erzeugt ausschließlich den separat ausgewiesenen ANN-Vergleichswert. DTA 11.1.6 verwendet ANN V17 mit der Architektur 22–12–1: 22 normierte Eingangsmerkmale, 12 Neuronen in der verborgenen Schicht und einen Ausgang. Die trainierten Gewichte und Skalierungsparameter sind fest in der HTML-Datei hinterlegt. Eine ebenfalls fest hinterlegte monotone Quantilkorrektur wird anschließend zur Hälfte angewendet (B50). Bei identischem Text und identischer Programmversion bleiben deshalb auch die ANN-Ergebnisse identisch. Die B-, C- und F-Detektoren und die zusätzlichen regelbasierten Diagnosen werden davon getrennt berechnet.
+        Das <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=ann-v17" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">neuronale Netz</a> erzeugt ausschließlich den separat ausgewiesenen ANN-Vergleichswert. DTA 11.1.8 verwendet ANN V17 mit der Architektur 22–12–1: 22 normierte Eingangsmerkmale, 12 Neuronen in der verborgenen Schicht und einen Ausgang. Die trainierten Gewichte und Skalierungsparameter sind fest in der HTML-Datei hinterlegt. Eine ebenfalls fest hinterlegte monotone Quantilkorrektur wird anschließend zur Hälfte angewendet (<a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=b50" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">B50</a>). Bei identischem Text und identischer Programmversion bleiben deshalb auch die ANN-Ergebnisse identisch. Die B-, C- und F-Detektoren und die zusätzlichen regelbasierten Diagnosen werden davon getrennt berechnet.
         <div class="faq-id">ID: faq-ann-deterministisch</div>
     </div>
 </section>
@@ -592,7 +600,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-blablameter-kopie">
-        Nein. Die Entwicklung begann unter anderem mit der Untersuchung des BlaBlaMeters und dem Versuch, dessen Verhalten aus Beispielen zu rekonstruieren. Daraus entstand schrittweise ein anderes Konzept: getrennte transparente Detektoren, eigene Dimensionen, eigene Kalibrierungen sowie die P-Q-Darstellung. Der rekonstruierte BlaBlaMeter-Wert blieb als Vergleichsgröße erhalten.
+        Nein. Die Entwicklung begann unter anderem mit der Untersuchung des <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=blablameter" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">BlaBlaMeters</a> und dem Versuch, dessen Verhalten aus Beispielen zu rekonstruieren. Daraus entstand schrittweise ein anderes Konzept: getrennte transparente Detektoren, eigene Dimensionen, eigene Kalibrierungen sowie die P-Q-Darstellung. Der rekonstruierte BlaBlaMeter-Wert blieb als Vergleichsgröße erhalten.
         <div class="faq-id">ID: faq-blablameter-kopie</div>
     </div>
 </section>
@@ -602,7 +610,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-noten-scheingenauigkeit">
-        Das DTA vergibt keine Noten. Die diagonalen Referenzlinien in der P/Q-Darstellung sollen eine vertraute Orientierung für Größenordnungen geben. Die mittlere Linie 3 wurde in DTA 11.1.6 anhand der Gamma-Modi der P- und Q-Verteilungen des V18-Korpus bestimmt und steht sinngemäß für „Ziel erreicht“. Das ist eine modellinterne Referenz und keine empirisch validierte Grenze zwischen Prüfungsnoten. Eine Textnote darf daraus nicht automatisch abgeleitet werden.
+        Das DTA vergibt keine Noten. Die diagonalen <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=pq-ebene" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Referenzlinien</a> in der P/Q-Darstellung sollen eine vertraute Orientierung für Größenordnungen geben. Die mittlere <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=referenzlinie-3-ziel-erreicht" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Linie 3</a> wurde in DTA 11.1.6 anhand der Gamma-Modi der P- und Q-Verteilungen des V18-Korpus bestimmt und steht sinngemäß für „Ziel erreicht“. Das ist eine modellinterne Referenz und keine empirisch validierte Grenze zwischen Prüfungsnoten. Eine Textnote darf daraus nicht automatisch abgeleitet werden.
         <div class="faq-id">ID: faq-noten-scheingenauigkeit</div>
     </div>
 </section>
@@ -612,7 +620,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-nullwerte-kalibrierung">
-        Ein Nullwert bedeutet, dass der jeweilige Detektor bei diesem Text keine entsprechend bewertete Belastung festgestellt hat. Besonders B und F liefern bei vielen Texten solche Nullwerte. Sie bleiben bei der Kalibrierung ausdrücklich erhalten und werden nicht künstlich erhöht. Nur die positiven Werte werden auf die gemeinsame ANN+B50-Referenzverteilung übertragen. Deshalb können die Gamma-Kurven der positiven Werte beinahe gleich aussehen, obwohl die vollständigen Verteilungen – einschließlich der Nullen – unterschiedlich sind.
+        Ein <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=nullwerte-bei-der-kalibrierung" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Nullwert</a> bedeutet, dass der jeweilige Detektor bei diesem Text keine entsprechend bewertete Belastung festgestellt hat. Besonders B und F liefern bei vielen Texten solche Nullwerte. Sie bleiben bei der <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=empirische-kalibrierung" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Kalibrierung</a> ausdrücklich erhalten und werden nicht künstlich erhöht. Nur die positiven Werte werden auf die gemeinsame ANN+B50-Referenzverteilung übertragen. Deshalb können die Gamma-Kurven der positiven Werte beinahe gleich aussehen, obwohl die vollständigen Verteilungen – einschließlich der Nullen – unterschiedlich sind.
         <div class="faq-id">ID: faq-nullwerte-kalibrierung</div>
     </div>
 </section>
@@ -622,7 +630,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-b50-verteilung">
-        Das ANN V17 neigt dazu, sehr niedrige BlaBlaMeter-Werte zu hoch und sehr hohe Werte zu niedrig vorherzusagen. Seine Ergebnisse liegen dadurch etwas zu dicht beieinander. B50 ist keine neue Netzarchitektur, sondern eine nachgeschaltete Quantilkorrektur: Die Hälfte des Ergebnisses stammt aus der ursprünglichen ANN-Prognose und die andere Hälfte aus einer monotonen statistischen Abbildung auf die BlaBlaMeter-Verteilung. In der verschachtelten Kreuzvalidierung verringerte die feste 50-%-Korrektur den Wasserstein-Abstand der Verteilungen um ungefähr 42 %, während der Fehler einzelner Texte praktisch unverändert blieb. Die Korrektur verbessert also hauptsächlich die Vergleichbarkeit der Verteilungen, nicht nachweisbar die Treffgenauigkeit bei jedem Text.
+        Das ANN V17 neigt dazu, sehr niedrige BlaBlaMeter-Werte zu hoch und sehr hohe Werte zu niedrig vorherzusagen. Seine Ergebnisse liegen dadurch etwas zu dicht beieinander. <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=b50" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">B50</a> ist keine neue Netzarchitektur, sondern eine nachgeschaltete Quantilkorrektur: Die Hälfte des Ergebnisses stammt aus der ursprünglichen ANN-Prognose und die andere Hälfte aus einer monotonen statistischen Abbildung auf die BlaBlaMeter-Verteilung. In der <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=nested-cv" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">verschachtelten Kreuzvalidierung</a> verringerte die feste 50-%-Korrektur den <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=wasserstein-distanz" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Wasserstein-Abstand</a> der Verteilungen um ungefähr 42 %, während der Fehler einzelner Texte praktisch unverändert blieb. Die Korrektur verbessert also hauptsächlich die Vergleichbarkeit der Verteilungen, nicht nachweisbar die Treffgenauigkeit bei jedem Text.
         <div class="faq-id">ID: faq-b50-verteilung</div>
     </div>
 </section>
@@ -652,8 +660,8 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-sprachforschung">
-        Das DTA ist nicht aus einer einzelnen sprachwissenschaftlichen Theorie entstanden. Ausgangspunkt war die praktische Analyse realer Texte: Auffälligkeiten wurden systematisiert, Detektoren entwickelt, an einem wachsenden Textkorpus geprüft und bei wiederkehrenden Fehlklassifikationen überarbeitet.<br><br>
-        Diese empirische Entwicklung wird inzwischen gezielt durch Erkenntnisse aus der Sprach-, Lese- und Verständlichkeitsforschung ergänzt. Dort wird Textverständlichkeit nicht allein über einzelne Wörter oder einfache Lesbarkeitskennzahlen beschrieben, sondern als Zusammenhang zwischen Merkmalen eines Textes und seiner Verarbeitung durch Leser betrachtet. Solche Erkenntnisse haben unter anderem die Weiterentwicklung der Diagnostik für syntaktische Belastung, propositionale und relationale Dichte, Nominalgruppen, Kohäsion und weitere Formen sprachlicher Verarbeitungslast beeinflusst.<br><br>
+        Das DTA ist nicht aus einer einzelnen sprachwissenschaftlichen Theorie entstanden. Ausgangspunkt war die praktische Analyse realer Texte: Auffälligkeiten wurden systematisiert, Detektoren entwickelt, an einem wachsenden Textkorpus geprüft und bei wiederkehrenden Fehlklassifikationen überarbeitet.<br/><br/>
+        Diese empirische Entwicklung wird inzwischen gezielt durch Erkenntnisse aus der Sprach-, Lese- und Verständlichkeitsforschung ergänzt. Dort wird <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=lesbarkeit-verstandlichkeit" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Textverständlichkeit</a> nicht allein über einzelne Wörter oder einfache Lesbarkeitskennzahlen beschrieben, sondern als Zusammenhang zwischen Merkmalen eines Textes und seiner Verarbeitung durch Leser betrachtet. Solche Erkenntnisse haben unter anderem die Weiterentwicklung der Diagnostik für syntaktische Belastung, propositionale und relationale Dichte, <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=nominalgruppenlast" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Nominalgruppen</a>, <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=kohaesion" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Kohäsion</a> und weitere Formen sprachlicher Verarbeitungslast beeinflusst.<br/><br/>
         Eine Aussage aus der Literatur wird dabei nicht automatisch zu einer Bewertungsregel des DTA. Neue Merkmale werden technisch operationalisiert, an realen Texten geprüft und möglichst konservativ eingesetzt. Mehrere der daraus entstandenen Deep-Insights-Merkmale bleiben bewusst score-neutral. Die Literatur liefert damit theoretische und empirische Anhaltspunkte für die Konstruktion der Detektoren; sie ersetzt weder die Prüfung am Textkorpus noch eine eigenständige Validierung des Gesamtverfahrens.
         <div class="faq-id">ID: faq-sprachforschung</div>
     </div>
@@ -664,7 +672,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-validitaet">
-        Das DTA wird nicht dadurch valide, dass seine Ergebnisse plausibel aussehen. Die Detektoren werden an realen Texten geprüft, Fehlklassifikationen dokumentiert und Änderungen durch Regressionstests kontrolliert. Für die Rekonstruktion der BlaBlaMeter-Werte und die Wahl der nachgelagerten B50-Korrektur wurde außerdem eine gruppierte, verschachtelte Kreuzvalidierung eingesetzt. Dabei waren die jeweils äußeren Testdaten nicht an der Parameterauswahl beteiligt. Dieses Verfahren prüft die Vorhersagegüte und Verteilungstreue innerhalb des vorhandenen Korpus. Es ersetzt jedoch keine unabhängige sprachwissenschaftliche Konstruktvalidierung und keine Untersuchung mit völlig neuen Texten.
+        Das DTA wird nicht dadurch valide, dass seine Ergebnisse plausibel aussehen. Die Detektoren werden an realen Texten geprüft, <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=fehlklassifikation" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Fehlklassifikationen</a> dokumentiert und Änderungen durch <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=regressionstest" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Regressionstests</a> kontrolliert. Für die Rekonstruktion der BlaBlaMeter-Werte und die Wahl der nachgelagerten B50-Korrektur wurde außerdem eine gruppierte, <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=nested-cv" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">verschachtelte Kreuzvalidierung</a> eingesetzt. Dabei waren die jeweils äußeren Testdaten nicht an der Parameterauswahl beteiligt. Dieses Verfahren prüft die Vorhersagegüte und Verteilungstreue innerhalb des vorhandenen Korpus. Es ersetzt jedoch keine unabhängige sprachwissenschaftliche <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=validitaet" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Konstruktvalidierung</a> und keine Untersuchung mit völlig neuen Texten.
         <div class="faq-id">ID: faq-validitaet</div>
     </div>
 </section>
@@ -674,7 +682,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-overfitting">
-        Diese Gefahr besteht und wird methodisch kontrolliert. Nicht jeder unerwartete Messwert führt zu einer Regeländerung. Eine Anpassung soll eine nachvollziehbare, möglichst wiederkehrende Fehlklasse beheben, ohne bereits funktionierende Fälle zu verschlechtern. Dafür gibt es den Textkorpus und Regressionstests. Bei der Auswahl der ANN-Nachkalibrierung wurde zusätzlich eine gruppierte, verschachtelte Kreuzvalidierung verwendet: Die Modellwahl erfolgte in inneren Trainingsfalten und ihre Bewertung auf getrennten äußeren Testfalten. Texte mit identischen Merkmalsvektoren blieben dabei in derselben Gruppe. Trotz dieser Kontrollen bleibt die spätere Prüfung an neu hinzukommenden Texten wichtig.
+        Diese Gefahr besteht und wird methodisch kontrolliert. Nicht jeder unerwartete Messwert führt zu einer Regeländerung. Eine Anpassung soll eine nachvollziehbare, möglichst wiederkehrende Fehlklasse beheben, ohne bereits funktionierende Fälle zu verschlechtern. Dafür gibt es den Textkorpus und <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=regressionstest" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Regressionstests</a>. Bei der Auswahl der ANN-Nachkalibrierung wurde zusätzlich eine gruppierte, <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=nested-cv" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">verschachtelte Kreuzvalidierung</a> verwendet: Die Modellwahl erfolgte in inneren Trainingsfalten und ihre Bewertung auf getrennten äußeren Testfalten. Texte mit identischen Merkmalsvektoren blieben dabei in derselben Gruppe. Trotz dieser Kontrollen bleibt die spätere Prüfung an neu hinzukommenden Texten wichtig.
         <div class="faq-id">ID: faq-overfitting</div>
     </div>
 </section>
@@ -694,7 +702,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-kalibrierung-zirkular">
-        Detektion, Skalierung und Validierung sind zu unterscheiden. B, C, F und LIX liefern zunächst eigene Rohwerte. Deren positive Werte werden anhand empirischer Quantile auf die Referenzverteilung des ANN V17+B50 abgebildet; echte Nullwerte bleiben erhalten. Dadurch werden die Skalen besser vergleichbar. Dass ihre Gamma-Kurven anschließend nahezu übereinanderliegen, ist eine beabsichtigte Folge der Kalibrierung und <strong>kein unabhängiger Beleg</strong> dafür, dass die Detektoren dasselbe messen oder gleich valide sind. Wenn sich der Referenzkorpus ändert, kann auch die Kalibrierung angepasst werden. Deshalb sind Detektor- und Kalibrierungsversion gemeinsam zu dokumentieren.
+        Detektion, Skalierung und Validierung sind zu unterscheiden. B, C, F und LIX liefern zunächst eigene <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=rohwert-kalibrierter-endwert" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Rohwerte</a>. Deren positive Werte werden anhand empirischer <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=quantil" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Quantile</a> auf die Referenzverteilung des ANN V17+B50 abgebildet; echte Nullwerte bleiben erhalten. Dadurch werden die Skalen besser vergleichbar. Dass ihre Gamma-Kurven anschließend nahezu übereinanderliegen, ist eine beabsichtigte Folge der Kalibrierung und <strong>kein unabhängiger Beleg</strong> dafür, dass die Detektoren dasselbe messen oder gleich valide sind. Wenn sich der <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=referenzkorpus-trainingskorpus" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Referenzkorpus</a> ändert, kann auch die Kalibrierung angepasst werden. Deshalb sind Detektor- und Kalibrierungsversion gemeinsam zu dokumentieren.
         <div class="faq-id">ID: faq-kalibrierung-zirkular</div>
     </div>
 </section>
@@ -704,7 +712,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-entwicklungsfehler">
-        Gerade weil die Detektoren transparent sind, werden Fehlklassifikationen sichtbar. Sie werden dokumentiert, systematisiert und als Regressionstests weiterverwendet. Ein Messsystem ohne bekannte Fehler wäre nicht automatisch besser; möglicherweise wären seine Fehler nur unbekannt. Entscheidend ist, ob Fehler nachvollziehbar behandelt werden und Änderungen überprüfbar bleiben.
+        Gerade weil die Detektoren transparent sind, werden <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=fehlklassifikation" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Fehlklassifikationen</a> sichtbar. Sie werden dokumentiert, systematisiert und als <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=regressionstest" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Regressionstests</a> weiterverwendet. Ein Messsystem ohne bekannte Fehler wäre nicht automatisch besser; möglicherweise wären seine Fehler nur unbekannt. Entscheidend ist, ob Fehler nachvollziehbar behandelt werden und Änderungen überprüfbar bleiben.
         <div class="faq-id">ID: faq-entwicklungsfehler</div>
     </div>
 </section>
@@ -714,7 +722,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-falsche-ergebnisse">
-        Ja. Sprache ist kontextabhängig, und regelbasierte Detektoren können fachlich notwendige Strukturen falsch einordnen. Deshalb zeigt das DTA keine unfehlbaren Urteile, sondern diagnostische Messwerte. Auffällige Ergebnisse sollten am Text geprüft werden. Wiederkehrende Fehlklassifikationen sind zugleich Material für die Weiterentwicklung der Detektoren.
+        Ja. Sprache ist kontextabhängig, und regelbasierte Detektoren können fachlich notwendige Strukturen falsch einordnen. Deshalb zeigt das DTA keine unfehlbaren Urteile, sondern diagnostische Messwerte. Auffällige Ergebnisse sollten am Text geprüft werden. Wiederkehrende <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=fehlklassifikation" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Fehlklassifikationen</a> sind zugleich Material für die Weiterentwicklung der Detektoren.
         <div class="faq-id">ID: faq-falsche-ergebnisse</div>
     </div>
 </section>
@@ -734,7 +742,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-guter-wert">
-        Nein. Das DTA misst nur die Eigenschaften, die im Modell operationalisiert sind. Ein Text kann niedrige DTA-Werte haben und trotzdem fachlich falsch, logisch widersprüchlich, schlecht gegliedert oder voller Rechtschreibfehler sein. Das DTA ist kein allgemeiner Qualitätsdetektor für Texte.
+        Nein. Das DTA misst nur die Eigenschaften, die im Modell <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=operationalisierung" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">operationalisiert</a> sind. Ein Text kann niedrige DTA-Werte haben und trotzdem fachlich falsch, logisch widersprüchlich, schlecht gegliedert oder voller Rechtschreibfehler sein. Das DTA ist kein allgemeiner Qualitätsdetektor für Texte.
         <div class="faq-id">ID: faq-guter-wert</div>
     </div>
 </section>
@@ -754,7 +762,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-subjektivitaet">
-        Ja. Textverständlichkeit und sprachliche Qualität hängen auch von Lesern, Vorwissen, Textsorte und Leseziel ab. Das DTA erfasst bestimmte sprachliche Strukturen, etwa Nominalstil, Absicherung, Abstraktion und formale Lesbarkeitsmerkmale. Häufungen können Anlass für eine genauere Prüfung sein; aus dem Messwert allein lässt sich jedoch nicht sicher vorhersagen, wie eine bestimmte Person den Text erlebt. Das DTA ergänzt deshalb die fachliche und menschliche Beurteilung, anstatt sie zu ersetzen.
+        Ja. <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=lesbarkeit-verstandlichkeit" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Textverständlichkeit</a> und sprachliche Qualität hängen auch von Lesern, Vorwissen, <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=textsorte" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Textsorte</a> und Leseziel ab. Das DTA erfasst bestimmte sprachliche Strukturen, etwa Nominalstil, Absicherung, Abstraktion und formale Lesbarkeitsmerkmale. Häufungen können Anlass für eine genauere Prüfung sein; aus dem Messwert allein lässt sich jedoch nicht sicher vorhersagen, wie eine bestimmte Person den Text erlebt. Das DTA ergänzt deshalb die fachliche und menschliche Beurteilung, anstatt sie zu ersetzen.
         <div class="faq-id">ID: faq-subjektivitaet</div>
     </div>
 </section>
@@ -764,7 +772,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-star-trek-serioes">
-        Die Star-Trek-Bezeichnungen sind didaktische Labels, keine sprachwissenschaftlichen Fachbegriffe. Sie machen unterschiedliche Merkmalsgruppen leichter merkbar. Die eigentlichen Detektoren werden unabhängig davon über konkrete sprachliche Merkmale definiert. Für die fachliche Diskussion zählt die Operationalisierung, nicht der Name des Labels.
+        Die Star-Trek-Bezeichnungen sind didaktische Labels, keine sprachwissenschaftlichen Fachbegriffe. Sie machen unterschiedliche Merkmalsgruppen leichter merkbar. Die eigentlichen Detektoren werden unabhängig davon über konkrete sprachliche Merkmale definiert. Für die fachliche Diskussion zählt die <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=operationalisierung" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Operationalisierung</a>, nicht der Name des Labels.
         <div class="faq-id">ID: faq-star-trek-serioes</div>
     </div>
 </section>
@@ -784,7 +792,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-fachgebiet">
-        Das ist überprüfbar. Texte einer neuen Disziplin können in den Korpus aufgenommen und systematisch auf Fehlklassifikationen untersucht werden. Zeigen sich fachtypische Probleme, werden Detektoren angepasst, erneut getestet und die erforderlichen Modelle und Kalibrierungen neu bestimmt.
+        Das ist überprüfbar. Texte einer neuen Disziplin können in den <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=referenzkorpus-trainingskorpus" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Korpus</a> aufgenommen und systematisch auf Fehlklassifikationen untersucht werden. Zeigen sich fachtypische Probleme, werden Detektoren angepasst, erneut getestet und die erforderlichen Modelle und Kalibrierungen neu bestimmt.
         <div class="faq-id">ID: faq-fachgebiet</div>
     </div>
 </section>
@@ -794,7 +802,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-korpus-herkunft">
-        Der Textkorpus wurde nicht einmalig nach einem theoretischen Idealplan zusammengestellt, sondern schrittweise aus realen Texten der täglichen Arbeit aufgebaut: Hochschultexte, studentische Arbeiten, Fachtexte, Presse- und Alltagstexte sowie weitere tatsächlich bearbeitete Texte. Der aktuelle <strong>V18-Korpus umfasst 2.616 Texte</strong>. Davon erfüllen 2.606 die technischen Voraussetzungen für die DTA-Auswertung; für die ANN-Modellierung stehen 2.605 Texte mit zugeordnetem BlaBlaMeter-Ü-Zielwert zur Verfügung. Das zugrunde liegende Netz ist ANN V17 (22–12–1). Die neue B50-Quantilkorrektur wurde aus gruppiert kreuzvalidierten Prognosen abgeleitet. Wiederkehrende Fehlklassifikationen werden dokumentiert und an bestehenden und neu hinzukommenden Texten überprüft.
+        Der Textkorpus wurde nicht einmalig nach einem theoretischen Idealplan zusammengestellt, sondern schrittweise aus realen Texten der täglichen Arbeit aufgebaut: Hochschultexte, studentische Arbeiten, Fachtexte, Presse- und Alltagstexte sowie weitere tatsächlich bearbeitete Texte. Der aktuelle <strong><a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=referenzkorpus-trainingskorpus" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">V18-Korpus</a> umfasst 2.616 Texte</strong>. Davon erfüllen 2.606 die technischen Voraussetzungen für die DTA-Auswertung; für die ANN-Modellierung stehen 2.605 Texte mit zugeordnetem BlaBlaMeter-Ü-Zielwert zur Verfügung. Das zugrunde liegende Netz ist <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=ann-v17" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">ANN V17</a> (22–12–1). Die neue <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=b50" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">B50-Quantilkorrektur</a> wurde aus gruppiert kreuzvalidierten Prognosen abgeleitet. Wiederkehrende Fehlklassifikationen werden dokumentiert und an bestehenden und neu hinzukommenden Texten überprüft.
         <div class="faq-id">ID: faq-korpus-herkunft</div>
     </div>
 </section>
@@ -804,7 +812,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-versionen-werte">
-        Ja. Neue Texte können zu überarbeiteten Detektoren, einem neu trainierten ANN oder einer neuen empirischen Kalibrierung führen. Deshalb ist ein DTA-Wert an die jeweilige Programmversion gebunden. <strong>DTA 11.1.6</strong> verwendet das Netz ANN V17 mit einer nachgelagerten 50-prozentigen Quantilkorrektur (B50) und darauf abgestimmten Kalibrierungen von B, C, F und LIX. Auch die P/Q-Referenzlinien wurden auf Basis des V18-Korpus neu positioniert. Für reproduzierbare Vergleiche müssen derselbe Text und dieselbe DTA-Version verwendet werden. Eine neue Version bezeichnet einen neuen dokumentierten Messstand.
+        Ja. Neue Texte können zu überarbeiteten Detektoren, einem neu trainierten ANN oder einer neuen <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=empirische-kalibrierung" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">empirischen Kalibrierung</a> führen. Deshalb ist ein DTA-Wert an die jeweilige Programmversion gebunden. <strong>DTA 11.1.8</strong> verwendet weiterhin das Netz ANN V17 mit einer nachgelagerten 50-prozentigen Quantilkorrektur (B50) und darauf abgestimmten Kalibrierungen von B, C, F und LIX. Auch die P/Q-Referenzlinien wurden auf Basis des V18-Korpus neu positioniert. Für reproduzierbare Vergleiche müssen derselbe Text und dieselbe DTA-Version verwendet werden. Eine neue Version bezeichnet einen neuen dokumentierten Messstand.
         <div class="faq-id">ID: faq-versionen-werte</div>
     </div>
 </section>
@@ -814,7 +822,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-technische-bestandteile">
-        Vor der eigentlichen sprachlichen Analyse findet eine technische Textaufbereitung statt. Nichtsprachliche oder für die deutsche Analyse ungeeignete Bestandteile werden soweit möglich erkannt, bereinigt oder für bestimmte Berechnungen neutralisiert. Das ist notwendig, damit beispielsweise mathematische Formeln oder fremde Schriftsysteme nicht fälschlich als deutsche Wörter bewertet werden. Vollständig fehlerfreie PDF-Extraktion kann dennoch nicht garantiert werden.
+        Vor der eigentlichen sprachlichen Analyse findet eine <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=textbereinigung-normalisierung" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">technische Textaufbereitung</a> statt. Nichtsprachliche oder für die deutsche Analyse ungeeignete Bestandteile werden soweit möglich erkannt, bereinigt oder für bestimmte Berechnungen neutralisiert. Das ist notwendig, damit beispielsweise mathematische Formeln oder fremde Schriftsysteme nicht fälschlich als deutsche Wörter bewertet werden. Vollständig fehlerfreie PDF-Extraktion kann dennoch nicht garantiert werden.
         <div class="faq-id">ID: faq-technische-bestandteile</div>
     </div>
 </section>
@@ -824,8 +832,8 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-textuebernahme-problemquellen">
-        Einfach den verfügbaren Text in das DTA übernehmen. Das DTA bereinigt die Eingabe vor der eigentlichen Analyse technisch. Dabei werden unter anderem überflüssige Leerzeichen, problematische Sonderzeichen, ungewöhnliche Aufzählungszeichen, Trennungsartefakte und andere typische Kopierfehler soweit möglich normalisiert. Die Analyse arbeitet anschließend mit dieser bereinigten Textfassung. Diese lässt sich auch anzeigen und kopieren – das DTA kann damit nebenbei als Werkzeug zur technischen Textbereinigung verwendet werden.<br><br>
-        Lässt sich Text aus einem PDF oder einer anderen Quelle nicht direkt kopieren, kann er über OCR übernommen werden. Unter Windows geht das beispielsweise mit PowerToys Text Extractor: Windows + Shift + T, gewünschten Bildschirmbereich markieren und den erkannten Text anschließend ins DTA einfügen. Auch typische OCR-Artefakte versucht die Vorverarbeitung des DTA zu bereinigen.<br><br>
+        Einfach den verfügbaren Text in das DTA übernehmen. Das DTA bereinigt die Eingabe vor der eigentlichen Analyse technisch. Dabei werden unter anderem überflüssige Leerzeichen, problematische Sonderzeichen, ungewöhnliche Aufzählungszeichen, Trennungsartefakte und andere typische Kopierfehler soweit möglich normalisiert. Die Analyse arbeitet anschließend mit dieser bereinigten Textfassung. Diese lässt sich auch anzeigen und kopieren – das DTA kann damit nebenbei als Werkzeug zur technischen Textbereinigung verwendet werden.<br/><br/>
+        Lässt sich Text aus einem PDF oder einer anderen Quelle nicht direkt kopieren, kann er über <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=ocr" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">OCR</a> übernommen werden. Unter Windows geht das beispielsweise mit PowerToys Text Extractor: Windows + Shift + T, gewünschten Bildschirmbereich markieren und den erkannten Text anschließend ins DTA einfügen. Auch typische OCR-Artefakte versucht die Vorverarbeitung des DTA zu bereinigen.<br/><br/>
         Bereinigen bedeutet dabei nicht, OCR-Fehler zuverlässig inhaltlich zu korrigieren. Wenn OCR Zeichen oder Wörter falsch erkennt, kann der ursprüngliche Inhalt verloren gehen.
         <div class="faq-id">ID: faq-textuebernahme-problemquellen</div>
     </div>
@@ -836,8 +844,8 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-ocr-formeln">
-        Das DTA versucht, typische technische Artefakte aus kopierten oder per OCR erkannten Texten zu bereinigen und eindeutig erkennbare mathematische Formeln von der sprachlichen Analyse auszunehmen. Das funktioniert jedoch nur, soweit die ursprüngliche Struktur noch zuverlässig erkennbar ist.<br><br>
-        Insbesondere OCR kann Zeichen falsch interpretieren oder Informationen vollständig verlieren. Aus mathematischen Operatoren, Variablen, Indizes oder Sonderzeichen können beispielsweise normale Buchstaben, Zahlen oder Satzzeichen werden. Solche Fehler lassen sich nicht zuverlässig automatisch rekonstruieren. Das DTA korrigiert deshalb nur eindeutige technische Artefakte und versucht nicht, mehrdeutige Zeichenfolgen zu erraten.<br><br>
+        Das DTA versucht, typische technische Artefakte aus kopierten oder per <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=ocr" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">OCR</a> erkannten Texten zu bereinigen und eindeutig erkennbare mathematische Formeln von der sprachlichen Analyse auszunehmen. Das funktioniert jedoch nur, soweit die ursprüngliche Struktur noch zuverlässig erkennbar ist.<br/><br/>
+        Insbesondere OCR kann Zeichen falsch interpretieren oder Informationen vollständig verlieren. Aus mathematischen Operatoren, Variablen, Indizes oder Sonderzeichen können beispielsweise normale Buchstaben, Zahlen oder Satzzeichen werden. Solche Fehler lassen sich nicht zuverlässig automatisch rekonstruieren. Das DTA korrigiert deshalb nur eindeutige technische Artefakte und versucht nicht, mehrdeutige Zeichenfolgen zu erraten.<br/><br/>
         Wenn möglich, sollte daher sauber extrahierter Text verwendet werden. Direktes Kopieren aus einem PDF ist einer OCR-Erkennung in der Regel vorzuziehen, sofern dabei brauchbarer Text entsteht. OCR ist vor allem eine Ausweichmöglichkeit für Quellen, aus denen sich Text nicht direkt übernehmen lässt. Je stärker ein Ausgangstext durch Formeln, ungewöhnliche Typografie, OCR-Fehler oder andere technische Artefakte verändert wurde, desto schwieriger wird die zuverlässige Analyse des darin enthaltenen deutschen Fließtextes.
         <div class="faq-id">ID: faq-ocr-formeln</div>
     </div>
@@ -860,7 +868,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-mindesttextmenge">
-        Bei sehr kurzen Texten können einzelne Wörter oder Konstruktionen die gemessenen Dichten unverhältnismäßig stark verändern. Statistische und sprachliche Kennzahlen werden dann instabil und leicht überinterpretiert. Eine Mindesttextmenge reduziert diesen Effekt. Das DTA ist deshalb für zusammenhängende Texte gedacht und nicht für die Bewertung einzelner Sätze oder Schlagwörter.
+        Bei sehr kurzen Texten können einzelne Wörter oder Konstruktionen die gemessenen Dichten unverhältnismäßig stark verändern. Statistische und sprachliche Kennzahlen werden dann instabil und leicht überinterpretiert. Eine <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=mindesttextmenge" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Mindesttextmenge</a> reduziert diesen Effekt. Das DTA ist deshalb für zusammenhängende Texte gedacht und nicht für die Bewertung einzelner Sätze oder Schlagwörter.
         <div class="faq-id">ID: faq-mindesttextmenge</div>
     </div>
 </section>
@@ -870,7 +878,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-ki-texte">
-        Ja. Das DTA analysiert den vorliegenden deutschen Text unabhängig davon, ob er von einem Menschen oder einem Sprachmodell geschrieben wurde. Es ist jedoch kein KI-Detektor und kann aus seinen Werten nicht zuverlässig ableiten, wer den Text erzeugt hat. Gemessen werden sprachliche Eigenschaften, nicht die Autorschaft.
+        Ja. Das DTA analysiert den vorliegenden deutschen Text unabhängig davon, ob er von einem Menschen oder einem <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=large-language-model-llm" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Sprachmodell</a> geschrieben wurde. Es ist jedoch kein KI-Detektor und kann aus seinen Werten nicht zuverlässig ableiten, wer den Text erzeugt hat. Gemessen werden sprachliche Eigenschaften, nicht die Autorschaft.
         <div class="faq-id">ID: faq-ki-texte</div>
     </div>
 </section>
@@ -890,9 +898,9 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-funktionsweise">
-        <p>Das DTA ist transparent aufgebaut: Der vollständige Programmcode liegt in der HTML-Datei und kann eingesehen werden. Damit lässt sich nachvollziehen, welche Merkmale erkannt und wie die Messwerte berechnet werden. B, C und F sowie die Deep-Insights-Diagnostik arbeiten regelbasiert; LIX folgt seiner formalen Berechnung.</p>
-        <p>Der BlaBlaMeter-Vergleichswert entsteht durch ANN V17, ein fest eingebettetes Feedforward-Netz mit 22 Eingangsmerkmalen, 12 Neuronen in der verborgenen Schicht und einem Ausgang. Die Netzgewichte und Skalierungsparameter sind fest gespeichert. Auf die ANN-Prognose folgt eine ebenfalls festgelegte monotone B50-Quantilkorrektur. Die positiven B-, C-, F- und LIX-Rohwerte werden anschließend auf die ANN+B50-Referenzverteilung kalibriert; echte Nullwerte bleiben erhalten. Aus den fünf Dimensionen werden das P/Q-Profil und die zugehörige Darstellung berechnet. Alle wesentlichen Berechnungsschritte sind damit reproduzierbar, auch wenn die erlernte ANN-Abbildung weniger unmittelbar interpretierbar ist als eine einzelne Regel.</p>
-        <div class="faq-id">ID: faq-funktionsweise</div>
+<p>Das DTA ist transparent aufgebaut: Der vollständige Programmcode liegt in der HTML-Datei und kann eingesehen werden. Damit lässt sich nachvollziehen, welche Merkmale erkannt und wie die Messwerte berechnet werden. B, C und F sowie die Deep-Insights-Diagnostik arbeiten regelbasiert; LIX folgt seiner formalen Berechnung.</p>
+<p>Der BlaBlaMeter-Vergleichswert entsteht durch ANN V17, ein fest eingebettetes <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=ann-v17" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Feedforward-Netz</a> mit 22 Eingangsmerkmalen, 12 Neuronen in der verborgenen Schicht und einem Ausgang. Die Netzgewichte und Skalierungsparameter sind fest gespeichert. Auf die ANN-Prognose folgt eine ebenfalls festgelegte monotone <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=b50" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">B50-Quantilkorrektur</a>. Die positiven B-, C-, F- und LIX-Rohwerte werden anschließend auf die ANN+B50-Referenzverteilung kalibriert; echte Nullwerte bleiben erhalten. Aus den fünf Dimensionen werden das <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=pq-ebene" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">P/Q-Profil</a> und die zugehörige Darstellung berechnet. Alle wesentlichen Berechnungsschritte sind damit reproduzierbar, auch wenn die erlernte ANN-Abbildung weniger unmittelbar interpretierbar ist als eine einzelne Regel.</p>
+<div class="faq-id">ID: faq-funktionsweise</div>
     </div>
 </section>
 <section class="faq-item" id="faq-datenschutz">
@@ -911,7 +919,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-manipulation">
-        Natürlich. Wer den Code verändert, verändert damit aber auch das Werkzeug. Sobald man sich auf ein DTA-Ergebnis beruft, kann jeder denselben Text mit der unveränderten Referenzversion erneut prüfen. Weichen die Ergebnisse ab, kommen nur wenige Ursachen infrage: ein anderer Text, eine andere Programmversion oder eine manipulierte Datei. Das DTA enthält deshalb auch einen Integritätshinweis, wenn die Datei verändert wurde. Vollständig verhindern lässt sich Manipulation bei offenem Code nicht – aber sie wird überprüfbar.
+        Natürlich. Wer den Code verändert, verändert damit aber auch das Werkzeug. Sobald man sich auf ein DTA-Ergebnis beruft, kann jeder denselben Text mit der unveränderten Referenzversion erneut prüfen. Weichen die Ergebnisse ab, kommen nur wenige Ursachen infrage: ein anderer Text, eine andere Programmversion oder eine manipulierte Datei. Das DTA enthält deshalb auch einen <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=integritaetspruefung-integritaetshinweis" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">Integritätshinweis</a>, wenn die Datei verändert wurde. Vollständig verhindern lässt sich Manipulation bei offenem Code nicht – aber sie wird überprüfbar.
         <div class="faq-id">ID: faq-manipulation</div>
     </div>
 </section>
@@ -921,7 +929,7 @@ h1 {
         <span class="faq-symbol" aria-hidden="true"></span>
     </button>
     <div class="faq-answer" id="answer-score-cheaten">
-        Natürlich kann man versuchen, auf eine Messgröße hin zu optimieren. Das garantiert aber keinen besseren Text. Wer nur einzelne Marker entfernt oder Formulierungen mechanisch verändert, kann den Score verbessern und gleichzeitig Stil oder Präzision verschlechtern. Das DTA soll deshalb Hinweise für eine Überarbeitung liefern, nicht zum Selbstzweck optimiert werden.
+        Natürlich kann man versuchen, <a class="glossary-link" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html?id=score-optimierung-goodhart-problem" rel="noopener noreferrer" target="_blank" title="Begriff im DTA-Glossar öffnen">auf eine Messgröße hin zu optimieren</a>. Das garantiert aber keinen besseren Text. Wer nur einzelne Marker entfernt oder Formulierungen mechanisch verändert, kann den Score verbessern und gleichzeitig Stil oder Präzision verschlechtern. Das DTA soll deshalb Hinweise für eine Überarbeitung liefern, nicht zum Selbstzweck optimiert werden.
         <div class="faq-id">ID: faq-score-cheaten</div>
     </div>
 </section>
@@ -935,8 +943,9 @@ h1 {
     <div class="license-meta">
         <span id="copyrightNotice">© 2026 Martin Wölker</span>
         <a id="contactLink" href="http://www.woelker.name/" target="_blank" rel="noopener noreferrer">Kontakt</a>
+        <a id="glossarLink" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html" target="_blank" rel="noopener noreferrer">Glossar</a>
         <button id="imprintLink" class="imprint-link-button" type="button" onclick="openImprint()">Impressum</button>
-        <span id="faqVersion">Version 0.9.0 · DTA 11.1.6 · Stand 19.11.2026</span>
+        <span id="faqVersion">Version 0.10.0 · DTA 11.1.8 · Stand 19.11.2026</span>
     </div>
 </div>
 
@@ -953,7 +962,7 @@ Phone: +49 173 28 29 0 25</p>
 
 <script>
 
-const FAQ_DTA_VERSION = "11.1.6";
+const FAQ_DTA_VERSION = "11.1.8";
 
 function checkCallingDTAVersion() {
     const params = new URLSearchParams(window.location.search);

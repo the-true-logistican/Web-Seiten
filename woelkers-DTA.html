@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deutsches Text-Audit V11.1.6</title>
+<title>Deutsches Text-Audit V11.1.8</title>
 <style>
 .technical-quality-warning { margin: 8px 0 14px; padding: 9px 12px; border-left: 3px solid #777; background: #f1f1f1; color: #222; font-size: 13px; line-height: 1.5; }
 .technical-quality-warning strong { display: block; margin-bottom: 4px; }
@@ -683,9 +683,10 @@ body.modal-open { overflow: hidden; }
     <div class="license-meta">
         <span id="copyrightNotice">© 2026 Martin Wölker</span>
         <a id="contactLink" href="http://www.woelker.name/" target="_blank" rel="noopener noreferrer">Kontakt</a>
-        <a id="faqLink" href="https://the-true-logistican.github.io/Web-Seiten/DTA-FAQ.html?dta=11.1.6" target="_blank" rel="noopener noreferrer">FAQ</a>
+        <a id="faqLink" href="https://the-true-logistican.github.io/Web-Seiten/DTA-FAQ.html?dta=11.1.8" target="_blank" rel="noopener noreferrer">FAQ</a>
+        <a id="glossarLink" href="https://the-true-logistican.github.io/Web-Seiten/DTA-Glossar.html" target="_blank" rel="noopener noreferrer">Glossar</a>
         <button id="imprintLink" class="imprint-link-button" type="button" onclick="openImprint()">Impressum</button>
-        <span id="footerVersion">Version 11.1.6</span>
+        <span id="footerVersion">Version 11.1.8</span>
     </div>
 </div>
 
@@ -797,6 +798,10 @@ Phone: +49 173 28 29 0 25</p>
  *           Klammerverlust und Kategorien direkt am Löschschritt gemessen;
  *           beschädigte Klammerfälle regressionsgeprüft. Keine ANN- oder
  *           Kalibrierungsänderung.
+ * V11.1.8: FAQ-Aufruf übergibt die tatsächlich verwendete DTA-Version 11.1.8.
+ *           Keine Änderung der Textanalyse, Detektoren, ANN oder Kalibrierung.
+ * V11.1.7: Glossar-Link direkt neben FAQ-Link im unteren Bereich ergänzt.
+ *           Keine Änderungen an Detektoren, ANN, Kalibrierung oder Auswertung.
  * V11.1.6: P/Q-Referenzlinien auf die V18-Verteilung von ANN V17+B50
  *           neu kalibriert. Linie 3 verläuft durch Modus(P), Modus(Q).
  *           Proportionsfaktoren 5/35, 20/35, 35/35, 50/35 unverändert.
@@ -925,14 +930,14 @@ function closeImprintOnBackdrop(event) {
 
 
 
-const DTA_VERSION = "11.1.6";
-const DTA_RELEASE_DATE = "18.11.2026";
+const DTA_VERSION = "11.1.8";
+const DTA_RELEASE_DATE = "19.11.2026";
 
 let lastAnalysisData = null;
 let activeBlaBlaMeterStage = null;
 
 
-const DTA_INTEGRITY_EXPECTED_SHA256 = "f88705acd120f4ed9816b6ca5167f2ec1dd577b298a2b4560597066dbe0e7a79";
+const DTA_INTEGRITY_EXPECTED_SHA256 = "ec5280ae17d78f74aeb94cd55740cd172bc4a89c2ae8ec5a51e9f22f03bf3256";
 let dtaIntegrityState = null;
 const DTA_LICENSE_METADATA = Object.freeze({
     license: "CC BY-NC-SA 4.0",
@@ -9449,8 +9454,8 @@ function runRegressionTests() {
         if (!condition) failures.push(name + (details ? ": " + details : ""));
     };
 
-    check("V11.1.6 Selbstprüfung", verifyDTAIntegrity(), computeDTAIntegrityHash());
-    check("V11.1.6 Versionsmetadaten", DTA_VERSION === "11.1.6" && DTA_RELEASE_DATE === "18.11.2026", DTA_VERSION + " / " + DTA_RELEASE_DATE);
+    check("V11.1.8 Selbstprüfung", verifyDTAIntegrity(), computeDTAIntegrityHash());
+    check("V11.1.8 Versionsmetadaten", DTA_VERSION === "11.1.8" && DTA_RELEASE_DATE === "19.11.2026", DTA_VERSION + " / " + DTA_RELEASE_DATE);
     check("V11.1.5 ANN-B50-Quantilkorrektur", ANN_V17_B50_CORRECTION.beta === 0.5 &&
           ANN_V17_B50_CORRECTION.x.length === 101 &&
           ANN_V17_B50_CORRECTION.y.length === 101 &&
