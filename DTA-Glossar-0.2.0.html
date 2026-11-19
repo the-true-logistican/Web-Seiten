@@ -1,0 +1,3350 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DTA-Glossar 0.2.0 | Deutsches Text-Audit</title>
+  <!-- Compiled Tailwind CSS, embedded for reliable offline use -->
+  <style id="compiled-tailwind">/*! tailwindcss v4.1.10 | MIT License | https://tailwindcss.com */
+@layer properties;
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --color-amber-50: oklch(98.7% 0.022 95.277);
+    --color-amber-100: oklch(96.2% 0.059 95.617);
+    --color-amber-200: oklch(92.4% 0.12 95.746);
+    --color-amber-300: oklch(87.9% 0.169 91.605);
+    --color-amber-400: oklch(82.8% 0.189 84.429);
+    --color-amber-500: oklch(76.9% 0.188 70.08);
+    --color-amber-700: oklch(55.5% 0.163 48.998);
+    --color-amber-800: oklch(47.3% 0.137 46.201);
+    --color-amber-900: oklch(41.4% 0.112 45.904);
+    --color-amber-950: oklch(27.9% 0.077 45.635);
+    --color-emerald-100: oklch(95% 0.052 163.051);
+    --color-emerald-200: oklch(90.5% 0.093 164.15);
+    --color-emerald-300: oklch(84.5% 0.143 164.978);
+    --color-emerald-400: oklch(76.5% 0.177 163.223);
+    --color-emerald-500: oklch(69.6% 0.17 162.48);
+    --color-emerald-800: oklch(43.2% 0.095 166.913);
+    --color-emerald-900: oklch(37.8% 0.077 168.94);
+    --color-blue-100: oklch(93.2% 0.032 255.585);
+    --color-blue-200: oklch(88.2% 0.059 254.128);
+    --color-blue-300: oklch(80.9% 0.105 251.813);
+    --color-blue-400: oklch(70.7% 0.165 254.624);
+    --color-blue-500: oklch(62.3% 0.214 259.815);
+    --color-blue-800: oklch(42.4% 0.199 265.638);
+    --color-blue-900: oklch(37.9% 0.146 265.522);
+    --color-purple-100: oklch(94.6% 0.033 307.174);
+    --color-purple-200: oklch(90.2% 0.063 306.703);
+    --color-purple-300: oklch(82.7% 0.119 306.383);
+    --color-purple-400: oklch(71.4% 0.203 305.504);
+    --color-purple-500: oklch(62.7% 0.265 303.9);
+    --color-purple-800: oklch(43.8% 0.218 303.724);
+    --color-purple-900: oklch(38.1% 0.176 304.987);
+    --color-slate-50: oklch(98.4% 0.003 247.858);
+    --color-slate-100: oklch(96.8% 0.007 247.896);
+    --color-slate-200: oklch(92.9% 0.013 255.508);
+    --color-slate-300: oklch(86.9% 0.022 252.894);
+    --color-slate-400: oklch(70.4% 0.04 256.788);
+    --color-slate-500: oklch(55.4% 0.046 257.417);
+    --color-slate-600: oklch(44.6% 0.043 257.281);
+    --color-slate-700: oklch(37.2% 0.044 257.287);
+    --color-slate-800: oklch(27.9% 0.041 260.031);
+    --color-slate-900: oklch(20.8% 0.042 265.755);
+    --color-white: #fff;
+    --spacing: 0.25rem;
+    --container-md: 28rem;
+    --container-2xl: 42rem;
+    --container-7xl: 80rem;
+    --text-xs: 0.75rem;
+    --text-xs--line-height: calc(1 / 0.75);
+    --text-sm: 0.875rem;
+    --text-sm--line-height: calc(1.25 / 0.875);
+    --text-base: 1rem;
+    --text-base--line-height: calc(1.5 / 1);
+    --text-lg: 1.125rem;
+    --text-lg--line-height: calc(1.75 / 1.125);
+    --text-xl: 1.25rem;
+    --text-xl--line-height: calc(1.75 / 1.25);
+    --text-2xl: 1.5rem;
+    --text-2xl--line-height: calc(2 / 1.5);
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --tracking-wide: 0.025em;
+    --tracking-wider: 0.05em;
+    --leading-relaxed: 1.625;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    --blur-sm: 8px;
+    --default-transition-duration: 150ms;
+    --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+    --color-brand-100: #dcfce7;
+    --color-brand-500: #22c55e;
+    --color-brand-600: #16a34a;
+    --color-brand-700: #15803d;
+    --color-brand-800: #166534;
+    --color-brand-900: #14532d;
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities {
+  .pointer-events-none {
+    pointer-events: none;
+  }
+  .invisible {
+    visibility: hidden;
+  }
+  .visible {
+    visibility: visible;
+  }
+  .not-sr-only {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+  .absolute {
+    position: absolute;
+  }
+  .fixed {
+    position: fixed;
+  }
+  .relative {
+    position: relative;
+  }
+  .static {
+    position: static;
+  }
+  .sticky {
+    position: sticky;
+  }
+  .inset-0 {
+    inset: calc(var(--spacing) * 0);
+  }
+  .inset-y-0 {
+    inset-block: calc(var(--spacing) * 0);
+  }
+  .top-0 {
+    top: calc(var(--spacing) * 0);
+  }
+  .right-0 {
+    right: calc(var(--spacing) * 0);
+  }
+  .left-0 {
+    left: calc(var(--spacing) * 0);
+  }
+  .isolate {
+    isolation: isolate;
+  }
+  .z-30 {
+    z-index: 30;
+  }
+  .z-50 {
+    z-index: 50;
+  }
+  .mx-auto {
+    margin-inline: auto;
+  }
+  .mt-0\.5 {
+    margin-top: calc(var(--spacing) * 0.5);
+  }
+  .mt-1 {
+    margin-top: calc(var(--spacing) * 1);
+  }
+  .mt-2 {
+    margin-top: calc(var(--spacing) * 2);
+  }
+  .mt-3 {
+    margin-top: calc(var(--spacing) * 3);
+  }
+  .mt-4 {
+    margin-top: calc(var(--spacing) * 4);
+  }
+  .mt-auto {
+    margin-top: auto;
+  }
+  .mr-1 {
+    margin-right: calc(var(--spacing) * 1);
+  }
+  .mb-1 {
+    margin-bottom: calc(var(--spacing) * 1);
+  }
+  .mb-2 {
+    margin-bottom: calc(var(--spacing) * 2);
+  }
+  .mb-4 {
+    margin-bottom: calc(var(--spacing) * 4);
+  }
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+  .block {
+    display: block;
+  }
+  .flex {
+    display: flex;
+  }
+  .grid {
+    display: grid;
+  }
+  .hidden {
+    display: none;
+  }
+  .inline-flex {
+    display: inline-flex;
+  }
+  .h-16 {
+    height: calc(var(--spacing) * 16);
+  }
+  .max-h-\[90vh\] {
+    max-height: 90vh;
+  }
+  .min-h-screen {
+    min-height: 100vh;
+  }
+  .w-16 {
+    width: calc(var(--spacing) * 16);
+  }
+  .w-full {
+    width: 100%;
+  }
+  .max-w-2xl {
+    max-width: var(--container-2xl);
+  }
+  .max-w-7xl {
+    max-width: var(--container-7xl);
+  }
+  .max-w-md {
+    max-width: var(--container-md);
+  }
+  .flex-1 {
+    flex: 1;
+  }
+  .scale-95 {
+    --tw-scale-x: 95%;
+    --tw-scale-y: 95%;
+    --tw-scale-z: 95%;
+    scale: var(--tw-scale-x) var(--tw-scale-y);
+  }
+  .scale-100 {
+    --tw-scale-x: 100%;
+    --tw-scale-y: 100%;
+    --tw-scale-z: 100%;
+    scale: var(--tw-scale-x) var(--tw-scale-y);
+  }
+  .transform {
+    transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
+  }
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  .grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  .flex-col {
+    flex-direction: column;
+  }
+  .items-center {
+    align-items: center;
+  }
+  .items-start {
+    align-items: flex-start;
+  }
+  .items-stretch {
+    align-items: stretch;
+  }
+  .justify-between {
+    justify-content: space-between;
+  }
+  .justify-center {
+    justify-content: center;
+  }
+  .gap-1 {
+    gap: calc(var(--spacing) * 1);
+  }
+  .gap-1\.5 {
+    gap: calc(var(--spacing) * 1.5);
+  }
+  .gap-2 {
+    gap: calc(var(--spacing) * 2);
+  }
+  .gap-3 {
+    gap: calc(var(--spacing) * 3);
+  }
+  .gap-4 {
+    gap: calc(var(--spacing) * 4);
+  }
+  .space-y-4 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 4) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 4) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .overflow-hidden {
+    overflow: hidden;
+  }
+  .overflow-x-auto {
+    overflow-x: auto;
+  }
+  .overflow-y-auto {
+    overflow-y: auto;
+  }
+  .rounded {
+    border-radius: 0.25rem;
+  }
+  .rounded-full {
+    border-radius: calc(infinity * 1px);
+  }
+  .rounded-lg {
+    border-radius: var(--radius-lg);
+  }
+  .rounded-xl {
+    border-radius: var(--radius-xl);
+  }
+  .border {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+  }
+  .border-t {
+    border-top-style: var(--tw-border-style);
+    border-top-width: 1px;
+  }
+  .border-b {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 1px;
+  }
+  .border-amber-200 {
+    border-color: var(--color-amber-200);
+  }
+  .border-amber-200\/60 {
+    border-color: color-mix(in srgb, oklch(92.4% 0.12 95.746) 60%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-amber-200) 60%, transparent);
+    }
+  }
+  .border-amber-300 {
+    border-color: var(--color-amber-300);
+  }
+  .border-blue-200 {
+    border-color: var(--color-blue-200);
+  }
+  .border-emerald-200 {
+    border-color: var(--color-emerald-200);
+  }
+  .border-purple-200 {
+    border-color: var(--color-purple-200);
+  }
+  .border-slate-100 {
+    border-color: var(--color-slate-100);
+  }
+  .border-slate-200 {
+    border-color: var(--color-slate-200);
+  }
+  .border-slate-300 {
+    border-color: var(--color-slate-300);
+  }
+  .bg-amber-50 {
+    background-color: var(--color-amber-50);
+  }
+  .bg-amber-50\/50 {
+    background-color: color-mix(in srgb, oklch(98.7% 0.022 95.277) 50%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-amber-50) 50%, transparent);
+    }
+  }
+  .bg-amber-100 {
+    background-color: var(--color-amber-100);
+  }
+  .bg-blue-100 {
+    background-color: var(--color-blue-100);
+  }
+  .bg-brand-100 {
+    background-color: var(--color-brand-100);
+  }
+  .bg-brand-600 {
+    background-color: var(--color-brand-600);
+  }
+  .bg-emerald-100 {
+    background-color: var(--color-emerald-100);
+  }
+  .bg-purple-100 {
+    background-color: var(--color-purple-100);
+  }
+  .bg-slate-50 {
+    background-color: var(--color-slate-50);
+  }
+  .bg-slate-50\/50 {
+    background-color: color-mix(in srgb, oklch(98.4% 0.003 247.858) 50%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-slate-50) 50%, transparent);
+    }
+  }
+  .bg-slate-100 {
+    background-color: var(--color-slate-100);
+  }
+  .bg-slate-200 {
+    background-color: var(--color-slate-200);
+  }
+  .bg-slate-900\/60 {
+    background-color: color-mix(in srgb, oklch(20.8% 0.042 265.755) 60%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-slate-900) 60%, transparent);
+    }
+  }
+  .bg-white {
+    background-color: var(--color-white);
+  }
+  .bg-white\/90 {
+    background-color: color-mix(in srgb, #fff 90%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-white) 90%, transparent);
+    }
+  }
+  .p-1 {
+    padding: calc(var(--spacing) * 1);
+  }
+  .p-2 {
+    padding: calc(var(--spacing) * 2);
+  }
+  .p-3 {
+    padding: calc(var(--spacing) * 3);
+  }
+  .p-4 {
+    padding: calc(var(--spacing) * 4);
+  }
+  .p-5 {
+    padding: calc(var(--spacing) * 5);
+  }
+  .p-6 {
+    padding: calc(var(--spacing) * 6);
+  }
+  .px-1\.5 {
+    padding-inline: calc(var(--spacing) * 1.5);
+  }
+  .px-2 {
+    padding-inline: calc(var(--spacing) * 2);
+  }
+  .px-2\.5 {
+    padding-inline: calc(var(--spacing) * 2.5);
+  }
+  .px-3 {
+    padding-inline: calc(var(--spacing) * 3);
+  }
+  .px-3\.5 {
+    padding-inline: calc(var(--spacing) * 3.5);
+  }
+  .px-4 {
+    padding-inline: calc(var(--spacing) * 4);
+  }
+  .py-0\.5 {
+    padding-block: calc(var(--spacing) * 0.5);
+  }
+  .py-1 {
+    padding-block: calc(var(--spacing) * 1);
+  }
+  .py-1\.5 {
+    padding-block: calc(var(--spacing) * 1.5);
+  }
+  .py-2 {
+    padding-block: calc(var(--spacing) * 2);
+  }
+  .py-2\.5 {
+    padding-block: calc(var(--spacing) * 2.5);
+  }
+  .py-4 {
+    padding-block: calc(var(--spacing) * 4);
+  }
+  .py-6 {
+    padding-block: calc(var(--spacing) * 6);
+  }
+  .py-16 {
+    padding-block: calc(var(--spacing) * 16);
+  }
+  .pt-2 {
+    padding-top: calc(var(--spacing) * 2);
+  }
+  .pt-3 {
+    padding-top: calc(var(--spacing) * 3);
+  }
+  .pr-1 {
+    padding-right: calc(var(--spacing) * 1);
+  }
+  .pr-3 {
+    padding-right: calc(var(--spacing) * 3);
+  }
+  .pr-10 {
+    padding-right: calc(var(--spacing) * 10);
+  }
+  .pb-1 {
+    padding-bottom: calc(var(--spacing) * 1);
+  }
+  .pl-3 {
+    padding-left: calc(var(--spacing) * 3);
+  }
+  .pl-10 {
+    padding-left: calc(var(--spacing) * 10);
+  }
+  .text-center {
+    text-align: center;
+  }
+  .text-left {
+    text-align: left;
+  }
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+  .font-sans {
+    font-family: var(--font-sans);
+  }
+  .text-2xl {
+    font-size: var(--text-2xl);
+    line-height: var(--tw-leading, var(--text-2xl--line-height));
+  }
+  .text-base {
+    font-size: var(--text-base);
+    line-height: var(--tw-leading, var(--text-base--line-height));
+  }
+  .text-lg {
+    font-size: var(--text-lg);
+    line-height: var(--tw-leading, var(--text-lg--line-height));
+  }
+  .text-sm {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+  }
+  .text-xl {
+    font-size: var(--text-xl);
+    line-height: var(--tw-leading, var(--text-xl--line-height));
+  }
+  .text-xs {
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
+  }
+  .text-\[10px\] {
+    font-size: 10px;
+  }
+  .text-\[11px\] {
+    font-size: 11px;
+  }
+  .leading-relaxed {
+    --tw-leading: var(--leading-relaxed);
+    line-height: var(--leading-relaxed);
+  }
+  .font-bold {
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+  }
+  .font-light {
+    --tw-font-weight: var(--font-weight-light);
+    font-weight: var(--font-weight-light);
+  }
+  .font-medium {
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
+  }
+  .font-normal {
+    --tw-font-weight: var(--font-weight-normal);
+    font-weight: var(--font-weight-normal);
+  }
+  .font-semibold {
+    --tw-font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-semibold);
+  }
+  .tracking-wide {
+    --tw-tracking: var(--tracking-wide);
+    letter-spacing: var(--tracking-wide);
+  }
+  .tracking-wider {
+    --tw-tracking: var(--tracking-wider);
+    letter-spacing: var(--tracking-wider);
+  }
+  .whitespace-nowrap {
+    white-space: nowrap;
+  }
+  .text-amber-500 {
+    color: var(--color-amber-500);
+  }
+  .text-amber-800 {
+    color: var(--color-amber-800);
+  }
+  .text-amber-900 {
+    color: var(--color-amber-900);
+  }
+  .text-blue-500 {
+    color: var(--color-blue-500);
+  }
+  .text-blue-800 {
+    color: var(--color-blue-800);
+  }
+  .text-brand-600 {
+    color: var(--color-brand-600);
+  }
+  .text-brand-700 {
+    color: var(--color-brand-700);
+  }
+  .text-brand-800 {
+    color: var(--color-brand-800);
+  }
+  .text-emerald-500 {
+    color: var(--color-emerald-500);
+  }
+  .text-emerald-800 {
+    color: var(--color-emerald-800);
+  }
+  .text-purple-500 {
+    color: var(--color-purple-500);
+  }
+  .text-purple-800 {
+    color: var(--color-purple-800);
+  }
+  .text-slate-400 {
+    color: var(--color-slate-400);
+  }
+  .text-slate-500 {
+    color: var(--color-slate-500);
+  }
+  .text-slate-600 {
+    color: var(--color-slate-600);
+  }
+  .text-slate-700 {
+    color: var(--color-slate-700);
+  }
+  .text-slate-800 {
+    color: var(--color-slate-800);
+  }
+  .text-slate-900 {
+    color: var(--color-slate-900);
+  }
+  .text-white {
+    color: var(--color-white);
+  }
+  .uppercase {
+    text-transform: uppercase;
+  }
+  .italic {
+    font-style: italic;
+  }
+  .placeholder-slate-400 {
+    &::placeholder {
+      color: var(--color-slate-400);
+    }
+  }
+  .opacity-0 {
+    opacity: 0%;
+  }
+  .shadow-2xl {
+    --tw-shadow: 0 25px 50px -12px var(--tw-shadow-color, rgb(0 0 0 / 0.25));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-sm {
+    --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .filter {
+    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
+  }
+  .backdrop-blur {
+    --tw-backdrop-blur: blur(8px);
+    -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+    backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+  }
+  .backdrop-blur-sm {
+    --tw-backdrop-blur: blur(var(--blur-sm));
+    -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+    backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+  }
+  .transition {
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, visibility, content-visibility, overlay, pointer-events;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .transition-colors {
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .transition-opacity {
+    transition-property: opacity;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .transition-transform {
+    transition-property: transform, translate, scale, rotate;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .duration-200 {
+    --tw-duration: 200ms;
+    transition-duration: 200ms;
+  }
+  .group-hover\:translate-x-0\.5 {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        --tw-translate-x: calc(var(--spacing) * 0.5);
+        translate: var(--tw-translate-x) var(--tw-translate-y);
+      }
+    }
+  }
+  .group-hover\:text-brand-600 {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        color: var(--color-brand-600);
+      }
+    }
+  }
+  .hover\:border-amber-400 {
+    &:hover {
+      @media (hover: hover) {
+        border-color: var(--color-amber-400);
+      }
+    }
+  }
+  .hover\:border-blue-400 {
+    &:hover {
+      @media (hover: hover) {
+        border-color: var(--color-blue-400);
+      }
+    }
+  }
+  .hover\:border-emerald-400 {
+    &:hover {
+      @media (hover: hover) {
+        border-color: var(--color-emerald-400);
+      }
+    }
+  }
+  .hover\:border-purple-400 {
+    &:hover {
+      @media (hover: hover) {
+        border-color: var(--color-purple-400);
+      }
+    }
+  }
+  .hover\:border-slate-400 {
+    &:hover {
+      @media (hover: hover) {
+        border-color: var(--color-slate-400);
+      }
+    }
+  }
+  .hover\:bg-brand-700 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-brand-700);
+      }
+    }
+  }
+  .hover\:bg-slate-50 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-slate-50);
+      }
+    }
+  }
+  .hover\:bg-slate-100 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-slate-100);
+      }
+    }
+  }
+  .hover\:bg-slate-200 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-slate-200);
+      }
+    }
+  }
+  .hover\:bg-slate-300 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-slate-300);
+      }
+    }
+  }
+  .hover\:text-slate-600 {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-slate-600);
+      }
+    }
+  }
+  .hover\:text-slate-900 {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-slate-900);
+      }
+    }
+  }
+  .hover\:underline {
+    &:hover {
+      @media (hover: hover) {
+        text-decoration-line: underline;
+      }
+    }
+  }
+  .hover\:shadow-md {
+    &:hover {
+      @media (hover: hover) {
+        --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+        box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+      }
+    }
+  }
+  .focus\:ring-2 {
+    &:focus {
+      --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
+      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    }
+  }
+  .focus\:ring-brand-500 {
+    &:focus {
+      --tw-ring-color: var(--color-brand-500);
+    }
+  }
+  .focus\:outline-none {
+    &:focus {
+      --tw-outline-style: none;
+      outline-style: none;
+    }
+  }
+  .sm\:flex-row {
+    @media (width >= 40rem) {
+      flex-direction: row;
+    }
+  }
+  .sm\:px-6 {
+    @media (width >= 40rem) {
+      padding-inline: calc(var(--spacing) * 6);
+    }
+  }
+  .sm\:text-2xl {
+    @media (width >= 40rem) {
+      font-size: var(--text-2xl);
+      line-height: var(--tw-leading, var(--text-2xl--line-height));
+    }
+  }
+  .sm\:text-sm {
+    @media (width >= 40rem) {
+      font-size: var(--text-sm);
+      line-height: var(--tw-leading, var(--text-sm--line-height));
+    }
+  }
+  .md\:grid-cols-2 {
+    @media (width >= 48rem) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .md\:flex-row {
+    @media (width >= 48rem) {
+      flex-direction: row;
+    }
+  }
+  .md\:items-center {
+    @media (width >= 48rem) {
+      align-items: center;
+    }
+  }
+  .md\:justify-between {
+    @media (width >= 48rem) {
+      justify-content: space-between;
+    }
+  }
+  .lg\:grid-cols-3 {
+    @media (width >= 64rem) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .lg\:px-8 {
+    @media (width >= 64rem) {
+      padding-inline: calc(var(--spacing) * 8);
+    }
+  }
+  .dark\:border-amber-700 {
+    &:where(.dark, .dark *) {
+      border-color: var(--color-amber-700);
+    }
+  }
+  .dark\:border-amber-800 {
+    &:where(.dark, .dark *) {
+      border-color: var(--color-amber-800);
+    }
+  }
+  .dark\:border-amber-800\/50 {
+    &:where(.dark, .dark *) {
+      border-color: color-mix(in srgb, oklch(47.3% 0.137 46.201) 50%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        border-color: color-mix(in oklab, var(--color-amber-800) 50%, transparent);
+      }
+    }
+  }
+  .dark\:border-blue-800 {
+    &:where(.dark, .dark *) {
+      border-color: var(--color-blue-800);
+    }
+  }
+  .dark\:border-emerald-800 {
+    &:where(.dark, .dark *) {
+      border-color: var(--color-emerald-800);
+    }
+  }
+  .dark\:border-purple-800 {
+    &:where(.dark, .dark *) {
+      border-color: var(--color-purple-800);
+    }
+  }
+  .dark\:border-slate-600 {
+    &:where(.dark, .dark *) {
+      border-color: var(--color-slate-600);
+    }
+  }
+  .dark\:border-slate-700 {
+    &:where(.dark, .dark *) {
+      border-color: var(--color-slate-700);
+    }
+  }
+  .dark\:border-slate-700\/40 {
+    &:where(.dark, .dark *) {
+      border-color: color-mix(in srgb, oklch(37.2% 0.044 257.287) 40%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        border-color: color-mix(in oklab, var(--color-slate-700) 40%, transparent);
+      }
+    }
+  }
+  .dark\:border-slate-700\/50 {
+    &:where(.dark, .dark *) {
+      border-color: color-mix(in srgb, oklch(37.2% 0.044 257.287) 50%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        border-color: color-mix(in oklab, var(--color-slate-700) 50%, transparent);
+      }
+    }
+  }
+  .dark\:border-slate-700\/60 {
+    &:where(.dark, .dark *) {
+      border-color: color-mix(in srgb, oklch(37.2% 0.044 257.287) 60%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        border-color: color-mix(in oklab, var(--color-slate-700) 60%, transparent);
+      }
+    }
+  }
+  .dark\:border-slate-700\/80 {
+    &:where(.dark, .dark *) {
+      border-color: color-mix(in srgb, oklch(37.2% 0.044 257.287) 80%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        border-color: color-mix(in oklab, var(--color-slate-700) 80%, transparent);
+      }
+    }
+  }
+  .dark\:bg-amber-900\/50 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, oklch(41.4% 0.112 45.904) 50%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-amber-900) 50%, transparent);
+      }
+    }
+  }
+  .dark\:bg-amber-900\/60 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, oklch(41.4% 0.112 45.904) 60%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-amber-900) 60%, transparent);
+      }
+    }
+  }
+  .dark\:bg-amber-950\/30 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, oklch(27.9% 0.077 45.635) 30%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-amber-950) 30%, transparent);
+      }
+    }
+  }
+  .dark\:bg-blue-900\/50 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, oklch(37.9% 0.146 265.522) 50%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-blue-900) 50%, transparent);
+      }
+    }
+  }
+  .dark\:bg-brand-900\/50 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, #14532d 50%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-brand-900) 50%, transparent);
+      }
+    }
+  }
+  .dark\:bg-brand-900\/60 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, #14532d 60%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-brand-900) 60%, transparent);
+      }
+    }
+  }
+  .dark\:bg-emerald-900\/50 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, oklch(37.8% 0.077 168.94) 50%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-emerald-900) 50%, transparent);
+      }
+    }
+  }
+  .dark\:bg-purple-900\/50 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, oklch(38.1% 0.176 304.987) 50%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-purple-900) 50%, transparent);
+      }
+    }
+  }
+  .dark\:bg-slate-700 {
+    &:where(.dark, .dark *) {
+      background-color: var(--color-slate-700);
+    }
+  }
+  .dark\:bg-slate-700\/60 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, oklch(37.2% 0.044 257.287) 60%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-slate-700) 60%, transparent);
+      }
+    }
+  }
+  .dark\:bg-slate-800 {
+    &:where(.dark, .dark *) {
+      background-color: var(--color-slate-800);
+    }
+  }
+  .dark\:bg-slate-800\/50 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, oklch(27.9% 0.041 260.031) 50%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-slate-800) 50%, transparent);
+      }
+    }
+  }
+  .dark\:bg-slate-800\/80 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, oklch(27.9% 0.041 260.031) 80%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-slate-800) 80%, transparent);
+      }
+    }
+  }
+  .dark\:bg-slate-800\/90 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, oklch(27.9% 0.041 260.031) 90%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-slate-800) 90%, transparent);
+      }
+    }
+  }
+  .dark\:bg-slate-900 {
+    &:where(.dark, .dark *) {
+      background-color: var(--color-slate-900);
+    }
+  }
+  .dark\:bg-slate-900\/60 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, oklch(20.8% 0.042 265.755) 60%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-slate-900) 60%, transparent);
+      }
+    }
+  }
+  .dark\:bg-slate-900\/70 {
+    &:where(.dark, .dark *) {
+      background-color: color-mix(in srgb, oklch(20.8% 0.042 265.755) 70%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-slate-900) 70%, transparent);
+      }
+    }
+  }
+  .dark\:text-amber-200 {
+    &:where(.dark, .dark *) {
+      color: var(--color-amber-200);
+    }
+  }
+  .dark\:text-amber-300 {
+    &:where(.dark, .dark *) {
+      color: var(--color-amber-300);
+    }
+  }
+  .dark\:text-amber-400 {
+    &:where(.dark, .dark *) {
+      color: var(--color-amber-400);
+    }
+  }
+  .dark\:text-blue-300 {
+    &:where(.dark, .dark *) {
+      color: var(--color-blue-300);
+    }
+  }
+  .dark\:text-emerald-300 {
+    &:where(.dark, .dark *) {
+      color: var(--color-emerald-300);
+    }
+  }
+  .dark\:text-purple-300 {
+    &:where(.dark, .dark *) {
+      color: var(--color-purple-300);
+    }
+  }
+  .dark\:text-slate-100 {
+    &:where(.dark, .dark *) {
+      color: var(--color-slate-100);
+    }
+  }
+  .dark\:text-slate-200 {
+    &:where(.dark, .dark *) {
+      color: var(--color-slate-200);
+    }
+  }
+  .dark\:text-slate-300 {
+    &:where(.dark, .dark *) {
+      color: var(--color-slate-300);
+    }
+  }
+  .dark\:text-slate-400 {
+    &:where(.dark, .dark *) {
+      color: var(--color-slate-400);
+    }
+  }
+  .dark\:text-white {
+    &:where(.dark, .dark *) {
+      color: var(--color-white);
+    }
+  }
+  .dark\:hover\:bg-slate-600 {
+    &:where(.dark, .dark *) {
+      &:hover {
+        @media (hover: hover) {
+          background-color: var(--color-slate-600);
+        }
+      }
+    }
+  }
+  .dark\:hover\:bg-slate-700 {
+    &:where(.dark, .dark *) {
+      &:hover {
+        @media (hover: hover) {
+          background-color: var(--color-slate-700);
+        }
+      }
+    }
+  }
+  .dark\:hover\:text-slate-200 {
+    &:where(.dark, .dark *) {
+      &:hover {
+        @media (hover: hover) {
+          color: var(--color-slate-200);
+        }
+      }
+    }
+  }
+  .dark\:hover\:text-white {
+    &:where(.dark, .dark *) {
+      &:hover {
+        @media (hover: hover) {
+          color: var(--color-white);
+        }
+      }
+    }
+  }
+}
+@property --tw-scale-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
+@property --tw-scale-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
+@property --tw-scale-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
+@property --tw-rotate-x {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-rotate-y {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-rotate-z {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-skew-x {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-skew-y {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-space-y-reverse {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
+@property --tw-leading {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-tracking {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-inset-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-inset-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-inset-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-ring-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-ring-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-inset-ring-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-inset-ring-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-ring-inset {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-ring-offset-width {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+@property --tw-ring-offset-color {
+  syntax: "*";
+  inherits: false;
+  initial-value: #fff;
+}
+@property --tw-ring-offset-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-blur {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-brightness {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-contrast {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-grayscale {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-hue-rotate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-invert {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-opacity {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-saturate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-sepia {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-drop-shadow {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-drop-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-drop-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-drop-shadow-size {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-blur {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-brightness {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-contrast {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-grayscale {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-hue-rotate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-invert {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-opacity {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-saturate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-sepia {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-duration {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-translate-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@layer properties {
+  @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
+    *, ::before, ::after, ::backdrop {
+      --tw-scale-x: 1;
+      --tw-scale-y: 1;
+      --tw-scale-z: 1;
+      --tw-rotate-x: initial;
+      --tw-rotate-y: initial;
+      --tw-rotate-z: initial;
+      --tw-skew-x: initial;
+      --tw-skew-y: initial;
+      --tw-space-y-reverse: 0;
+      --tw-border-style: solid;
+      --tw-leading: initial;
+      --tw-font-weight: initial;
+      --tw-tracking: initial;
+      --tw-shadow: 0 0 #0000;
+      --tw-shadow-color: initial;
+      --tw-shadow-alpha: 100%;
+      --tw-inset-shadow: 0 0 #0000;
+      --tw-inset-shadow-color: initial;
+      --tw-inset-shadow-alpha: 100%;
+      --tw-ring-color: initial;
+      --tw-ring-shadow: 0 0 #0000;
+      --tw-inset-ring-color: initial;
+      --tw-inset-ring-shadow: 0 0 #0000;
+      --tw-ring-inset: initial;
+      --tw-ring-offset-width: 0px;
+      --tw-ring-offset-color: #fff;
+      --tw-ring-offset-shadow: 0 0 #0000;
+      --tw-blur: initial;
+      --tw-brightness: initial;
+      --tw-contrast: initial;
+      --tw-grayscale: initial;
+      --tw-hue-rotate: initial;
+      --tw-invert: initial;
+      --tw-opacity: initial;
+      --tw-saturate: initial;
+      --tw-sepia: initial;
+      --tw-drop-shadow: initial;
+      --tw-drop-shadow-color: initial;
+      --tw-drop-shadow-alpha: 100%;
+      --tw-drop-shadow-size: initial;
+      --tw-backdrop-blur: initial;
+      --tw-backdrop-brightness: initial;
+      --tw-backdrop-contrast: initial;
+      --tw-backdrop-grayscale: initial;
+      --tw-backdrop-hue-rotate: initial;
+      --tw-backdrop-invert: initial;
+      --tw-backdrop-opacity: initial;
+      --tw-backdrop-saturate: initial;
+      --tw-backdrop-sepia: initial;
+      --tw-duration: initial;
+      --tw-translate-x: 0;
+      --tw-translate-y: 0;
+      --tw-translate-z: 0;
+    }
+  }
+}
+</style>
+  <!-- Font Awesome enhances icons when a network connection is available -->
+
+  <style>
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(156, 163, 175, 0.5);
+      border-radius: 3px;
+    }
+  </style>
+
+<style id="dta-glossary-overrides">
+  :root { color-scheme: light dark; }
+  .category-grid { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:.6rem; }
+  .category-tile { min-height:3.5rem; width:100%; display:flex; align-items:center; justify-content:center; gap:.45rem; padding:.6rem .65rem; text-align:center; line-height:1.25; white-space:normal; font-weight:600; font-size:.83rem; border:1px solid transparent; border-radius:.6rem; }
+  .category-tile.active { background:#15803d; color:white; border-color:#15803d; box-shadow:0 1px 3px rgba(0,0,0,.15); }
+  .category-tile:not(.active) { background:#f1f5f9; color:#334155; border-color:#e2e8f0; }
+  .category-tile:not(.active):hover { background:#e2e8f0; }
+  .category-count { opacity:.78; font-size:.72rem; white-space:nowrap; }
+  .dark .category-tile:not(.active) { background:#334155; color:#e2e8f0; border-color:#475569; }
+  .dark .category-tile:not(.active):hover { background:#475569; }
+  .all-row { padding-bottom:.3rem; }
+  .all-row .category-tile { min-height:2.2rem; width:auto; min-width:9rem; display:inline-flex; }
+  .icon { display:inline-block; width:1em; height:1em; vertical-align:-.12em; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+  .tiny-icon { width:.88em; height:.88em; }
+  .glossary-card { min-height:12.75rem; }
+  .glossary-card:focus-visible, .category-tile:focus-visible { outline:3px solid #16a34a; outline-offset:2px; }
+  #modal-backdrop:not(.hidden) { display:flex; }
+  .detail-section-label { font-size:.72rem; letter-spacing:.035em; font-weight:700; text-transform:uppercase; color:#64748b; margin-bottom:.3rem; }
+  .detail-box { background:#f8fafc; border:1px solid #e2e8f0; border-radius:.6rem; padding:1rem; }
+  .dark .detail-box { background:#0f172a; border-color:#334155; }
+  .detail-line { line-height:1.62; }
+  .card-acronym { font-size:.72rem; font-weight:700; padding:.2rem .45rem; background:#f1f5f9; border-radius:.35rem; border:1px solid #e2e8f0; }
+  .dark .card-acronym { background:#334155; border-color:#475569; }
+  .category-badge { font-size:.67rem; font-weight:650; border:1px solid #cbd5e1; padding:.22rem .5rem; border-radius:99px; }
+  .dark .category-badge { border-color:#475569; }
+  .content-prose { font-size:.94rem; line-height:1.6; }
+  @media (max-width:1050px) { .category-grid { grid-template-columns:repeat(2, minmax(0,1fr)); } }
+  @media (max-width:540px) { .category-grid { grid-template-columns:repeat(1, minmax(0,1fr)); } .category-tile { min-height:2.6rem; } .all-row .category-tile { width:100%; } }
+  @media (prefers-reduced-motion: reduce) { .transition, .transition-opacity, .transition-transform { transition-duration:0ms!important; } }
+</style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-200 min-h-screen flex flex-col font-sans">
+<header class="sticky top-0 z-30 bg-white/90 dark:bg-slate-800/90 backdrop-blur border-b border-slate-200 dark:border-slate-700 shadow-sm">
+ <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+   <div>
+    <div class="flex items-center gap-2 mb-1">
+     <span class="bg-brand-600 text-white text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">DTA-Glossar 0.2.0</span>
+     <span class="text-xs text-slate-500 dark:text-slate-400">Redaktionsfassung &middot; <span id="prototype-count">0</span> Begriffe</span>
+    </div>
+    <h1 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Glossar zum Deutschen Text-Audit</h1>
+    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1">Begriffe, Methoden und Messgr&ouml;&szlig;en &ndash; <span id="header-total-count">0</span> Eintr&auml;ge in acht Themenbereichen.</p>
+   </div>
+   <div class="flex items-center gap-2">
+    <button id="copy-summary-btn" type="button" class="inline-flex items-center gap-2 px-3 py-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 hover:bg-slate-50 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 shadow-sm transition">Liste kopieren</button>
+    <button id="theme-toggle" type="button" class="px-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700" aria-label="Darstellung umschalten" title="Hell- oder Dunkelmodus"><span id="theme-label">Dunkel</span></button>
+   </div>
+  </div>
+  <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/50 flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+   <div class="relative flex-1">
+    <input type="search" id="search-input" placeholder="Begriff, Abk&uuml;rzung, Synonym, Definition oder Thema suchen ..." aria-label="Glossar durchsuchen" autocomplete="off" class="w-full pl-3 pr-10 py-2.5 text-sm bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-900 dark:text-white placeholder-slate-400 transition" />
+    <button id="clear-search" type="button" class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-slate-500 hover:text-slate-900 dark:hover:text-white" aria-label="Suche leeren">&#10005;</button>
+   </div>
+   <div class="flex items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
+    <span><strong id="visible-count" class="text-slate-900 dark:text-white font-semibold">0</strong> von <span id="total-count">0</span> Begriffen</span>
+    <button id="reset-filters" type="button" class="text-brand-600 dark:text-brand-400 hover:underline hidden font-medium">Filter zur&uuml;cksetzen</button>
+   </div>
+  </div>
+  <div id="data-quality-status" role="status" aria-live="polite" class="hidden mt-3 p-3 rounded-lg border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/30 text-amber-900 dark:text-amber-200 text-xs"></div>
+  <div class="mt-4">
+   <div class="all-row" id="all-category-row"><button type="button" data-category="all" class="category-tile active" aria-pressed="true">Alle <span class="category-count" id="count-all"></span></button></div>
+   <div id="category-grid" class="category-grid" aria-label="Acht Themenbereiche"></div>
+  </div>
+  <div id="alpha-bar" class="flex items-center gap-1 overflow-x-auto custom-scrollbar mt-3 pt-2 border-t border-slate-100 dark:border-slate-700/40 text-xs" aria-label="Alphabetischer Filter">
+   <span class="text-slate-500 font-semibold uppercase pr-1 text-[10px]">Buchstabe:</span>
+   <button type="button" data-letter="all" class="alpha-btn active px-2 py-0.5 rounded font-medium bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-white" aria-pressed="true">Alle</button>
+  </div>
+ </div>
+</header>
+<main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+ <div id="glossary-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" aria-live="polite"></div>
+ <div id="no-results" class="hidden text-center py-16 px-4"><h2 class="text-lg font-bold">Keine passenden Begriffe</h2><p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Suche anpassen oder alle Filter zur&uuml;cksetzen.</p><button id="reset-search-btn" type="button" class="mt-4 inline-flex items-center px-4 py-2 text-xs font-semibold rounded-lg bg-brand-600 hover:bg-brand-700 text-white transition">Alle Filter zur&uuml;cksetzen</button></div>
+</main>
+<div id="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-term" aria-hidden="true" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-200 flex items-center justify-center p-4">
+ <div id="modal-box" class="bg-white dark:bg-slate-800 rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden border border-slate-200 dark:border-slate-700 transform scale-95 transition-transform duration-200">
+  <div class="p-6 border-b border-slate-100 dark:border-slate-700 flex items-start justify-between bg-slate-50/50 dark:bg-slate-800/50">
+   <div class="flex-1 pr-3">
+    <div class="flex items-center gap-2 mb-2"><span id="modal-category-badge" class="category-badge"></span><span id="modal-acronym-badge" class="card-acronym hidden"></span></div>
+    <h2 id="modal-term" class="text-2xl font-bold text-slate-900 dark:text-white"></h2>
+    <p id="modal-english" class="text-sm font-medium text-slate-500 dark:text-slate-400 mt-0.5 hidden"></p>
+    <p id="modal-aliases" class="text-xs text-slate-500 dark:text-slate-400 mt-2 hidden"></p>
+   </div>
+   <button id="close-modal" type="button" class="text-slate-500 hover:text-slate-900 dark:hover:text-white text-xl p-1 rounded-lg" aria-label="Detailansicht schlie&szlig;en">&#10005;</button>
+  </div>
+  <div class="p-6 overflow-y-auto space-y-4 custom-scrollbar text-slate-700 dark:text-slate-300 text-sm">
+   <div><div class="detail-section-label">Definition</div><p id="modal-definition" class="text-base text-slate-800 dark:text-slate-100 detail-line"></p></div>
+   <div class="detail-box"><div class="detail-section-label">Bedeutung im DTA</div><p id="modal-context" class="detail-line"></p></div>
+   <div id="modal-distinction-container" class="hidden"><div class="detail-section-label">Abgrenzung</div><p id="modal-distinction" class="detail-line"></p></div>
+   <div id="modal-example-container" class="hidden"><div class="detail-section-label">Beispiel</div><p id="modal-example" class="detail-line"></p></div>
+  </div>
+  <div class="p-4 border-t border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 flex flex-wrap items-center justify-between gap-2">
+   <div class="flex items-center gap-3"><button id="copy-modal-text" type="button" class="text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">Eintrag kopieren</button><button id="copy-entry-link" type="button" class="text-xs font-medium text-brand-700 dark:text-brand-400 hover:underline">Begriffslink kopieren</button></div>
+   <button id="close-modal-btn" type="button" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-white text-xs font-semibold rounded-lg transition">Schlie&szlig;en</button>
+  </div>
+ </div>
+</div>
+<footer class="mt-auto bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 py-4">
+ <div class="max-w-7xl mx-auto px-4 text-xs text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-2"><p>DTA-Glossar 0.2.0 &middot; redaktionelle Vorabfassung</p><p>Erweiterbarer Datenbestand &middot; DTA-Bezugsstand 11.1.6</p></div>
+</footer>
+<script>
+
+const categoryList = [
+  {
+    "id": "grundlagen",
+    "label": "Grundlagen und Bedienung"
+  },
+  {
+    "id": "dimensionen",
+    "label": "Dimensionen und P/Q-Modell"
+  },
+  {
+    "id": "sprache",
+    "label": "Sprachliche Befunde"
+  },
+  {
+    "id": "diagnostik",
+    "label": "Vertiefte Sprach- und Textdiagnostik"
+  },
+  {
+    "id": "aufbereitung",
+    "label": "Textaufbereitung"
+  },
+  {
+    "id": "kalibrierung",
+    "label": "Kalibrierung und Verteilungen"
+  },
+  {
+    "id": "neuronales-netz",
+    "label": "Neuronales Netz und Validierung"
+  },
+  {
+    "id": "wissenschaft",
+    "label": "Wissenschaftliche Einordnung"
+  }
+];
+const glossaryData = [
+  {
+    "id": "dta",
+    "term": "Deutsches Text-Audit (DTA)",
+    "category": "grundlagen",
+    "definition": "Browserbasiertes Werkzeug zur regelbasierten und statistisch unterstützten Diagnose sprachlicher Merkmale deutscher Texte.",
+    "context": "Das DTA beschreibt auffällige Muster, zeigt fünf Bewertungsdimensionen und ein P/Q-Profil. Es ersetzt weder eine fachliche Prüfung noch ein menschliches Qualitätsurteil.",
+    "acronym": "DTA",
+    "english": "German Text Audit",
+    "aliases": [
+      "Textaudit",
+      "Textanalyse",
+      "Deutsches Text Audit"
+    ],
+    "distinction": "Die Analyse eines Textes ist keine automatische Benotung.",
+    "priority": "A"
+  },
+  {
+    "id": "blablameter",
+    "term": "BlaBlaMeter",
+    "category": "grundlagen",
+    "definition": "Das externe Verfahren BlaBlaMeter bewertet ausgewählte Eigenschaften sprachlicher Formulierungen anhand eines eigenen Algorithmus.",
+    "context": "Im DTA sind dessen Werte des überarbeiteten Texts die Zielgröße der ANN-Nachbildung; DTA und BlaBlaMeter sind nicht dasselbe Werkzeug.",
+    "priority": "A"
+  },
+  {
+    "id": "textprofil-funfdimensionale-analyse",
+    "term": "Textprofil / fünfdimensionale Analyse",
+    "category": "grundlagen",
+    "definition": "Zusammenstellung der fünf DTA-Dimensionen zu einem gemeinsam interpretierbaren Textprofil.",
+    "context": "Die Darstellung zeigt Betazoid, Cardassianisch, Ferengi, ANN und LIX; Unterschiede zwischen den Dimensionen können wichtiger als ein einzelner Zahlenwert sein.",
+    "priority": "A"
+  },
+  {
+    "id": "sprachliche-belastung",
+    "term": "Sprachliche Belastung",
+    "category": "grundlagen",
+    "definition": "Aus den DTA-Detektoren abgeleitete Intensität bestimmter sprachlicher Muster, die die Lesbarkeit oder Präzision beeinträchtigen können.",
+    "context": "Sprachliche Belastung ist ein modellinterner Kennwert; er bedeutet weder sachliche Unrichtigkeit noch eine allgemeingültige Bewertung des Texts.",
+    "priority": "A"
+  },
+  {
+    "id": "informationsdichte",
+    "term": "Informationsdichte",
+    "category": "grundlagen",
+    "definition": "Verhältnis zwischen dem Umfang der vermittelten Sachinformation und der dafür eingesetzten sprachlichen Form.",
+    "context": "Die Informationsdichte motiviert die DTA-Entwicklung, wird aber nicht unmittelbar als empirisch validierte eigenständige Messgröße bestimmt.",
+    "priority": "A",
+    "aliases": [
+      "Information pro Wort",
+      "Informationsgehalt"
+    ]
+  },
+  {
+    "id": "dta-ergebnis-dta-wert",
+    "term": "DTA-Ergebnis / DTA-Wert",
+    "category": "grundlagen",
+    "definition": "Gesamtheit der vom DTA ausgegebenen Kennwerte und Diagnosehinweise für einen Text.",
+    "context": "Die zentrale grafische Zusammenfassung ist ein Punkt in der P/Q-Ebene; ein einzelner universeller Qualitäts-Prozentwert ist damit nicht gleichzusetzen.",
+    "priority": "A"
+  },
+  {
+    "id": "insights",
+    "term": "Insights",
+    "category": "grundlagen",
+    "definition": "Übersichtsansicht der DTA-Auswertung mit kompakten Kennzahlen und Erläuterungen.",
+    "context": "Insights dienen der Orientierung. Die detaillierteren Befunde erscheinen in den Deep Insights.",
+    "priority": "A"
+  },
+  {
+    "id": "large-language-model-llm",
+    "term": "Large Language Model (LLM)",
+    "category": "grundlagen",
+    "definition": "Großes, auf umfangreichen Textdaten trainiertes Sprachmodell, das unter anderem Sprache erzeugen und bearbeiten kann.",
+    "context": "Das DTA ist kein generatives Sprachmodell; seine Berechnungen beruhen auf fest hinterlegten Detektoren, einem trainierten ANN und Kalibrierungsfunktionen.",
+    "acronym": "LLM",
+    "aliases": [
+      "Sprachmodell",
+      "KI-Sprachmodell"
+    ],
+    "priority": "B"
+  },
+  {
+    "id": "deep-insights",
+    "term": "Deep Insights",
+    "category": "grundlagen",
+    "definition": "Vertiefte Diagnoseansicht mit detaillierten sprachlichen Merkmalen und zugehörigen Befunden.",
+    "context": "Deep Insights ergänzen die Übersicht um eine genauer nachvollziehbare Analyse. Nicht jeder dargestellte Hinweis geht als zusätzlicher Faktor in die Bewertung ein.",
+    "aliases": [
+      "Detaildiagnose",
+      "vertiefte Analyse"
+    ],
+    "distinction": "Ein diagnostischer Hinweis ist nicht zwangsläufig scorewirksam.",
+    "priority": "A"
+  },
+  {
+    "id": "detektor",
+    "term": "Detektor",
+    "category": "grundlagen",
+    "definition": "Technische oder sprachbezogene Prüfroutine, die nach definierten Mustern im Text sucht und daraus Signale ableitet.",
+    "context": "Detektoren erzeugen Hinweise und gegebenenfalls Rohwerte für B, C oder F. Ein Treffer ist nicht automatisch ein grammatischer oder stilistischer Fehler.",
+    "priority": "A"
+  },
+  {
+    "id": "fundstelle-detektortreffer",
+    "term": "Fundstelle / Detektortreffer",
+    "category": "grundlagen",
+    "definition": "Konkrete Textstelle, an der eine Prüfroutine ein gesuchtes Muster entdeckt hat.",
+    "context": "Die Fundstelle erlaubt eine Prüfung im Kontext; die bloße Anzahl der Treffer beweist noch keine schlechte Textqualität.",
+    "priority": "A"
+  },
+  {
+    "id": "scorewirksam-score-neutral",
+    "term": "Scorewirksam / score-neutral",
+    "category": "grundlagen",
+    "definition": "Scorewirksam heißt: Ein Befund beeinflusst einen numerischen DTA-Wert; score-neutral heißt: Er wird nur zur Information angezeigt.",
+    "context": "Diese Unterscheidung ist besonders für Deep Insights relevant. Nicht alle angezeigten Diagnosen fließen zusätzlich in die Bewertung ein.",
+    "aliases": [
+      "Score-neutral",
+      "Scorewirksamkeit"
+    ],
+    "priority": "A"
+  },
+  {
+    "id": "betazoid",
+    "term": "Betazoid (B)",
+    "category": "dimensionen",
+    "definition": "DTA-spezifische Dimension zur Erfassung bestimmter Phrasen, ungebundener Abstraktionen und sprachlicher Unschärfen.",
+    "context": "Der Betazoid-Rohwert entsteht durch eigene Detektoren und wird zur Darstellung auf eine gemeinsame Referenzskala kalibriert. Ein echter Nullwert bleibt dabei erhalten.",
+    "acronym": "B",
+    "aliases": [
+      "B-Wert",
+      "Betazoid-Wert",
+      "BCF"
+    ],
+    "distinction": "Betazoid ist eine projektspezifische Bezeichnung und kein standardisiertes sprachwissenschaftliches Messkonstrukt.",
+    "priority": "A"
+  },
+  {
+    "id": "cardassianisch-c",
+    "term": "Cardassianisch (C)",
+    "category": "dimensionen",
+    "definition": "DTA-spezifischer Teilwert für Merkmale eines schwerfälligen, stark nominal geprägten oder verwaltungsartigen Sprachstils.",
+    "context": "C-Detektoren achten unter anderem auf Nominal- und Kanzleistil sowie sprachliche Konstruktionen, die handelnde Akteure verdecken.",
+    "acronym": "C",
+    "aliases": [
+      "Cardassianisch",
+      "C-Wert"
+    ],
+    "priority": "A"
+  },
+  {
+    "id": "ferengi-f",
+    "term": "Ferengi (F)",
+    "category": "dimensionen",
+    "definition": "DTA-spezifischer Teilwert für sprachliche Abschwächungen, Vorbehalte und offene Festlegungen.",
+    "context": "F-Detektoren kennzeichnen etwa gehäufte Absicherungen. Sachlich notwendige Vorbehalte sind dabei nicht automatisch Fehler.",
+    "acronym": "F",
+    "aliases": [
+      "Ferengi",
+      "F-Wert"
+    ],
+    "priority": "A"
+  },
+  {
+    "id": "lix",
+    "term": "LIX",
+    "category": "dimensionen",
+    "definition": "Lesbarkeitskennzahl, die mittlere Satzlänge und den Anteil längerer Wörter verbindet.",
+    "context": "Der ursprüngliche LIX-Rohwert ist dimensionsverschieden von B, C und F; das DTA verwendet für das Profil einen entsprechend kalibrierten Wert.",
+    "acronym": "LIX",
+    "aliases": [
+      "Lesbarkeitsindex",
+      "Lesbarkeitswert",
+      "LIX-Index",
+      "LIX-Wert"
+    ],
+    "priority": "A"
+  },
+  {
+    "id": "ann-vergleichswert",
+    "term": "ANN-Vergleichswert",
+    "category": "dimensionen",
+    "definition": "Vom neuronalen Netz berechneter Vergleichswert, der den BlaBlaMeter-Wert eines überarbeiteten Textes näherungsweise rekonstruiert.",
+    "context": "Im aktuellen DTA stammt er aus ANN V17 mit nachgelagerter B50-Korrektur; er ist keine zusätzliche regelbasierte Sprachdimension.",
+    "acronym": "ANN",
+    "aliases": [
+      "ANN V17+B50",
+      "neuronaler Vergleichswert"
+    ],
+    "priority": "A"
+  },
+  {
+    "id": "p-parallelkomponente",
+    "term": "P – Parallelkomponente",
+    "category": "dimensionen",
+    "definition": "Projektion des fünfteiligen Bewertungsvektors auf die gemeinsame Raumdiagonale; kennzeichnet das gemeinsame Niveau.",
+    "context": "Im DTA wird P als Summe der fünf Werte geteilt durch die Quadratwurzel aus fünf berechnet, also nicht als schlichtes arithmetisches Mittel.",
+    "acronym": "P",
+    "aliases": [
+      "P-Wert",
+      "Parallelwert"
+    ],
+    "priority": "A"
+  },
+  {
+    "id": "q-profilunwucht",
+    "term": "Q – Profilunwucht",
+    "category": "dimensionen",
+    "definition": "Länge des Anteils des fünfdimensionalen Bewertungsvektors, der senkrecht zur gemeinsamen Raumdiagonale steht.",
+    "context": "Ein hohes Q zeigt ein ungleichmäßiges Profil der fünf Werte; Q ist nicht gleichbedeutend mit hoher durchschnittlicher sprachlicher Belastung.",
+    "acronym": "Q",
+    "aliases": [
+      "Q-Wert",
+      "Unwucht"
+    ],
+    "priority": "A"
+  },
+  {
+    "id": "funfdimensionaler-profilvektor",
+    "term": "Fünfdimensionaler Profilvektor",
+    "category": "dimensionen",
+    "definition": "Fünf gleichzeitig betrachtete Zahlen, die zusammen einen Punkt im fünfdimensionalen Merkmalsraum bilden.",
+    "context": "Im DTA sind dies die kalibrierten Werte B, C, F, ANN und LIX, aus denen anschließend P und Q abgeleitet werden.",
+    "priority": "B"
+  },
+  {
+    "id": "raumdiagonale-orthogonale-komponente",
+    "term": "Raumdiagonale / orthogonale Komponente",
+    "category": "dimensionen",
+    "definition": "Geometrische Zerlegung eines Vektors in seinen Anteil entlang der Richtung gleicher Dimensionen und seinen senkrechten Rest.",
+    "context": "Die Raumdiagonale aller fünf Dimensionen erzeugt P; die senkrechte Restlänge erzeugt Q. Beide ergeben zusammen die Länge R des Gesamtvektors.",
+    "priority": "B"
+  },
+  {
+    "id": "pq-ebene",
+    "term": "P/Q-Diagramm und diagonale Referenzlinien",
+    "category": "dimensionen",
+    "definition": "Zweidimensionale Darstellung eines DTA-Textprofils anhand der Koordinaten P und Q.",
+    "context": "Diagonale Referenzlinien helfen bei der groben Einordnung. Die Linie 3 orientiert sich in DTA 11.1.6 an den Gamma-Modi der Referenzverteilungen: P + Q = 1,2107.",
+    "aliases": [
+      "P/Q-Ebene",
+      "PQ-Diagramm",
+      "Orientierungslinien",
+      "PQ-Karte"
+    ],
+    "distinction": "Die Ziffern an den Linien dienen als Orientierung und sind keine validierten Schul- oder Hochschulnoten.",
+    "priority": "A"
+  },
+  {
+    "id": "referenzlinie-3-ziel-erreicht",
+    "term": "Referenzlinie 3 – „Ziel erreicht“",
+    "category": "dimensionen",
+    "definition": "Diagonale Orientierungsmarke des P/Q-Diagramms, die für das typische Niveau des V18-Referenzkorpus als \"Ziel erreicht\" gesetzt wurde.",
+    "context": "In DTA 11.1.6 verläuft diese Linie durch die separat geschätzten Gamma-Modi von P und Q: P + Q = 1,2107. Sie ist keine validierte Prüfungsnote.",
+    "priority": "A"
+  },
+  {
+    "id": "fullwort-weichmacher",
+    "term": "Füllwort / Weichmacher",
+    "category": "sprache",
+    "definition": "Hinweiswort oder Formulierung, die eine Aussage ohne klaren Informationsbeitrag abschwächt oder ausdehnt.",
+    "context": "B-Detektoren berücksichtigen bestimmte Weichmacher. Ein einzelnes Vorkommen kann im jeweiligen Kontext völlig angemessen sein.",
+    "priority": "A",
+    "aliases": [
+      "Füllwörter",
+      "Weichmacher",
+      "sprachliche Weichmacher",
+      "Fuellwort"
+    ]
+  },
+  {
+    "id": "phrasensprache-floskel",
+    "term": "Phrasensprache / Floskel",
+    "category": "sprache",
+    "definition": "Wiederkehrende, formelhafte Wendung, die eine Aussage oft unnötig verlängert oder inhaltsarm lässt.",
+    "context": "Im DTA sind bestimmte Floskeln Suchmuster. Ihre Bewertung hängt von Kontext, Aussagefunktion und Häufung ab.",
+    "priority": "A",
+    "aliases": [
+      "Floskeln",
+      "Rahmentext",
+      "Einleitungsfloskel",
+      "Übergangsfloskel",
+      "Abschlussfloskel",
+      "Leerformel"
+    ],
+    "distinction": "Rahmentext kann der Leserführung dienen und ist nicht schon deshalb überflüssig, weil er die Darstellung organisiert."
+  },
+  {
+    "id": "ungebundene-abstraktion",
+    "term": "Ungebundene Abstraktion",
+    "category": "sprache",
+    "definition": "Verwendung eines abstrakten Ausdrucks ohne ausreichend erkennbaren konkreten Bezug.",
+    "context": "Eine Diagnose kann sinnvoll sein, wenn Begriffe wie \"Optimierung\" ohne Gegenstand, Maßstab oder handelnden Akteur verwendet werden.",
+    "priority": "A"
+  },
+  {
+    "id": "unbestimmter-akteur-z-b-man",
+    "term": "Unbestimmter Akteur (z. B. „man“)",
+    "category": "sprache",
+    "definition": "Unbestimmt bezeichnete handelnde Person oder Institution, etwa durch das Pronomen \"man\".",
+    "context": "Im DTA wird die unklare Zuordnung von Verantwortung untersucht; \"man\" ist nicht grundsätzlich sprachlich falsch.",
+    "priority": "B"
+  },
+  {
+    "id": "unbelegte-bewertung",
+    "term": "Unbelegte Bewertung",
+    "category": "sprache",
+    "definition": "Wertende Behauptung, für die im Text weder Maßstab noch nachvollziehbare Begründung bereitgestellt wird.",
+    "context": "Die Diagnose betrifft die sprachliche Begründung einer Bewertung, nicht deren tatsächliche Wahrheit oder Falschheit.",
+    "priority": "A",
+    "aliases": [
+      "wertende Behauptung",
+      "unbelegte Behauptung"
+    ]
+  },
+  {
+    "id": "redundanz",
+    "term": "Redundanz",
+    "category": "sprache",
+    "definition": "Wiederholung sprachlicher oder inhaltlicher Elemente ohne erkennbaren zusätzlichen Informationsgewinn.",
+    "context": "Das DTA sucht nach bestimmten Wiederholungsmustern; notwendige terminologische Wiederholung kann fachlich sinnvoll sein.",
+    "priority": "A",
+    "aliases": [
+      "inhaltliche Wiederholung",
+      "unnötige Wiederholung",
+      "redundante Formulierung"
+    ]
+  },
+  {
+    "id": "nominalstil-kanzleistil",
+    "term": "Nominalstil / Kanzleistil",
+    "category": "sprache",
+    "definition": "Sprachstil mit vielen Substantiven, Nominalkonstruktionen und verwaltungsnahen Formulierungen.",
+    "context": "Solche Konstruktionen können Handlungen verdecken und Texte verdichten; in Fachtexten sind sie nicht generell zu vermeiden.",
+    "priority": "A",
+    "aliases": [
+      "Beamtendeutsch",
+      "Amtsdeutsch",
+      "Bürokratendeutsch",
+      "Kanzleisprache"
+    ],
+    "distinction": "Beamtendeutsch oder Amtsdeutsch bezeichnen ein Bündel von Stileigenschaften, keine eigenständige messbare DTA-Dimension."
+  },
+  {
+    "id": "nominalisierung",
+    "term": "Nominalisierung",
+    "category": "sprache",
+    "definition": "Sprachliche Umformung eines Verbs oder Adjektivs in ein Substantiv.",
+    "context": "Häufungen von Nominalisierungen können Sätze verdichten oder Akteure und Handlungen weniger sichtbar machen. Ob sie problematisch sind, hängt vom Kontext ab.",
+    "english": "Nominalization",
+    "aliases": [
+      "Substantivierung",
+      "Nominalisierungen",
+      "substantiviertes Verb"
+    ],
+    "example": "\"Die Durchführung der Prüfung\" statt \"Wir prüfen\".",
+    "priority": "A"
+  },
+  {
+    "id": "suffixsubstantiv",
+    "term": "Suffixsubstantiv",
+    "category": "sprache",
+    "definition": "Substantiv, das über ein charakteristisches Wortbildungssuffix wie -ung oder -keit identifiziert werden kann.",
+    "context": "Suffixmuster dienen im DTA als heuristische Hinweise auf nominale Dichte. Nicht jedes Wort mit einem solchen Suffix ist problematisch.",
+    "priority": "B"
+  },
+  {
+    "id": "passivkonstruktion",
+    "term": "Passivkonstruktion",
+    "category": "sprache",
+    "definition": "Grammatische Konstruktion, bei der das Subjekt typischerweise nicht als unmittelbar handelnder Akteur erscheint.",
+    "context": "Passiv kann den Fokus sinnvoll auf Vorgänge legen. Im DTA ist besonders relevant, wenn dadurch Verantwortlichkeiten unnötig unklar bleiben.",
+    "priority": "A",
+    "aliases": [
+      "Passiv",
+      "Passivsatz",
+      "Vorgangspassiv"
+    ],
+    "distinction": "Passiv und Agenslosigkeit sind nicht identisch: Ein Passivsatz kann den Handelnden nennen; umgekehrt kann auch ein Aktivsatz die Verantwortung offenlassen."
+  },
+  {
+    "id": "funktionsverbgefuge-fvg",
+    "term": "Funktionsverbgefüge (FVG)",
+    "category": "sprache",
+    "definition": "Feste oder häufige Verbindung aus einem relativ bedeutungsarmen Verb und einer nominalen Ergänzung.",
+    "context": "Beispiel: \"eine Entscheidung treffen\" statt \"entscheiden\". Funktionsverbgefüge sind nicht grundsätzlich unzulässig, können aber unnötig umständlich sein.",
+    "acronym": "FVG",
+    "aliases": [
+      "Funktionsverbgefuege",
+      "FVG",
+      "Funktionsverbkonstruktion",
+      "Nominalverbgefüge"
+    ],
+    "priority": "A"
+  },
+  {
+    "id": "satzlange",
+    "term": "Satzlänge",
+    "category": "sprache",
+    "definition": "Anzahl der Wörter oder vergleichbarer Zähleinheiten in einem Satz.",
+    "context": "Eine große Satzlänge kann ein Hinweis auf erhöhte Verarbeitungslast sein; sie misst nicht automatisch syntaktische Schwierigkeit.",
+    "priority": "A",
+    "aliases": [
+      "Bandwurmsatz",
+      "Bandwurmsätze",
+      "überlanger Satz"
+    ]
+  },
+  {
+    "id": "syntaktische-komplexitat-einbettung",
+    "term": "Syntaktische Komplexität / Einbettung",
+    "category": "sprache",
+    "definition": "Grad der strukturellen Verschachtelung und Abhängigkeit innerhalb eines Satzes.",
+    "context": "Das DTA verwendet Näherungsindikatoren; lange Sätze können einfach und kurze Sätze syntaktisch anspruchsvoll sein.",
+    "priority": "A",
+    "aliases": [
+      "Schachtelsatz",
+      "Schachtelsätze",
+      "Satzverschachtelung",
+      "verschachtelter Satz"
+    ]
+  },
+  {
+    "id": "akteursentzug",
+    "term": "Akteursentzug",
+    "category": "sprache",
+    "definition": "Sprachliche Formulierung, bei der nicht deutlich wird, wer eine Handlung ausführt oder eine Entscheidung trifft.",
+    "context": "Nominalisierungen, Passiv und unbestimmte Akteure können dazu beitragen. Die Diagnose erfordert die Betrachtung des Zusammenhangs.",
+    "priority": "A",
+    "aliases": [
+      "Agenslosigkeit",
+      "Agenslos",
+      "fehlender Akteur",
+      "fehlende Verantwortungszuordnung"
+    ]
+  },
+  {
+    "id": "modalitat-konjunktiv",
+    "term": "Modalität / Konjunktiv",
+    "category": "sprache",
+    "definition": "Grammatische und lexikalische Mittel, um Möglichkeit, Notwendigkeit, Gewissheit oder Bedingtheit auszudrücken.",
+    "context": "Das DTA berücksichtigt manche Modalitätsmarker im Ferengi-Kontext. Konjunktiv und Modalverben sind für präzise wissenschaftliche Aussagen oft erforderlich.",
+    "priority": "A"
+  },
+  {
+    "id": "hedging",
+    "term": "Hedging / Relativierung",
+    "category": "sprache",
+    "definition": "Sprachliche Abschwächung oder Einschränkung einer Aussage durch Unsicherheits- und Distanzmarker.",
+    "context": "Wörter wie \"möglicherweise\" oder \"vermutlich\" können eine Behauptung sachgerecht relativieren; eine unnötige Häufung kann Aussagen unklar machen.",
+    "aliases": [
+      "Absicherungssprache",
+      "Unsicherheitsmarker",
+      "Modalisierung",
+      "Hedge Cue",
+      "Hedge Cues",
+      "Absicherungsmarker",
+      "sprachliche Absicherung",
+      "vorsichtige Formulierung"
+    ],
+    "distinction": "Hedging ist nicht pauschal schlechter Stil; wissenschaftlich begründete Unsicherheit ist oft notwendig. Ein Hedge Cue ist ein sprachliches Signal für eine Einschränkung oder Unsicherheit. Ein solches Signal kann wissenschaftlich gerechtfertigt sein; die reine Erkennung entscheidet nicht über die Berechtigung.",
+    "priority": "A"
+  },
+  {
+    "id": "bedingungsbereich",
+    "term": "Bedingungsbereich",
+    "category": "sprache",
+    "definition": "Teil einer Aussage, dessen Geltung an eine ausdrückliche oder implizite Bedingung gebunden ist.",
+    "context": "Bei der Interpretation von Detektortreffern muss beachtet werden, ob eine Einschränkung nur einen Teilsatz oder eine umfassendere Aussage betrifft.",
+    "priority": "B"
+  },
+  {
+    "id": "absicherungskaskade",
+    "term": "Absicherungskaskade",
+    "category": "sprache",
+    "definition": "Häufung verschiedener Einschränkungen, Unsicherheitsmarker oder Rückzugsformulierungen in engem sprachlichem Zusammenhang.",
+    "context": "F-Detektoren können solche Häufungen anzeigen. Die bloße Anzahl sagt nicht, ob die Unsicherheit wissenschaftlich begründet ist.",
+    "priority": "B"
+  },
+  {
+    "id": "hinterturphrase-offene-alternative",
+    "term": "Hintertürphrase / offene Alternative",
+    "category": "sprache",
+    "definition": "Formulierung, die neben einer Behauptung bewusst eine unspezifizierte alternative Deutung oder Ausnahme offenlässt.",
+    "context": "Das DTA kann solche Wendungen als Unverbindlichkeit markieren; eine notwendige offene Alternative muss deshalb nicht schlecht formuliert sein.",
+    "priority": "B"
+  },
+  {
+    "id": "propositionale-last",
+    "term": "Propositionale Last",
+    "category": "diagnostik",
+    "definition": "Näherungswert für die Anzahl und Verschachtelung inhaltlicher Aussagen in einer sprachlichen Einheit.",
+    "context": "Die Deep Insights nutzen die propositionale Last als diagnostischen Anhaltspunkt für anspruchsvolle Satzstrukturen. Die Kennzahl ist keine direkte Messung kognitiver Belastung bei realen Lesern.",
+    "english": "Propositional load",
+    "aliases": [
+      "Aussagedichte",
+      "Propositionslast",
+      "propositionale Dichte"
+    ],
+    "distinction": "Ein hoher Wert belegt für sich genommen keine mangelnde Verständlichkeit. Propositionale Last beschreibt einen Diagnoseaspekt; der Begriff ist nicht gleichbedeutend mit einer einzelnen Proposition oder überprüfbaren Behauptung.",
+    "priority": "B"
+  },
+  {
+    "id": "relationslast-konnektor",
+    "term": "Relationslast / Konnektor",
+    "category": "diagnostik",
+    "definition": "Dichte und Komplexität sprachlicher Verbindungen wie Ursachen, Bedingungen und Gegensätze.",
+    "context": "Deep Insights verwenden Konnektorhinweise, um Beziehungen zwischen Aussagen sichtbar zu machen; kein direkter Verständlichkeitstest.",
+    "priority": "B"
+  },
+  {
+    "id": "syntaktische-spannweite-satzklammer",
+    "term": "Syntaktische Spannweite / Satzklammer",
+    "category": "diagnostik",
+    "definition": "Abstand oder strukturelle Trennung zwischen grammatisch zusammengehörenden Satzteilen.",
+    "context": "Lange Satzklammern können das Nachvollziehen eines Satzes erschweren; der DTA-Befund ist eine heuristische Diagnose.",
+    "priority": "B",
+    "aliases": [
+      "Prädikatsklammer",
+      "Verbklammer",
+      "Klammerweite"
+    ]
+  },
+  {
+    "id": "prapositionskaskade",
+    "term": "Präpositionskaskade",
+    "category": "diagnostik",
+    "definition": "Häufung von Präpositionalgruppen, die aufeinander aufbauen oder sich verschachteln.",
+    "context": "Solche Ketten können Bezüge verschleiern, müssen im Fachtext aber nicht immer vermieden werden.",
+    "priority": "B"
+  },
+  {
+    "id": "abstraktionscluster",
+    "term": "Abstraktionscluster",
+    "category": "diagnostik",
+    "definition": "Enge räumliche Häufung mehrerer abstrakter Nomen oder Konstruktionen.",
+    "context": "Der Detektor markiert solche Cluster als möglichen Anlass für Konkretisierung und bessere Zuordnung.",
+    "priority": "B"
+  },
+  {
+    "id": "nominalgruppenlast",
+    "term": "Nominalgruppenlast",
+    "category": "diagnostik",
+    "definition": "Ausmaß der Verschachtelung und Erweiterung nominaler Wortgruppen.",
+    "context": "Lange Nominalgruppen können präzise sein, erhöhen aber häufig den Aufwand zum Erkennen von Bezügen.",
+    "priority": "B"
+  },
+  {
+    "id": "metadiskurs",
+    "term": "Metadiskurs",
+    "category": "diagnostik",
+    "definition": "Textteile, in denen der Autor über den Aufbau, die Argumentation oder den Schreibprozess selbst spricht.",
+    "context": "Metadiskurs kann die Orientierung verbessern, etwa durch Hinweise auf die folgenden Kapitel. Er kann aber auch Raum einnehmen, ohne Sachinformationen hinzuzufügen.",
+    "english": "Metadiscourse",
+    "aliases": [
+      "Meta-Kommentar",
+      "Textorganisation",
+      "Textnavigation",
+      "Strukturhinweis",
+      "Metatext",
+      "Textorganisationssignal"
+    ],
+    "example": "\"Im folgenden Abschnitt werden drei Aspekte diskutiert.\"",
+    "priority": "B"
+  },
+  {
+    "id": "epistemische-stapelung",
+    "term": "Epistemische Stapelung",
+    "category": "diagnostik",
+    "definition": "Gehäuftes Auftreten von Ausdrücken, die die Sicherheit einer Aussage relativieren oder einschränken.",
+    "context": "Die Deep Insights machen solche Stapelungen sichtbar; die fachliche Angemessenheit der Unsicherheit ist gesondert zu beurteilen.",
+    "priority": "B"
+  },
+  {
+    "id": "lexikalische-kohasion",
+    "term": "Lexikalische Kohäsion",
+    "category": "diagnostik",
+    "definition": "Zusammenhalt eines Textes durch Wiederaufnahme und Variation bedeutungstragender Wörter.",
+    "context": "Wortwiederholungen und Bezugsketten können Kohäsion signalisieren, sind aber allein noch kein Beleg für inhaltliche Kohärenz.",
+    "priority": "B",
+    "aliases": [
+      "lexikalische Verknüpfung",
+      "Wiederaufnahme",
+      "Wiederaufnahmekette"
+    ],
+    "distinction": "Lexikalische Kohäsion ist nur eine Form der sprachlichen Textverknüpfung und beweist für sich genommen keine inhaltliche Kohärenz."
+  },
+  {
+    "id": "denglisch-anglizismen",
+    "term": "Denglisch / Anglizismen",
+    "category": "diagnostik",
+    "definition": "Verwendung englischer Wörter, Wendungen oder gemischter deutsch-englischer Ausdrücke im deutschsprachigen Text.",
+    "context": "Das DTA kann solche Muster diagnostisch anzeigen; etablierte Fachtermini und Eigennamen sind keine automatischen Stilprobleme.",
+    "priority": "B",
+    "aliases": [
+      "Denglisch",
+      "Anglizismus",
+      "Anglizismen",
+      "englische Lehnwörter"
+    ],
+    "distinction": "Ein Anglizismus ist nicht automatisch ein verzichtbares Fremdwort. Fachsprachliche Angemessenheit hängt von Adressatenkreis und Verwendungszweck ab."
+  },
+  {
+    "id": "zeitreferenz-relative-gebundene",
+    "term": "Zeitreferenz (relative, gebundene)",
+    "category": "diagnostik",
+    "definition": "Zeitangabe, die sich erst aus Kontext, Erstellungsdatum oder einem ausdrücklich genannten Bezugspunkt erschließt.",
+    "context": "Relative Ausdrücke wie \"gestern\" können ohne Zeitanker unklar sein. Die Zeitreferenzdiagnose ist im aktuellen DTA score-neutral.",
+    "aliases": [
+      "Zeitanker",
+      "zeitlicher Bezug"
+    ],
+    "priority": "B"
+  },
+  {
+    "id": "originaltext-bbm-o",
+    "term": "Originaltext (BBM-O)",
+    "category": "aufbereitung",
+    "definition": "Unveränderte Ausgangsfassung des analysierten Texts.",
+    "context": "BBM-O dient zur Abgrenzung von technischer Bereinigung und redaktioneller Überarbeitung.",
+    "acronym": "BBM-O",
+    "aliases": [
+      "BBM O"
+    ],
+    "priority": "A"
+  },
+  {
+    "id": "technisch-bereinigter-text-bbm-t",
+    "term": "Technisch bereinigter Text (BBM-T)",
+    "category": "aufbereitung",
+    "definition": "Textfassung nach Entfernung oder Korrektur rein technischer Übertragungsartefakte.",
+    "context": "BBM-T soll beispielsweise störende Trennungs- und Kopierartefakte beheben, ohne den sprachlichen Inhalt neu zu formulieren.",
+    "acronym": "BBM-T",
+    "aliases": [
+      "BBM T"
+    ],
+    "priority": "A"
+  },
+  {
+    "id": "bbm-ue",
+    "term": "Überarbeiteter Text (BBM-Ü)",
+    "category": "aufbereitung",
+    "definition": "Bezeichnung für die überarbeitete Textstufe, deren BlaBlaMeter-Wert als Zielwert der ANN-Modellierung verwendet wurde.",
+    "context": "BBM-Ü ist von BBM-O (Originaltext) und BBM-T (technisch bereinigte Textstufe) zu unterscheiden. Im V18-Korpus lagen 2.605 gültige Datensätze mit diesem Zielwert für das ANN vor.",
+    "acronym": "BBM-Ü",
+    "aliases": [
+      "BlaBlaMeter Ü",
+      "überarbeiteter Text",
+      "BBM Ue",
+      "BBM-Ü",
+      "BlaBlaMeter-Ü"
+    ],
+    "distinction": "Die drei Textstufen sind keine drei verschiedenen neuronalen Netze.",
+    "priority": "A"
+  },
+  {
+    "id": "neutralisierte-analysefassung",
+    "term": "Neutralisierte Analysefassung",
+    "category": "aufbereitung",
+    "definition": "Interne Textrepräsentation, in der bestimmte nicht auszuwertende Bestandteile für die Analyse kenntlich gemacht oder ersetzt wurden.",
+    "context": "Sie kann vom sichtbaren Original abweichen, ohne dass dessen ursprünglicher Wortlaut redaktionell umgeschrieben wird.",
+    "priority": "B"
+  },
+  {
+    "id": "textbereinigung-normalisierung",
+    "term": "Textbereinigung / Normalisierung",
+    "category": "aufbereitung",
+    "definition": "Technisches Vereinheitlichen von Eingabetexten, um sie zuverlässig analysieren zu können.",
+    "context": "Dazu gehören je nach Verarbeitung die Behandlung von Zeilenumbrüchen, Steuerzeichen oder Trennungsartefakten; fachliche Aussagen bleiben erhalten.",
+    "priority": "A"
+  },
+  {
+    "id": "analyse-neutralisierung",
+    "term": "Analyse-Neutralisierung",
+    "category": "aufbereitung",
+    "definition": "Gezieltes Ausnehmen spezieller Bereiche von einer sprachstatistischen Zählung.",
+    "context": "Formeln, Fremdschrift oder andere nicht passend auswertbare Teile werden nicht zwingend gelöscht, sondern für bestimmte Messungen neutralisiert.",
+    "priority": "B"
+  },
+  {
+    "id": "tokenisierung-token",
+    "term": "Tokenisierung / Token",
+    "category": "aufbereitung",
+    "definition": "Zerlegung einer Zeichenfolge in analysierbare Einheiten wie Wörter, Satzzeichen oder Satzfragmente.",
+    "context": "Die gewählte Tokenisierung beeinflusst Zähler und Nenner von Dichten und Lesbarkeitsmaßen.",
+    "priority": "B"
+  },
+  {
+    "id": "satzgrenzenerkennung",
+    "term": "Satzgrenzenerkennung",
+    "category": "aufbereitung",
+    "definition": "Verfahren zur Bestimmung von Satzanfang und Satzende in einer Zeichenfolge.",
+    "context": "Abkürzungen, Listen und kopierte PDF-Texte können Satzgrenzen schwer erkennbar machen; das beeinflusst Satzstatistiken.",
+    "priority": "B"
+  },
+  {
+    "id": "ocr",
+    "term": "OCR (Texterkennung)",
+    "category": "aufbereitung",
+    "definition": "Automatische Erkennung von Schriftzeichen in eingescannten Dokumenten oder Bildern.",
+    "context": "OCR-Ergebnisse können falsch erkannte Zeichen, Umbrüche oder Trennungen enthalten. Diese Artefakte können Textanalysewerte beeinflussen.",
+    "acronym": "OCR",
+    "english": "Optical Character Recognition",
+    "aliases": [
+      "Texterkennung",
+      "optische Zeichenerkennung"
+    ],
+    "distinction": "OCR ist eine Vorverarbeitung; sie verbessert nicht automatisch die sprachliche Qualität des Textes.",
+    "priority": "A"
+  },
+  {
+    "id": "trennungsartefakt-soft-hyphen",
+    "term": "Trennungsartefakt / Soft Hyphen",
+    "category": "aufbereitung",
+    "definition": "Bei PDF-Übernahmen entstandenes Zeichen oder Umbruchmuster, das ein Wort technisch zerlegt.",
+    "context": "Ein Soft Hyphen ist ein bedingtes Trennzeichen. Solche Artefakte sollten vor der sprachlichen Diagnose fachlich unverändert bereinigt werden.",
+    "priority": "B"
+  },
+  {
+    "id": "rohwert-kalibrierter-endwert",
+    "term": "Rohwert / kalibrierter Endwert",
+    "category": "kalibrierung",
+    "definition": "Unmittelbar von einem Detektor ermittelter Wert gegenüber einer nachträglich skalierten Größe.",
+    "context": "B, C, F und LIX werden auf die ANN+B50-Referenzskala gebracht; Rohwert und Endwert dürfen nicht verwechselt werden.",
+    "priority": "A",
+    "aliases": [
+      "Rohscore",
+      "kalibrierter Wert"
+    ]
+  },
+  {
+    "id": "referenzkorpus-trainingskorpus",
+    "term": "Referenzkorpus / Trainingskorpus",
+    "category": "kalibrierung",
+    "definition": "Sammlung ausgewählter Texte, die der Modellentwicklung und statistischen Kalibrierung als Datenbasis dient.",
+    "context": "Der aktuelle V18-Bestand umfasst 2.616 Texte, davon 2.606 DTA-gültige und 2.605 mit verwendbarem ANN-Zielwert. Es ist keine repräsentative Sprach-Normstichprobe.",
+    "priority": "A",
+    "aliases": [
+      "Textkorpus",
+      "Vergleichskorpus",
+      "Referenzdatensatz"
+    ]
+  },
+  {
+    "id": "empirische-kalibrierung",
+    "term": "Empirische Kalibrierung",
+    "category": "kalibrierung",
+    "definition": "Statistische Zuordnung der Werte verschiedener Verfahren anhand beobachteter Vergleichsdaten.",
+    "context": "Im DTA dient sie der Angleichung der Verteilungen; sie erzeugt keine unabhängige Bestätigung gleicher inhaltlicher Aussagekraft.",
+    "priority": "A"
+  },
+  {
+    "id": "referenzskala",
+    "term": "Referenzskala",
+    "category": "kalibrierung",
+    "definition": "Gemeinsame numerische Darstellungsebene, auf die verschiedene Messwerte transformiert werden.",
+    "context": "Vergleichbare Zahlbereiche bedeuten nicht, dass die fünf DTA-Dimensionen dasselbe sprachliche Konstrukt messen.",
+    "priority": "A"
+  },
+  {
+    "id": "quantil",
+    "term": "Quantil",
+    "category": "kalibrierung",
+    "definition": "Wert, unterhalb dessen ein bestimmter Anteil einer Verteilung liegt.",
+    "context": "Quantile sind relative Positionen, keine absoluten sprachlichen Güteurteile.",
+    "priority": "B"
+  },
+  {
+    "id": "perzentil",
+    "term": "Perzentil",
+    "category": "kalibrierung",
+    "definition": "Quantil, das den Rang einer Beobachtung in Prozent ausdrückt, etwa das 50. Perzentil als Median.",
+    "context": "Ein Perzentil beschreibt die Position innerhalb des verwendeten Referenzkorpus und hängt deshalb von dessen Zusammensetzung ab.",
+    "priority": "A"
+  },
+  {
+    "id": "quantilabbildung",
+    "term": "Quantilabbildung",
+    "category": "kalibrierung",
+    "definition": "Abbildung einer Position in der Ausgangsverteilung auf dieselbe relative Position in einer Zielverteilung.",
+    "context": "Für ANN V17 wird daraus eine monotone Korrekturkurve abgeleitet. Sie orientiert sich an Verteilungen, nicht an individueller Textsemantik.",
+    "priority": "B"
+  },
+  {
+    "id": "b50",
+    "term": "B50 – 50-prozentige Quantilkorrektur",
+    "category": "kalibrierung",
+    "definition": "Monotone statistische Nachkorrektur, die zur Hälfte auf die Vorhersage von ANN V17 angewendet wird.",
+    "context": "B50 kombiniert die ursprüngliche ANN-Prognose und die voll quantilkorrigierte Prognose zu gleichen Teilen. Damit nähert sich die Verteilung der Vorhersagen der empirischen BlaBlaMeter-Verteilung an.",
+    "acronym": "B50",
+    "english": "50% quantile calibration",
+    "aliases": [
+      "Quantilkalibrierung",
+      "ANN V17+B50",
+      "Nachkalibrierung",
+      "B50",
+      "50% Quantilkorrektur",
+      "B50-Quantilkorrektur",
+      "hälftige Quantilkorrektur",
+      "50-Prozent-Quantilkorrektur",
+      "B-50"
+    ],
+    "distinction": "Das neuronale Netz und seine trainierten Gewichte bleiben dabei unverändert.",
+    "example": "B50 = 0,5 × ANN-Prognose + 0,5 × vollständig quantilkorrigierte Prognose.",
+    "priority": "A"
+  },
+  {
+    "id": "monotone-kalibrierung",
+    "term": "Monotone Kalibrierung",
+    "category": "kalibrierung",
+    "definition": "Umrechnung, die mit wachsendem Ausgangswert nie zu einem kleineren korrigierten Wert führt.",
+    "context": "Die B50-Korrektur bewahrt damit die Rangfolge der ANN-Prognosen, ohne deren numerische Abstände unverändert lassen zu müssen.",
+    "priority": "B"
+  },
+  {
+    "id": "nullwerte-bei-der-kalibrierung",
+    "term": "Nullwerte bei der Kalibrierung",
+    "category": "kalibrierung",
+    "definition": "Beibehaltung exakt null gemessener Detektorwerte trotz Kalibrierung.",
+    "context": "Beim DTA bleiben echte Nullen für B, C und F erhalten; nur positive Werte werden an die Referenzverteilung angepasst.",
+    "priority": "A"
+  },
+  {
+    "id": "histogramm",
+    "term": "Histogramm",
+    "category": "kalibrierung",
+    "definition": "Grafische Darstellung der Häufigkeit beobachteter Werte in benachbarten Intervallen.",
+    "context": "Ein Histogramm beruht auf Daten und Klassenbreiten; eine geglättete Gamma-Kurve ist dagegen eine angepasste Modellverteilung.",
+    "priority": "B"
+  },
+  {
+    "id": "gamma-fit",
+    "term": "Gamma-Verteilung / Gamma-Fit",
+    "category": "kalibrierung",
+    "definition": "Anpassung einer mathematischen Gamma-Verteilung an beobachtete positive Messwerte.",
+    "context": "Im DTA werden angepasste Gamma-Kurven genutzt, um Verteilungen zu vergleichen und ihre Modalwerte zu bestimmen. Bei der dargestellten Kalibrierungsanalyse werden echte Nullwerte vom Fit ausgenommen.",
+    "english": "Gamma distribution fit",
+    "aliases": [
+      "Gamma-Verteilung",
+      "Gamma-Kurve",
+      "Gamma-Modus",
+      "Modalwert",
+      "Gamma-Fit"
+    ],
+    "distinction": "Fast deckungsgleiche Gamma-Kurven nach einer Quantilkalibrierung belegen keine unabhängige Validität der Detektoren.",
+    "priority": "B"
+  },
+  {
+    "id": "modalwert-modus",
+    "term": "Modalwert / Modus",
+    "category": "kalibrierung",
+    "definition": "Wert, an dem eine Häufigkeitsverteilung oder ihre geschätzte Dichte das Maximum besitzt.",
+    "context": "Die P/Q-Referenzlinie 3 nutzt die Modi separat angepasster Gamma-Verteilungen; der Modus ist nicht mit Median oder arithmetischem Mittel gleichzusetzen.",
+    "priority": "A"
+  },
+  {
+    "id": "wasserstein-distanz",
+    "term": "Wasserstein-Distanz",
+    "category": "kalibrierung",
+    "definition": "Maß für die Distanz zweier statistischer Verteilungen, anschaulich als minimal erforderliche Verschiebung von Wahrscheinlichkeitsmasse.",
+    "context": "Die B50-Kreuzvalidierung ergab gegenüber V17 etwa 42 % geringeren Wasserstein-Abstand der Vorhersage- und Zielverteilungen bei fester 50-%-Korrektur.",
+    "priority": "C"
+  },
+  {
+    "id": "regression-zur-mitte",
+    "term": "Regression zur Mitte",
+    "category": "kalibrierung",
+    "definition": "Tendenz punktweiser Prognosemodelle, extreme Zielwerte weniger extrem vorherzusagen.",
+    "context": "Bei ANN V17 zeigte sie sich unter anderem in einer gegenüber BBM-Ü zu engen Verteilung. B50 gleicht dies teilweise statistisch aus.",
+    "priority": "C"
+  },
+  {
+    "id": "streuung-standardabweichung",
+    "term": "Streuung / Standardabweichung",
+    "category": "kalibrierung",
+    "definition": "Beschreibung, wie stark Werte einer Verteilung um ihren Mittelwert schwanken.",
+    "context": "Die Standardabweichung ist ein Maß für die Breite; vergleichbare Modalwerte allein garantieren noch keine identischen Verteilungen.",
+    "priority": "B"
+  },
+  {
+    "id": "eingangsmerkmal-feature",
+    "term": "Eingangsmerkmal / Feature",
+    "category": "neuronales-netz",
+    "definition": "Numerisch aus einem Text berechnete Eigenschaft, die einem Modell als Eingabe dient.",
+    "context": "ANN V17 verarbeitet 22 Textmerkmale. Ein Merkmal ist keine unmittelbare Gesamtbewertung des Textes.",
+    "priority": "B"
+  },
+  {
+    "id": "ann-v17",
+    "term": "Feedforward-Netz / Architektur 22–12–1",
+    "category": "neuronales-netz",
+    "definition": "Trainiertes Feedforward-Netz mit 22 Eingangsmerkmalen, 12 verborgenen Neuronen und einem Ausgabeneuron.",
+    "context": "Das DTA verwendet die fest gespeicherten Netzgewichte und die Architektur 22–12–1. Auf die V17-Ausgabe folgt die B50-Korrektur; neues Training findet beim Analysieren eines Textes nicht statt.",
+    "acronym": "ANN",
+    "english": "Artificial Neural Network",
+    "aliases": [
+      "neuronales Netz",
+      "22-12-1",
+      "Backpropagation-Netz",
+      "ANN V17",
+      "Künstliches neuronales Netz",
+      "Neuronalnetz"
+    ],
+    "distinction": "Backpropagation wurde zum Trainieren verwendet; bei der normalen Textanalyse werden nur Vorwärtsrechnungen ausgeführt.",
+    "priority": "B"
+  },
+  {
+    "id": "aktivierungsfunktion-tanh-softplus",
+    "term": "Aktivierungsfunktion (tanh / Softplus)",
+    "category": "neuronales-netz",
+    "definition": "Mathematische Funktion, die aus der gewichteten Summe eines Neurons dessen Ausgabewert erzeugt.",
+    "context": "ANN V17 verwendet tanh in der verborgenen Schicht und Softplus für den positiven Ausgang; im Auswertungslauf werden die Funktionen nur vorwärts berechnet.",
+    "priority": "C"
+  },
+  {
+    "id": "backpropagation",
+    "term": "Backpropagation",
+    "category": "neuronales-netz",
+    "definition": "Verfahren zur Berechnung der Ableitungen einer Modellverlustfunktion nach den Netzgewichten.",
+    "context": "Backpropagation wurde beim Training von ANN V17 eingesetzt, nicht bei der normalen Textauswertung. Die Gewichte bleiben dann unverändert.",
+    "priority": "C"
+  },
+  {
+    "id": "verlustfunktion-loss",
+    "term": "Verlustfunktion (Loss)",
+    "category": "neuronales-netz",
+    "definition": "Numerische Zielfunktion, die bestimmt, welche Modellfehler bei der Optimierung minimiert werden.",
+    "context": "Unterschiedliche Verlustfunktionen gewichten Einzelprognosen und Verteilungseigenschaften verschieden.",
+    "priority": "C"
+  },
+  {
+    "id": "gewichteter-quadratischer-fehler",
+    "term": "Gewichteter quadratischer Fehler",
+    "category": "neuronales-netz",
+    "definition": "Quadratische Fehlerfunktion, in der einzelne Beobachtungen unterschiedlich stark gewichtet werden.",
+    "context": "In der V17-Entwicklung wurden niedrige BBM-Ü-Werte bei der Anpassung stärker berücksichtigt.",
+    "priority": "C"
+  },
+  {
+    "id": "regularisierung-l2",
+    "term": "Regularisierung (L2)",
+    "category": "neuronales-netz",
+    "definition": "Zusätzlicher Term im Trainingsziel, der zu große Modellgewichte bestraft.",
+    "context": "Eine L2-Regularisierung soll Überanpassung begrenzen, ersetzt aber keine externe Prüfung der Vorhersagegüte.",
+    "priority": "C"
+  },
+  {
+    "id": "kreuzvalidierung",
+    "term": "Kreuzvalidierung",
+    "category": "neuronales-netz",
+    "definition": "Wiederholte Teilung eines Datenbestands in Trainings- und Prüfteile.",
+    "context": "Für jeden Prüfdurchlauf wird auf anderen Daten trainiert, um die Prognosegüte auf zurückgehaltenen Fällen zu bewerten.",
+    "priority": "B"
+  },
+  {
+    "id": "gruppierte-kreuzvalidierung",
+    "term": "Gruppierte Kreuzvalidierung",
+    "category": "neuronales-netz",
+    "definition": "Datenaufteilung, die zusammengehörende Beobachtungen stets derselben Trainings- oder Prüfgruppe zuordnet.",
+    "context": "Bei der DTA-Prüfung wurden identische 22-Merkmalsvektoren zusammengehalten, um Dublettenlecks zu verhindern.",
+    "priority": "C"
+  },
+  {
+    "id": "nested-cv",
+    "term": "Verschachtelte Kreuzvalidierung",
+    "category": "neuronales-netz",
+    "definition": "Prüfverfahren mit einer inneren Schleife zur Modellauswahl und einer davon getrennten äußeren Schleife zur Bewertung.",
+    "context": "Für die Wahl von B50 wurden gruppierte Datenaufteilungen eingesetzt. So sollte vermieden werden, dass die Prüfung durch vorherige Parameterauswahl auf denselben Testdaten verzerrt wird.",
+    "english": "Nested cross-validation",
+    "aliases": [
+      "Nested CV",
+      "Kreuzvalidierung",
+      "Cross-Validation"
+    ],
+    "distinction": "Auch verschachtelte Kreuzvalidierung ersetzt keine spätere Prüfung mit wirklich neuen Texten.",
+    "priority": "C"
+  },
+  {
+    "id": "out-of-fold-prognose-oof",
+    "term": "Out-of-Fold-Prognose (OOF)",
+    "category": "neuronales-netz",
+    "definition": "Vorhersage für einen Datensatz, die aus einem Modell stammt, das genau diesen Datensatz nicht zum Trainieren erhielt.",
+    "context": "Solche Out-of-Fold-Werte wurden verwendet, um die finale Quantilkorrektur ohne direkte Anpassung an die Endprognosen zu bestimmen.",
+    "acronym": "OOF",
+    "aliases": [
+      "OOF-Prognose"
+    ],
+    "priority": "C"
+  },
+  {
+    "id": "mae-rmse",
+    "term": "MAE / RMSE",
+    "category": "neuronales-netz",
+    "definition": "Zwei Fehlerkennzahlen: mittlerer absoluter Fehler (MAE) und Wurzel des mittleren quadratischen Fehlers (RMSE).",
+    "context": "MAE mittelt absolute Abweichungen; RMSE gewichtet große Einzelabweichungen stärker. Die B50-Anwendung verbessert diese Kennzahlen nicht nachweisbar.",
+    "aliases": [
+      "MAE",
+      "RMSE",
+      "mittlerer absoluter Fehler",
+      "quadratischer Fehler"
+    ],
+    "priority": "C"
+  },
+  {
+    "id": "bias",
+    "term": "Bias",
+    "category": "neuronales-netz",
+    "definition": "Systematische Richtung einer Prognoseabweichung, etwa dauernde Über- oder Unterschätzung.",
+    "context": "Bei den V17-Prognosen wurden niedrige BBM-Werte eher über- und hohe eher unterschätzt; die Verteilungskorrektur reduziert diese Verzerrung teilweise.",
+    "priority": "C"
+  },
+  {
+    "id": "bootstrap-intervall",
+    "term": "Bootstrap-Intervall",
+    "category": "neuronales-netz",
+    "definition": "Intervall zur Beschreibung der Unsicherheit einer Schätzung, ermittelt durch wiederholte Stichproben aus vorhandenen Daten.",
+    "context": "In der Modellprüfung wurden gruppenbasierte Bootstrap-Verfahren verwendet; ein Intervall, das null umfasst, belegt keine signifikante Fehlerverbesserung.",
+    "priority": "C"
+  },
+  {
+    "id": "operationalisierung",
+    "term": "Operationalisierung",
+    "category": "wissenschaft",
+    "definition": "Übersetzung eines abstrakten Begriffs in ausdrücklich definierte, beobachtbare und berechenbare Indikatoren.",
+    "context": "Das DTA operationalisiert bestimmte sprachliche Muster. Aus ihrer Messbarkeit folgt nicht automatisch die Messung umfassender Textqualität.",
+    "priority": "A"
+  },
+  {
+    "id": "lesbarkeit-verstandlichkeit",
+    "term": "Lesbarkeit / Verständlichkeit",
+    "category": "wissenschaft",
+    "definition": "Formale Eigenschaften eines Textes gegenüber der tatsächlichen Leichtigkeit, mit der Menschen ihn verstehen.",
+    "context": "LIX und verwandte Indikatoren beschreiben Oberflächenmerkmale; ein Leserexperiment wäre nötig, um Verstehen direkt nachzuweisen.",
+    "priority": "A",
+    "aliases": [
+      "Lesbarkeit",
+      "Verständlichkeit",
+      "sprachliche Verständlichkeit",
+      "Leseleichtigkeit"
+    ],
+    "distinction": "Lesbarkeitsformeln erfassen vor allem Oberflächenmerkmale. Ob ein Text tatsächlich verstanden wird, hängt zusätzlich von Vorwissen, Inhalt, Gliederung und Adressaten ab."
+  },
+  {
+    "id": "validitaet",
+    "term": "Konstruktvalidität",
+    "category": "wissenschaft",
+    "definition": "Eigenschaft einer Messung, dasjenige Konstrukt tatsächlich zu erfassen, das sie zu messen beansprucht.",
+    "context": "Eine gute numerische Übereinstimmung mit einem Vergleichsverfahren sagt noch nicht, ob das DTA sprachliche Qualität im umfassenden Sinn korrekt misst.",
+    "english": "Validity",
+    "aliases": [
+      "Validität"
+    ],
+    "distinction": "Kalibrierung, Reproduzierbarkeit und Validität sind verschiedene Eigenschaften.",
+    "priority": "B"
+  },
+  {
+    "id": "reliabilitat",
+    "term": "Reliabilität",
+    "category": "wissenschaft",
+    "definition": "Ausmaß, in dem wiederholte Messungen unter vergleichbaren Bedingungen konsistente Ergebnisse liefern.",
+    "context": "Die exakte Wiederholbarkeit eines Programms ist ein Aspekt; sie ersetzt nicht den Nachweis, dass die Zielgröße sachlich angemessen erfasst wird.",
+    "priority": "B"
+  },
+  {
+    "id": "fehlklassifikation",
+    "term": "Fehlklassifikation",
+    "category": "wissenschaft",
+    "definition": "Falsche Zuordnung eines Textmerkmals zu einer Detektorkategorie oder das Übersehen eines tatsächlich vorhandenen Merkmals.",
+    "context": "Automatische Heuristiken können Fehlalarme und übersehene Fälle erzeugen. Fundstellen sollten daher im jeweiligen Satz geprüft werden.",
+    "priority": "A"
+  },
+  {
+    "id": "determinismus",
+    "term": "Determinismus / Reproduzierbarkeit",
+    "category": "wissenschaft",
+    "definition": "Eigenschaft einer Berechnung, bei identischer Eingabe und identischem Programmzustand stets dasselbe Ergebnis zu liefern.",
+    "context": "Das DTA verwendet fest hinterlegte Regeln, Netzgewichte und Kalibrierungsparameter. Bei identischem Text und identischer Version bleiben die berechneten Werte deshalb gleich.",
+    "english": "Determinism",
+    "aliases": [
+      "Reproduzierbarkeit",
+      "deterministisch",
+      "wiederholbare Analyse"
+    ],
+    "distinction": "Deterministische Ergebnisse sind nicht automatisch richtige Ergebnisse.",
+    "priority": "A"
+  },
+  {
+    "id": "regressionstest",
+    "term": "Regressionstest",
+    "category": "wissenschaft",
+    "definition": "Automatisierter Test, der nach einer Programmänderung erneut bekannte erwartete Ergebnisse kontrolliert.",
+    "context": "Regressionstests sichern insbesondere Berechnungen, Navigation, Nullwertbehandlung und Referenzlinien ab; sie sind keine externe Sprachvalidierung.",
+    "priority": "B"
+  },
+  {
+    "id": "score-optimierung-goodhart-problem",
+    "term": "Score-Optimierung (Goodhart-Problem)",
+    "category": "wissenschaft",
+    "definition": "Gezielte Umformulierung eines Texts allein mit dem Ziel, einen numerischen Index zu verbessern.",
+    "context": "Nach dem Goodhart-Problem kann eine Kennzahl als Optimierungsziel ihre Aussagekraft verlieren. Ein besserer DTA-Wert garantiert keinen fachlich besseren Text.",
+    "aliases": [
+      "Goodhart",
+      "Goodharts Gesetz",
+      "Goodhart-Effekt",
+      "Goodhart Problem"
+    ],
+    "priority": "A",
+    "distinction": "Eine metrisch verbesserte Formulierung muss nicht den fachlichen Inhalt besser vermitteln. Die Optimierung eines Indikators kann seine Aussagekraft untergraben."
+  },
+  {
+    "id": "weasel-words-unbestimmte-autoritaet",
+    "term": "Weasel Words / unbestimmte Autorität",
+    "category": "sprache",
+    "english": "Weasel words",
+    "definition": "Formulierungen, die eine Behauptung auf nicht näher bestimmbare Personen, Gruppen oder Quellen stützen und ihr dadurch den Anschein einer Absicherung geben.",
+    "context": "Das DTA kann Formulierungsmuster wie unbestimmte Akteure oder unbelegte Bewertungen als Hinweise erfassen. Ob eine behauptete Autorität tatsächlich belegt ist, erfordert Quellen- und Kontextprüfung; es gibt dafür keinen eigenständigen Weasel-Words-Score.",
+    "example": "„Viele Experten sind der Meinung, dass …“ – ohne zu sagen, welche Experten und auf welche Belege sie sich stützen.",
+    "distinction": "Anders als Hedging wird nicht primär die Gewissheit abgeschwächt, sondern eine nicht identifizierte Autorität als Stütze angeführt.",
+    "aliases": [
+      "Wieselwörter",
+      "Wieselwort",
+      "unbestimmte Quelle",
+      "vage Quellenzuschreibung",
+      "unbelegte Autorität",
+      "Experten behaupten",
+      "manche Experten meinen"
+    ],
+    "priority": "A"
+  },
+  {
+    "id": "vagheit",
+    "term": "Vagheit",
+    "category": "sprache",
+    "english": "Vagueness",
+    "definition": "Unbestimmtheit einer Formulierung, bei der Umfang, Bezugsgegenstand, Maßstab oder Bedingungen einer Aussage offenbleiben.",
+    "context": "Einzelne DTA-Detektoren können vagheitsnahe Formulierungen anzeigen. Ein allgemeiner, validierter Vagheitswert wird nicht berechnet; die sachliche Berechtigung lässt sich nur im Kontext bewerten.",
+    "example": "„Wir optimieren die Prozesse deutlich.“ – Ohne zu benennen, welche Prozesse, welche Kennzahl und welcher Vergleich gelten.",
+    "distinction": "Nicht jede offene Formulierung ist inhaltsleer. Vagheit ist von begründeter Unsicherheit und von einem zulässigen Allgemeinheitsgrad zu unterscheiden.",
+    "aliases": [
+      "vage Aussage",
+      "vage Formulierung",
+      "Unbestimmtheit",
+      "sprachliche Unschärfe",
+      "fehlende Spezifizierung"
+    ],
+    "priority": "A"
+  },
+  {
+    "id": "worthuelse-buzzword",
+    "term": "Worthülse / Buzzword",
+    "category": "sprache",
+    "english": "Buzzword; empty phrase",
+    "definition": "Ein positiv besetzter oder modischer Ausdruck, dessen konkreter Sachbezug im jeweiligen Text nicht erläutert wird.",
+    "context": "Ein DTA-Muster kann verdächtige Schlagwörter finden; ob ein Wort an einer konkreten Stelle aussagekräftig ist, lässt sich nicht allein aus einer Wortliste bestimmen. Es existiert kein allgemeiner Wahrheits- oder Worthülsen-Detektor.",
+    "example": "„Ganzheitlich“, „Mehrwert“ oder „nachhaltig“ bleiben Worthülsen, wenn unklar bleibt, worin der Nutzen oder die Wirkung besteht.",
+    "distinction": "Ein Buzzword ist nicht schon aufgrund seiner Häufigkeit falsch. Mit Definition, Kriterien und Daten kann dasselbe Wort präzise verwendet werden.",
+    "aliases": [
+      "Worthülsen",
+      "Buzzwords",
+      "Modewort",
+      "Modewörter",
+      "Schlagwort",
+      "Leerwort",
+      "Marketingfloskel"
+    ],
+    "priority": "A"
+  },
+  {
+    "id": "intensivierer-evaluativ",
+    "term": "Intensivierer / Evaluativ",
+    "category": "sprache",
+    "english": "Intensifier; evaluative language",
+    "definition": "Sprachliche Mittel, die eine Eigenschaft verstärken oder eine wertende Haltung ausdrücken, beispielsweise „absolut“, „hervorragend“ oder „einzigartig“.",
+    "context": "Einzelne Steigerungs- und Wertungsmuster sind über Wörterlisten erfassbar. Das DTA kann sprachliche Auffälligkeiten anzeigen, aber nicht allein aus dem Wort auf eine unbegründete oder falsche Aussage schließen.",
+    "example": "„Eine absolut revolutionäre Lösung“ enthält starke Wertungs- und Intensivierungssignale, ohne deren Maßstab zu nennen.",
+    "distinction": "Ein Superlativ ist eine grammatische Steigerungsform; Evaluativität bezeichnet Bewertung. Beide können zusammen auftreten, sind aber nicht deckungsgleich.",
+    "aliases": [
+      "Intensivierung",
+      "Intensivierer",
+      "Evaluativität",
+      "wertende Sprache",
+      "Superlativ",
+      "Marketington",
+      "Steigerungswort"
+    ],
+    "priority": "A"
+  },
+  {
+    "id": "fachwort-fremdwort",
+    "term": "Fachwort versus Fremdwort",
+    "category": "sprache",
+    "english": "Technical term versus foreign word",
+    "definition": "Ein Fachwort bezeichnet einen in einem Fachgebiet definierten Sachverhalt. Ein Fremdwort ist ein aus einer anderen Sprache übernommener Ausdruck; beide Eigenschaften können zugleich vorliegen.",
+    "context": "Das DTA kann einzelne Anglizismen oder fremdsprachliche Ausdrücke markieren. Ob sie fachlich notwendig oder für den Adressaten verständlich sind, erfordert eine Prüfung von Bedeutung, Textsorte und Zielgruppe.",
+    "example": "„Supply Chain“ ist ein fremdsprachiger Fachausdruck; sein Einsatz kann in einem Logistikfachtext sinnvoll, in einem allgemeinen Text aber erklärungsbedürftig sein.",
+    "distinction": "Fremdwort, Fachwort und Anglizismus sind unterschiedliche Kategorien und dürfen nicht pauschal als Sprachfehler gezählt werden.",
+    "aliases": [
+      "Fachwort",
+      "Fachbegriff",
+      "Fremdwort",
+      "Fremdwörter",
+      "Fachterminus",
+      "Terminologie",
+      "technischer Begriff"
+    ],
+    "priority": "A"
+  },
+  {
+    "id": "konkretheit",
+    "term": "Konkretheit",
+    "category": "wissenschaft",
+    "english": "Specificity; concreteness",
+    "definition": "Grad, in dem eine Aussage ihren Gegenstand durch erkennbare Handlungen, Größen, Orte, Zeitpunkte, Beispiele oder Kriterien bestimmt.",
+    "context": "Zahlen, Daten und Eigennamen können als oberflächliche Hinweise gezählt werden. Das DTA berechnet daraus keinen validierten Gesamtwert für Konkretheit und prüft nicht automatisch, ob solche Angaben stimmen.",
+    "example": "Statt „Die Bearbeitung wurde deutlich beschleunigt“: „Die Bearbeitungszeit sank von 12 auf 8 Minuten pro Auftrag.“",
+    "distinction": "Ein präziser Zahlenwert kann erfunden sein; Konkretheit ist nicht mit Wahrheit oder Überprüfbarkeit gleichzusetzen.",
+    "aliases": [
+      "konkrete Aussage",
+      "konkrete Angaben",
+      "Spezifität",
+      "Messkriterium",
+      "Quantifizierung"
+    ],
+    "priority": "A"
+  },
+  {
+    "id": "ueberpruefbarkeit-falsifizierbarkeit",
+    "term": "Überprüfbarkeit / Falsifizierbarkeit",
+    "category": "wissenschaft",
+    "english": "Verifiability; falsifiability",
+    "definition": "Überprüfbarkeit bezeichnet die Möglichkeit, eine Aussage anhand nachvollziehbarer Kriterien und Belege zu prüfen. Falsifizierbarkeit bezeichnet die Möglichkeit, dass eine Aussage durch denkbare Beobachtungen widerlegt werden kann.",
+    "context": "DTA-Muster können fehlende Konkreta oder Begründungen anregen, aber weder Aussagen automatisch empirisch verifizieren noch deren wissenschaftliche Falsifizierbarkeit zuverlässig bestimmen.",
+    "example": "„Das Verfahren spart mindestens 10 % Energie unter Testbedingung X“ nennt einen überprüfbaren Vergleich; seine Gültigkeit muss gemessen werden.",
+    "distinction": "Überprüfbarkeit und Falsifizierbarkeit sind verwandte, aber nicht identische wissenschaftstheoretische Konzepte.",
+    "aliases": [
+      "Überprüfbarkeit",
+      "Falsifizierbarkeit",
+      "Prüfbarkeit",
+      "Widerlegbarkeit",
+      "falsifizierbare Aussage",
+      "Testbarkeit"
+    ],
+    "priority": "A"
+  },
+  {
+    "id": "proposition-behauptung-claim",
+    "term": "Proposition / Behauptung / Claim",
+    "category": "diagnostik",
+    "english": "Proposition; claim",
+    "definition": "Der wahrheitsfähige Aussagegehalt einer Äußerung. Eine Proposition kann in unterschiedlichen sprachlichen Formen ausgedrückt werden; eine Behauptung stellt einen solchen Gehalt als geltend dar.",
+    "context": "Die in Deep Insights verwendete „propositionale Last“ ist nicht die automatische vollständige Zerlegung eines Textes in überprüfte Behauptungen. Das DTA besitzt keinen unabhängigen Claim-Prüfer.",
+    "example": "„Die Durchlaufzeit sank um 20 %“ und „Es gab eine Reduktion der Durchlaufzeit um 20 %“ können denselben Aussagegehalt transportieren.",
+    "distinction": "Nicht jede Proposition ist ohne weitere Bedingungen empirisch überprüfbar. Propositionale Last bezeichnet eine andere Diagnosegröße.",
+    "aliases": [
+      "Proposition",
+      "Propositionen",
+      "Claim",
+      "Claims",
+      "Aussageeinheit",
+      "Behauptung",
+      "Aussagegehalt"
+    ],
+    "priority": "A"
+  },
+  {
+    "id": "register-stilebene",
+    "term": "Register / Stilebene",
+    "category": "wissenschaft",
+    "english": "Linguistic register",
+    "definition": "Sprachliche Ausdrucksweise, die mit Kommunikationssituation, Zweck, Fachgebiet und Adressatenkreis verbunden ist.",
+    "context": "Das DTA beschreibt sprachliche Muster, bewertet aber nicht automatisch, ob eine bestimmte Fachsprache, Umgangssprache oder amtliche Ausdrucksweise für einen konkreten Adressaten angemessen ist.",
+    "example": "Eine juristische Stellungnahme verlangt andere Fachbegriffe und Formulierungen als eine Gebrauchsanleitung.",
+    "distinction": "Ein Register ist keine absolute Qualitätsstufe; angemessen ist es nur im Verhältnis zur Kommunikationsaufgabe.",
+    "aliases": [
+      "Register",
+      "Stilebene",
+      "Sprachregister",
+      "Sprachstil",
+      "Fachregister",
+      "adressatengerechter Stil"
+    ],
+    "priority": "A"
+  },
+  {
+    "id": "bullshit-frankfurt",
+    "term": "Bullshit (nach Harry G. Frankfurt)",
+    "category": "grundlagen",
+    "english": "Bullshit (Frankfurt)",
+    "definition": "Philosophischer Begriff für Äußerungen, bei denen die sprechende Person gegenüber der Wahrheit dessen, was sie vermittelt, gleichgültig ist; anders als beim bewussten Lügen steht der Wahrheitsbezug selbst nicht im Zentrum.",
+    "context": "BlaBlaMeter und DTA arbeiten mit beobachtbaren sprachlichen Merkmalen. Sie können die innere Haltung eines Autors gegenüber Wahrheit und Wahrhaftigkeit nicht feststellen.",
+    "example": "Eine sprachlich beeindruckende Aussage kann unbegründet sein; allein aus ihrer Form folgt jedoch keine Gleichgültigkeit gegenüber der Wahrheit.",
+    "distinction": "Der philosophische Begriff ist kein direkt aus Textmerkmalen messbares Persönlichkeits- oder Intentionsmerkmal.",
+    "aliases": [
+      "Bullshit",
+      "Harry Frankfurt",
+      "Frankfurt Bullshit",
+      "Wahrheitsgleichgültigkeit",
+      "Bullshit-Begriff"
+    ],
+    "priority": "B"
+  },
+  {
+    "id": "lesbarkeitsformel",
+    "term": "Lesbarkeitsformel",
+    "category": "wissenschaft",
+    "english": "Readability formula",
+    "definition": "Rechenverfahren, das anhand formaler Textmerkmale wie Wort- oder Satzlänge einen Näherungswert für die Leseschwierigkeit liefert.",
+    "context": "Im DTA wird der LIX als eine Kennzahl verwendet. Die Amstad-Formel, Wiener Sachtextformel und SMOG werden hier als andere Verfahren erläutert und nicht als im DTA 11.1.6 implementierte Berechnungen ausgegeben.",
+    "example": "LIX nutzt die Satzlänge und den Anteil längerer Wörter; andere Formeln gewichten andere Oberflächenmerkmale.",
+    "distinction": "Lesbarkeitsformeln prüfen weder faktische Richtigkeit noch den tatsächlichen Verständniserfolg einer bestimmten Person.",
+    "aliases": [
+      "Lesbarkeitsformeln",
+      "Readability",
+      "Amstad",
+      "Amstad-Formel",
+      "Flesch-Amstad",
+      "Wiener Sachtextformel",
+      "SMOG"
+    ],
+    "priority": "B"
+  },
+  {
+    "id": "kohaerenz",
+    "term": "Kohärenz",
+    "category": "diagnostik",
+    "english": "Coherence",
+    "definition": "Inhaltlich-logischer Zusammenhang zwischen Aussagen, Abschnitten und dem Gesamtgedankengang eines Textes.",
+    "context": "Das DTA liefert einzelne strukturelle und sprachliche Hinweise. Eine umfassende, empirisch validierte Kohärenzmessung des gesamten Textes ist kein eigener DTA-Wert.",
+    "example": "Ein Abschnitt erläutert zunächst die Ursache einer Störung und beschreibt anschließend ihre nachvollziehbare Folge.",
+    "distinction": "Kohärenz betrifft den Sinnzusammenhang; Kohäsion betrifft erkennbare sprachliche Verknüpfungsmittel.",
+    "aliases": [
+      "Kohärenzbeziehung",
+      "logischer Zusammenhang",
+      "inhaltlicher Zusammenhang",
+      "roter Faden"
+    ],
+    "priority": "A"
+  },
+  {
+    "id": "kohaesion",
+    "term": "Kohäsion",
+    "category": "diagnostik",
+    "english": "Cohesion",
+    "definition": "Sprachliche Mittel, die Textteile miteinander verbinden, etwa Pronomen, Konnektoren, Wiederaufnahmen und Wortfeldbezüge.",
+    "context": "Das DTA beschreibt einzelne Hinweise wie lexikalische Kohäsion. Es berechnet keinen eigenständigen vollständigen Kohäsions-Score für alle sprachlichen Verknüpfungsmittel.",
+    "example": "„Die Anlage fiel aus. Dieser Ausfall verzögerte die Lieferung.“ – „Dieser Ausfall“ nimmt den vorherigen Sachverhalt auf.",
+    "distinction": "Ein Text kann stark durch Verweiswörter verknüpft sein, ohne inhaltlich kohärent zu sein; Kohäsion und Kohärenz sind nicht identisch.",
+    "aliases": [
+      "Textkohäsion",
+      "Textverknüpfung",
+      "grammatische Kohäsion",
+      "Konnektoren",
+      "Verweismittel"
+    ],
+    "priority": "A"
+  },
+  {
+    "id": "textsorte",
+    "term": "Textsorte",
+    "category": "diagnostik",
+    "english": "Text type; genre",
+    "definition": "Durch Kommunikationszweck, typische Struktur und sprachliche Konventionen gekennzeichnete Art von Text, etwa Bericht, Antrag, Anleitung oder wissenschaftlicher Artikel.",
+    "context": "Die Angemessenheit von Detektortreffern hängt mitunter von der Textsorte ab. DTA 11.1.6 ordnet Texte aber nicht über einen eigenständigen allgemein validierten Textsortenklassifikator ein.",
+    "example": "Ein Laborbericht benötigt andere Konventionen als ein Werbetext; Passivformen können im Bericht sachlich angemessen sein.",
+    "distinction": "Textsorte beschreibt eine kommunikative Kategorie, nicht automatisch eine Qualitätsklasse.",
+    "aliases": [
+      "Textsorten",
+      "Texttyp",
+      "Textgattung",
+      "Genre",
+      "Textgenre",
+      "Dokumenttyp"
+    ],
+    "priority": "A"
+  },
+  {
+    "id": "gliederung",
+    "term": "Gliederung",
+    "category": "diagnostik",
+    "english": "Text structure; outline",
+    "definition": "Erkennbare Ordnung der Inhalte eines Dokuments nach Abschnitten, Themen und Unterthemen.",
+    "context": "Einzelne formale Strukturmerkmale sind maschinell erkennbar. Eine umfassende Prüfung von Gliederungslogik und Argumentationsgang ist in DTA 11.1.6 nicht als eigenständiger Score implementiert.",
+    "example": "Problemstellung, Methode, Ergebnis und Bewertung werden als unterscheidbare Abschnitte angeordnet.",
+    "distinction": "Eine formal saubere Gliederung garantiert noch keine kohärente Argumentation oder ausreichende inhaltliche Tiefe.",
+    "aliases": [
+      "Textgliederung",
+      "Abschnittsstruktur",
+      "Dokumentstruktur",
+      "Textstruktur",
+      "Strukturierung",
+      "Überschriftenstruktur"
+    ],
+    "priority": "A"
+  },
+  {
+    "id": "leserfuehrung",
+    "term": "Leserführung",
+    "category": "diagnostik",
+    "english": "Reader guidance",
+    "definition": "Gestaltung eines Textes, die Leserinnen und Leser durch Reihenfolge, Bezugnahmen, Übergänge und erkennbare Zielsetzung beim Verstehen unterstützt.",
+    "context": "Einzelne Signale der Leserführung überschneiden sich mit Metadiskurs und Kohäsion. Das DTA besitzt keinen isolierten, validierten Leserführungswert.",
+    "example": "„Zunächst beschreiben wir das Verfahren. Danach vergleichen wir die Messergebnisse.“ – Eine Orientierung über den Aufbau.",
+    "distinction": "Eine Überleitung kann funktional sinnvoll sein; sie ist nicht allein wegen ihrer formelhaften Struktur eine überflüssige Floskel.",
+    "aliases": [
+      "Leserorientierung",
+      "Textnavigation",
+      "Orientierung im Text",
+      "Leseweg",
+      "Leseführung"
+    ],
+    "priority": "A"
+  }
+];
+const categoryMap = new Map(categoryList.map(({id,label})=>[id,label]));
+let currentCategory='all', currentLetter='all', searchQuery='', lastFocus=null, closeTimer=null;
+const byId = id => document.getElementById(id);
+const input=byId('search-input'), grid=byId('glossary-grid'), empty=byId('no-results'), modal=byId('modal-backdrop');
+function safe(value) { return value == null ? '' : String(value); }
+function escapeHTML(value) { return safe(value).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function norm(s) { return safe(s).normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('de').replace(/\u00df/g,'ss').replace(/[\u2010-\u2015\u2212_]/g,'-').replace(/\s+/g,' ').trim(); }
+const tokens = s => norm(s).match(/[\p{L}\p{N}]+/gu)||[];
+function aliases(entry) { return Array.isArray(entry.aliases)?entry.aliases:[]; }
+function names(entry) { return [entry.term,entry.acronym,entry.english,...aliases(entry)].filter(Boolean).map(norm); }
+function exact(entry,q) { return names(entry).includes(q); }
+function matchesSearch(entry,q) {
+  if(!q) return true;
+  if(exact(entry,q)) return true;
+  if(q.length<=2) return false;
+  const fields=[entry.term,entry.acronym,entry.english,entry.definition,entry.context,entry.distinction,entry.example,...aliases(entry)];
+  const words=tokens(fields.filter(Boolean).join(' '));
+  const terms=tokens(q);
+  const isKnownCode=glossaryData.some(e=>norm(e.acronym)===q);
+  return terms.length>0 && terms.every(t=>words.some(w=>w===t || (!isKnownCode && t.length>=4 && w.startsWith(t))));
+}
+function filterData() {
+ const q=norm(searchQuery);
+ return glossaryData.filter(e=>(currentCategory==='all'||e.category===currentCategory)
+  && (currentLetter==='all'||norm(e.term).toUpperCase().startsWith(currentLetter)||norm(e.acronym).toUpperCase().startsWith(currentLetter))
+  && matchesSearch(e,q))
+  .sort((a,b)=>(q?Number(exact(b,q))-Number(exact(a,q)):0)||a.term.localeCompare(b.term,'de',{sensitivity:'base'}));
+}
+function categoryLabel(id) { return categoryMap.get(id)||'Unbekannte Kategorie'; }
+function showStatus(text) { const e=byId('data-quality-status'); e.textContent=text; e.classList.toggle('hidden',!text); }
+function validate() {
+ const issues=[],ids=new Set();
+ for(const e of glossaryData) {
+  if(!e || typeof e!=='object') { issues.push('Ung\u00fcltiger Datensatz'); continue; }
+  if(!e.id || ids.has(e.id)) issues.push('Fehlende/doppelte ID: '+safe(e.id));
+  ids.add(e.id);
+  if(!categoryMap.has(e.category)) issues.push('Unbekannte Kategorie: '+safe(e.id));
+  for(const f of ['term','definition','context']) if(!safe(e[f]).trim()) issues.push('Pflichtfeld '+f+' fehlt: '+safe(e.id));
+  if(e.aliases && !Array.isArray(e.aliases)) issues.push('Aliasse ung\u00fcltig: '+safe(e.id));
+ }
+ showStatus(issues.length?'Datenpr\u00fcfung: '+issues.join(' | '):'');
+ return issues;
+}
+function buildCategories() {
+ const row=byId('category-grid');
+ row.innerHTML=categoryList.map(c=>`<button type="button" data-category="${escapeHTML(c.id)}" class="category-tile" aria-pressed="false"><span>${escapeHTML(c.label)}</span><span class="category-count">(${glossaryData.filter(e=>e.category===c.id).length})</span></button>`).join('');
+ byId('count-all').textContent='('+glossaryData.length+')';
+ byId('total-count').textContent=glossaryData.length;
+ byId('header-total-count').textContent=glossaryData.length;
+ byId('prototype-count').textContent=glossaryData.length;
+ updateCategoryButtons();
+}
+function updateCategoryButtons() { document.querySelectorAll('[data-category]').forEach(b=>{const active=b.dataset.category===currentCategory;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));}); }
+function buildAlphabet() {
+ const bar=byId('alpha-bar');
+ for(const letter of 'ABCDEFGHIJKLMNOPQRSTUVWXYZ') {
+  const b=document.createElement('button');b.type='button';b.dataset.letter=letter;
+  b.className='alpha-btn px-2 py-0.5 rounded font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition';b.textContent=letter;bar.appendChild(b);
+ }
+ updateLetters();
+}
+function updateLetters() {
+ document.querySelectorAll('.alpha-btn').forEach(b=>{
+  const active=b.dataset.letter===currentLetter;b.classList.toggle('active',active);
+  b.classList.toggle('bg-slate-200',active);b.classList.toggle('dark:bg-slate-700',active);
+  b.classList.toggle('text-slate-800',active);b.classList.toggle('dark:text-white',active);
+  b.setAttribute('aria-pressed',String(active));
+ });
+}
+function render() {
+ const matches=filterData();byId('visible-count').textContent=matches.length;
+ byId('reset-filters').classList.toggle('hidden',currentCategory==='all'&&currentLetter==='all'&&!searchQuery.trim());
+ empty.classList.toggle('hidden',matches.length>0);
+ grid.innerHTML=matches.map(e=>`<button type="button" data-glossary-id="${escapeHTML(e.id)}" class="glossary-card w-full text-left bg-white dark:bg-slate-800 rounded-xl p-5 border border-slate-200 dark:border-slate-700/80 shadow-sm hover:border-emerald-400 hover:shadow-md transition duration-200 flex flex-col justify-between cursor-pointer group">
+  <div><div class="flex items-start justify-between gap-2 mb-3"><div>${e.acronym?`<span class="card-acronym">${escapeHTML(e.acronym)}</span>`:''}</div><span class="category-badge text-slate-600 dark:text-slate-300">${escapeHTML(categoryLabel(e.category))}</span></div>
+  <h3 class="text-base font-bold text-slate-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">${escapeHTML(e.term)}</h3>
+  ${e.english?`<p class="text-xs font-medium text-slate-500 dark:text-slate-400 mt-1 italic">EN: ${escapeHTML(e.english)}</p>`:''}
+  ${aliases(e).length?`<p class="text-[11px] text-slate-400 mt-1">Suchbegriffe: ${escapeHTML(aliases(e).slice(0,3).join(' / '))}</p>`:''}
+  <p class="text-xs text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed mt-3">${escapeHTML(e.definition)}</p></div>
+  <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between text-xs text-brand-600 dark:text-brand-400 font-semibold"><span>Definition und Kontext anzeigen</span><span aria-hidden="true">&#8250;</span></div>
+ </button>`).join('');
+}
+function setOptional(id,value,prefix='') {const e=byId(id);e.textContent=value?prefix+value:'';e.classList.toggle('hidden',!value);}
+function setOptionalSection(name, value) {byId('modal-'+name).textContent=value||'';byId('modal-'+name+'-container').classList.toggle('hidden',!value);}
+function openEntry(id,fromUrl=false) {
+ const e=glossaryData.find(x=>x.id===id);if(!e)return false;
+ clearTimeout(closeTimer);lastFocus=fromUrl?null:document.activeElement;
+ byId('modal-term').textContent=e.term;setOptional('modal-acronym-badge',e.acronym);
+ setOptional('modal-english',e.english,'Englisch: ');
+ setOptional('modal-aliases',aliases(e).length?aliases(e).join(' / '):'','Weitere Suchbegriffe: ');
+ byId('modal-category-badge').textContent=categoryLabel(e.category);
+ byId('modal-definition').textContent=e.definition;byId('modal-context').textContent=e.context;
+ setOptionalSection('distinction',e.distinction);setOptionalSection('example',e.example);
+ modal.dataset.activeId=e.id;modal.classList.remove('hidden','opacity-0');modal.setAttribute('aria-hidden','false');
+ byId('modal-box').classList.remove('scale-95');byId('modal-box').classList.add('scale-100');
+ document.body.style.overflow='hidden';byId('close-modal').focus();return true;
+}
+function closeEntry() {
+ if(modal.classList.contains('hidden'))return;
+ modal.classList.add('hidden','opacity-0');modal.setAttribute('aria-hidden','true');
+ byId('modal-box').classList.add('scale-95');byId('modal-box').classList.remove('scale-100');
+ document.body.style.overflow='';if(lastFocus?.isConnected)lastFocus.focus();
+}
+function entryAsText(e) {
+ return [e.term+(e.acronym?' ('+e.acronym+')':''),e.english?'Englisch: '+e.english:'',
+ 'Definition: '+e.definition,'Bedeutung im DTA: '+e.context,
+ e.distinction?'Abgrenzung: '+e.distinction:'',e.example?'Beispiel: '+e.example:'',
+ aliases(e).length?'Weitere Suchbegriffe: '+aliases(e).join('; '):''].filter(Boolean).join('\n');
+}
+async function copyText(s) {
+ if(navigator.clipboard?.writeText){try{await navigator.clipboard.writeText(s);return true;}catch(e){console.warn(e);}}
+ const t=document.createElement('textarea');t.value=s;t.readOnly=true;t.style.cssText='position:fixed;left:-9999px;top:0';document.body.appendChild(t);t.select();let ok=false;
+ try { ok=!!document.execCommand?.('copy'); }catch(e){console.warn(e);}t.remove();return ok;
+}
+function buttonFeedback(btn,ok,successText) {
+ const before=btn.textContent;btn.textContent=ok?successText:'Kopieren nicht verf\u00fcgbar';
+ setTimeout(()=>{btn.textContent=before;},1700);
+}
+async function copyVisible() {
+ const entries=filterData();if(!entries.length)return;
+ const ok=await copyText(entries.map(entryAsText).join('\n\n---\n\n'));
+ buttonFeedback(byId('copy-summary-btn'),ok,entries.length+' Eintr\u00e4ge kopiert');
+}
+function directLink(id) {const u=new URL(window.location.href);u.search='';u.hash='';u.searchParams.set('id',id);return u.toString();}
+function reset() {
+ currentCategory='all';currentLetter='all';searchQuery='';input.value='';byId('clear-search').classList.add('hidden');
+ updateCategoryButtons();updateLetters();render();
+}
+function initTheme() {
+ let pref=null;try{pref=localStorage.getItem('dta-glossary-theme');}catch(e){}
+ const systemDark=!!window.matchMedia?.('(prefers-color-scheme: dark)')?.matches;
+ const isDark=pref==='dark'||(pref!=='light'&&systemDark);
+ document.documentElement.classList.toggle('dark',isDark);byId('theme-label').textContent=isDark?'Hell':'Dunkel';
+ byId('theme-toggle').addEventListener('click',()=>{
+  const dark=document.documentElement.classList.toggle('dark');byId('theme-label').textContent=dark?'Hell':'Dunkel';
+  try{localStorage.setItem('dta-glossary-theme',dark?'dark':'light');}catch(e){}
+ });
+}
+function listen() {
+ input.addEventListener('input',()=>{searchQuery=input.value;byId('clear-search').classList.toggle('hidden',!searchQuery);render();});
+ byId('clear-search').addEventListener('click',()=>{searchQuery='';input.value='';byId('clear-search').classList.add('hidden');render();input.focus();});
+ byId('all-category-row').addEventListener('click',event=>{const b=event.target.closest('[data-category]');if(b){currentCategory=b.dataset.category;updateCategoryButtons();render();}});
+ byId('category-grid').addEventListener('click',event=>{const b=event.target.closest('[data-category]');if(b){currentCategory=b.dataset.category;updateCategoryButtons();render();}});
+ byId('alpha-bar').addEventListener('click',event=>{const b=event.target.closest('[data-letter]');if(b){currentLetter=b.dataset.letter;updateLetters();render();}});
+ grid.addEventListener('click',event=>{const b=event.target.closest('[data-glossary-id]');if(b)openEntry(b.dataset.glossaryId);});
+ byId('reset-filters').addEventListener('click',reset);byId('reset-search-btn').addEventListener('click',reset);
+ byId('copy-summary-btn').addEventListener('click',copyVisible);
+ byId('close-modal').addEventListener('click',closeEntry);byId('close-modal-btn').addEventListener('click',closeEntry);
+ modal.addEventListener('click',event=>{if(event.target===modal)closeEntry();});
+ byId('copy-modal-text').addEventListener('click',async()=>{
+  const e=glossaryData.find(x=>x.id===modal.dataset.activeId);if(e)buttonFeedback(byId('copy-modal-text'),await copyText(entryAsText(e)),'Eintrag kopiert');
+ });
+ byId('copy-entry-link').addEventListener('click',async()=>buttonFeedback(byId('copy-entry-link'),await copyText(directLink(modal.dataset.activeId)),'Link kopiert'));
+ document.addEventListener('keydown',event=>{
+  if(event.key==='Escape'&&!modal.classList.contains('hidden')){event.preventDefault();closeEntry();}
+  if(event.key==='Tab'&&!modal.classList.contains('hidden')){
+   const focusable=[...byId('modal-box').querySelectorAll('button:not([disabled])')];const first=focusable[0],last=focusable[focusable.length-1];
+   if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
+   else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
+  }
+ });
+}
+function initURL() {
+ const params=new URLSearchParams(window.location.search),q=params.get('q');
+ if(q!==null){searchQuery=q.trim();input.value=searchQuery;byId('clear-search').classList.toggle('hidden',!searchQuery);}
+ return params.get('id');
+}
+document.addEventListener('DOMContentLoaded',()=>{
+ const stages=[['Thema',initTheme],['Daten',validate],['Kategorien',buildCategories],['Alphabet',buildAlphabet],['Ereignisse',listen]];
+ for(const [name,fn] of stages)try{fn();}catch(e){console.error(name,e);showStatus('Initialisierung fehlgeschlagen: '+name);}
+ let selectedId=null;try{selectedId=initURL();}catch(e){console.warn('URL-Parameter',e);}
+ render();
+ if(selectedId&&!openEntry(selectedId,true))showStatus('Kein Glossareintrag mit der ID "'+selectedId+'" vorhanden. Die Suchfunktion steht weiterhin zur Verf\u00fcgung.');
+});
+
+</script>
+</body>
+</html>
