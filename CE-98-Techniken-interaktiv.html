@@ -1,0 +1,2569 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plastics Recycling Technologies — 360° Interactive Taxonomy (98 Routes)</title>
+  <style>
+    /* ==========================================================================
+       DESIGN TOKENS & THEME VARIABLES (DARK & LIGHT MODE)
+       ========================================================================== */
+    :root {
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+      /* Branch Accent Palette */
+      --b1-color: #38bdf8; /* 1. Mechanical - Sky Blue */
+      --b2-color: #2dd4bf; /* 2. Solvent/Physical - Teal */
+      --b3-color: #fb923c; /* 3. Chemical - Amber/Orange */
+      --b4-color: #4ade80; /* 4. Biological - Emerald/Lime */
+      --b5-color: #c084fc; /* 5. Recycling by Design - Violet */
+
+      /* TRL & Flag Colors */
+      --trl-high: #10b981;
+      --trl-mid: #f59e0b;
+      --trl-low: #6366f1;
+      --flag-cond: #eab308;
+      --flag-unres: #ef4444;
+      --flag-hist: #94a3b8;
+    }
+
+    [data-theme="dark"] {
+      --bg-canvas: #090d16;
+      --bg-panel: #111827;
+      --bg-card: #1e293b;
+      --bg-hover: #283548;
+      --bg-input: #0f172a;
+      --border-subtle: rgba(148, 163, 184, 0.16);
+      --border-strong: rgba(148, 163, 184, 0.32);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --ring-guide: rgba(148, 163, 184, 0.08);
+      --link-opacity: 0.42;
+      --shadow-panel: -8px 0 30px rgba(0, 0, 0, 0.55);
+      --shadow-hud: 0 8px 24px rgba(0, 0, 0, 0.45);
+    }
+
+    [data-theme="light"] {
+      --bg-canvas: #f8fafc;
+      --bg-panel: #ffffff;
+      --bg-card: #f1f5f9;
+      --bg-hover: #e2e8f0;
+      --bg-input: #f8fafc;
+      --border-subtle: rgba(15, 23, 42, 0.12);
+      --border-strong: rgba(15, 23, 42, 0.25);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --ring-guide: rgba(15, 23, 42, 0.06);
+      --link-opacity: 0.55;
+      --shadow-panel: -8px 0 28px rgba(15, 23, 42, 0.08);
+      --shadow-hud: 0 6px 20px rgba(15, 23, 42, 0.08);
+
+      --b1-color: #0284c7;
+      --b2-color: #0d9488;
+      --b3-color: #d97706;
+      --b4-color: #16a34a;
+      --b5-color: #7c3aed;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: var(--font-sans);
+      background-color: var(--bg-canvas);
+      color: var(--text-primary);
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    /* ==========================================================================
+       LAYOUT SHELL
+       ========================================================================== */
+    .app-shell {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* TOP HEADER BAR */
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.65rem;
+      padding: 0.6rem 1rem;
+      background-color: var(--bg-panel);
+      border-bottom: 1px solid var(--border-subtle);
+      z-index: 30;
+    }
+
+    .brand-block {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .brand-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: conic-gradient(from 0deg, var(--b1-color), var(--b2-color), var(--b3-color), var(--b4-color), var(--b5-color), var(--b1-color));
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .brand-icon-inner {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: var(--bg-panel);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 0.72rem;
+      color: var(--text-primary);
+    }
+
+    .brand-title {
+      font-size: 0.98rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .brand-sub {
+      font-size: 0.74rem;
+      color: var(--text-secondary);
+    }
+
+    /* CONTROLS & FILTERS */
+    .toolbar-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .search-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-input {
+      background: var(--bg-input);
+      border: 1px solid var(--border-strong);
+      color: var(--text-primary);
+      border-radius: 8px;
+      padding: 0.38rem 0.65rem 0.38rem 1.85rem;
+      font-size: 0.8rem;
+      width: 210px;
+      outline: none;
+      transition: border-color 0.15s, width 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--b1-color);
+      width: 245px;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.55rem;
+      color: var(--text-muted);
+      pointer-events: none;
+      font-size: 0.8rem;
+    }
+
+    .filter-select, .btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      border-radius: 8px;
+      padding: 0.38rem 0.65rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .filter-select:hover, .btn:hover {
+      background: var(--bg-hover);
+      border-color: var(--border-strong);
+    }
+
+    .btn-active {
+      background: var(--b1-color) !important;
+      color: #090d16 !important;
+      border-color: transparent !important;
+      font-weight: 700;
+    }
+
+    .segmented {
+      display: inline-flex;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 2px;
+    }
+
+    .segmented button {
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      padding: 0.26rem 0.55rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .segmented button.active {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    /* MAIN WORKSPACE */
+    .workspace {
+      position: relative;
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* RADIAL SVG VIEWPORT */
+    .canvas-container {
+      position: relative;
+      flex: 1;
+      height: 100%;
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+      overflow: hidden;
+    }
+
+    .canvas-container:active {
+      cursor: grabbing;
+    }
+
+    svg#radial-tree {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* SVG ELEMENTS */
+    .ring-circle {
+      fill: none;
+      stroke: var(--ring-guide);
+      stroke-dasharray: 4 6;
+    }
+
+    .tree-link {
+      fill: none;
+      stroke-linecap: round;
+      transition: opacity 0.22s ease, stroke-width 0.22s ease;
+    }
+
+    .node-group {
+      cursor: pointer;
+      transition: opacity 0.22s ease;
+    }
+
+    .node-circle {
+      transition: r 0.18s ease, stroke-width 0.18s ease, fill 0.18s ease;
+    }
+
+    .node-group:hover .node-circle {
+      stroke: var(--text-primary);
+      stroke-width: 2.2px;
+    }
+
+    .node-label {
+      fill: var(--text-primary);
+      font-family: var(--font-sans);
+      pointer-events: none;
+      transition: opacity 0.2s ease, fill 0.2s ease;
+    }
+
+    .root-label {
+      font-weight: 800;
+      font-size: 13px;
+      text-anchor: middle;
+    }
+
+    .main-branch-label {
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .sub-branch-label {
+      font-weight: 600;
+      font-size: 9.8px;
+      fill: var(--text-secondary);
+    }
+
+    .leaf-label {
+      font-size: 8.6px;
+      font-weight: 500;
+    }
+
+    .leaf-id-tag {
+      font-family: var(--font-mono);
+      font-weight: 700;
+    }
+
+    .dimmed {
+      opacity: 0.12 !important;
+    }
+
+    .highlighted-link {
+      opacity: 0.95 !important;
+      stroke-width: 2.4px !important;
+    }
+
+    /* FLOATING HUD CONTROLS (BOTTOM LEFT) */
+    .hud-controls {
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      z-index: 20;
+    }
+
+    .hud-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 0.35rem 0.5rem;
+      box-shadow: var(--shadow-hud);
+    }
+
+    .zoom-readout {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: var(--text-secondary);
+      min-width: 44px;
+      text-align: center;
+    }
+
+    .topbar-zoom-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 1px 3px;
+    }
+
+    .topbar-zoom-group .btn {
+      padding: 0.26rem 0.48rem;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+    }
+
+    /* INSPECTOR SIDEBAR */
+    .inspector {
+      width: 400px;
+      max-width: 92vw;
+      height: 100%;
+      background: var(--bg-panel);
+      border-left: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-panel);
+      display: flex;
+      flex-direction: column;
+      z-index: 25;
+      transition: transform 0.25s ease;
+    }
+
+    .inspector.collapsed {
+      position: absolute;
+      right: 0;
+      transform: translateX(100%);
+    }
+
+    .inspector-header {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .inspector-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .inspector-footer {
+      padding: 0.65rem 1rem;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 0.71rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 0.8rem;
+    }
+
+    .card-label {
+      font-size: 0.69rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      font-family: var(--font-mono);
+    }
+
+    .badge-trl-9 { background: rgba(16, 185, 129, 0.16); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.35); }
+    .badge-trl-mid { background: rgba(245, 158, 11, 0.16); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .badge-trl-low { background: rgba(99, 102, 241, 0.18); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.35); }
+    .badge-cond { background: rgba(234, 179, 8, 0.16); color: #eab308; border: 1px solid rgba(234, 179, 8, 0.35); }
+    .badge-unres { background: rgba(239, 68, 68, 0.16); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.35); }
+    .badge-hist { background: rgba(148, 163, 184, 0.16); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.35); }
+
+    .flow-box {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+    }
+
+    .flow-arrow {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .xref-btn {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-strong);
+      color: var(--text-primary);
+      border-radius: 6px;
+      padding: 0.3rem 0.55rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+      margin-top: 0.3rem;
+      margin-right: 0.35rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .xref-btn:hover {
+      border-color: var(--b1-color);
+    }
+
+    /* DECISION RULE MODAL */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(4px);
+      display: none;
+      place-items: center;
+      z-index: 50;
+      padding: 1rem;
+    }
+
+    .modal-backdrop.open {
+      display: grid;
+    }
+
+    .modal-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-strong);
+      border-radius: 14px;
+      max-width: 680px;
+      width: 100%;
+      max-height: 86vh;
+      overflow-y: auto;
+      padding: 1.35rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    }
+
+    .rule-step {
+      display: flex;
+      gap: 0.75rem;
+      padding: 0.7rem;
+      border-radius: 10px;
+      background: var(--bg-card);
+      margin-bottom: 0.55rem;
+      border-left: 4px solid var(--b1-color);
+    }
+
+    .rule-num {
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 0.85rem;
+      min-width: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .inspector {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+      }
+      .legend-overlay {
+        max-width: calc(100% - 2rem);
+      }
+      .search-input {
+        width: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="app-shell">
+  <!-- TOP NAVIGATION & FILTER BAR -->
+  <header class="topbar">
+    <div class="brand-block">
+      <div class="brand-icon"><div class="brand-icon-inner">360°</div></div>
+      <div>
+        <div class="brand-title" id="ui-app-title">Kunststoffrecyclingtechnologien — Interaktive Taxonomie</div>
+        <div class="brand-sub" id="ui-app-sub">98 Katalogverfahren (Recherche: Martin Wölker) · Basis: JRC132067 / Kim 2026 / Ragaert 2017</div>
+      </div>
+    </div>
+
+    <div class="toolbar-controls">
+      <!-- Search -->
+      <div class="search-wrap">
+        <span class="search-icon">⌕</span>
+        <input type="text" id="search-input" class="search-input" placeholder="ID, Polymer, Verfahren..." />
+      </div>
+
+      <!-- TRL Filter -->
+      <select id="trl-filter" class="filter-select" aria-label="TRL Filter">
+        <option value="all">Alle TRL-Stufen</option>
+        <option value="high">TRL 8–9 (Industriell)</option>
+        <option value="mid">TRL 5–7 (Pilot / Demo)</option>
+        <option value="low">TRL 2–4 (Labor / Konzept)</option>
+      </select>
+
+      <!-- Volume / Scale Filter -->
+      <select id="vol-filter" class="filter-select" aria-label="Volume / Scale Filter">
+        <option value="all">Alle Mengenstufen</option>
+        <option value="bulk">Massenstrom / Industriell</option>
+        <option value="single">Einzelanlage / Pilot / Nische</option>
+        <option value="lab">Labor / Keine Mengenbasis</option>
+      </select>
+
+      <!-- Flag Filter -->
+      <select id="flag-filter" class="filter-select" aria-label="Evidence Flag Filter">
+        <option value="all">Alle Evidenz-Status</option>
+        <option value="conditional">Bedingter Endpunkt</option>
+        <option value="unresolved">Ungeklärte Evidenz / Hinweis</option>
+        <option value="historical">Historische Anlage</option>
+      </select>
+
+      <!-- Decision Rule Modal Button -->
+      <button class="btn" id="btn-rules" title="Klassifikationsregeln anzeigen">
+        <span>🧭</span><span id="ui-btn-rules">Entscheidungsregel</span>
+      </button>
+
+      <!-- Reset Labels Button -->
+      <button class="btn" id="btn-reset-labels" title="Label-Darstellung zurücksetzen">
+        <span>🏷</span><span id="ui-btn-reset-labels">Reset Labels</span>
+      </button>
+
+      <!-- Center / Reset Viewport Button -->
+      <button class="btn" id="btn-center" title="Ansicht auf Wurzel zentrieren (Zoom 100%, Rotation 0°)">
+        <span>⌖</span><span id="ui-btn-center">Zentrieren</span>
+      </button>
+
+      <!-- Zoom Controls (- / % / +) in Topbar -->
+      <div class="topbar-zoom-group" title="Zoomstufe anpassen (Mausrad oder +/-)">
+        <button class="btn" id="btn-zoom-out" title="Herauszoomen">−</button>
+        <span class="zoom-readout" id="zoom-readout">85%</span>
+        <button class="btn" id="btn-zoom-in" title="Hineinzoomen">+</button>
+      </div>
+
+      <!-- Language Toggle -->
+      <div class="segmented" role="group" aria-label="Language">
+        <button id="lang-de" class="active">DE</button>
+        <button id="lang-en">EN</button>
+      </div>
+
+      <!-- Theme Toggle -->
+      <button class="btn" id="btn-theme" title="Dark / Light Mode">☀ / ☾</button>
+
+      <!-- Toggle Inspector -->
+      <button class="btn" id="btn-toggle-inspector" title="Informationsleiste ein-/ausblenden">☰</button>
+    </div>
+  </header>
+
+  <!-- WORKSPACE: 360 RADIAL CANVAS + SIDE INSPECTOR -->
+  <div class="workspace">
+    <div class="canvas-container" id="canvas-container">
+      <!-- 360-Degree Radial SVG -->
+      <svg id="radial-tree" viewBox="-700 -700 1400 1400" preserveAspectRatio="xMidYMid meet">
+        <g id="viewport">
+          <g id="layer-rings"></g>
+          <g id="layer-links"></g>
+          <g id="layer-nodes"></g>
+        </g>
+      </svg>
+    </div>
+
+    <!-- RIGHT DETAIL INSPECTOR -->
+    <aside class="inspector" id="inspector">
+      <div class="inspector-header">
+        <div>
+          <div style="font-size:0.72rem; color:var(--text-muted); font-weight:700; text-transform:uppercase;" id="ui-insp-kicker">Technologie-Steckbrief</div>
+          <div style="font-size:0.9rem; font-weight:700;" id="ui-insp-count">98 / 98 Verfahren sichtbar</div>
+        </div>
+        <button class="btn" id="btn-close-inspector" style="padding:0.25rem 0.5rem;">✕</button>
+      </div>
+
+      <div class="inspector-body" id="inspector-body">
+        <!-- Populated dynamically on node click or initial welcome state -->
+      </div>
+
+      <div class="inspector-footer">
+        <span id="ui-footer-credit">Katalog &amp; Recherche: Martin Wölker · Quellen: JRC132067, Ragaert 2017, Kim 2026, Hopewell 2009, Al-Salem 2017, Dannhauer 2023</span>
+        <span id="ui-version-tag" style="font-family:var(--font-mono); white-space:nowrap;">v1.0 · 23.11.2026</span>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- DECISION RULE MODAL -->
+<div class="modal-backdrop" id="rule-modal">
+  <div class="modal-card">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.85rem;">
+      <h2 style="font-size:1.08rem;" id="ui-modal-title">Wie klassifiziert man ein unbekanntes Recyclingverfahren?</h2>
+      <button class="btn" id="btn-close-modal">✕</button>
+    </div>
+    <p style="font-size:0.84rem; color:var(--text-secondary); margin-bottom:0.9rem; line-height:1.5;" id="ui-modal-intro">
+      Prüfe in dieser Reihenfolge das Schicksal der kovalenten Polymerhauptkette (Rückgrat) und die Rolle externer Trigger:
+    </p>
+    <div id="modal-steps-container"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================================
+   1. TAXONOMY HIERARCHY & BILINGUAL METADATA
+   ============================================================================ */
+const TAXONOMY = {
+  root: {
+    id: "root",
+    de: "Kunststoffrecycling-\ntechnologien",
+    en: "Plastics Recycling\nTechnologies"
+  },
+  branches: [
+    {
+      id: "B1",
+      code: "1",
+      colorVar: "--b1-color",
+      hex: "#38bdf8",
+      de: "1. Mechanisches Recycling",
+      en: "1. Mechanical Recycling",
+      ruleDe: "Das Polymer-Rückgrat bleibt chemisch intakt; lediglich Form, Partikelgröße oder Mischungsphase werden physikalisch verändert.",
+      ruleEn: "The polymer backbone remains chemically intact; only physical form, particle size, or blend morphology changes.",
+      subs: [
+        { id: "1.1", de: "1.1 Direkte werkseitige Rückführung", en: "1.1 Direct In-Plant Reprocessing" },
+        { id: "1.2a", de: "1.2a Schmelzverarbeitung: PET", en: "1.2a Melt Reprocessing: PET" },
+        { id: "1.2b", de: "1.2b Schmelzverarbeitung: Polyolefine", en: "1.2b Melt Reprocessing: Polyolefins" },
+        { id: "1.2c", de: "1.2c Schmelzverarbeitung: Styrol/PVC/Techn.", en: "1.2c Melt Reprocessing: Styrenics/PVC/Eng." },
+        { id: "1.3", de: "1.3 Verbund-, Partikel- & Elastomer-Reprocessing", en: "1.3 Composite, Particulate & Elastomer Recovery" }
+      ]
+    },
+    {
+      id: "B2",
+      code: "2",
+      colorVar: "--b2-color",
+      hex: "#2dd4bf",
+      de: "2. Lösungsmittelbasiertes Recycling",
+      en: "2. Solvent-Based (Physical) Recycling",
+      ruleDe: "Selektives Lösen und Wiederausfällen in einem Solvens; Fremdstoffe/Schichten werden abgetrennt, die Polymerkette bleibt ungespalten.",
+      ruleEn: "Selective dissolution and precipitation in a solvent; additives or foreign layers are separated while polymer chains remain intact.",
+      subs: [
+        { id: "2.1", de: "2.1 Selektive Polymerauflösung & Fällung", en: "2.1 Selective Polymer Dissolution & Precipitation" },
+        { id: "2.2", de: "2.2 Mehrschicht-Delaminierung & Extraktion", en: "2.2 Multilayer Delamination & Extraction" }
+      ]
+    },
+    {
+      id: "B3",
+      code: "3",
+      colorVar: "--b3-color",
+      hex: "#fb923c",
+      de: "3. Chemisches Recycling",
+      en: "3. Chemical Recycling",
+      ruleDe: "Abiotische Spaltung kovalenter Bindungen durch Solvolyse, gezieltes thermisches Unzipping, Katalyse oder unselektives Cracken.",
+      ruleEn: "Abiotic cleavage of covalent polymer bonds via solvolysis, targeted thermal unzipping, catalysis, or non-selective cracking.",
+      subs: [
+        { id: "3.1a", de: "3.1a Alkoholyse & Glykolyse", en: "3.1a Alcoholysis & Glycolysis" },
+        { id: "3.1b", de: "3.1b Hydrolyse (alkalisch/neutral/sauer)", en: "3.1b Hydrolysis (Alkaline/Neutral/Acid)" },
+        { id: "3.1c", de: "3.1c Acidolyse & Acetolyse (PU/Composites)", en: "3.1c Acidolysis & Acetolysis (PU/Composites)" },
+        { id: "3.1d", de: "3.1d Intensivierte & selektive Solvolyse", en: "3.1d Intensified & Selective Solvolysis" },
+        { id: "3.2", de: "3.2 Thermische Depolymerisation (Unzipping)", en: "3.2 Thermal Depolymerisation (Unzipping)" },
+        { id: "3.3", de: "3.3 Selektive katalytische/oxidative Spaltung", en: "3.3 Selective Catalytic/Oxidative Cleavage" },
+        { id: "3.4a", de: "3.4a Pyrolyse (trocken/katalytisch/MW)", en: "3.4a Pyrolysis (Dry/Catalytic/MW)" },
+        { id: "3.4b", de: "3.4b Hydrothermale Konversion (HTL)", en: "3.4b Hydrothermal Conversion (HTL)" },
+        { id: "3.4c", de: "3.4c Vergasung & Synthesegas-Route", en: "3.4c Gasification & Syngas Synthesis" },
+        { id: "3.4d", de: "3.4d Plasma-unterstütztes Cracken", en: "3.4d Plasma-Assisted Cracking" }
+      ]
+    },
+    {
+      id: "B4",
+      code: "4",
+      colorVar: "--b4-color",
+      hex: "#4ade80",
+      de: "4. Biologisches Recycling",
+      en: "4. Biological & Chemo-Biological Recycling",
+      ruleDe: "Enzyme oder Mikroorganismen katalysieren den Abbau zu Monomeren oder werten voroxidierte Kunststofffragmente biologisch auf.",
+      ruleEn: "Enzymes or microorganisms catalyse depolymerisation to monomers or biologically funnel pre-oxidised plastic intermediates.",
+      subs: [
+        { id: "4.1", de: "4.1 Direkte enzymatische Depolymerisation", en: "4.1 Direct Enzymatic Depolymerisation" },
+        { id: "4.2", de: "4.2 Chemo-enzymatisch & Chemo-biologisches Funneling", en: "4.2 Chemo-Enzymatic & Chemo-Biological Funneling" }
+      ]
+    },
+    {
+      id: "B5",
+      code: "5",
+      colorVar: "--b5-color",
+      hex: "#c084fc",
+      de: "5. Recycling by Design",
+      en: "5. Recycling by Design",
+      ruleDe: "Speziell synthetisierte Polymere mit eingebauten dynamischen Austausch- oder Sollbruchstellen für gezieltes Umformen oder Zerlegen.",
+      ruleEn: "Purpose-synthesised polymers engineered with dynamic covalent exchange or cleavable linkages for triggered reshaping or depolymerisation.",
+      subs: [
+        { id: "5.1", de: "5.1 Dynamische kovalente Netzwerke (Vitrimere)", en: "5.1 Dynamic Covalent Networks (Vitrimers)" },
+        { id: "5.2", de: "5.2 Triggerbare Depolymerisation (Design-Polymere)", en: "5.2 Triggered Depolymerisation (Designed Polymers)" }
+      ]
+    }
+  ]
+};
+
+/* ============================================================================
+   2. COMPLETE DATASET OF ALL 98 CATALOGUE ENTRIES
+   ============================================================================ */
+const ENTRIES = [
+  // --- BRANCH 1: MECHANICAL RECYCLING (24 + 2 = 26 entries) ---
+  { id: 1, b: "B1", sub: "1.1", trl: "9", tier: "high", volTier: "bulk", flags: [],
+    en: "Direct reprocessing of production scrap", de: "Direkte Rückführung von Produktionsabfällen",
+    feedEn: "Clean, identified factory thermoplastic scrap", feedDe: "Saubere, sortenreine Produktionsabfälle",
+    outEn: "Secondary resin or compounded material", outDe: "Sekundärgranulat oder Recompound",
+    volDe: "Marktkontext · EU-27+3 · 2024 · 2,9 Mio. t mechanisch recycelte Pre-Consumer-Kunststoffe (Definition schließt direkte werkinterne Rückführung im selben Prozess aus; separate Menge nicht belegt). Globaler Kontext: 40,8 Mio. t mechanisch recycelte Post-Consumer-Kunststoffe (Plastics Europe 2025).",
+    volEn: "Market context · EU-27+3 · 2024 · 2.9 million t mechanically recycled pre-consumer plastics (reporting definition excludes reclamation within the same manufacturing process; separate direct reuse mass unverified). Global context: 40.8 million t mechanical post-consumer (Plastics Europe 2025).",
+    evEn: "Routine in-plant reuse of identified thermoplastic production scrap; additive carry-over and heat history still matter.",
+    evDe: "Routinemäßige werksinterne Wiederverwendung sortenreiner Thermoplastabfälle; Additiv-Verschleppung und thermische Vorgeschichte bleiben relevant." },
+
+  { id: 2, b: "B1", sub: "1.2a", trl: "9", tier: "high", volTier: "bulk", flags: [], xrefs: [46, 65],
+    en: "PET bottle-to-bottle recycling", de: "PET-Bottle-to-Bottle-Recycling",
+    feedEn: "Post-consumer PET bottles", feedDe: "Post-Consumer-PET-Flaschen",
+    outEn: "Food-contact rPET pellets (with optional SSP)", outDe: "Lebensmitteltaugliches rPET (ggf. mit SSP-Nachkondensation)",
+    volDe: "Endanwendung · USA & Kanada · 2025 · 69 % des recycelten PET gingen in neue Flaschen. Sammlung · USA · 2025 · 1.821 Mio. lb (≈826.000 t) Post-Consumer-PET-Flaschen über alle Endnutzungen. Regionaler Benchmark · EU-27+3 · 2022 · ≈0,91 Mio. t rPET in Flaschen (48 % von ≈1,9 Mio. t; alle rPET-Herkünfte).",
+    volEn: "End use · US and Canada · 2025 · 69% of recycled PET went into new bottles. Collection · US · 2025 · 1,821 million lb (≈826,000 t) post-consumer PET bottles across all end uses. Regional benchmark · EU-27+3 · 2022 · ≈0.91 million t rPET used in bottles (48% × ≈1.9 million t; all rPET feed origins).",
+    evEn: "Validated decontamination and remelting lines produce commercial bottle-grade rPET; solid-state polycondensation (SSP) can restore intrinsic viscosity.",
+    evDe: "Validierte Dekontaminations- und Umschmelzanlagen liefern kommerzielles Bottle-Grade-rPET; SSP kann die intrinsische Viskosität wiederherstellen." },
+
+  { id: 3, b: "B1", sub: "1.2a", trl: "9", tier: "high", volTier: "bulk", flags: [],
+    en: "PET bottle-to-fibre recycling", de: "PET-Bottle-to-Fibre-Recycling",
+    feedEn: "Prepared post-consumer PET bottles", feedDe: "Aufbereitete PET-Flaschen",
+    outEn: "Polyester textile/nonwoven fibres", outDe: "Polyesterfasern für Textilien und Vliese",
+    volDe: "Endanwendung · EU-27+3 · 2022 · ≈300.000 t rPET in Faseranwendungen verbraucht (alle rPET-Herkünfte erfasst; neuere Flaschen-Tonage nicht verifiziert).",
+    volEn: "End use · EU-27+3 · 2022 · ≈300,000 t rPET consumed in fibre applications (covers all rPET feed origins; newer bottle-origin tonnage unverified).",
+    evEn: "Routine industrial melt spinning of recycled bottle PET into saleable polyester fibre with distinct viscosity limits.",
+    evDe: "Industrielles Schmelzspinnen von Flaschen-rPET zu Polyesterfasern mit spezifischen Viskositätsanforderungen." },
+
+  { id: 4, b: "B1", sub: "1.2a", trl: "9", tier: "high", volTier: "bulk", flags: [],
+    en: "PET bottle-to-sheet recycling", de: "PET-Bottle-to-Sheet-Recycling",
+    feedEn: "Prepared post-consumer PET bottles", feedDe: "Aufbereitete PET-Flaschen",
+    outEn: "Extruded PET sheet for thermoformed trays", outDe: "Extrudierte PET-Folie/-Platte für Tiefziehschalen",
+    volDe: "Endanwendung · EU-27+3 · 2022 · ≈475.000 t rPET in der Folienextrusion eingesetzt (25 % von ≈1,9 Mio. t; alle rPET-Herkünfte; neuere Flaschen-Tonage nicht verifiziert).",
+    volEn: "End use · EU-27+3 · 2022 · ≈475,000 t rPET used in sheet extrusion (25% × ≈1.9 million t; all rPET feed origins; newer bottle-origin tonnage unverified).",
+    evEn: "Industrial use of mechanically recycled bottle PET in extruded sheet and thermoforming applications.",
+    evDe: "Industrieller Einsatz von mechanisch recyceltem Flaschen-PET in der Folienextrusion und im Thermoformen." },
+
+  { id: 5, b: "B1", sub: "1.2a", trl: "9", tier: "high", volTier: "bulk", flags: [],
+    en: "PET tray recycling", de: "PET-Tray-Recycling (Schalen)",
+    feedEn: "Compatible post-consumer PET trays", feedDe: "Kompatible PET-Schalen",
+    outEn: "Secondary PET sheet or trays", outDe: "Sekundär-PET-Folien oder neue Trays",
+    volDe: "Installierte Kapazität · EU-27+3 · 2024 · ≈100.000 t/a Inputkapazität für PET-Tray-Recycling. Outputkapazität · Cirrec, Duiven (NL) · Jan. 2026 · ≈27.000 t/a Tray-rPET-Pellets. Verarbeitete Menge · USA & Kanada · 2025 · 226 Mio. lb (≈102.500 t) PET-Thermoformen über Thermoform-Formate.",
+    volEn: "Installed capacity · EU-27+3 · 2024 · ≈100,000 t/yr PET tray recycling input capacity. Output capacity · Cirrec, Duiven, Netherlands · Jan 2026 · ≈27,000 t/yr tray-derived rPET pellets. Actual regional processing · US and Canada · 2025 · 226 million lb (≈102,500 t) post-consumer PET thermoforms across thermoform formats.",
+    evEn: "Cirrec’s Duiven operation produces tray-derived rPET for new trays from accepted feed.",
+    evDe: "Cirrec in Duiven produziert Tray-basiertes rPET für neue Schalen; Mehrschichtaufbauten und Klebstoffe begrenzen die Ausbeute." },
+
+  { id: 6, b: "B1", sub: "1.2b", trl: "9", tier: "high", volTier: "bulk", flags: [],
+    en: "HDPE rigid packaging recycling", de: "HDPE-Hartverpackungs-Recycling",
+    feedEn: "Rigid HDPE bottles and containers", feedDe: "Feste HDPE-Flaschen und Behälter",
+    outEn: "HDPE regranulate", outDe: "HDPE-Regranulat",
+    volDe: "Standortkapazität · Veolia, Dagenham (UK) · 16.000 t/a für HDPE-Milchflaschen-Anlage. Regionale Kapazität · EU-27+3 · 2024 · ≈1,75 Mio. t/a für Hart-HDPE über alle Anwendungen.",
+    volEn: "Site capacity · Veolia, Dagenham, UK · 16,000 t/yr for HDPE milk-bottle recycling facility. Regional capacity · EU-27+3 · 2024 · ≈1.75 million t/yr for rigid HDPE across uses.",
+    evEn: "Commercial rigid-packaging HDPE regranulate for identified grades; colour, odour and melt flow constrain applications.",
+    evDe: "Kommerzielles HDPE-Regranulat aus Hartverpackungen; Farbe, Geruch und Schmelzindex bestimmen das Einsatzgebiet." },
+
+  { id: 7, b: "B1", sub: "1.2b", trl: "9", tier: "high", volTier: "bulk", flags: [],
+    en: "LDPE and LLDPE film recycling", de: "LDPE- und LLDPE-Folienrecycling",
+    feedEn: "Flexible LDPE/LLDPE film waste", feedDe: "Flexible LDPE/LLDPE-Folienabfälle",
+    outEn: "Recycled PE pellets or compounds", outDe: "Recycelte PE-Pellets oder Compounds",
+    volDe: "Regionale Kapazität · EU-27+3 · 2024 · ≈3,5 Mio. t/a installierte Inputkapazität für die breitere Polyolefin-Folienkategorie (keine reine LDPE/LLDPE-Tonage in dieser Reihe verifiziert).",
+    volEn: "Regional capacity · EU-27+3 · 2024 · ≈3.5 million t/yr installed input capacity for the broader polyolefin-film category (no LDPE/LLDPE-only tonnage verified in that series).",
+    evEn: "Industrial regranulation of identified LDPE/LLDPE film streams; print residues and gels limit thin-film reuse.",
+    evDe: "Industrielle Regranulierung definierter LDPE/LLDPE-Folienströme; Druckfarbenreste und Stippen begrenzen Dünnfolienanwendungen." },
+
+  { id: 8, b: "B1", sub: "1.2b", trl: "9", tier: "high", volTier: "bulk", flags: [],
+    en: "Agricultural polyethylene film recycling", de: "Agrar-Polyethylenfolien-Recycling",
+    feedEn: "Managed agricultural PE films", feedDe: "Erfasste landwirtschaftliche PE-Folien",
+    outEn: "Recycled PE regranulate", outDe: "Recyceltes PE-Granulat",
+    volDe: "Sammlung zum stofflichen Recycling · Deutschland, ERDE-System · 2025 · 37.342 t Agrarkunststoffe erfasst und dem werkstofflichen Recycling zugeführt (umfasst auch Materialien jenseits reiner PE-Folie).",
+    volEn: "Collection for material recycling · Germany, ERDE scheme · 2025 · 37,342 t agricultural plastics collected and sent for material recycling (covers materials beyond PE film).",
+    evEn: "Industrial conversion of suitable agricultural PE film into regranulate. The rating is for managed feed streams.",
+    evDe: "Industrielle Aufbereitung ausreichend gereinigter Agrarfolien; Anhaftungen (Erde) und Bewitterung mindern Ausbeute und Qualität." },
+
+  { id: 9, b: "B1", sub: "1.2b", trl: "9", tier: "high", volTier: "bulk", flags: [],
+    en: "Polypropylene packaging recycling", de: "Polypropylen-Verpackungsrecycling",
+    feedEn: "Identified PP packaging waste", feedDe: "Sortenreine PP-Verpackungsabfälle",
+    outEn: "Secondary PP compounds", outDe: "Sekundär-PP-Compounds",
+    volDe: "Regionale Kapazität · EU-27+3 · 2024 · ≈1,8 Mio. t/a installierte Inputkapazität für Hart-PP über Verpackungen und weitere Anwendungen (keine verpackungsspezifische Ist-Tonage verifiziert).",
+    volEn: "Regional capacity · EU-27+3 · 2024 · ≈1.8 million t/yr installed rigid PP input capacity across packaging and other uses (no packaging-only actual tonnage verified in that series).",
+    evEn: "Routine industrial reprocessing of selected packaging PP into secondary grades; PE carry-over and odour constrain specifications.",
+    evDe: "Routinemäßiges Reprocessing ausgewählter Verpackungs-PP-Ströme; PE-Fremdanteile und Geruch begrenzen die Spezifikation." },
+
+  { id: 10, b: "B1", sub: "1.2b", trl: "9", tier: "high", volTier: "single", flags: [],
+    en: "Polypropylene automotive recycling", de: "Polypropylen-Automobilrecycling",
+    feedEn: "PP-rich automotive parts (e.g. bumpers)", feedDe: "PP-reiche Automobilbauteile",
+    outEn: "Secondary PP automotive/technical compounds", outDe: "Sekundär-PP-Compounds für technische Anwendungen",
+    volDe: "Geplante Outputkapazität · Sumika, Saint-Martin-de-Crau (FR) · Ankündigung 2026 · ≈10.000 t/a recyceltes PP aus kombiniertem Automobil- und Industrie-Feed (keine separate Ist-Tonage für Automobil belegt).",
+    volEn: "Planned output capacity · Sumika, Saint-Martin-de-Crau, France · 2026 announcement · ≈10,000 t/yr recycled PP from combined automotive and industrial feed (no separate actual automotive tonnage found).",
+    evEn: "Industrial production of secondary compounds from selected PP-rich automotive streams; fillers and elastomers govern grade.",
+    evDe: "Industrielle Herstellung von Sekundärcompounds aus ausgewählten Automobil-PP-Strömen; Füllstoffe und Elastomere bestimmen die Güte." },
+
+  { id: 11, b: "B1", sub: "1.2b", trl: "9", tier: "high", volTier: "single", flags: [], xrefs: [117],
+    en: "Polyolefin blend recycling", de: "Polyolefin-Blend-Recycling (PE/PP)",
+    feedEn: "Controlled PE/PP mixed waste", feedDe: "Kontrollierte PE/PP-Mischströme",
+    outEn: "Compatibilised secondary PE/PP blend", outDe: "Compatibilisierter PE/PP-Sekundärblend",
+    volDe: "Geplanter Kapazitätsausbau · Borouge International, Niedergebra (DE) · angekündigt Okt. 2026 für Q1 2027 · knapp 9.000 t/a zusätzlicher Output an Mischpolyolefin-Rezyklat (jährlicher Ist-Output des Standorts unbestätigt).",
+    volEn: "Planned capacity addition · Borouge International, Niedergebra, Germany · announced Oct 2026 for Q1 2027 · nearly 9,000 t/yr additional mixed-polyolefin recyclate output (annual actual site output unverified).",
+    evEn: "Industrial melt compounding of controlled PE/PP blends using compatibilisers for interfacial adhesion (unlike unvalidated claim in 117).",
+    evDe: "Industrielles Schmelzcompoundieren kontrollierter PE/PP-Blends mit Haftvermittlern (abzugrenzen von ID 117)." },
+
+  { id: 12, b: "B1", sub: "1.2c", trl: "9", tier: "high", volTier: "bulk", flags: [],
+    en: "Rigid polystyrene recycling", de: "Hart-Polystyrol-Recycling (PS/HIPS)",
+    feedEn: "Separated rigid PS / HIPS streams", feedDe: "Getrennte Hart-PS / HIPS-Ströme",
+    outEn: "PS / HIPS regranulate", outDe: "PS- / HIPS-Regranulat",
+    volDe: "Regionale Kapazität · EU-27+3 · 2024 · ≈110.000 t/a installierte Inputkapazität für die PS-Hälfte der kombinierten PRE-Kategorie PS/EPS (220.000 t/a gesamt; separate Ist-Tonage nicht belegt).",
+    volEn: "Regional capacity · EU-27+3 · 2024 · ≈110,000 t/yr installed input capacity for the PS half of PRE’s combined 220,000 t/yr PS/EPS category (no separate rigid-PS actual tonnage found).",
+    evEn: "Commercial mechanically recycled rigid HIPS/PS grades (e.g., INEOS Styrolution) from compatible post-consumer/industrial streams.",
+    evDe: "Kommerziell verfügbare mechanisch recycelte HIPS/PS-Typen (z. B. INEOS Styrolution) aus kompatiblen Abfallströmen." },
+
+  { id: 13, b: "B1", sub: "1.2c", trl: "9", tier: "high", volTier: "bulk", flags: [],
+    en: "Expanded polystyrene recycling", de: "Expandiertes Polystyrol-Recycling (EPS)",
+    feedEn: "Collected EPS foam packaging/insulation", feedDe: "Getrennt gesammelter EPS-Schaumstoff",
+    outEn: "Densified PS regranulate", outDe: "Kompaktiertes PS-Regranulat",
+    volDe: "Regionale Kapazität · EU-27+3 · 2024 · ≈110.000 t/a (EPS-Hälfte von PS/EPS). Gemeldeter Recyclinganteil · Japan · 2025 · 43.400 t (48,5 % von 89.400 t genutztem EPS) in stofflichen Routen außerhalb chemischem Recycling (20.000 t Rezyklatpellets, 11.700 t verdichtet für Export, 11.700 t sonstige physikalische Stoffströme nach JEPSA).",
+    volEn: "Regional capacity · EU-27+3 · 2024 · ≈110,000 t/yr (EPS half of PS/EPS). Reported recycling share · Japan · 2025 · 43,400 t (48.5% of 89,400 t used EPS) assigned to non-chemical material routes (20,000 t recycled pellets, 11,700 t densified for export, 11,700 t other physical material routes per JEPSA).",
+    evEn: "Industrial recycling of separately collected EPS into secondary solid PS via mechanical/thermal densification and melt extrusion.",
+    evDe: "Industrielles Recycling von getrennt gesammeltem EPS durch Verdichtung und Umschmelzen zu Polystyrol-Regranulat." },
+
+  { id: 14, b: "B1", sub: "1.2c", trl: "9", tier: "high", volTier: "bulk", flags: [], xrefs: [62],
+    en: "Rigid PVC recycling", de: "Hart-PVC-Recycling (Rohre/Profile)",
+    feedEn: "Separated rigid PVC profiles and pipes", feedDe: "Sortenreine Hart-PVC-Profile und -Rohre",
+    outEn: "Rigid PVC regranulate/pulverised compound", outDe: "Hart-PVC-Regranulat / Mahlgut",
+    volDe: "Gemeldetes Recycling · EU-27 + UK, NO & CH · 2025 · 487.654 t PVC-Abfälle aus Hart-Kategorien im Recovinyl-Netzwerk (Fenster/Profile 416.889 t, Rohre 41.001 t, Hartfolie 19.308 t, sonstiges Hart-PVC 10.456 t; berechnet aus VinylPlus 2026).",
+    volEn: "Reported recycling · EU-27 + UK, Norway and Switzerland · 2025 · 487,654 t PVC waste by rigid-origin category in Recovinyl (windows and profiles 416,889 t; pipes 41,001 t; rigid film 19,308 t; other rigid 10,456 t; calculated from VinylPlus 2026).",
+    evEn: "Routine industrial recycling of rigid PVC pipes and window profiles; heat stability and legacy additives constrain reuse.",
+    evDe: "Etabliertes industrielles Recycling von Hart-PVC-Rohren und Fensterprofilen; Thermostabilität und Altadditive setzen Grenzen." },
+
+  { id: 15, b: "B1", sub: "1.2c", trl: "9", tier: "high", volTier: "bulk", flags: [],
+    en: "Flexible PVC recycling", de: "Weich-PVC-Recycling",
+    feedEn: "Compatible flexible PVC streams", feedDe: "Kompatible Weich-PVC-Abfälle",
+    outEn: "Secondary flexible PVC compounds", outDe: "Sekundäre Weich-PVC-Compounds",
+    volDe: "Gemeldetes Recycling · EU-27 + UK, NO & CH · 2025 · 53.812 t in der Recovinyl-Kategorie „Flexibles“ (daneben Bodenbeläge 119.873 t und Kabel 104.633 t als separate Kategorien in VinylPlus 2026).",
+    volEn: "Reported recycling · EU-27 + UK, Norway and Switzerland · 2025 · 53,812 t in Recovinyl’s “Flexibles” category (flooring 119,873 t and cables 104,633 t reported as separate categories in VinylPlus 2026).",
+    evEn: "Industrial recompounding of specified flexible PVC streams; plasticiser type and regulated legacy substances constrain use.",
+    evDe: "Industrielles Recompoundieren definierter Weich-PVC-Ströme; Weichmachertypen und regulierte Altstoffe begrenzen den Einsatz." },
+
+  { id: 16, b: "B1", sub: "1.2c", trl: "9", tier: "high", volTier: "single", flags: [],
+    en: "ABS recycling", de: "ABS-Recycling",
+    feedEn: "Controlled ABS from production/WEEE", feedDe: "Kontrolliertes ABS aus Produktion/Elektroaltgeräten",
+    outEn: "Secondary ABS compounds", outDe: "Sekundär-ABS-Compounds",
+    volDe: "Standortkapazität · MBA Polymers, Deutschland · 20.000 t/a kombinierter WEEE-Input für einen Standort mit mehreren Harztypen inkl. ABS (separater ABS-Output-Anteil nicht verfügbar).",
+    volEn: "Site capacity · MBA Polymers, Germany · 20,000 t/yr combined WEEE input for a site producing several resin grades including ABS (separate ABS output split unavailable).",
+    evEn: "Commercial mechanically recycled ABS grades from controlled streams; WEEE streams require screening for restricted flame retardants.",
+    evDe: "Kommerzielle mechanisch recycelte ABS-Typen; WEEE-Ströme erfordern Kontrolle auf regulierte Flammschutzmittel." },
+
+  { id: 17, b: "B1", sub: "1.2c", trl: "9", tier: "high", volTier: "single", flags: [],
+    en: "PC/ABS blend recycling", de: "PC/ABS-Blend-Recycling",
+    feedEn: "Known PC/ABS durable goods/scrap", feedDe: "Identifizierte PC/ABS-Bauteile/-Abfälle",
+    outEn: "Secondary PC/ABS blends", outDe: "Sekundäre PC/ABS-Blends",
+    volDe: "Standortkapazität · MBA Polymers, Deutschland · identischer 20.000-t/a-WEEE-Input wie ID 16 (separater PC/ABS-Output-Anteil nicht verfügbar).",
+    volEn: "Site capacity · MBA Polymers, Germany · same 20,000 t/yr mixed WEEE input as entry 16 (separate PC/ABS output split unavailable).",
+    evEn: "Industrial recompounding of identified PC/ABS scrap for established secondary grades; moisture and blend ratio control are critical.",
+    evDe: "Industrielles Recompoundieren bekannter PC/ABS-Abfälle; Trocknung und Phasenverhältnis sind entscheidend." },
+
+  { id: 18, b: "B1", sub: "1.2c", trl: "9", tier: "high", volTier: "lab", flags: [], xrefs: [48],
+    en: "Polyamide mechanical recycling", de: "Polyamid-Recycling (mechanisch)",
+    feedEn: "Separated PA6 or PA66 streams", feedDe: "Sortenreine PA6- oder PA66-Ströme",
+    outEn: "Secondary PA compounds", outDe: "Sekundär-PA-Compounds",
+    volDe: "Datenlücke · Keine verifizierte Tonnage für mechanisches PA-Recycling (Avient Nymax REC, Feb. 2026, belegt Produktanwendung; chemische PA6-Depolymerisation siehe ID 48).",
+    volEn: "Gap · No verified tonnage for mechanical PA recycling (Avient Nymax REC, Feb 2026, documents product application; PA6 depolymerisation is entry 48).",
+    evEn: "Industrial mechanical reprocessing of selected PA scrap; strict drying prevents hydrolytic molecular weight loss (see 48 for chemical PA6).",
+    evDe: "Industrielles Umschmelzen ausgewählter PA-Ströme; Trocknung verhindert hydrolytischen Molmassenabbau (chemisch siehe ID 48)." },
+
+  { id: 19, b: "B1", sub: "1.2c", trl: "9", tier: "high", volTier: "single", flags: [], xrefs: [114],
+    en: "Polycarbonate mechanical recycling", de: "Polycarbonat-Recycling (mechanisch)",
+    feedEn: "Identified, dry polycarbonate scrap", feedDe: "Identifiziertes, trockenes PC-Material",
+    outEn: "Secondary PC compounds", outDe: "Sekundär-PC-Compounds",
+    volDe: "Standortkapazität · Covestro, Shanghai (CN) · Inbetriebnahme 2023 · 25.000 t/a compoundiertes PC und Blends mit mechanischem Rezyklatanteil (bezieht sich auf den gesamten Compoundstrom).",
+    volEn: "Site capacity · Covestro, Shanghai, China · commissioned 2023 · 25,000 t/yr compounded PC and blends containing mechanically recycled material (refers to whole compound stream).",
+    evEn: "Commercial recycled PC compounds for selected grades; hydrolysis, heat history and additives affect optical and impact properties.",
+    evDe: "Kommerzielle PC-Recompounds für definierte Anwendungen; Hydrolyse und thermische Vorgeschichte beeinflussen Schlagzähigkeit und Optik." },
+
+  { id: 20, b: "B1", sub: "1.2c", trl: "8–9", tier: "high", volTier: "lab", flags: [],
+    en: "PBT mechanical recycling", de: "PBT-Recycling (mechanisch)",
+    feedEn: "Known PBT production/post-use grades", feedDe: "Bekannte PBT-Typen / Produktionsabfälle",
+    outEn: "Recycled-content PBT compounds", outDe: "PBT-Compounds mit Rezyklatanteil",
+    volDe: "Datenlücke · Keine verifizierte Tonnage für mechanisch reprozessiertes PBT (LANXESS-Literatur beschreibt Polyester-Blends u. a. mit rPET, ohne PBT-Rezyklatmenge).",
+    volEn: "Gap · No verified tonnage for mechanically reprocessed PBT (cited product literature covers polyester blends incorporating rPET, without reprocessed-PBT tonnage).",
+    evEn: "Recompounders sell recycled-content PBT compounds for specified applications. The reviewed public sources leave the exact input provenance and operating history less clear for individual grades.",
+    evDe: "Compoundeure vertreiben PBT-Typen mit Rezyklatanteil; öffentliche Quellen lassen genaue Input-Herkunft und Betriebshistorie teils offen." },
+
+  { id: 21, b: "B1", sub: "1.2c", trl: "9", tier: "high", volTier: "single", flags: [], xrefs: [49],
+    en: "PMMA mechanical recycling", de: "PMMA-Recycling (mechanisch)",
+    feedEn: "Well-characterised acrylic (PMMA) scrap", feedDe: "Sortenreine Acrylglas-Abfälle (PMMA)",
+    outEn: "Secondary PMMA products", outDe: "Sekundäre PMMA-Erzeugnisse",
+    volDe: "Vorgelagerte Standortkapazität · Pekutherm (DE) · Angabe 2024 · 10.000 short tons/a Sortierkapazität beim PMMA-Spezialisten (Aufbereitung für Röhm & POLYVANTIS; tatsächliche mechanisch reprozessierte PMMA-Menge nicht offengelegt).",
+    volEn: "Upstream site capacity · Pekutherm, Germany · 2024 disclosure · 10,000 tons/yr sorting capacity at PMMA specialist (prepared material for Röhm & POLYVANTIS; actual mechanically reprocessed PMMA tonnage undisclosed).",
+    evEn: "Commercial mechanical reprocessing of compatible, well-characterised acrylic scrap. Colour and optical quality limit applications; entry 49 instead recovers MMA.",
+    evDe: "Kommerzielles Umschmelzen sauberer PMMA-Abfälle; optische Anforderungen begrenzen den Einsatz (chemisch zu MMA siehe ID 49)." },
+
+  { id: 22, b: "B1", sub: "1.3", trl: "8–9", tier: "high", volTier: "lab", flags: [],
+    en: "Thermoplastic composite recycling", de: "Thermoplast-Verbundwerkstoff-Recycling",
+    feedEn: "Thermoplastic-matrix composite scrap", feedDe: "Faserverstärkte Thermoplast-Abfälle",
+    outEn: "Short-fibre reinforced secondary compound", outDe: "Kurzfaserverstärktes Recompound",
+    volDe: "Datenlücke · Keine verifizierte Jahrestonnage mechanisch reprozessierter Thermoplast-Composite-Abfälle (Toray & TPAC dokumentieren Produktionsabfall-Anwendung in den Niederlanden).",
+    volEn: "Gap · No verified annual volume of mechanically reprocessed thermoplastic-composite scrap (Toray and TPAC document a Netherlands production-scrap case).",
+    evEn: "Industrial recompounding applies to selected thermoplastic-composite scrap. Qualification and service evidence vary with matrix, reinforcement and target product.",
+    evDe: "Industrielles Recompoundieren schmilzt die Thermoplastmatrix auf; Verstärkungsfasern werden dabei gekürzt und neu orientiert." },
+
+  { id: 23, b: "B1", sub: "1.3", trl: "9 · niche", tier: "high", volTier: "lab", flags: ["conditional"],
+    en: "Mechanical recycling of thermoset composites", de: "Mechanisches Recycling von Duroplast-Composites",
+    feedEn: "Glass-reinforced thermoset composite waste", feedDe: "Glasfaserverstärkte Duroplast-Abfälle",
+    outEn: "Ground particulate filler / short-fibre additive", outDe: "Gemahlener Füllstoff / Kurzfaser-Zuschlag",
+    volDe: "Datenlücke · Kommerzielles Mahlen und Wiedereinsetzen in UK für Filon und Hambleside Danelaw belegt, aber keine verifizierten Tonnen an gemahlenem Abfall oder Füllstoff.",
+    volEn: "Gap · UK commercial grinding and reincorporation documented for Filon and Hambleside Danelaw, but no verified tonnes of composite scrap ground or filler produced.",
+    evEn: "Commercial grinding and reincorporation as filler in new composites. Conditional: cured resin remains crosslinked; size reduction alone is only preparation.",
+    evDe: "Kommerzielles Vermahlen und Einbinden als Füllstoff. Bedingt: Vernetztes Harz bleibt erhalten; Zerkleinerung allein ist nur Vorbehandlung." },
+
+  { id: 24, b: "B1", sub: "1.3", trl: "9", tier: "high", volTier: "bulk", flags: [], xrefs: [60],
+    en: "Mechanical tyre recycling", de: "Mechanisches Altreifen-Recycling",
+    feedEn: "End-of-life tyres", feedDe: "Altreifen",
+    outEn: "Vulcanised rubber granulate (+ steel & textile)", outDe: "Vulkanisiertes Gummigranulat (+ Stahl & Textil)",
+    volDe: "Gemeldeter Marktfluss · USA · 2025 · 1,201 Mio. short tons Altreifen dem Gummigranulat-Markt zugeordnet (USTMA-Einheiten; Markt-Bilanzgrenze für Altreifenverbleib).",
+    volEn: "Reported market flow · US · 2025 · 1.201 million tons end-of-life tyres assigned to ground-rubber market in USTMA units (measures tyre disposition at market boundary).",
+    evEn: "Routine industrial granulation of tyres; the vulcanised crosslink network remains intact (unlike devulcanisation in ID 60).",
+    evDe: "Industrielle Granulierung von Altreifen; das vulkanisierte Netzwerk bleibt intakt (im Gegensatz zur Devulkanisation in ID 60)." },
+
+  { id: 113, b: "B1", sub: "1.3", trl: "4", tier: "low", volTier: "lab", flags: ["unresolved"], xrefs: [52],
+    en: "Cold-sintering recycling of polymer composites", de: "Kaltsinter-Recycling von Polymer-Composites",
+    feedEn: "Selected waste-plastic composite particles", feedDe: "Ausgewählte Kunststoff-Verbundpartikel",
+    outEn: "Consolidated composite specimens", outDe: "Konsolidierte Verbundwerkstoff-Prüfkörper",
+    volDe: "Datenlücke · Lai et al. (2024, Penn State) dokumentierten wiederholtes Reprozessieren von Laborprüfkörpern; keine verifizierten Betriebstonnen für Kaltsintern von Kunststoffabfällen.",
+    volEn: "Gap · Lai et al. (2024, Penn State) documented repeated reprocessing of lab specimens; no verified operating tonnes for cold sintering of plastic waste.",
+    evEn: "Lai et al. (2024) consolidated plastic composite particles using transient liquid and pressure without bulk melting; pilot throughput unverified.",
+    evDe: "Lai et al. (2024) verpressten Partikel mit transienter Flüssigkeit und Druck ohne Aufschmelzen; Pilotdurchsatz unbestätigt." },
+
+  { id: 117, b: "B1", sub: "1.2b", trl: "2 · mixed-waste route", tier: "low", volTier: "lab", flags: ["unresolved"], xrefs: [11],
+    en: "Additive-free physical alloying of PE and PP", de: "Additivfreies physikalisches Legieren von PE und PP",
+    feedEn: "Proposed for mixed PE/PP waste (tested on virgin 50/50)", feedDe: "Für PE/PP-Mischabfall vorgeschlagen (nur mit Neuware getestet)",
+    outEn: "Extruded PE/PP alloy", outDe: "Extrudierte PE/PP-Legierung",
+    volDe: "Datenlücke · Kein verifizierter Abfalldurchsatz für den Legierungs-Anspruch (Studie 2026 zu additivfreier Kompatibilisierung betrifft Neuware-PP/PE; zurückgezogenes Qu-Ergebnis liefert keine Mengenbelege).",
+    volEn: "Gap · No verified waste throughput for the alloying claim (2026 study reports additive-free compatibilisation on virgin PP/PE; withdrawn Qu result supplies no quantity evidence).",
+    evEn: "Qu et al. tested virgin grades via eccentric-rotor extrusion; waste validation is unverified and the journal page displays a retraction marker.",
+    evDe: "Qu et al. testeten nur Neuware via Exzenterrotor-Extrusion; Abfall-Evidenz fehlt und die Artikelseite trägt einen Retraction-Vermerk." },
+
+  // --- BRANCH 2: SOLVENT-BASED / PHYSICAL RECYCLING (8 entries) ---
+  { id: 52, b: "B2", sub: "2.1", trl: "9 · early industrial use", tier: "high", volTier: "single", flags: [],
+    en: "Selective polypropylene dissolution", de: "Selektive Polypropylen-Auflösung",
+    feedEn: "PP-rich post-consumer/industrial waste", feedDe: "PP-reiche Abfälle",
+    outEn: "Purified PP resin (intact polymer chains)", outDe: "Gereinigtes PP-Rezyklat (intakte Polymerketten)",
+    volDe: "Tatsächlicher Output · PureCycle, Ironton, Ohio (USA) · Q3 2026 · 5,2 Mio. lb (≈2.360 t) PureFive-PP-Harz produziert (Quartalswert; Nennkapazität wird oft mit 48.600–49.000 t/a angegeben; Profitabilität hier nicht belegt).",
+    volEn: "Actual output · PureCycle, Ironton, Ohio, US · Q3 2026 · 5.2 million lb (≈2,360 t) PureFive PP resin produced (covers one quarter; commonly cited 48,600–49,000 t/yr reflect rounding of nominal capacity; profitability unestablished here).",
+    evEn: "PureCycle Ironton line reported ~2,360 t resin produced in Q3 2026 and customer shipments; polymer backbone remains intact in solvent.",
+    evDe: "PureCycle Ironton meldete ca. 2.360 t Harzproduktion in Q3 2026; das PP-Rückgrat bleibt beim Lösen und Fällen chemisch intakt." },
+
+  { id: 53, b: "B2", sub: "2.1", trl: "7 · historical deployment", tier: "mid", volTier: "single", flags: ["historical"],
+    en: "Selective polyethylene dissolution", de: "Selektive Polyethylen-Auflösung",
+    feedEn: "Selected LDPE-rich waste feeds", feedDe: "Ausgewählte LDPE-reiche Abfallströme",
+    outEn: "Recovered PE resin", outDe: "Zurückgewonnenes PE-Rezyklat",
+    volDe: "Historischer Kapazitätskontext · APK Newcycling, Merseburg (DE) · Profil 2019 · 8.000 t/a für die PE/PA-Mehrschichtlinie (geteilt mit ID 54 & 68; separater PE-Output unbestätigt; Schließungsentscheidung Dez. 2025 gemeldet).",
+    volEn: "Historical capacity context · APK Newcycling, Merseburg, Germany · 2019 profile · 8,000 t/yr for PE/PA multilayer line, shared with entries 54 and 68 (separate PE output unverified; closure decision reported Dec 2025).",
+    evEn: "APK Newcycling at Merseburg demonstrated site-scale prototype operation; LYB acquired APK in 2024 and announced site closure in Dec 2025.",
+    evDe: "APK Newcycling in Merseburg demonstrierte Prototypbetrieb; nach LYB-Übernahme (2024) wurde im Dez. 2025 die Schließung gemeldet." },
+
+  { id: 54, b: "B2", sub: "2.2", trl: "6–7", tier: "mid", volTier: "single", flags: [],
+    en: "Solvent-based recycling of multilayer packaging", de: "Lösungsmittelbasiertes Recycling von Mehrschichtfolien",
+    feedEn: "Multilayer plastic laminates", feedDe: "Mehrschicht-Verbundfolien",
+    outEn: "Separated intact polymer fractions", outDe: "Getrennte, intakte Polymerfraktionen",
+    volDe: "Historische Pilot-Inputkapazität · CreaSolv-Sachet-Projekt, Indonesien · Angabe 2019 (Pilot eröffnet 2018) · 3 t/Tag Material. Merseburg (8.000 t/a Mischlaminat) entspricht ID 53 & 68; aktuelle Jahresverarbeitung unbestätigt.",
+    volEn: "Historical pilot input capacity · CreaSolv sachet project, Indonesia · 2019 disclosure for pilot opened 2018 · 3 t/day material. Merseburg 8,000 t/yr mixed laminate line is same case as entries 53 and 68; current annual processing unverified.",
+    evEn: "Sequential dissolution (APK, CreaSolv, STRAP) recovers target polymer layers intact; residual layers require separate treatment.",
+    evDe: "Sequenzielles Lösen (APK, CreaSolv, STRAP) gewinnt Zielpolymere intakt zurück; Restschichten erfordern separate Verwertung." },
+
+  { id: 55, b: "B2", sub: "2.1", trl: "8", tier: "high", volTier: "single", flags: ["unresolved"],
+    en: "Solvent-based polystyrene recovery", de: "Lösungsmittelbasierte Polystyrol-Rückgewinnung",
+    feedEn: "Selected PS and EPS foam waste", feedDe: "Ausgewählte PS- und EPS-Schaumabfälle",
+    outEn: "Purified PS resin", outDe: "Gereinigtes PS-Rezyklat",
+    volDe: "Geplante Inputkapazität · UpSolv, Eastern Townships, Québec (CA) · Ankündigung Feb. 2026 · 11.000 short tons/a PS-Abfall für das erste Werk angegeben (aktueller Standortdurchsatz unbestätigt).",
+    volEn: "Planned input capacity · UpSolv, Eastern Townships, Québec, Canada · Feb 2026 announcement · 11,000 tons/yr PS waste stated for first plant (current site throughput unverified).",
+    evEn: "UpSolv announced commercial-scale launch of dissolution-derived PS in Feb 2026; sustained operating throughput remains unverified.",
+    evDe: "UpSolv meldete im Feb. 2026 kommerziellen Produktstart; kontinuierlicher Dauerbetrieb ist öffentlich noch unbestätigt." },
+
+  { id: 62, b: "B2", sub: "2.2", trl: "9 · historical", tier: "high", volTier: "single", flags: ["historical"], xrefs: [14],
+    en: "Vinyloop PVC recycling — historical industrial technology", de: "Vinyloop-PVC-Recycling (historische Großanlage)",
+    feedEn: "PVC cables, coated fabrics and composites", feedDe: "PVC-Kabel, beschichtete Gewebe und Composites",
+    outEn: "Recovered PVC compound", outDe: "Zurückgewonnenes PVC-Compound",
+    volDe: "Historische Standort-Inputkapazität · VinyLoop, Ferrara (IT) · Auslegung im Betriebszeitraum 2002–2018 · 10.000 t/a Input (genannte 8.500 t/a Compound sind eine Kapazitätsrechnung bei 85 % Ausbeute; Schließung 2018).",
+    volEn: "Historical site input capacity · VinyLoop, Ferrara, Italy · design during 2002–2018 operating period · 10,000 t/yr feed (cited 8,500 t/yr compound is capacity-based calculation at 85% recovery; closed 2018).",
+    evEn: "Ferrara VinyLoop operated industrially for years via selective PVC dissolution before closing in 2018 due to legacy plasticiser regulation.",
+    evDe: "VinyLoop in Ferrara betrieb jahrelang industrielle PVC-Auflösung; Schließung 2018 wegen Regulierung enthaltener Altweichmacher." },
+
+  { id: 66, b: "B2", sub: "2.2", trl: "5 pilot / 4 original laminate", tier: "mid", volTier: "single", flags: ["unresolved"],
+    en: "STRAP — Solvent-Targeted Recovery and Precipitation", de: "STRAP — Lösungsmittelgezielte Rückgewinnung & Fällung",
+    feedEn: "PE/EVOH/PET laminates or PP-rich waste", feedDe: "PE/EVOH/PET-Laminate oder PP-reiche Abfälle",
+    outEn: "Separated intact polymers", outDe: "Getrennte, intakte Polymere",
+    volDe: "Pilot-Auslegung · Michigan Tech / REMADE (USA) · geprüft Nov. 2026 · 25 kg/h Auslegungsrate (Okt.-2026-PP-Versuche belegen Pilottest; Dauerbetrieb bei Auslegungsrate unbestätigt).",
+    volEn: "Pilot design · Michigan Tech/REMADE, US · checked Nov 2026 · 25 kg/h design rate (Oct 2026 PP recovery evidence supports pilot test; sustained operation at design rate unverified).",
+    evEn: "Lab-validated on PE/EVOH/PET (TRL 4) and pilot-tested on PP-rich waste in 2026 (TRL 5); integrated 25 kg/h design runs remain open.",
+    evDe: "Im Labor für PE/EVOH/PET (TRL 4) und 2026 im Pilotmaßstab für PP (TRL 5) gezeigt; integrierte 25-kg/h-Läufe noch unbestätigt." },
+
+  { id: 67, b: "B2", sub: "2.2", trl: "6–7", tier: "mid", volTier: "single", flags: ["unresolved"],
+    en: "CreaSolv polymer separation", de: "CreaSolv-Polymertrennung",
+    feedEn: "Multilayer sachets / composite plastics", feedDe: "Mehrschicht-Sachets / Verbundkunststoffe",
+    outEn: "Target polymer fraction after contaminant removal", outDe: "Zielpolymer-Fraktion nach Störstoffabtrennung",
+    volDe: "Historische Pilot-Inputkapazität · CreaSolv Indonesien Sachet-Pilot · Angabe 2019 · 3 t/Tag (gleiche Anlage wie ID 54; 700 t/a Nennkapazität in Anbieterangabe; aktueller Durchsatz unbestätigt).",
+    volEn: "Historical pilot input capacity · CreaSolv Indonesia sachet pilot · 2019 disclosure · 3 t/day, same installation as entry 54 (700 t/yr nominal vendor figure; current throughput unverified).",
+    evEn: "Formulated solvent dissolves target polymer; Indonesian sachet pilot reported at 700 t/yr nominal capacity with measured output unverified.",
+    evDe: "Formuliertes Solvens löst Zielpolymer; Pilot in Indonesien (700 t/a Nennkapazität) beschrieben, gemessener Output unbestätigt." },
+
+  { id: 68, b: "B2", sub: "2.2", trl: "6–7", tier: "mid", volTier: "single", flags: ["conditional"],
+    en: "Polyethylene/polyamide multilayer separation", de: "Polyethylen/Polyamid-Mehrschichttrennung",
+    feedEn: "Post-industrial PE/PA barrier films", feedDe: "Post-industrielle PE/PA-Barrierefolien",
+    outEn: "Separated PE and PA fractions", outDe: "Getrennte PE- und PA-Fraktionen",
+    volDe: "Historische Standort-Inputkapazität · APK Newcycling, Merseburg (DE) · Profil 2019 · 8.000 t/a gemischter PE/PA-Laminat-Input (gleiche Anlage wie ID 53–54; getrennter PE- und PA-Output unbestätigt).",
+    volEn: "Historical site input capacity · APK Newcycling, Merseburg, Germany · 2019 profile · 8,000 t/yr mixed PE/PA laminate feed, same installation as entries 53–54 (separate recovered PE and PA output unverified).",
+    evEn: "Demonstrated in Newcycling pilot trials; conditional on verified recovery and material reuse of both PE and PA layers.",
+    evDe: "In Newcycling-Pilotversuchen gezeigt; vollständiges Recycling erfordert verifizierte Verwertung beider Schichten (PE und PA)." },
+
+  // --- BRANCH 3: CHEMICAL RECYCLING (46 entries) ---
+  { id: 46, b: "B3", sub: "3.1a", trl: "9", tier: "high", volTier: "single", flags: [], xrefs: [2, 84],
+    en: "PET glycolysis", de: "PET-Glykolyse",
+    feedEn: "Post-consumer PET + ethylene glycol", feedDe: "PET-Abfälle + Ethylenglykol",
+    outEn: "BHET monomer and oligomers for PET synthesis", outDe: "BHET-Monomer und Oligomere für PET-Synthese",
+    volDe: "Standort-Outputkapazität · JEPLAN Pet Refine Technology, Kawasaki (JP) · geprüft Nov. 2026 · 22.000 t/a recyceltes PET-Harz über den BHET-Prozess (Globaler Kontext: 0,4 Mio. t chemisch recycelte Post-Consumer-Kunststoffe in 2024).",
+    volEn: "Site output capacity · JEPLAN Pet Refine Technology, Kawasaki, Japan · checked Nov 2026 · 22,000 t/yr recycled PET resin via BHET route (Global context: 0.4 million t chemically recycled post-consumer plastics in 2024).",
+    evEn: "Glycolytic ester cleavage yields BHET; JEPLAN’s Kawasaki plant resumed full operation in 2021 with project completion confirmed in 2026.",
+    evDe: "Glykolytische Esterspaltung liefert BHET; JEPLAN Kawasaki nahm Vollbetrieb 2021 wieder auf (Projektabschluss 2026 bestätigt)." },
+
+  { id: 47, b: "B3", sub: "3.1a", trl: "9", tier: "high", volTier: "single", flags: [],
+    en: "PET methanolysis", de: "PET-Methanolyse",
+    feedEn: "Post-consumer PET + methanol", feedDe: "PET-Abfälle + Methanol",
+    outEn: "Dimethyl terephthalate (DMT) + ethylene glycol", outDe: "Dimethylterephthalat (DMT) + Ethylenglykol",
+    volDe: "Standort-Inputkapazität · Eastman, Kingsport, Tennessee (USA) · verifiziert 2025 · bis zu 110.000 t/a komplexe Polyesterabfälle (tatsächliche jährliche Einsatzmenge nicht verifiziert).",
+    volEn: "Site input capacity · Eastman, Kingsport, Tennessee, US · verified 2025 · up to 110,000 t/yr complex polyester waste (actual annual feed tonnage unverified).",
+    evEn: "Methanolytic ester cleavage yields DMT and EG; Eastman Kingsport reported on-spec commercial production and sales in 2024–2026.",
+    evDe: "Methanolytische Esterspaltung liefert DMT und EG; Eastman Kingsport meldete spezifikationsgerechte Produktion und Verkäufe (2024–2026)." },
+
+  { id: 48, b: "B3", sub: "3.1b", trl: "9", tier: "high", volTier: "single", flags: [], xrefs: [18],
+    en: "PA6 depolymerisation to caprolactam", de: "PA6-Depolymerisation zu Caprolactam",
+    feedEn: "Selected PA6 waste (fishing nets, carpets)", feedDe: "Ausgewählte PA6-Abfälle (Fischernetze, Teppiche)",
+    outEn: "Purified caprolactam monomer for PA6 yarn", outDe: "Gereinigtes Caprolactam-Monomer für PA6-Garn",
+    volDe: "Sammlung · Aquafil globales Beschaffungsnetzwerk · 2025 · ≈16.000 t Post-Consumer-Abfälle gesammelt (Referenzwerk Ljubljana, Slowenien; separater Standort-Input oder Caprolactam-Output nicht verifiziert).",
+    volEn: "Collection · Aquafil global sourcing network · 2025 · ≈16,000 t post-consumer waste collected (Ljubljana, Slovenia plant is production reference; separate actual site feed or caprolactam output unverified).",
+    evEn: "Aquafil’s Ljubljana ECONYL plant commercially depolymerises PA6 back to caprolactam for PA6 fibre production.",
+    evDe: "Aquafils ECONYL-Anlage in Ljubljana depolymerisiert PA6 kommerziell zu Caprolactam für neue PA6-Fasern." },
+
+  { id: 49, b: "B3", sub: "3.2", trl: "7–8", tier: "mid", volTier: "single", flags: [], xrefs: [21],
+    en: "PMMA depolymerisation to methyl methacrylate", de: "PMMA-Depolymerisation zu Methylmethacrylat (MMA)",
+    feedEn: "Acrylic / PMMA scrap (e.g. taillights)", feedDe: "PMMA-Abfälle (z. B. Rückleuchten)",
+    outEn: "Purified methyl methacrylate (MMA) monomer", outDe: "Gereinigtes MMA-Monomer",
+    volDe: "Geplante Kapazität · MyRemono halb-industrielle Anlage, Italien · MAIRE-Geschäftsbericht 2025 (publ. 2026) · 650 kg/h Auslegung (Inbetriebnahme 2026 geplant; frühere Allianz-Angabe: 5.000 t/a anfängliche PMMA-Inputkapazität für dasselbe Projekt).",
+    volEn: "Planned capacity · MyRemono semi-industrial facility, Italy · 2025 annual report published 2026 · rated at 650 kg/h, startup scheduled 2026 (earlier alliance note states 5,000 t/yr initial PMMA input capacity for same project).",
+    evEn: "Thermal chain-unzipping selectively yields MMA; MyRemono and Röhm demonstrated pilot recovery and industrial upgrading at Worms.",
+    evDe: "Thermisches Ketten-Unzipping liefert selektiv MMA; MyRemono und Röhm demonstrierten Pilot- und Aufreinigungsbetrieb in Worms." },
+
+  { id: 50, b: "B3", sub: "3.2", trl: "9 · niche", tier: "high", volTier: "single", flags: [], xrefs: [103],
+    en: "Polystyrene depolymerisation to styrene", de: "Polystyrol-Depolymerisation zu Styrol",
+    feedEn: "Selected polystyrene waste", feedDe: "Ausgewählte Polystyrol-Abfälle",
+    outEn: "Styrene monomer condensate", outDe: "Styrol-Monomer-Kondensat",
+    volDe: "Standort-Auslegungsrate · Toyo Styrene, Chiba (JP) · Technik 2023, Inbetriebnahme 2024 · 10 short tons/Tag Systemauslegung laut Agilyx (tatsächlicher jährlicher Styrol-Output unbestätigt).",
+    volEn: "Site design rate · Toyo Styrene, Chiba, Japan · equipment disclosed 2023, commissioned 2024 · 10 tons/day system rating per Agilyx (actual annual styrene output unverified).",
+    evEn: "Thermal unzipping yields styrene-rich condensate; Toyo Styrene’s Chiba line (Agilyx tech) produced on-spec styrene in 2024–2025.",
+    evDe: "Thermisches Unzipping liefert Styrol; Toyo Styrene (Chiba, Agilyx-Technologie) produzierte 2024–2025 spezifikationsgerechtes Styrol." },
+
+  { id: 51, b: "B3", sub: "3.1a", trl: "9 / 5", tier: "high", volTier: "single", flags: [], xrefs: [82, 83],
+    en: "Polyurethane glycolysis", de: "Polyurethan-Glykolyse",
+    feedEn: "Flexible PU mattress foam / selected PU", feedDe: "PU-Weichschaum (Matratzen) / ausgewählte PU",
+    outEn: "Recovered polyols for new PU formulations", outDe: "Zurückgewonnene Polyole für neue PU-Systeme",
+    volDe: "Standortkapazität · Dow/Eco-mobilier RENUVA, Semoy (FR) · Inbetriebnahme 2021 · ≈2.000 t/a erwartete Produktionskapazität (UNHCR-Studie). Pilotcharge · Spanien · Del Amo et al., 2022 · 3 kg PU-Schaum-Einsatz pro dokumentiertem Split-Phase-Versuch.",
+    volEn: "Site capacity · Dow/Eco-mobilier RENUVA, Semoy, France · commissioned 2021 · ≈2,000 t/yr expected production capacity per UNHCR study. Pilot batch · Spain · Del Amo et al., 2022 · 3 kg PU foam charged per documented split-phase trial.",
+    evEn: "Semoy RENUVA operates commercially on mattress foam (TRL 9); Del Amo split-phase glycolysis demonstrated at 3 kg pilot scale (TRL 5).",
+    evDe: "Semoy RENUVA verwertet Matratzenschaum kommerziell (TRL 9); Del Amo Split-Phase-Glykolyse im 3-kg-Pilotmaßstab gezeigt (TRL 5)." },
+
+  { id: 59, b: "B3", sub: "3.4a", trl: "8–9", tier: "high", volTier: "single", flags: ["conditional"],
+    en: "Tyre pyrolysis", de: "Altreifen-Pyrolyse",
+    feedEn: "End-of-life tyre rubber", feedDe: "Altreifen-Gummi",
+    outEn: "Pyrolysis oil, gas, recovered carbon black, steel", outDe: "Pyrolyseöl, Gas, Carbon Black, Stahl",
+    volDe: "Gemeldeter Markt-Input · USA · 2025 · 56.000 short tons Altreifen in inländischer Pyrolyse über alle Zwecke. Standortziel · Pyrum, Dillingen/Saar (DE) · >22.000 short tons/a Altreifen nach Ausbau (Schredderanlage ca. 9.000 short tons in 2025; physischer Reifen-zu-Neukautschuk-Output offen).",
+    volEn: "Reported market input · US · 2025 · 56,000 tons end-of-life tyres processed by domestic pyrolysis across all end uses. Site target · Pyrum, Dillingen/Saar, Germany · >22,000 tons/yr end-of-life tyres after planned upgrades (shredder processed ≈9,000 tons in 2025; physical tyre-to-new-rubber output unverified).",
+    evEn: "Conditional: Pyrum and partners report an operating route from tyre pyrolysis oil to co-fed chemical production and attributed synthetic rubber returned to tyre manufacture. Exact physical waste-to-rubber yield remains open.",
+    evDe: "Bedingt: Pyrum/BASF/Pirelli betreiben eine Massenbilanz-Kette vom Pyrolyseöl zu Synthesekautschuk; physische Ausbeute offen." },
+
+  { id: 60, b: "B3", sub: "3.3", trl: "7–8", tier: "mid", volTier: "single", flags: [], xrefs: [24],
+    en: "Rubber devulcanisation", de: "Gummi-Devulkanisation",
+    feedEn: "Vulcanised rubber waste", feedDe: "Vulkanisierte Gummiabfälle",
+    outEn: "Reprocessable devulcanised rubber compound", outDe: "Wiederverarbeitbarer devulkanisierter Kautschuk",
+    volDe: "Betreiberangabe Kapazität · Rubberlink, Portugal · 4.000 t/a Gummiverarbeitungskapazität über Reifen-, Schuh- und weitere Gummi-Inputs (devulkanisierter Standort-Output unbestätigt).",
+    volEn: "Operator-reported capacity · Rubberlink, Portugal · 4,000 t/yr rubber processing capacity across tyre-derived, footwear and other rubber feeds (site devulcanised output unverified).",
+    evEn: "Thermomechanical/chemical treatment selectively cleaves S–S/C–S crosslinks while limiting main-chain scission; industrial trials active.",
+    evDe: "Thermomechanisch/chemische Spaltung von Schwefelbrücken bei begrenzter Hauptkettenschädigung; industrielle Anlagen im Einsatz." },
+
+  { id: 61, b: "B3", sub: "3.4a", trl: "9 · selected chains", tier: "high", volTier: "single", flags: ["conditional"],
+    en: "Polyolefin pyrolysis to hydrocarbon feedstock", de: "Polyolefin-Pyrolyse zu Kohlenwasserstoff-Feedstock",
+    feedEn: "PE/PP-rich mixed plastic waste", feedDe: "PE/PP-reiche Kunststoffabfälle",
+    outEn: "Pyrolysis oil -> steam cracker -> attributed polymers", outDe: "Pyrolyseöl -> Steamcracker -> attribuierte Polymere",
+    volDe: "Ist-Input & Zwischenoutput · Pryme One, Rotterdam (NL) · 2025 · 1.023 t Kunststoff verarbeitet, 807 t Pyrolyseöl erzeugt (Nenn-Inputkapazität ≈26.000 t/a; unbefristete Schließung März 2026 gemeldet). Aktive Standort-Inputkapazität · TotalEnergies, Grandpuits (FR) · Start März 2026 · 15.000 short tons/a Kunststoffabfälle.",
+    volEn: "Actual site input and intermediate output · Pryme One, Rotterdam, Netherlands · 2025 · 1,023 t plastic processed and 807 t pyrolysis oil produced (rated input capacity ≈26,000 t/yr; indefinite closure reported March 2026). Active site input capacity · TotalEnergies, Grandpuits, France · started production March 2026 · 15,000 tons/yr waste plastics.",
+    evEn: "Conditional: Operating waste-to-oil chains supply commercial petrochemical production, with attributed recycled content in products. This rating applies to those chains and leaves physical plastic-to-plastic yield open.",
+    evDe: "Bedingt: Bestehende Ketten speisen Steamcracker via Massenbilanz; generische physische Kunststoff-zu-Kunststoff-Ausbeute nicht belegt." },
+
+  { id: 63, b: "B3", sub: "3.1b", trl: "6–7", tier: "mid", volTier: "single", flags: [], xrefs: [84],
+    en: "Alkaline PET hydrolysis", de: "Alkalische PET-Hydrolyse",
+    feedEn: "PET waste + aqueous base", feedDe: "PET-Abfälle + wässrige Lauge",
+    outEn: "Terephthalate salts -> TPA + ethylene glycol", outDe: "Terephthalatsalze -> TPA + Ethylenglykol",
+    volDe: "Demo-Inputkapazität · GR3N, Norditalien · eröffnet 2024 · 60 kg PET/h für mikrowellenunterstützte alkalische Hydrolyse (jährliche Ist-Tonnen unbestätigt).",
+    volEn: "Demonstration input capacity · GR3N, northern Italy · opened 2024 · 60 kg PET/h for microwave-assisted alkaline hydrolysis (annual actual tonnes unverified).",
+    evEn: "GR3N’s microwave-assisted alkaline route shows a relevant-scale demonstration installation in Italy. The rating applies to that alkaline configuration and its documented feed.",
+    evDe: "GR3Ns mikrowellenunterstützte alkalische Hydrolyse-Demonstrationsanlage in Italien (Eröffnung 2024) gewinnt TPA und EG." },
+
+  { id: 64, b: "B3", sub: "3.1b", trl: "4", tier: "low", volTier: "lab", flags: [],
+    en: "Neutral or high-temperature PET hydrolysis", de: "Neutrale / Hochtemperatur-PET-Hydrolyse",
+    feedEn: "Post-consumer PET + hot compressed water", feedDe: "Post-Consumer-PET + heißes Druckwasser",
+    outEn: "Terephthalic acid (TPA) + ethylene glycol", outDe: "Terephthalsäure (TPA) + Ethylenglykol",
+    volDe: "Datenlücke · Neutrale Hydrolyse an Post-Consumer-PET in US-Laborreaktoren (2023) getestet; keine verifizierte jährliche Betriebstonnage für diese neutrale Konfiguration.",
+    volEn: "Gap · Neutral hydrolysis on post-consumer PET tested in US laboratory reactors (2023); no verified operating annual tonnage for this neutral configuration.",
+    evEn: "Validated at laboratory scale on post-consumer PET without added acid/base; solids handling and purification remain scale-up challenges.",
+    evDe: "Im Labormaßstab ohne Säure-/Laugenzusatz validiert; Feststoffhandling und Aufreinigung sind zentrale Scale-up-Hürden." },
+
+  { id: 69, b: "B3", sub: "3.4c", trl: "9 · gasification step", tier: "high", volTier: "single", flags: ["conditional"], xrefs: [70],
+    en: "Plastic-waste gasification", de: "Kunststoffabfall-Vergasung",
+    feedEn: "Mixed plastic waste", feedDe: "Gemischte Kunststoffabfälle",
+    outEn: "Conditioned synthesis gas (CO + H2)", outDe: "Konditioniertes Synthesegas (CO + H2)",
+    volDe: "Gemeldete Werks-Verarbeitungsrate · Resonac / Showa Denko, Kawasaki (JP) · Nachhaltigkeitsbericht 2021 · ca. 70.000 short tons/a Kunststoffabfälle für EUP-Vergasung (aktueller gemessener Kalenderjahreswert nicht verifiziert).",
+    volEn: "Reported plant processing rate · Resonac/Showa Denko, Kawasaki, Japan · 2021 sustainability disclosure · approximately 70,000 tons/yr waste plastics for EUP gasification (recent measured calendar-year total unverified).",
+    evEn: "Conditional: Resonac’s EUP route provides evidence of industrial plastic-waste gasification for chemical feedstocks. Entry 70 assesses an onward synthesis pathway.",
+    evDe: "Bedingt: Resonacs EUP-Verfahren läuft industriell für Chemierohstoffe; energetisch genutztes Syngas zählt nicht als Recycling." },
+
+  { id: 70, b: "B3", sub: "3.4c", trl: "6–7 · intermediate chain", tier: "mid", volTier: "single", flags: ["conditional", "unresolved"], xrefs: [69],
+    en: "Gasification followed by chemical synthesis", de: "Vergasung mit nachgeschalteter Chemiesynthese",
+    feedEn: "Mixed plastic / MSW -> syngas", feedDe: "Kunststoff-/Siedlungsabfall -> Synthesegas",
+    outEn: "Methanol / ethanol -> olefins / polymers", outDe: "Methanol / Ethanol -> Olefine / Polymere",
+    volDe: "Pilot-Outputkapazität · Sekisui / LanzaTech, Kuji (JP) · Leistungsmeldung Jan. 2026 · ≈400 short tons/a Ethanol aus gemischtem Siedlungsabfall (Kunststoffanteil und kumulierter Ist-Output in der Meldung unbestätigt).",
+    volEn: "Pilot output capacity · Sekisui/LanzaTech, Kuji, Japan · Jan 2026 performance announcement · ≈400 tons/yr ethanol from mixed municipal solid waste (plastic share and actual cumulative ethanol output unverified in release).",
+    evEn: "Conditional: The Kuji MSW gasification-to-ethanol pilot reported achieving its performance guarantee in 2026. That demonstrates an intermediate synthesis chain; an integrated waste-to-new-polymer chain at Kuji remains unverified.",
+    evDe: "Bedingt: Kuji-Pilotanlage erreichte 2026 Leistungsgarantie bis Ethanol; integrierte Kette bis zum neuen Polymer noch unbestätigt." },
+
+  { id: 71, b: "B3", sub: "3.4b", trl: "6", tier: "mid", volTier: "lab", flags: ["conditional"],
+    en: "Hydrothermal liquefaction of polyolefins", de: "Hydrothermale Verflüssigung (HTL) von Polyolefinen",
+    feedEn: "Mixed polyolefin waste + hot compressed water", feedDe: "Gemischte Polyolefine + heißes Druckwasser",
+    outEn: "Hydrocarbon oil fractions", outDe: "Kohlenwasserstoff-Ölfraktionen",
+    volDe: "Datenlücke · Somersby, New South Wales (AU) · Cat-HTR-Pilotanlage seit 2021 in Betrieb (Versuche mit Kunststoff-Feed dokumentiert, aber kein verifizierter kunststoffspezifischer Jahresdurchsatz).",
+    volEn: "Gap · Somersby, New South Wales, Australia · Cat-HTR pilot commissioned 2021 (developer documents trials on plastic feed, but no verified plastic-specific annual throughput found).",
+    evEn: "Conditional: Licella reports operation of a Cat-HTR pilot with selected mixed waste-plastic feeds. Different aqueous processes require their own feed and scale evidence.",
+    evDe: "Bedingt: Licella betrieb Cat-HTR-Pilotanlage; gewonnenes Öl erfordert nachgelagerte Raffinerie-Aufbereitung zu Polymeren." },
+
+  { id: 72, b: "B3", sub: "3.4b", trl: "6 · platform evidence", tier: "mid", volTier: "single", flags: ["conditional", "unresolved"],
+    en: "Hydro-PRT — Hydrothermal Plastic Recycling Technology", de: "Hydro-PRT — Hydrothermale Kunststoffkonversion",
+    feedEn: "Mixed plastic waste + supercritical water", feedDe: "Gemischte Kunststoffabfälle + überkritisches Wasser",
+    outEn: "Hydrocarbon liquid fractions", outDe: "Flüssige Kohlenwasserstoff-Fraktionen",
+    volDe: "Genannte Standort-Outputkapazität · Mura Wilton, Teesside (UK) · Betreiberangaben 2026 · 20.000 t/a zirkuläre Kohlenwasserstoffprodukte (Standortprognose; kumulierte Ist-Produktion unbestätigt).",
+    volEn: "Stated site output capacity · Mura Wilton, Teesside, UK · 2026 operator materials · 20,000 t/yr circular hydrocarbon products (site forecast; actual cumulative production unverified).",
+    evEn: "Conditional / Unresolved: Supported by Cat-HTR platform (TRL 6); Mura Wilton commercial installation lacks verified sustained operating output.",
+    evDe: "Bedingt / Ungeklärt: Basiert auf Cat-HTR-Plattform (TRL 6); für Mura Wilton liegt noch kein verifizierter Dauerbetriebsnachweis vor." },
+
+  { id: 73, b: "B3", sub: "3.4a", trl: "5–6", tier: "mid", volTier: "single", flags: ["conditional"],
+    en: "Catalytic pyrolysis", de: "Katalytische Pyrolyse",
+    feedEn: "Selected polymer feeds + cracking catalyst", feedDe: "Ausgewählte Polymere + Crack-Katalysator",
+    outEn: "Shifted hydrocarbon oil/gas distribution", outDe: "Verschobene Kohlenwasserstoff-Produktverteilung",
+    volDe: "Historischer Größen-Benchmark · Fuji-Verfahren, Japan · zitiert in Review 2025 · 500 t/a Kunststoffabfall für semi-kommerzielle katalytische Einheit (historischer Fall; keine vergleichbare aktuelle Polymer-Output-Tonnage belegt).",
+    volEn: "Historical scale benchmark · Fuji process, Japan · cited in 2025 review · 500 t/yr plastic waste reported for semi-commercial catalytic unit (separate historical case; no comparable current polymer-output tonnage verified).",
+    evEn: "Conditional: In-situ/ex-situ catalysts shift hydrocarbon selectivity at pilot scale; downstream cleanup and polymer synthesis required.",
+    evDe: "Bedingt: Katalysatoren steuern die Produktverteilung im Pilotmaßstab; nachgelagerte Aufreinigung und Polymersynthese nötig." },
+
+  { id: 74, b: "B3", sub: "3.4a", trl: "5–6", tier: "mid", volTier: "single", flags: ["conditional"],
+    en: "Fluidised-bed pyrolysis", de: "Wirbelschicht-Pyrolyse",
+    feedEn: "HDPE / particulate plastic waste", feedDe: "HDPE / zerkleinerte Kunststoffabfälle",
+    outEn: "Condensable hydrocarbon vapours and gas", outDe: "Kondensierbare Kohlenwasserstoffdämpfe und Gas",
+    volDe: "Gemessene Pilot-Einsatzrate · Université de Sherbrooke, Québec (CA) · Studie 2026 · 3,2 kg HDPE/h während 2–5 h Versuchsläufen.",
+    volEn: "Actual pilot feed rate · Université de Sherbrooke, Québec, Canada · study published 2026 · 3.2 kg HDPE/h during 2–5 h runs.",
+    evEn: "Conditional: Reactor configuration providing rapid heat transfer (2026 continuous HDPE pilot); downstream polymer qualification open.",
+    evDe: "Bedingt: Reaktorvariante mit schnellem Wärmeübergang (2026 kontinuierlicher HDPE-Pilot); Qualifizierung bis zum Polymer offen." },
+
+  { id: 75, b: "B3", sub: "3.4a", trl: "4–5", tier: "low", volTier: "lab", flags: ["conditional"],
+    en: "Hydropyrolysis and hydrogen-assisted thermal cracking", de: "Hydropyrolyse und wasserstoffunterstütztes Cracken",
+    feedEn: "Plastics + reactive hydrogen atmosphere", feedDe: "Kunststoffe + Wasserstoffatmosphäre",
+    outEn: "More saturated hydrocarbon oil", outDe: "Stärker gesättigtes Kohlenwasserstofföl",
+    volDe: "Datenlücke · Eine Tandem-Hydropyrolyse-Studie (2026) zeigt Kohlenwasserstoffe für Flugkraftstoff; kein Betriebsmassenstrom für eine Polymer-Feedstock-Kette belegt.",
+    volEn: "Gap · A 2026 tandem hydropyrolysis study demonstrates hydrocarbon products for jet-fuel applications; no operating mass flow verified for a polymer-feedstock chain.",
+    evEn: "Conditional: In-reactor hydrogen alters cracking products at lab/pre-pilot scale; must be tracked to polymer feedstock.",
+    evDe: "Bedingt: Wasserstoff im Reaktor verändert Crackprodukte im Labor-/Vorpilotmaßstab; Nachweis bis Polymer-Feedstock nötig." },
+
+  { id: 78, b: "B3", sub: "3.1c", trl: "4–5", tier: "low", volTier: "lab", flags: ["conditional", "unresolved"],
+    en: "Chemical recycling of wind-turbine blade composites", de: "Chemisches Recycling von Windkraftflügel-Composites",
+    feedEn: "Retired epoxy/thermoset wind-turbine blades", feedDe: "Ausgediente Epoxid/Duroplast-Rotorblätter",
+    outEn: "Matrix-derived chemicals + recovered fibres", outDe: "Matrix-Chemikalien + zurückgewonnene Fasern",
+    volDe: "Datenlücke · CETEC und Rotorblatt-Studien (2026) belegen chemische Zerlegung, aber keine Jahrestonnen verarbeiteter Rotorblätter oder rückgewonnener Matrixchemikalien (Acetolyse siehe ID 109).",
+    volEn: "Gap · CETEC and 2026 retired-blade research document chemical recovery, but no annual tonnes of deconstructed blades or recovered matrix chemicals verified (distinct acetolysis in entry 109).",
+    evEn: "Conditional: Lab treatment and CETEC scale-up documented; counts as plastics recycling only if matrix chemicals are reused (fibre-only excluded).",
+    evDe: "Bedingt: Labor- und CETEC-Scale-up dokumentiert; zählt nur als Kunststoffrecycling, wenn Matrix-Chemikalien wiederverwendet werden." },
+
+  { id: 80, b: "B3", sub: "3.1a", trl: "9 / 4", tier: "high", volTier: "single", flags: [],
+    en: "Chemical recycling of polyester textiles", de: "Chemisches Recycling von Polyester-Textilien",
+    feedEn: "Polyester / blended textiles", feedDe: "Polyester- / Mischtextilien",
+    outEn: "BHET or TPA monomer intermediates", outDe: "BHET- oder TPA-Monomerintermediate",
+    volDe: "Standort-Outputkapazität · JEPLAN Kitakyushu Hibikinada (JP) · geprüft Nov. 2026 · 1.000 t/a textilstämmiges Polyesterharz. Laborcharge · University of Delaware (USA) · 2024 · 0,5 g Polyestertextil pro Mikrowellen-Glykolyse-Lauf (Andini et al.).",
+    volEn: "Site output capacity · JEPLAN Kitakyushu Hibikinada, Japan · checked Nov 2026 · 1,000 t/yr textile-derived polyester resin. Lab batch · University of Delaware, US · 2024 · 0.5 g polyester textile per reported microwave-glycolysis run (Andini et al.).",
+    evEn: "JEPLAN’s Kitakyushu route operates on selected polyester textiles (9). Andini’s specific microwave process on mixed textiles is a laboratory example (4).",
+    evDe: "JEPLAN Kitakyushu arbeitet kommerziell mit Polyestertextilien (TRL 9); Andinis Mikrowellen-Glykolyse an Mischgeweben ist Laborstand (TRL 4)." },
+
+  { id: 81, b: "B3", sub: "3.1b", trl: "4–6", tier: "mid", volTier: "single", flags: ["conditional"],
+    en: "Selective chemical separation of blended textiles", de: "Selektive chemische Trennung von Mischtextilien",
+    feedEn: "Polycotton / blended fibre textiles", feedDe: "Polycotton- / Mischfasertextilien",
+    outEn: "PET monomers (TPA/EG) + retained cellulose pulp", outDe: "PET-Monomere (TPA/EG) + erhaltene Zellulosefasern",
+    volDe: "Geplante Inputkapazität · Circ, Projekt Saint-Avold (FR) · Angaben 2025–2026 · 70.000 t/a Polycotton. Laborcharge · University of Delaware (USA) · 2024 · 0,5 g unsortierte Mischtextilien im separaten Andini-Versuch.",
+    volEn: "Planned input capacity · Circ, Saint-Avold project, France · 2025–26 disclosures · 70,000 t/yr polycotton. Lab batch · University of Delaware, US · 2024 · 0.5 g unsorted blended textiles in distinct Andini experiment.",
+    evEn: "Andini validated targeted recovery in laboratory blends. Separate hydrothermal polycotton projects such as Circ have reached demonstration and product trials. Specify the method and each output.",
+    evDe: "Bedingt: Hydrothermale Polycotton-Verfahren (z. B. Circ) erreichten Demo-Maßstab; stoffliche Nutzung der Fraktionen muss belegt sein." },
+
+  { id: 82, b: "B3", sub: "3.1b", trl: "3–4", tier: "low", volTier: "lab", flags: ["unresolved"],
+    en: "Chemical recycling of polyurethane by hydrolysis", de: "Chemisches Recycling von Polyurethan durch Hydrolyse",
+    feedEn: "Selected polyurethane formulations + water", feedDe: "Ausgewählte Polyurethan-Formulierungen + Wasser",
+    outEn: "Polyols and amine-containing products", outDe: "Polyole und aminhaltige Spaltprodukte",
+    volDe: "Datenlücke · Evonik PU-Hydrolyse-Entwicklung, Hanau (DE) · Update Juni 2026 belegt Entwicklung und Förderung, aber keinen verifizierten Pilot-Input oder Jahresdurchsatz.",
+    volEn: "Gap · Evonik PU hydrolysis development, Hanau, Germany · June 2026 update documents development and funding, but no verified hydrolysis pilot feed mass or annual throughput.",
+    evEn: "Water-mediated cleavage and recovered fractions are reported for selected PU formulations in research. Reuse specifications and a verified integrated pilot remain open.",
+    evDe: "Wasservermittelte Spaltung im Labormaßstab gezeigt; Aufreinigung und integrierte Pilot-Wiederverwendung sind noch offen." },
+
+  { id: 83, b: "B3", sub: "3.1c", trl: "4", tier: "low", volTier: "lab", flags: ["unresolved"],
+    en: "Polyurethane acidolysis", de: "Polyurethan-Acidolyse",
+    feedEn: "PU waste + organic carboxylic acids", feedDe: "PU-Abfälle + organische Carbonsäuren",
+    outEn: "Polyol-rich mixtures / derivatives", outDe: "Polyolreiche Gemische / Derivate",
+    volDe: "Datenlücke · Veröffentlichte Versuche beschreiben Acidolyse ausgewählter PU-Schäume; keine verifizierte Pilot- oder Kommerziallonnage für diese Konfiguration.",
+    volEn: "Gap · Published trials report acidolysis of selected PU foams; no verified pilot or commercial tonnage for the acidolysis configuration.",
+    evEn: "Laboratory acidolysis and separation of products are documented for selected PU. Separate scale evidence would be needed for a waste-fed pilot.",
+    evDe: "Labor-Acidolyse und Produkttrennung dokumentiert; Durchsatz eines abfallgespeisten Pilotbetriebs bleibt ungeklärt." },
+
+  { id: 84, b: "B3", sub: "3.1d", trl: "4", tier: "low", volTier: "lab", flags: [], xrefs: [46, 63],
+    en: "Microwave-assisted PET glycolysis", de: "Mikrowellenunterstützte PET-Glykolyse",
+    feedEn: "PET waste / textiles + ethylene glycol", feedDe: "PET-Abfälle / Textilien + Ethylenglykol",
+    outEn: "BHET-rich glycolysate", outDe: "BHET-reiches Glykolysat",
+    volDe: "Laborcharge · University of Delaware (USA) · 2024 · 0,5 g Polyestertextil in den zitierten Mikrowellen-Glykolyse-Versuchen (gleicher Fall wie Laborangabe in ID 80).",
+    volEn: "Lab batch · University of Delaware, US · 2024 · 0.5 g polyester textile in cited microwave-glycolysis trials (same case as lab observation in entry 80).",
+    evEn: "Microwave heating assists glycolysis of PET to a BHET-rich product. Laboratory heating rate or PET conversion does not measure isolated BHET, polymer yield or plant economics.",
+    evDe: "Mikrowellen liefern schnelle Heizraten für die Glykolyse im Labor; zu unterscheiden von der alkalischen Hydrolyse (ID 63)." },
+
+  { id: 85, b: "B3", sub: "3.1d", trl: "4", tier: "low", volTier: "lab", flags: [],
+    en: "Microwave-assisted sequential PET glycolysis and hydrolysis", de: "Mikrowellenunterstützte sequenzielle PET-Glykolyse & -Hydrolyse",
+    feedEn: "PET waste", feedDe: "PET-Abfälle",
+    outEn: "Terephthalic acid (TPA) via glycolysate", outDe: "Terephthalsäure (TPA) über Glykolysat",
+    volDe: "Laborcharge · Azeem et al., Irland-geleitet · 2022 · separate 0,85 g und 0,82 g Rest-PET-Einsatz in der Hydrolysestufe nach Glykolyse (Neuware-PET-Vergleich: 1,00 g).",
+    volEn: "Lab batch · Azeem et al., Ireland-led study · 2022 · separate 0.85 g and 0.82 g residual-PET charges in hydrolysis stage following glycolysis (virgin PET comparator: 1.00 g).",
+    evEn: "Azeem et al. (2022) report approximately 99% PET depolymerisation under laboratory conditions for the tested sequential route, which targets TPA through glycolysate intermediates.",
+    evDe: "Azeem et al. (2022) zeigten ca. 99 % Labordepolymerisation in einer zweistufigen Mikrowellen-Glykolyse/Hydrolyse." },
+
+  { id: 86, b: "B3", sub: "3.1d", trl: "3–4", tier: "low", volTier: "lab", flags: [],
+    en: "Bimetallic-catalyst PET depolymerisation", de: "Bimetall-katalysierte PET-Depolymerisation",
+    feedEn: "PET waste + bimetallic catalyst", feedDe: "PET-Abfälle + Bimetall-Katalysator",
+    outEn: "Ester cleavage monomers (BHET / diesters)", outDe: "Esterspaltprodukte (BHET / Diester)",
+    volDe: "Datenlücke · Bimetallische PET-Spaltung in einer Laborstudie (2026) dokumentiert; keine verifizierte Pilot- oder Industriemenge für diese Katalysatorkonfiguration.",
+    volEn: "Gap · Bimetallic PET cleavage documented in a 2026 laboratory study; no verified pilot or industrial volume for that catalyst configuration.",
+    evEn: "Bimetallic ester-cleavage studies show experimental proof or laboratory validation on specified feeds. The generic entry does not identify a pilot configuration.",
+    evDe: "Synergistische Zweimetall-Katalysatoren erhöhen Selektivität und Geschwindigkeit der Esterspaltung im Labor." },
+
+  { id: 87, b: "B3", sub: "3.1d", trl: "4", tier: "low", volTier: "lab", flags: [],
+    en: "Ionic-liquid-assisted PET recycling", de: "Ionische-Flüssigkeiten-gestütztes PET-Recycling",
+    feedEn: "PET waste + ionic liquid catalyst/medium", feedDe: "PET-Abfälle + ionische Flüssigkeit",
+    outEn: "BHET monomer", outDe: "BHET-Monomer",
+    volDe: "Datenlücke · Yue et al. dokumentieren ionische-Flüssigkeiten-Glykolyse im Labormaßstab; kein verifizierter Pilot- oder Jahresdurchsatz veröffentlicht.",
+    volEn: "Gap · Yue et al. document lab-scale ionic-liquid glycolysis; no verified published pilot or annual throughput found for that configuration.",
+    evEn: "Yue et al. measured BHET yields and PET conversion in laboratory ionic-liquid-catalysed glycolysis.",
+    evDe: "Yue et al. quantifizierten BHET-Ausbeuten bei der durch ionische Flüssigkeiten katalysierten PET-Glykolyse im Labor." },
+
+  { id: 88, b: "B3", sub: "3.1d", trl: "4", tier: "low", volTier: "lab", flags: [], xrefs: [54],
+    en: "Deep-eutectic-solvent recycling", de: "Deep-Eutectic-Solvent-Recycling (DES)",
+    feedEn: "PET or multilayer laminates + DES medium", feedDe: "PET oder Mehrschichtfolien + DES-Medium",
+    outEn: "PET monomers (glycolysis) or delaminated layers", outDe: "PET-Monomere (Glykolyse) oder delaminierte Schichten",
+    volDe: "Labormaßstab · Azeem et al., Irland-geleitet · 2022 · zwei optimierte DES/Glykolyse-Varianten ergaben 0,85 g und 0,82 g Rest-PET (als Hydrolyse-Feed in ID 85; Restmengen, kein Industriedurchsatz).",
+    volEn: "Lab scale · Azeem et al., Ireland-led study · 2022 · two optimised DES/glycolysis variants gave 0.85 g and 0.82 g residual PET, used separately as hydrolysis feeds in entry 85 (residual quantities; no industrial throughput verified).",
+    evEn: "Azeem et al. evaluated defined deep-eutectic formulations in laboratory PET experiments. Separate DES studies target physical delamination (cross-ref 54).",
+    evDe: "Azeem et al. untersuchten DES für die PET-Depolymerisation im Labor; andere DES-Ansätze zielen auf reine Delaminierung (Querverweis 54)." },
+
+  { id: 89, b: "B3", sub: "3.1d", trl: "4", tier: "low", volTier: "lab", flags: ["unresolved"], xrefs: [124],
+    en: "Mechanochemical polymer depolymerisation", de: "Mechanochemische Polymer-Depolymerisation",
+    feedEn: "PVC/PET mixtures or PDK networks (ball milling)", feedDe: "PVC/PET-Gemische oder PDK-Netzwerke (Kugelmühle)",
+    outEn: "Terephthalic acid (TPA) / monomers", outDe: "Terephthalsäure (TPA) / Monomere",
+    volDe: "Datenlücke · Die PVC/PET-Kugelmühlen-Studie (2025) berichtet eine Labordemonstration; kein verifizierter Betriebsmassenstrom für Mischabfall im Pilot- oder Industriemaßstab.",
+    volEn: "Gap · The 2025 PVC/PET ball-milling study reports a lab demonstration; no verified operating mass flow for mixed-waste treatment at pilot or industrial scale.",
+    evEn: "A 2025 study recovered TPA from a PVC/PET mixture by stepwise ball milling. Sustained operation at relevant scale remains unverified.",
+    evDe: "Eine Studie (2025) gewann TPA aus PVC/PET-Gemischen durch schrittweises Kugelmahlen im Labor; kontinuierlicher Betrieb unbestätigt." },
+
+  { id: 94, b: "B3", sub: "3.3", trl: "4", tier: "low", volTier: "lab", flags: ["conditional"],
+    en: "Catalytic hydrocracking of polyolefins", de: "Katalytisches Hydrocracken von Polyolefinen",
+    feedEn: "PE / PP + hydrogen + acid/metal catalyst", feedDe: "PE / PP + Wasserstoff + Katalysator",
+    outEn: "Shorter saturated hydrocarbons", outDe: "Kürzere gesättigte Kohlenwasserstoffe",
+    volDe: "Datenlücke · Labor-Hydrocracken berichtet Produktverteilungen; kein verifizierter Betriebsmassenstrom für den spezifizierten Abfall-Polyolefin-zu-Polymer-Pfad.",
+    volEn: "Gap · Laboratory hydrocracking reports product distributions; no verified operating mass flow tied to specified waste-polyolefin-to-polymer pathway.",
+    evEn: "Conditional: Produces liquid hydrocarbons in lab reactors; requires demonstrated downstream conversion to plastics rather than fuels.",
+    evDe: "Bedingt: Liefert flüssige Kohlenwasserstoffe im Labor; Nachweis der Weiterverarbeitung zu Kunststoffen (statt Kraftstoff) nötig." },
+
+  { id: 95, b: "B3", sub: "3.3", trl: "4", tier: "low", volTier: "lab", flags: ["conditional"],
+    en: "Ruthenium-catalysed polyolefin hydrogenolysis", de: "Ruthenium-katalysierte Polyolefin-Hydrogenolyse",
+    feedEn: "Polyolefins + H2 + Ru catalyst", feedDe: "Polyolefine + H2 + Ru-Katalysator",
+    outEn: "Narrow-distribution alkanes / waxes", outDe: "Engverteilte Alkane / Wachse",
+    volDe: "Datenlücke · Ru-katalysierte Hydrogenolyse im Labor hat Stoffumsatz-Evidenz; kein verifizierter Pilot- oder Industriedurchsatz mit Abfall-Feed für diese Route.",
+    volEn: "Gap · Laboratory Ru-catalysed hydrogenolysis has material conversion evidence; no verified pilot or industrial waste-fed throughput for specified route.",
+    evEn: "Conditional: Selective C–C hydrogenolysis yields characterised saturated hydrocarbons in lab studies; polymer synthesis destination governs recycling status.",
+    evDe: "Bedingt: Selektive C–C-Hydrogenolyse liefert definierte Alkane/Wachse im Labor; Verwertung in der Polymersynthese entscheidet." },
+
+  { id: 96, b: "B3", sub: "3.3", trl: "4", tier: "low", volTier: "lab", flags: ["conditional"],
+    en: "Tandem hydrocracking using bifunctional catalysts", de: "Tandem-Hydrocracken mit bifunktionellen Katalysatoren",
+    feedEn: "Polyolefins + metal-acid bifunctional catalyst", feedDe: "Polyolefine + bifunktioneller Metall-Säure-Katalysator",
+    outEn: "Tailored hydrocarbon distributions", outDe: "Maßgeschneiderte Kohlenwasserstoff-Verteilungen",
+    volDe: "Datenlücke · Laborstudien mit bifunktionellen Katalysatoren überlappen ID 94–95; kein verifizierter kontinuierlicher Pilotdurchsatz für diese Tandem-Konfiguration.",
+    volEn: "Gap · Laboratory bifunctional-catalyst evidence overlaps entries 94–95; no verified continuous pilot throughput for specified tandem configuration.",
+    evEn: "Conditional: Metal and acid sites cooperatively tailor chain length in lab tests; fuel vs. polymer intermediate endpoints must be separated.",
+    evDe: "Bedingt: Metall- und Säurezentren steuern die Kettenlänge im Labor; Kraftstoff- und Polymer-Endpunkte müssen getrennt bewertet werden." },
+
+  { id: 97, b: "B3", sub: "3.3", trl: "4", tier: "low", volTier: "lab", flags: ["conditional"], xrefs: [104, 106],
+    en: "Catalytic oxidative depolymerisation of polyolefins", de: "Katalytische oxidative Depolymerisation von Polyolefinen",
+    feedEn: "PE / PP + oxygen + oxidation catalyst", feedDe: "PE / PP + Sauerstoff + Oxidationskatalysator",
+    outEn: "Carboxylic acids / oxygenated intermediates", outDe: "Carbonsäuren / sauerstoffhaltige Intermediate",
+    volDe: "Datenlücke · Oxidative Spaltung von PE/PP im Labormaßstab berichtet; kein verifizierter Pilotdurchsatz oder rückgewonnene Produkt-Tonnage für diese Oxygenat-Route.",
+    volEn: "Gap · Oxidative cleavage of PE/PP reported at laboratory scale; no verified pilot throughput and recovered product tonnage for specified oxygenate route.",
+    evEn: "Conditional: Lab oxidation yields plastic-derived oxygenates (also used as upstream step for biological funneling in IDs 104/106).",
+    evDe: "Bedingt: Laboroxidation liefert Carbonsäuren/Oxygenate (dient auch als Vorstufe für biologisches Funneling in IDs 104/106)." },
+
+  { id: 98, b: "B3", sub: "3.3", trl: "4", tier: "low", volTier: "lab", flags: ["conditional"], xrefs: [105],
+    en: "Catalytic polystyrene oxidation", de: "Katalytische Polystyrol-Oxidation",
+    feedEn: "Polystyrene waste + oxidant/catalyst", feedDe: "Polystyrol-Abfälle + Oxidationsmittel/Katalysator",
+    outEn: "Benzoic acid / aromatic oxygenates", outDe: "Benzoesäure / aromatische Oxygenate",
+    volDe: "Labor-/Bench-Feed-Maßstab · Cornell University (USA) · Publikation 2022 · Gramm-Mengen PS in Photoflow-Scale-up-Demo umgesetzt (Photooxidations-Beispiel, fällt auch unter ID 100).",
+    volEn: "Lab/bench feed scale · Cornell University, US · 2022 publication · gram quantities of PS converted in photoflow scale-up demonstration (photooxidation example also under entry 100).",
+    evEn: "Conditional: Yields aromatic oxygenates in lab studies (distinct from styrene monomer unzipping); downstream polymer loop unverified.",
+    evDe: "Bedingt: Liefert aromatische Oxygenate im Labor (kein Styrol-Unzipping); nachgelagerter Polymerkreislauf noch unbestätigt." },
+
+  { id: 99, b: "B3", sub: "3.3", trl: "3–4", tier: "low", volTier: "lab", flags: ["conditional", "unresolved"],
+    en: "Electrochemical polymer depolymerisation", de: "Elektrochemische Polymer-Depolymerisation",
+    feedEn: "PVC or PET-derived glycol in electrochemical cell", feedDe: "PVC oder PET-Glykol in elektrochemischer Zelle",
+    outEn: "Dechlorinated products / oxidised chemicals", outDe: "Dechlorierte Produkte / oxidierte Chemikalien",
+    volDe: "Laborcharge · University of Michigan (USA) · 2026 · bis zu 0,5 g PVC in elektrochemischen Dechlorierungs-Versuchen (Endpunkt ist Dechlorierung; kein Massenstrom einer Kunststoffkette belegt).",
+    volEn: "Lab batch · University of Michigan, US · 2026 · up to 0.5 g PVC in electrochemical dechlorination experiments (endpoint is dechlorination; no operating plastics-chain mass flow verified).",
+    evEn: "Conditional / Unresolved: Lab electrochemical cells transform waste PVC or PET hydrolysates; complete polymer material loop unverified.",
+    evDe: "Bedingt / Ungeklärt: Labor-Elektrolysezellen wandeln PVC oder PET-Hydrolysate um; geschlossener Materialkreislauf unbestätigt." },
+
+  { id: 100, b: "B3", sub: "3.3", trl: "4 conversion / 2–3 materials", tier: "low", volTier: "lab", flags: ["conditional", "unresolved"],
+    en: "Photocatalytic plastic conversion", de: "Photokatalytische Kunststoffkonversion",
+    feedEn: "PS / pretreated plastics + light + photocatalyst", feedDe: "PS / vorbehandelte Kunststoffe + Licht + Photokatalysator",
+    outEn: "Aromatic small molecules", outDe: "Aromatische Kleinmoleküle",
+    volDe: "Labor-/Bench-Feed-Maßstab · Cornell University (USA) · Publikation 2022 · Gramm-Mengen PS in der Photoflow-Studie (auch in ID 98; aktueller Jahresoutput und fertige Polymertonnage unbestätigt).",
+    volEn: "Lab/bench feed scale · Cornell University, US · 2022 publication · gram quantities of PS in photoflow study also in entry 98 (actual annual output and finished polymer tonnage unverified).",
+    evEn: "Conditional / Unresolved: Light-driven lab conversion reaches TRL 4, while an isolated polymer-grade material loop remains at TRL 2–3.",
+    evDe: "Bedingt / Ungeklärt: Lichtgetriebene Laborkonversion erreicht TRL 4, die stoffliche Rückführung zu Kunststoffen liegt bei TRL 2–3." },
+
+  { id: 102, b: "B3", sub: "3.4d", trl: "3–4", tier: "low", volTier: "lab", flags: ["conditional", "unresolved"],
+    en: "Plasma-assisted plastic conversion", de: "Plasmagestützte Kunststoffkonversion",
+    feedEn: "Selected polypropylene / plastic feeds", feedDe: "Ausgewählte Polypropylen- / Kunststoffströme",
+    outEn: "Propylene-rich gas mixture", outDe: "Propylenreiches Gasgemisch",
+    volDe: "Datenlücke · Labor-Plasmakatalyse mit PP berichtet Gasausbeuten; keine verifizierte Pilotmenge zur Rückgewinnung von Polymer-Propylen über diese Route.",
+    volEn: "Gap · Laboratory plasma-catalytic work with PP reports gas yields; no verified pilot quantity for recovering polymer-grade propylene from PP via specified route.",
+    evEn: "Conditional / Unresolved: Lab plasma treatment of PP yielded propylene-rich gas; purification for polymerisation and mixed-waste handling open.",
+    evDe: "Bedingt / Ungeklärt: Labor-Plasmabehandlung von PP lieferte propylenreiches Gas; Aufreinigung und Mischabfall-Eignung offen." },
+
+  { id: 103, b: "B3", sub: "3.4a", trl: "6", tier: "mid", volTier: "single", flags: ["conditional"], xrefs: [50],
+    en: "Microwave-assisted pyrolysis", de: "Mikrowellenunterstützte Pyrolyse",
+    feedEn: "PS / plastics + microwave-absorbing medium", feedDe: "PS / Kunststoffe + Mikrowellenabsorber",
+    outEn: "Styrene-rich condensate / pyrolysis oil & gas", outDe: "Styrolreiches Kondensat / Pyrolyseöl & Gas",
+    volDe: "Historische Pilotkapazität · Pyrowave, Raum Montréal, Québec (CA) · validiertes Profil 2019 · 400–1.200 short tons/a angegebene Abfall-Verarbeitungskapazität für Kleinanlage (aktueller Jahresdurchsatz unbestätigt).",
+    volEn: "Historical pilot capacity · Pyrowave, near Montréal, Québec, Canada · 2019 company-validated profile · 400–1,200 tons/yr stated waste-treatment capability for small unit (current annual throughput unverified).",
+    evEn: "Conditional: Pyrowave and partners reported finished products from microwave-derived styrene in demonstration batches. This supports the specified PS route.",
+    evDe: "Bedingt: Pyrowave demonstrierte Endprodukte aus Mikrowellen-Styrol (TRL 6); Mikrowelle liefert Energie, Mechanismus ist Pyrolyse." },
+
+  { id: 107, b: "B3", sub: "3.1a", trl: "4", tier: "low", volTier: "lab", flags: [],
+    en: "Catalytic polyurethane methanolysis and hydrogenation", de: "Katalytische Polyurethan-Methanolyse und -Hydrierung",
+    feedEn: "Urethane/ester-containing PU + MeOH + H2", feedDe: "Urethan-/Ester-haltiges PU + MeOH + H2",
+    outEn: "Aromatic diamines + lactones/diols", outDe: "Aromatische Diamine + Lactone/Diole",
+    volDe: "Laborcharge · Chinesische Akademie der Wissenschaften (CN) · Publikation 2025 · 5 g PU-reiche Reifenprobe, letztlich ≈2,2 g Polyimidfilm und ≈0,44 g Polylacton in der beschriebenen Kette (Bo Sun et al.).",
+    volEn: "Lab batch · Chinese Academy of Sciences-led study, China · publication 2025 · 5 g PU-rich tyre sample, ultimately yielding ≈2.2 g polyimide film and ≈0.44 g polylactone in described chain (Bo Sun et al.).",
+    evEn: "Bo Sun et al. recovered intermediates from selected PU formulations and demonstrated polymer synthesis in the laboratory.",
+    evDe: "Bo Sun et al. spalteten PU im Labor in Diamine und Lactone und demonstrierten die Repolymerisation." },
+
+  { id: 108, b: "B3", sub: "3.1c", trl: "4", tier: "low", volTier: "lab", flags: [],
+    en: "Polyurethane upcycling into 3D-printing resins", de: "Polyurethan-Upcycling zu 3D-Druck-Harzen",
+    feedEn: "Waste PU foam / thermoset PU", feedDe: "PU-Schaum- / Duroplast-Abfälle",
+    outEn: "Functionalised photocurable 3D-printing resin", outDe: "Funktionalisiertes photohärtbares 3D-Druck-Harz",
+    volDe: "Datenlücke · Neuere Arbeiten (2025/2026) zeigen gehärtete Bauteile aus PU-Harzen; kein verifizierter Anlagendurchsatz oder jährlicher Harz-Output gefunden.",
+    volEn: "Gap · Recent papers (2025/2026) demonstrate cured articles from PU-derived resin; no verified plant throughput or annual resin output found for those formulations.",
+    evEn: "Laboratory studies turned waste PU foam or thermoset PU into photocurable resins and printed test articles.",
+    evDe: "Laborstudien spalteten PU-Abfälle und funktionalisierten die Spaltprodukte zu photohärtbaren Harzen für den 3D-Druck." },
+
+  { id: 109, b: "B3", sub: "3.1c", trl: "4", tier: "low", volTier: "lab", flags: [],
+    en: "Epoxy-composite acetolysis", de: "Epoxid-Composite-Acetolyse",
+    feedEn: "Epoxy–amine carbon-fibre composites (CFRP)", feedDe: "Epoxid-Amin-Carbonfaser-Composites (CFK)",
+    outEn: "Matrix building blocks + recovered carbon fibres", outDe: "Matrix-Bausteine + zurückgewonnene Carbonfasern",
+    volDe: "Laborcharge · Lahive et al., US-geleitet · 2025 · ≈250 mg Composite pro Massenbilanz-Test (separater verkleinerter Fahrradrahmen-Versuch umfasst 10 g Faser-Vlies als Faseranwendungsbeispiel; Scale-up ca. 80 g).",
+    volEn: "Lab batch · Lahive et al., US-led study · 2025 · ≈250 mg composite per reported mass-balance test (separate downsized bicycle-frame demo includes 10 g recovered-fibre mat as fibre-use example; scale-up ≈80 g).",
+    evEn: "Lahive et al. recovered matrix building blocks and fibre from an 80 g CFRP test and made new specimens. The larger plant is modelled.",
+    evDe: "Lahive et al. gewannen Matrix-Bausteine und Fasern aus ca. 80 g CFK zurück und fertigten neue Verbundprüfkörper." },
+
+  { id: 110, b: "B3", sub: "3.1c", trl: "3–4", tier: "low", volTier: "lab", flags: ["conditional"],
+    en: "Microwave-assisted composite solvolysis", de: "Mikrowellenunterstützte Composite-Solvolyse",
+    feedEn: "Thermoset fibre composites + reactive solvent", feedDe: "Duroplast-Faserverbunde + Reaktivlösungsmittel",
+    outEn: "Matrix-derived chemicals + fibres", outDe: "Matrix-Chemikalien + Fasern",
+    volDe: "Datenlücke · Studie (2026) zeigt mikrowellenunterstützte Solvolyse an Rotorblattproben; kein verifizierter Pilotdurchsatz oder jährliche Chemikalien-Tonnage gefunden.",
+    volEn: "Gap · A 2026 study demonstrates microwave-assisted solvolysis of end-of-life wind blade samples; no verified pilot throughput or annual recovered chemicals tonnage found.",
+    evEn: "Microwave-assisted solvolysis has laboratory evidence for resin removal. Plastic-matrix recovery and reuse remain chemistry-specific.",
+    evDe: "Bedingt: Laborbelege für mikrowellenunterstützte Harzablösung; zählt als Kunststoffrecycling nur bei Isolation wiederverwendbarer Matrixbausteine." },
+
+  { id: 111, b: "B3", sub: "3.1c", trl: "3–4", tier: "low", volTier: "lab", flags: ["conditional"],
+    en: "Ruthenium-catalysed epoxy-network cleavage", de: "Ruthenium-katalysierte Epoxidnetzwerk-Spaltung",
+    feedEn: "Defined epoxy composites + Ru catalyst", feedDe: "Definierte Epoxid-Composites + Ru-Katalysator",
+    outEn: "Matrix-derived cleavage products + fibres", outDe: "Matrix-Spaltprodukte + Fasern",
+    volDe: "Laborcharge · Ahrens et al., Dänemark · 2023 · 5,13 g ausgemustertes Windrad-Rotorblatt im Scale-up-Versuch für Ru-katalysierte Spaltung (tatsächlicher Industriedurchsatz unbestätigt).",
+    volEn: "Lab batch · Ahrens et al., Denmark · 2023 · 5.13 g decommissioned wind-turbine blade in scale-up experiment for Ru-catalysed cleavage (actual industrial throughput unverified).",
+    evEn: "Laboratory ruthenium-catalysed cleavage of selected epoxy structures supports experimental proof or lab validation. The generic entry leaves the reuse endpoint formulation-specific.",
+    evDe: "Bedingt: Ru-katalysierte C–O-Spaltung setzt im Labor Matrixfragmente und Fasern frei; geschlossene Wiederverwendung ist harzspezifisch." },
+
+  { id: 114, b: "B3", sub: "3.1a", trl: "4", tier: "low", volTier: "lab", flags: [], xrefs: [19],
+    en: "Catalytic depolymerisation of polycarbonates", de: "Katalytische Depolymerisation von Polycarbonaten",
+    feedEn: "BPA-based polycarbonate + alcohol/catalyst", feedDe: "BPA-Polycarbonat + Alkohol/Katalysator",
+    outEn: "Bisphenol A (BPA) + carbonate derivatives", outDe: "Bisphenol A (BPA) + Carbonat-Derivate",
+    volDe: "Datenlücke · Veröffentlichte Laborstudien zeigen selektive PC-Depolymerisation; kein verifizierter Durchsatz für diese spezifische katalytische Route und Feedstock.",
+    volEn: "Gap · Published laboratory studies demonstrate selective PC depolymerisation; no verified throughput for specific catalytic route and feed.",
+    evEn: "Laboratory polycarbonate methanolysis and separation of recoverable chemicals are documented for specified feed.",
+    evDe: "Katalytische Methanolyse/Solvolyse der Carbonatbindungen gewinnt im Labor gereinigtes BPA und Dimethylcarbonat zurück." },
+
+  { id: 115, b: "B3", sub: "3.1d", trl: "4", tier: "low", volTier: "lab", flags: ["conditional"],
+    en: "Selective catalytic recycling of mixed polyesters", de: "Selektives katalytisches Recycling gemischter Polyester",
+    feedEn: "Defined PET / PLA polyester mixtures", feedDe: "Definierte PET- / PLA-Polyestergemische",
+    outEn: "Selectively depolymerised monomer from one polyester", outDe: "Selektiv depolymerisiertes Monomer eines Polyesters",
+    volDe: "Forschungscharge · US-geleitete Studie · 2025 · 1 kg Modell-Feed aus PET, PLA, PBAT und PBS in einem Methanolyse-Scale-up-Lauf (zusätzlich kleinere Versuche mit realen Abfällen).",
+    volEn: "Research batch · US-led study · 2025 · 1 kg model feed blending PET, PLA, PBAT and PBS in a methanolysis scale-up run (study also reports smaller trials with real waste feeds).",
+    evEn: "Laboratory experiments validated selective PET/PLA cleavage and measured process and separation behaviour.",
+    evDe: "Bedingt: Unterschiedliche Reaktionsraten erlauben selektive Spaltung im Labor; Verbleib beider Fraktionen muss geklärt sein." },
+
+  { id: 116, b: "B3", sub: "3.1d", trl: "4", tier: "low", volTier: "lab", flags: [],
+    en: "Sequential catalytic recycling of PET, PLA and polycarbonate", de: "Sequenzielles katalytisches Recycling von PET, PLA und PC",
+    feedEn: "Lab-defined PLA / BPA-PC / PET mixtures", feedDe: "Definierte PLA- / BPA-PC- / PET-Gemische",
+    outEn: "Staged monomer recovery (lactate, BPA, BHET/TPA)", outDe: "Stufenweise Monomerrückgewinnung (Lactat, BPA, BHET/TPA)",
+    volDe: "Datenlücke · Studie (2026) dokumentiert sequenzielle Labor-Rückgewinnung für PLA, BPA-PC und PET; keine integrierte Pilot- oder Kommerz-Output-Tonnage verifiziert.",
+    volEn: "Gap · A 2026 study documents sequential lab recovery for PLA, BPA-PC and PET; no integrated pilot or commercial output tonnage verified.",
+    evEn: "A 2026 zinc-catalyst study investigated sequential processing of lab-defined PLA, BPA-PC and PET mixtures.",
+    evDe: "Eine Zinkkatalysator-Studie (2026) zeigte die stufenweise, bindungsselektive Spaltung von PLA, PC und PET im Laborgemisch." },
+
+  // --- BRANCH 4: BIOLOGICAL & CHEMO-BIOLOGICAL RECYCLING (8 entries) ---
+  { id: 65, b: "B4", sub: "4.1", trl: "7", tier: "mid", volTier: "single", flags: [], xrefs: [2, 46],
+    en: "Enzymatic PET recycling", de: "Enzymatisches PET-Recycling",
+    feedEn: "Amorphised/pretreated PET waste + PET hydrolases", feedDe: "Amorphisiertes PET + PET-Hydrolasen",
+    outEn: "Terephthalic acid (TPA) + ethylene glycol", outDe: "Terephthalsäure (TPA) + Ethylenglykol",
+    volDe: "Geplante Standort-Inputkapazität · Carbios, Longlaville (FR) · Angaben 2026 · 50.000 t/a PET-Abfall (Projektfinanzierung im Sept. 2026 noch in Bearbeitung). Demo-Chargenkapazität · Carbios, Clermont-Ferrand (FR) · Inbetriebnahme 2021 · 2 t PET-Abfall pro Reaktorzyklus.",
+    volEn: "Planned site input capacity · Carbios, Longlaville, France · 2026 disclosures · 50,000 t/yr PET waste (project financing still discussed in Sept 2026 update). Demonstration batch capacity · Carbios, Clermont-Ferrand, France · commissioned 2021 · 2 tons PET waste per reactor cycle.",
+    evEn: "Carbios reports that its Clermont-Ferrand demonstrator has processed PET waste since 2021. Longlaville was still presented as a financing-stage project in September 2026.",
+    evDe: "Carbios’ Demonstrationsanlage in Clermont-Ferrand läuft seit 2021 (TRL 7); das kommerzielle Werk Longlaville war im Sept. 2026 noch in Finanzierung." },
+
+  { id: 90, b: "B4", sub: "4.1", trl: "4", tier: "low", volTier: "lab", flags: [],
+    en: "Enzymatic recycling of PET/cotton blends", de: "Enzymatisches Recycling von PET/Baumwoll-Mischtextilien",
+    feedEn: "Blended PET / cotton textiles", feedDe: "PET-/Baumwoll-Mischtextilien",
+    outEn: "TPA (from PET) + optional glucose (from cotton)", outDe: "TPA (aus PET) + optional Glucose (aus Baumwolle)",
+    volDe: "Datenlücke · Kaabel et al. (2022) dokumentieren PET/Baumwoll-Hydrolyse im Labor; keine verifizierte Pilot- oder Industrietonnage für diese Feststoff-Methode.",
+    volEn: "Gap · Kaabel et al. (2022) document PET/cotton hydrolysis in laboratory; no verified pilot or industrial treatment tonnage for this solid-state method.",
+    evEn: "Kaabel et al. tested mixed PET/cotton textiles and quantified laboratory hydrolysis products.",
+    evDe: "Kaabel et al. demonstrierten die enzymatische Hydrolyse von PET/Baumwoll-Mischgeweben im Labormaßstab." },
+
+  { id: 91, b: "B4", sub: "4.2", trl: "3–4", tier: "low", volTier: "lab", flags: ["conditional", "unresolved"],
+    en: "Chemo-enzymatic separation of mixed textiles", de: "Chemo-enzymatische Trennung von Mischtextilien",
+    feedEn: "Mixed multi-fibre textiles", feedDe: "Mehrkomponenten-Mischtextilien",
+    outEn: "Monomers + retained intact fibres", outDe: "Monomere + erhaltene Intaktfasern",
+    volDe: "Datenlücke · Ausgewählte chemo-enzymatische Textilbehandlungen haben Laborevidenz; integrierter Pilot-Massenstrom und getrennte Produkt-Tonagen unbestätigt.",
+    volEn: "Gap · Selected chemo-enzymatic textile treatments have laboratory evidence; integrated pilot mass flow and separate recovered product tonnages remain unverified.",
+    evEn: "Staged selective treatment has experimental evidence on defined textile blends. The record leaves an integrated relevant-scale process unresolved.",
+    evDe: "Bedingt / Ungeklärt: Sequenzielle chemische und enzymatische Stufen spalten Mischgewebe im Labor; Pilotintegration noch offen." },
+
+  { id: 92, b: "B4", sub: "4.1", trl: "4", tier: "low", volTier: "lab", flags: [],
+    en: "MOF-stabilised enzymatic PET recycling", de: "MOF-stabilisiertes enzymatisches PET-Recycling",
+    feedEn: "PET waste + MOF-immobilised PET hydrolase", feedDe: "PET-Abfälle + MOF-immobilisierte PET-Hydrolase",
+    outEn: "Terephthalic acid (TPA)", outDe: "Terephthalsäure (TPA)",
+    volDe: "Datenlücke · Studie (2026) berichtet PET-Depolymerisation mit immobilisierter Hydrolase im Labor; kein verifizierter Pilot- oder Industriemassenstrom für MOF-Variante.",
+    volEn: "Gap · A 2026 study reports laboratory PET depolymerisation with an immobilised hydrolase; no verified pilot or industrial mass flow for MOF-supported configuration.",
+    evEn: "A 2026 paper compared MOF-immobilised PET hydrolase with free enzyme in laboratory tests, including TPA recovery.",
+    evDe: "Studie (2026) verglich an metallorganischen Gerüsten (MOF) immobilisierte PET-Hydrolasen mit freien Enzymen im Labor." },
+
+  { id: 93, b: "B4", sub: "4.1", trl: "3–4", tier: "low", volTier: "lab", flags: ["unresolved"],
+    en: "Enzymatic polyurethane decomposition", de: "Enzymatischer Polyurethan-Abbau",
+    feedEn: "Polyester-based polyurethane formulations", feedDe: "Polyester-basierte Polyurethan-Formulierungen",
+    outEn: "Cleavage fragments / small building blocks", outDe: "Spaltfragmente / niedermolekulare Bausteine",
+    volDe: "Datenlücke · Studie (Nov. 2026) berichtet Laborbehandlung von kommerziellem PU-Schaum; kein verifizierter Pilot- oder Jahresmassenstrom für enzymatische Route.",
+    volEn: "Gap · A November 2026 study reports laboratory treatment of commercial PU foam; no verified pilot or annual mass flow for enzymatic route found.",
+    evEn: "Laboratory enzymatic treatment has been shown for selected PU formulations, especially polyester PU. Endpoints range from fragmentation to identified small products.",
+    evDe: "Ungeklärt: Enzyme spalten Esterbindungen in Polyester-PU im Labor; Monomerisolierung und Wiedereinsatz in neuem PU noch offen." },
+
+  { id: 104, b: "B4", sub: "4.2", trl: "4", tier: "low", volTier: "lab", flags: ["conditional"], xrefs: [97],
+    en: "Chemo-biological funneling", de: "Chemo-biologisches Funneling",
+    feedEn: "Defined mixed plastics (PS, HDPE, PET)", feedDe: "Definierte Mischkunststoffe (PS, HDPE, PET)",
+    outEn: "Chemical oxygenates -> microbial biopolymers/chemicals", outDe: "Chemische Oxygenate -> mikrobielle Biopolymere/Chemikalien",
+    volDe: "Datenlücke · US-Laborstudie (Sullivan et al.) zeigt Tandem-Konversion definierter Kunststoff-Feeds; kein integrierter Pilotdurchsatz oder Jahresoutput belegt.",
+    volEn: "Gap · Sullivan et al. US laboratory study shows tandem conversion of defined plastic feeds; no integrated pilot throughput or annual output verified for this sequence.",
+    evEn: "Defined mixed-plastic feeds were processed through sequential laboratory oxidation and biological conversion.",
+    evDe: "Bedingt: Sullivan et al. (2022) kombinierten chemische Oxidation mit Mikroben an definierten Mischabfällen; Umgang mit Störstoffen offen." },
+
+  { id: 105, b: "B4", sub: "4.2", trl: "4", tier: "low", volTier: "lab", flags: ["conditional"], xrefs: [98],
+    en: "Biological upcycling of styrene-derived compounds", de: "Biologisches Upcycling styrolabgeleiteter Verbindungen",
+    feedEn: "Pre-oxidised/cleaved PS aromatic intermediates", feedDe: "Voroxidierte/gespaltene PS-Aromaten",
+    outEn: "Microbial target chemicals / biopolymers", outDe: "Mikrobielle Zielchemikalien / Biopolymere",
+    volDe: "Datenlücke · Biologische Stufe aus PS-Aromaten in Laborstudien berichtet; kein separater Jahres-Input oder -Output belegt (teilt Sullivan-et-al.-Fall mit ID 104 & 106).",
+    volEn: "Gap · Styrene-derived biological stage reported in laboratory studies; no separate annual input or output verified (shares Sullivan et al. case with entries 104 and 106).",
+    evEn: "Laboratory studies identify products from biologically processed PS-derived aromatic intermediates. Continuous system performance remains open.",
+    evDe: "Bedingt: Zweistufige Route, bei der abiotisch gewonnene PS-Aromaten im Labor mikrobiell zu Zielstoffen umgesetzt werden." },
+
+  { id: 106, b: "B4", sub: "4.2", trl: "4", tier: "low", volTier: "lab", flags: ["conditional"], xrefs: [97],
+    en: "Microbial conversion of oxidised polyolefin products", de: "Mikrobielle Konversion oxidierter Polyolefin-Produkte",
+    feedEn: "Soluble oxidation products from PE / PP", feedDe: "Lösliche Oxidationsprodukte aus PE / PP",
+    outEn: "Microbial biopolymers / platform chemicals", outDe: "Mikrobielle Biopolymere / Plattformchemikalien",
+    volDe: "Datenlücke · Sullivan et al. dokumentieren mikrobielle Konversion oxidierter Kunststoff-Substrate im Labor; keine kontinuierliche Abfall-zu-Produkt-Tonnage verifiziert.",
+    volEn: "Gap · Sullivan et al. document laboratory microbial conversion of oxidised plastic-derived substrates; no published continuous waste-to-product tonnage verified for this stage.",
+    evEn: "Laboratory studies demonstrate conversion of soluble products from oxidised polyolefins.",
+    evDe: "Bedingt: Mikroben verwerten lösliche oxidierte PE/PP-Fragmente im Labor (abzugrenzen vom direkten enzymatischen Abbau intakter Polyolefine)." },
+
+  // --- BRANCH 5: RECYCLING BY DESIGN (10 entries) ---
+  { id: 118, b: "B5", sub: "5.1", trl: "4", tier: "low", volTier: "lab", flags: [],
+    en: "Vitrimer recycling", de: "Vitrimer-Recycling (assoziativer Bindungsaustausch)",
+    feedEn: "Designed vitrimer polymer networks", feedDe: "Designte Vitrimer-Polymernetzwerke",
+    outEn: "Thermally reshaped/reprocessed vitrimer network", outDe: "Thermisch umgeformtes Vitrimer-Netzwerk",
+    volDe: "Datenlücke · Vitrimer-Versuche berichten Reprocessing oder Bausteinrückgewinnung für definierte Netzwerke; keine jährliche Recycling-Tonnage für untersuchte Varianten verifiziert.",
+    volEn: "Gap · Vitrimer experiments report reprocessing or constituent recovery for defined networks; no annual recycled tonnage verified for reviewed configurations.",
+    evEn: "Thermal reshaping and property retention are demonstrated for specified vitrimer specimens. The rating is for the recovery operation described here.",
+    evDe: "Assoziativer dynamisch-kovalenter Bindungsaustausch erlaubt thermisches Umformen bei erhaltener Netzwerkdichte im Labor." },
+
+  { id: 119, b: "B5", sub: "5.1", trl: "4", tier: "low", volTier: "lab", flags: ["unresolved"], xrefs: [46],
+    en: "PET upcycling into vitrimer networks", de: "PET-Upcycling zu Vitrimer-Netzwerken",
+    feedEn: "Post-consumer PET + dynamic crosslinker", feedDe: "Post-Consumer-PET + dynamischer Vernetzer",
+    outEn: "Reprocessable vitrimer / vitrimer macromonomer", outDe: "Umformbares Vitrimer / Vitrimer-Makromonomer",
+    volDe: "Datenlücke · Danielson et al. (2025) berichten Makromonomer-Rückgewinnung aus PET-Vitrimer im Labor; keine verifizierte jährliche PET-Behandlung oder Harz-Output-Menge.",
+    volEn: "Gap · Danielson et al. (2025) report laboratory recovery of macromonomer from a PET-derived vitrimer; no verified annual waste PET treatment or resin output for specific network.",
+    evEn: "Danielson et al. validated thermal reprocessing and macromonomer recovery at laboratory scale for a PET-derived vitrimer.",
+    evDe: "Danielson et al. (2025) überführten Post-Consumer-PET im Labor in umformbare Vitrimere samt Makromonomer-Rückgewinnung; Pilot offen." },
+
+  { id: 120, b: "B5", sub: "5.2", trl: "4", tier: "low", volTier: "lab", flags: [],
+    en: "Reversible amidation polymer networks", de: "Reversible Amidierungs-Polymernetzwerke",
+    feedEn: "Designed reversible-amidation elastomers/thermosets", feedDe: "Designte reversible Amid-Elastomere/-Duroplaste",
+    outEn: "Isolated building blocks (BMA, TMEN, LPEI) via acid", outDe: "Isolierte Bausteine (BMA, TMEN, LPEI) durch Säuretrigger",
+    volDe: "Labor-Output · Qin et al., China · 2022 · 4,87 g BMA und 1,11 g TMEN aus dem BMA–TMEN-Netzwerkversuch isoliert (Ausbeuten 94–97 % in untersuchten Systemen).",
+    volEn: "Lab output · Qin et al., China · 2022 · 4.87 g BMA and 1.11 g TMEN isolated from BMA–TMEN network experiment (94–97% isolation yields in studied systems).",
+    evEn: "Qin et al. isolated building blocks, reformed networks and tested selectivity in laboratory mixtures.",
+    evDe: "Qin et al. (2022) isolierten Bausteine mit 94–97 % Ausbeute aus Laborgemischen und vernetzten sie erneut." },
+
+  { id: 121, b: "B5", sub: "5.1", trl: "4", tier: "low", volTier: "lab", flags: [], xrefs: [122],
+    en: "Disulfide-based recyclable polymer networks", de: "Disulfid-basierte recycelbare Polymernetzwerke",
+    feedEn: "Designed disulfide-crosslinked networks", feedDe: "Designte Disulfid-vernetzte Netzwerke",
+    outEn: "Reshaped solid (S–S exchange) or isolated oligomers", outDe: "Umgeformter Feststoff (S–S-Austausch) oder Oligomere",
+    volDe: "Datenlücke · Disulfid-Vitrimer-Studie (2025) zeigt Oligomer-Rückgewinnung und Re-Vernetzung im Labor; keine jährliche Betriebstonnage verifiziert.",
+    volEn: "Gap · A 2025 disulfide vitrimer study demonstrates laboratory oligomer recovery and re-crosslinking; no operating annual tonnage verified.",
+    evEn: "Defined disulfide-based networks show laboratory oligomer recovery and re-crosslinking or repeated polymer recovery.",
+    evDe: "Dynamischer S–S-Austausch ermöglicht thermisches Umformen, reduktive Trigger spalten zu re-vernetzbaren Oligomeren im Labor." },
+
+  { id: 122, b: "B5", sub: "5.2", trl: "4", tier: "low", volTier: "lab", flags: [], xrefs: [118],
+    en: "Orthogonal dynamic covalent networks", de: "Orthogonale dynamische kovalente Netzwerke",
+    feedEn: "Networks with two independent dynamic bond types", feedDe: "Netzwerke mit zwei unabhängigen dynamischen Bindungstypen",
+    outEn: "Staged reshaping or separated reusable monomers", outDe: "Stufenweises Umformen oder getrennte Monomere",
+    volDe: "Datenlücke · Arbeit zu orthogonalen dynamischen Netzwerken belegt Bausteinrückgewinnung im Labor; kein verifizierter Pilot- oder Jahrestonnagewert gefunden.",
+    volEn: "Gap · Published orthogonal dynamic-network work verifies laboratory constituent recovery; no verified pilot or annual tonnage for designed network found.",
+    evEn: "An orthogonal dynamic network study isolated and separated reusable monomers in laboratory experiments.",
+    evDe: "Orthogonale Trigger erlauben wahlweise gezieltes Umformen oder vollständige Monomerisolierung im Laborexperiment." },
+
+  { id: 123, b: "B5", sub: "5.1", trl: "3–4", tier: "low", volTier: "lab", flags: [],
+    en: "Phase-separated reversible polymer networks", de: "Phasenseparierte reversible Polymernetzwerke",
+    feedEn: "Microphase-separated dynamic elastomers", feedDe: "Mikrophasenseparierte dynamische Elastomere",
+    outEn: "Reprocessed elastomer or selectively cleaved segments", outDe: "Reprozessiertes Elastomer oder selektiv gespaltene Segmente",
+    volDe: "Datenlücke · Studie (2026) zu phasensepariertem Silikon-Elastomer zeigt Reprocessing-Stabilität im Labor; kein jährliches Recyclingvolumen für dieses Netzwerk.",
+    volEn: "Gap · A 2026 phase-separated silicone-elastomer study demonstrates lab reprocessing stability; no verified annual recycling volume found for this network.",
+    evEn: "Phase-separated dynamic materials show laboratory reprocessing or selective segment recovery in specific systems. Evidence depends on the network and endpoint.",
+    evDe: "Designte Hart-/Weichdomänen mit dynamischen Vernetzern zeigen Reprocessing und selektive Segmentrückgewinnung im Labor." },
+
+  { id: 124, b: "B5", sub: "5.2", trl: "4", tier: "low", volTier: "lab", flags: [], xrefs: [89],
+    en: "Polydiketoenamine recycling", de: "Polydiketoenamin-Recycling (PDK)",
+    feedEn: "Designed PDK resins (even in mixed/additive waste)", feedDe: "Designte PDK-Harze (auch in Misch-/Additivabfällen)",
+    outEn: "Pure triketone & amine monomers via strong acid", outDe: "Reine Triketon- und Amin-Monomere durch starke Säure",
+    volDe: "Datenlücke · Veröffentlichte PDK-Arbeiten (Christensen et al.) dokumentieren Monomer-Rückgewinnung im Labor; keine verifizierte jährliche PDK-Abfallmenge oder Output-Tonnage.",
+    volEn: "Gap · Published PDK work (Christensen et al.) documents laboratory monomer recovery from designed materials; no verified annual PDK waste processing or output found.",
+    evEn: "Christensen et al. recovered reusable monomers from designed PDK networks, including laboratory mixtures with additives.",
+    evDe: "Christensen et al. (2019) gewannen PDK-Monomere im Säurebad aus additivierten/gemischten Laborproben zurück (Standardkunststoffe bleiben unberührt)." },
+
+  { id: 125, b: "B5", sub: "5.2", trl: "4–5", tier: "low", volTier: "lab", flags: ["conditional"],
+    en: "Cleavable thermoset composites", de: "Spaltbare Duroplast-Composites (Sollbruchstellen-Harze)",
+    feedEn: "Fibre composites with cleavable epoxy matrices", feedDe: "Faserverbunde mit spaltbaren Epoxidmatrices",
+    outEn: "Reusable matrix oligomers/monomers + intact fibres", outDe: "Wiederverwendbare Matrix-Bausteine + intakte Fasern",
+    volDe: "Datenlücke · Indien · Grasim/Suzlon kündigten 2026 eine Pilotkooperation an; tatsächlich zerlegte Rotorblattmenge und Masse rückgewonnener Matrixbausteine unbestätigt.",
+    volEn: "Gap · India · Grasim/Suzlon announced pilot collaboration in 2026; volume of end-of-life blades actually deconstructed and mass of recovered reusable matrix building blocks remain unverified.",
+    evEn: "Cleavable epoxy composite research shows reusable matrix-derived fractions at laboratory scale. Some formulations have relevant prototype development; commercial blade use and a qualified recovery loop are separate milestones.",
+    evDe: "Bedingt: Spaltbare Epoxidsysteme (z. B. Recyclamine-Rotorblatt-Tests) zeigen Labor-/Prototyp-Zerlegung; Matrix-Wiederverwendung erforderlich." },
+
+  { id: 126, b: "B5", sub: "5.1", trl: "4", tier: "low", volTier: "lab", flags: [],
+    en: "Reprocessable covalent adaptable composites", de: "Reprozessierbare kovalent-adaptierbare Composites",
+    feedEn: "Fibre-reinforced CAN-matrix composites", feedDe: "Faserverstärkte CAN-Matrix-Composites",
+    outEn: "Reshaped / thermoformed fibre composite parts", outDe: "Umgeformte / thermogeformte Faserverbundbauteile",
+    volDe: "Datenlücke · Veröffentlichte Arbeiten zeigen Umformung ausgewählter CAN-Composite-Prüfkörper; keine verifizierte kommerzielle Masse reprozessierter Composites.",
+    volEn: "Gap · Published work demonstrates reshaping of selected covalent adaptable composite specimens; no verified commercial mass of composite reprocessed.",
+    evEn: "Composite specimens made with exchangeable networks have been reshaped or reprocessed in laboratory studies.",
+    evDe: "Dynamischer Bindungsaustausch ermöglicht Thermoformen oder Schweißen von Faserverbunden ohne Matrix-Faser-Trennung im Labor." },
+
+  { id: 128, b: "B5", sub: "5.2", trl: "4", tier: "low", volTier: "lab", flags: [],
+    en: "Recyclable polyesters with engineered depolymerisation behaviour", de: "Recycelbare Polyester mit maßgeschneiderter Depolymerisierbarkeit",
+    feedEn: "Purpose-synthesised reversible polyesters", feedDe: "Gezielt synthetisierte reversible Polyester",
+    outEn: "Defined cyclic/linear monomers -> repolymerised polyester", outDe: "Definierte Monomere -> repolymerisierter Polyester",
+    volDe: "Datenlücke · Designte Polyester-Modellsysteme zeigen Depolymerisation/Repolymerisation im Labor; keine verifizierte Jahrestonnage für diese Spezialmaterialien.",
+    volEn: "Gap · Designed polyester model systems demonstrate laboratory depolymerisation/repolymerisation; no verified annual tonnage found for specified engineered materials.",
+    evEn: "Designed polyesters have laboratory demonstrations of depolymerisation and repolymerisation for specific monomers.",
+    evDe: "Maßgeschneiderte Polyesterstrukturen demonstrieren geschlossene Depolymerisation und Repolymerisation im Labormodell." }
+];
+
+/* ============================================================================
+   3. APPLICATION STATE & TRANSLATIONS
+   ============================================================================ */
+let state = {
+  lang: "de",
+  theme: "dark",
+  search: "",
+  branchFilter: "all",
+  trlFilter: "all",
+  volFilter: "all",
+  flagFilter: "all",
+  selectedNode: null, // { type: 'root'|'branch'|'sub'|'leaf', id: ... }
+  showAllLabels: false,
+  zoom: 0.85,
+  rotation: 0,
+  panX: 0,
+  panY: 0
+};
+
+const I18N = {
+  de: {
+    appTitle: "Kunststoffrecyclingtechnologien — Interaktive Taxonomie",
+    appSub: "98 Katalogverfahren (Recherche: Martin Wölker) · Basis: JRC132067 / Kim 2026 / Ragaert 2017",
+    searchPlaceholder: "ID, Polymer, Verfahren...",
+    allTrl: "Alle TRL-Stufen",
+    trlHigh: "TRL 8–9 (Industriell)",
+    trlMid: "TRL 5–7 (Pilot / Demo)",
+    trlLow: "TRL 2–4 (Labor / Konzept)",
+    allVol: "Alle Mengenstufen",
+    volBulk: "Massenstrom / Industriell",
+    volSingle: "Einzelanlage / Pilot / Nische",
+    volLab: "Labor / Keine Mengenbasis",
+    allFlags: "Alle Evidenz-Status",
+    flagCond: "Bedingter Endpunkt",
+    flagUnres: "Ungeklärte Evidenz / Hinweis",
+    flagHist: "Historische Anlage",
+    btnRules: "Entscheidungsregel",
+    btnResetLabels: "Reset Labels",
+    btnCenter: "Zentrieren",
+    footerCredit: "Katalog & Recherche: Martin Wölker · Quellen: JRC132067, Ragaert 2017, Kim 2026, Hopewell 2009, Al-Salem 2017, Dannhauer 2023",
+    versionTag: "v1.0 · Stand: 23. Nov. 2026",
+    inspKicker: "Technologie-Steckbrief",
+    visibleCount: (n) => `${n} / 98 Verfahren aktiv`,
+    welcomeTitle: "360°-Lehrbaum für Kunststoffrecycling",
+    welcomeText: "Katalog und Recherche von Martin Wölker (98 Verfahren, Stand 23. Nov. 2026, Web-Version erstellt am 23. Nov. 2026), strukturiert als Lehrbaum auf Basis von JRC132067 (2023), Ragaert et al. (2017), Kim (2026), Hopewell et al. (2009), Al-Salem et al. (2017) und Dannhauer et al. (2023). Klicke direkt auf die 5 Hauptäste im Baum oder nutze Mausrad/Touch zum Zoomen.",
+    branchRuleLabel: "Klassifikationsregel dieses Astes",
+    flowLabel: "Stoffstrom (Input → Output)",
+    scaleLabel: "Mengenordnung & Raumbezug",
+    volumeDataLabel: "Mengenbelege & Kontext (Stichtag 23. Nov. 2026)",
+    principleLabel: "Funktionsprinzip & Einordnung",
+    evidenceLabel: "Katalog-Evidenz & TRL-Begründung (Stand 23. Nov. 2026)",
+    modalTitle: "Wie klassifiziert man ein unbekanntes Recyclingverfahren?",
+    modalIntro: "Prüfe in dieser Reihenfolge das Schicksal der kovalenten Polymerhauptkette (Rückgrat) und die Rolle externer Trigger:",
+    rules: [
+      { n: "1", color: "#c084fc", title: "Recycling by Design (Ast 5)", desc: "Liegt ein gezielt mit Sollbruchstellen oder dynamischen Austauschbindungen synthetisiertes Polymer vor?" },
+      { n: "2", color: "#4ade80", title: "Biologisches Recycling (Ast 4)", desc: "Spalten Enzyme oder Mikroorganismen die Kette direkt bzw. werten voroxidierte Fragmente biologisch auf?" },
+      { n: "3", color: "#2dd4bf", title: "Lösungsmittelbasiertes Recycling (Ast 2)", desc: "Wird das Polymer ohne Spaltung der Hauptkette selektiv gelöst, gereinigt und wieder ausgefällt?" },
+      { n: "4", color: "#38bdf8", title: "Mechanisches Recycling (Ast 1)", desc: "Bleibt das Polymergerüst chemisch intakt und wird mechanisch/thermisch umgeformt oder zerkleinert?" },
+      { n: "5", color: "#fb923c", title: "Chemisches Recycling (Ast 3)", desc: "Werden kovalente Bindungen abiotisch durch Solvolyse, Unzipping, Katalyse, Pyrolyse, HTL, Vergasung oder Plasma gespalten?" }
+    ]
+  },
+  en: {
+    appTitle: "Plastics Recycling Technologies — 360° Interactive Taxonomy",
+    appSub: "98 Catalogue Routes (Research: Martin Wölker) · Basis: JRC132067 / Kim 2026 / Ragaert 2017",
+    searchPlaceholder: "ID, polymer, route...",
+    allTrl: "All TRL Tiers",
+    trlHigh: "TRL 8–9 (Industrial)",
+    trlMid: "TRL 5–7 (Pilot / Demo)",
+    trlLow: "TRL 2–4 (Lab / Concept)",
+    allVol: "All Volume Tiers",
+    volBulk: "Bulk / Industrial Stream",
+    volSingle: "Single Plant / Pilot / Niche",
+    volLab: "Lab / No Volume Basis",
+    allFlags: "All Evidence Flags",
+    flagCond: "Conditional Endpoint",
+    flagUnres: "Unresolved Evidence / Note",
+    flagHist: "Historical Installation",
+    btnRules: "Decision Rule",
+    btnResetLabels: "Reset Labels",
+    btnCenter: "Center",
+    footerCredit: "Catalogue & Research: Martin Wölker · Sources: JRC132067, Ragaert 2017, Kim 2026, Hopewell 2009, Al-Salem 2017, Dannhauer 2023",
+    versionTag: "v1.0 · As of 23 Nov 2026",
+    inspKicker: "Technology Profile",
+    visibleCount: (n) => `${n} / 98 routes active`,
+    welcomeTitle: "360° Teaching Tree for Plastics Recycling",
+    welcomeText: "Catalogue and research by Martin Wölker (98 routes, as of 23 Nov 2026, web version created 23 Nov 2026), structured as a teaching tree based on JRC132067 (2023), Ragaert et al. (2017), Kim (2026), Hopewell et al. (2009), Al-Salem et al. (2017) and Dannhauer et al. (2023). Click any of the 5 main branches in the tree or use wheel/touch to zoom.",
+    branchRuleLabel: "Classification Rule for This Branch",
+    flowLabel: "Material Flow (Feedstock → Output)",
+    scaleLabel: "Volume & Spatial Scope",
+    volumeDataLabel: "Volume Evidence & Context (Cut-off 23 Nov 2026)",
+    principleLabel: "Operating Principle & Placement",
+    evidenceLabel: "Catalogue Evidence & TRL Basis (Checked 23 Nov 2026)",
+    modalTitle: "How do you classify an unfamiliar recycling route?",
+    modalIntro: "Check in this sequence what happens to the covalent polymer backbone and whether engineered triggers are involved:",
+    rules: [
+      { n: "1", color: "#c084fc", title: "Recycling by Design (Branch 5)", desc: "Is the polymer engineered with dynamic covalent bonds or cleavable linkers for triggered recovery?" },
+      { n: "2", color: "#4ade80", title: "Biological Recycling (Branch 4)", desc: "Do enzymes or microbes cleave the polymer or biologically funnel pre-oxidised intermediates?" },
+      { n: "3", color: "#2dd4bf", title: "Solvent-Based Recycling (Branch 2)", desc: "Is the polymer selectively dissolved, purified, and re-precipitated without chain scission?" },
+      { n: "4", color: "#38bdf8", title: "Mechanical Recycling (Branch 1)", desc: "Does the polymer backbone stay intact while form, size, or blend phase is physically reprocessed?" },
+      { n: "5", color: "#fb923c", title: "Chemical Recycling (Branch 3)", desc: "Are covalent bonds cleaved abiotically via solvolysis, unzipping, catalysis, pyrolysis, HTL, gasification, or plasma?" }
+    ]
+  }
+};
+
+function updateUI(visibleCount) {
+  const t = I18N[state.lang];
+  document.getElementById("ui-app-title").textContent = t.appTitle;
+  document.getElementById("ui-app-sub").textContent = t.appSub;
+  document.getElementById("search-input").placeholder = t.searchPlaceholder;
+
+  const trlSel = document.getElementById("trl-filter");
+  trlSel.options[0].textContent = t.allTrl;
+  trlSel.options[1].textContent = t.trlHigh;
+  trlSel.options[2].textContent = t.trlMid;
+  trlSel.options[3].textContent = t.trlLow;
+
+  const volSel = document.getElementById("vol-filter");
+  volSel.options[0].textContent = t.allVol;
+  volSel.options[1].textContent = t.volBulk;
+  volSel.options[2].textContent = t.volSingle;
+  volSel.options[3].textContent = t.volLab;
+
+  const flagSel = document.getElementById("flag-filter");
+  flagSel.options[0].textContent = t.allFlags;
+  flagSel.options[1].textContent = t.flagCond;
+  flagSel.options[2].textContent = t.flagUnres;
+  flagSel.options[3].textContent = t.flagHist;
+
+  document.getElementById("ui-btn-rules").textContent = t.btnRules;
+  document.getElementById("ui-btn-reset-labels").textContent = t.btnResetLabels;
+  document.getElementById("ui-btn-center").textContent = t.btnCenter;
+  document.getElementById("ui-footer-credit").textContent = t.footerCredit;
+  document.getElementById("ui-version-tag").textContent = t.versionTag;
+  document.getElementById("ui-insp-kicker").textContent = t.inspKicker;
+  document.getElementById("ui-insp-count").textContent = t.visibleCount(visibleCount);
+}
+
+function renderInspector() {
+  const body = document.getElementById("inspector-body");
+  if (!body) return;
+  const t = I18N[state.lang];
+  const sel = state.selectedNode;
+
+  if (!sel || sel.type === "root") {
+    body.innerHTML = `
+      <div class="card">
+        <div class="card-label">${t.inspKicker}</div>
+        <h3 style="font-size:0.96rem; margin-bottom:0.45rem;">${t.welcomeTitle}</h3>
+        <p style="font-size:0.81rem; color:var(--text-secondary); line-height:1.52;">${t.welcomeText}</p>
+      </div>
+    `;
+    return;
+  }
+
+  if (sel.type === "branch") {
+    const branch = TAXONOMY.branches.find(b => b.id === sel.id);
+    if (!branch) return;
+    const count = ENTRIES.filter(e => e.b === branch.id).length;
+    body.innerHTML = `
+      <div class="card">
+        <div class="card-label" style="color:${branch.hex}">${state.lang === "de" ? "Hauptast" : "Main Branch"} · ${count} ${state.lang === "de" ? "Verfahren" : "routes"}</div>
+        <h3 style="font-size:0.98rem; margin-bottom:0.45rem;">${state.lang === "de" ? branch.de : branch.en}</h3>
+        <div class="card-label" style="margin-top:0.5rem;">${t.branchRuleLabel}</div>
+        <p style="font-size:0.81rem; color:var(--text-secondary); line-height:1.5;">${state.lang === "de" ? branch.ruleDe : branch.ruleEn}</p>
+      </div>
+    `;
+    return;
+  }
+
+  if (sel.type === "sub") {
+    let foundSub = null;
+    let parentBranch = null;
+    for (const b of TAXONOMY.branches) {
+      const s = b.subs.find(item => item.id === sel.id);
+      if (s) {
+        foundSub = s;
+        parentBranch = b;
+        break;
+      }
+    }
+    if (!foundSub || !parentBranch) return;
+    const subEntries = ENTRIES.filter(e => e.b === parentBranch.id && e.sub === foundSub.id);
+    body.innerHTML = `
+      <div class="card">
+        <div class="card-label" style="color:${parentBranch.hex}">${state.lang === "de" ? parentBranch.de : parentBranch.en}</div>
+        <h3 style="font-size:0.96rem; margin-bottom:0.45rem;">${state.lang === "de" ? foundSub.de : foundSub.en}</h3>
+        <p style="font-size:0.8rem; color:var(--text-secondary);">${subEntries.length} ${state.lang === "de" ? "zugeordnete Katalogverfahren" : "catalogue routes in this subgroup"}.</p>
+      </div>
+    `;
+    return;
+  }
+
+  const e = ENTRIES.find(item => item.id === sel.id);
+  if (!e) return;
+  const branch = TAXONOMY.branches.find(b => b.id === e.b);
+  const trlBadgeClass = e.tier === "high" ? "badge-trl-9" : e.tier === "mid" ? "badge-trl-mid" : "badge-trl-low";
+
+  const flagBadges = (e.flags || []).map(fl => {
+    if (fl === "conditional") return `<span class="badge badge-cond">${t.flagCond}</span>`;
+    if (fl === "unresolved") return `<span class="badge badge-unres">${t.flagUnres}</span>`;
+    if (fl === "historical") return `<span class="badge badge-hist">${t.flagHist}</span>`;
+    return "";
+  }).join("");
+
+  const xrefHtml = (e.xrefs || []).length > 0
+    ? `<div style="margin-top:0.55rem;"><div class="card-label">${state.lang === "de" ? "Querverweise" : "Cross-References"}</div>${
+        e.xrefs.map(xid => {
+          const target = ENTRIES.find(item => item.id === xid);
+          const label = target ? `#${xid} ${state.lang === "de" ? target.de : target.en}` : `#${xid}`;
+          return `<button class="xref-btn" onclick="selectEntryById(${xid})">${label}</button>`;
+        }).join("")
+      }</div>`
+    : "";
+
+  body.innerHTML = `
+    <div class="card">
+      <div class="card-label" style="color:${branch ? branch.hex : "var(--text-muted)"}">#${e.id} · ${branch ? (state.lang === "de" ? branch.de : branch.en) : e.b} (${e.sub})</div>
+      <h3 style="font-size:0.98rem; margin-bottom:0.5rem;">${state.lang === "de" ? e.de : e.en}</h3>
+      <div class="badge-row">
+        <span class="badge ${trlBadgeClass}">TRL ${e.trl}</span>
+        ${flagBadges}
+      </div>
+      ${xrefHtml}
+    </div>
+
+    <div class="card">
+      <div class="card-label">${t.flowLabel}</div>
+      <div class="flow-box">
+        <div><strong>${state.lang === "de" ? "Input" : "Feedstock"}:</strong> ${state.lang === "de" ? e.feedDe : e.feedEn}</div>
+        <div class="flow-arrow">↓</div>
+        <div><strong>${state.lang === "de" ? "Output" : "Output"}:</strong> ${state.lang === "de" ? e.outDe : e.outEn}</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">${t.volumeDataLabel}</div>
+      <p style="font-size:0.81rem; color:var(--text-primary); line-height:1.52;">
+        ${state.lang === "de"
+          ? (e.volDe || "Datenlücke · Kein quantifizierter Mengen- oder Kapazitätsbeleg für diese spezifische Route im Katalog verifiziert (Stichtag 23. Nov. 2026).")
+          : (e.volEn || "Gap · No quantified volume or capacity observation substantiated for this specific route in the catalogue (cut-off 23 Nov 2026).")}
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-label">${t.evidenceLabel}</div>
+      <p style="font-size:0.81rem; color:var(--text-primary); line-height:1.5;">
+        ${state.lang === "de" ? e.evDe : e.evEn}
+      </p>
+    </div>
+  `;
+}
+
+function selectEntryById(id) {
+  state.selectedNode = { type: "leaf", id };
+  openInspector();
+  renderInspector();
+  renderTree();
+}
+
+/* ============================================================================
+   7. RADIAL 360° TREE LAYOUT & RENDERING ENGINE
+   ============================================================================ */
+const svgEl = document.getElementById("radial-tree");
+const viewportEl = document.getElementById("viewport");
+const ringsLayer = document.getElementById("layer-rings");
+const linksLayer = document.getElementById("layer-links");
+const nodesLayer = document.getElementById("layer-nodes");
+
+const RADII = {
+  root: 0,
+  branch: 145,
+  sub: 305,
+  leaf: 475,
+  label: 492
+};
+
+function matchesFilters(entry) {
+  if (state.branchFilter !== "all" && entry.b !== state.branchFilter) return false;
+  if (state.trlFilter !== "all" && entry.tier !== state.trlFilter) return false;
+  if (state.volFilter !== "all" && entry.volTier !== state.volFilter) return false;
+  if (state.flagFilter !== "all" && !entry.flags.includes(state.flagFilter)) return false;
+
+  if (state.search.trim() !== "") {
+    const q = state.search.trim().toLowerCase();
+    const hay = [
+      String(entry.id),
+      entry.sub,
+      entry.trl,
+      entry.en,
+      entry.de,
+      entry.feedEn,
+      entry.feedDe,
+      entry.outEn,
+      entry.outDe,
+      entry.volEn || "",
+      entry.volDe || "",
+      entry.evEn,
+      entry.evDe
+    ].join(" ").toLowerCase();
+    if (!hay.includes(q)) return false;
+  }
+  return true;
+}
+
+function getVisibleEntries() {
+  return ENTRIES.filter(matchesFilters);
+}
+
+function polarToCartesian(r, angleDeg) {
+  const rad = ((angleDeg - 90) * Math.PI) / 180;
+  return {
+    x: r * Math.cos(rad),
+    y: r * Math.sin(rad)
+  };
+}
+
+function computeLayout() {
+  const visibleEntries = getVisibleEntries();
+  const visibleSet = new Set(visibleEntries.map(e => e.id));
+
+  const activeBranches = TAXONOMY.branches
+    .map(branch => {
+      const subs = branch.subs
+        .map(sub => {
+          const leaves = ENTRIES.filter(e => e.b === branch.id && e.sub === sub.id);
+          return { ...sub, leaves, branch };
+        })
+        .filter(sub => sub.leaves.length > 0);
+      const totalLeaves = subs.reduce((acc, s) => acc + s.leaves.length, 0);
+      return { ...branch, subs, totalLeaves };
+    })
+    .filter(b => b.totalLeaves > 0);
+
+  const grandTotalLeaves = activeBranches.reduce((acc, b) => acc + b.totalLeaves, 0) || 1;
+
+  const nodes = [];
+  const links = [];
+
+  nodes.push({
+    id: "root",
+    type: "root",
+    x: 0,
+    y: 0,
+    r: 36,
+    color: "#38bdf8",
+    label: state.lang === "de" ? TAXONOMY.root.de : TAXONOMY.root.en,
+    matched: true
+  });
+
+  let currentAngle = 0;
+  const branchGapDeg = activeBranches.length > 1 ? 4.5 : 0;
+  const usableArcDeg = 360 - branchGapDeg * activeBranches.length;
+
+  activeBranches.forEach(branch => {
+    const branchSpan = (branch.totalLeaves / grandTotalLeaves) * usableArcDeg;
+    const startAngle = currentAngle;
+    const endAngle = currentAngle + branchSpan;
+    const midAngle = (startAngle + endAngle) / 2;
+
+    const bPos = polarToCartesian(RADII.branch, midAngle);
+    const branchMatched = visibleEntries.some(e => e.b === branch.id);
+
+    const branchNode = {
+      id: branch.id,
+      type: "branch",
+      data: branch,
+      x: bPos.x,
+      y: bPos.y,
+      angle: midAngle,
+      r: 14,
+      color: branch.hex,
+      label: state.lang === "de" ? branch.de : branch.en,
+      matched: branchMatched
+    };
+    nodes.push(branchNode);
+    links.push({
+      source: nodes[0],
+      target: branchNode,
+      color: branch.hex,
+      type: "root-branch",
+      matched: branchMatched
+    });
+
+    let subAngleCursor = startAngle;
+    branch.subs.forEach(sub => {
+      const subSpan = (sub.leaves.length / branch.totalLeaves) * branchSpan;
+      const subStart = subAngleCursor;
+      const subEnd = subAngleCursor + subSpan;
+      const subMid = (subStart + subEnd) / 2;
+
+      const sPos = polarToCartesian(RADII.sub, subMid);
+      const subMatched = sub.leaves.some(l => visibleSet.has(l.id));
+
+      const subNode = {
+        id: `sub-${sub.id}`,
+        type: "sub",
+        data: sub,
+        branch: branch,
+        x: sPos.x,
+        y: sPos.y,
+        angle: subMid,
+        r: 8.5,
+        color: branch.hex,
+        label: state.lang === "de" ? sub.de : sub.en,
+        matched: subMatched
+      };
+      nodes.push(subNode);
+      links.push({
+        source: branchNode,
+        target: subNode,
+        color: branch.hex,
+        type: "branch-sub",
+        matched: subMatched
+      });
+
+      const count = sub.leaves.length;
+      const padDeg = Math.min(2.2, subSpan * 0.12);
+      const innerStart = subStart + padDeg;
+      const innerEnd = subEnd - padDeg;
+
+      sub.leaves.forEach((leaf, idx) => {
+        const frac = count === 1 ? 0.5 : idx / (count - 1);
+        const leafAngle = innerStart + frac * Math.max(0, innerEnd - innerStart);
+        const lPos = polarToCartesian(RADII.leaf, leafAngle);
+        const isMatched = visibleSet.has(leaf.id);
+
+        const leafNode = {
+          id: `leaf-${leaf.id}`,
+          type: "leaf",
+          data: leaf,
+          branch: branch,
+          sub: sub,
+          x: lPos.x,
+          y: lPos.y,
+          angle: leafAngle,
+          r: isMatched ? 5.6 : 4.2,
+          color: branch.hex,
+          matched: isMatched
+        };
+        nodes.push(leafNode);
+        links.push({
+          source: subNode,
+          target: leafNode,
+          color: branch.hex,
+          type: "sub-leaf",
+          matched: isMatched
+        });
+      });
+
+      subAngleCursor = subEnd;
+    });
+
+    currentAngle = endAngle + branchGapDeg;
+  });
+
+  return { nodes, links, visibleCount: visibleEntries.length };
+}
+
+function makeCurvedLinkPath(source, target) {
+  if (source.type === "root") {
+    return `M ${source.x.toFixed(1)} ${source.y.toFixed(1)} L ${target.x.toFixed(1)} ${target.y.toFixed(1)}`;
+  }
+  const r1 = Math.hypot(source.x, source.y);
+  const r2 = Math.hypot(target.x, target.y);
+  const rMid = (r1 + r2) / 2;
+
+  const a1 = Math.atan2(source.y, source.x);
+  const a2 = Math.atan2(target.y, target.x);
+
+  let diff = a2 - a1;
+  while (diff > Math.PI) diff -= Math.PI * 2;
+  while (diff < -Math.PI) diff += Math.PI * 2;
+
+  const aMid = a1 + diff * 0.5;
+  const cx = rMid * Math.cos(aMid);
+  const cy = rMid * Math.sin(aMid);
+
+  return `M ${source.x.toFixed(1)} ${source.y.toFixed(1)} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${target.x.toFixed(1)} ${target.y.toFixed(1)}`;
+}
+
+function isNodeOrAncestorSelected(node) {
+  const sel = state.selectedNode;
+  if (!sel) return false;
+  if (sel.type === "root" && node.type === "root") return true;
+  if (sel.type === "branch") {
+    return (node.type === "branch" && node.id === sel.id) ||
+           (node.branch && node.branch.id === sel.id);
+  }
+  if (sel.type === "sub") {
+    return (node.type === "sub" && node.data.id === sel.id) ||
+           (node.type === "leaf" && node.sub.id === sel.id);
+  }
+  if (sel.type === "leaf") {
+    return node.type === "leaf" && node.data.id === sel.id;
+  }
+  return false;
+}
+
+function renderTree() {
+  const { nodes, links, visibleCount } = computeLayout();
+  const hasActiveFilter =
+    state.search.trim() !== "" ||
+    state.branchFilter !== "all" ||
+    state.trlFilter !== "all" ||
+    state.volFilter !== "all" ||
+    state.flagFilter !== "all";
+
+  ringsLayer.innerHTML = "";
+  [RADII.branch, RADII.sub, RADII.leaf].forEach(r => {
+    const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    c.setAttribute("cx", 0);
+    c.setAttribute("cy", 0);
+    c.setAttribute("r", r);
+    c.setAttribute("class", "ring-circle");
+    ringsLayer.appendChild(c);
+  });
+
+  linksLayer.innerHTML = "";
+  links.forEach(lk => {
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", makeCurvedLinkPath(lk.source, lk.target));
+    path.setAttribute("class", "tree-link");
+    path.setAttribute("stroke", lk.color);
+
+    const width = lk.type === "root-branch" ? 3.2 : lk.type === "branch-sub" ? 2.0 : 1.25;
+    path.setAttribute("stroke-width", width);
+
+    let opacity = state.theme === "dark" ? 0.42 : 0.55;
+    if (hasActiveFilter && !lk.matched) opacity = 0.07;
+    if (state.selectedNode) {
+      const active = isNodeOrAncestorSelected(lk.target);
+      opacity = active ? 0.92 : 0.08;
+      if (active) path.classList.add("highlighted-link");
+    }
+    path.setAttribute("opacity", opacity);
+    linksLayer.appendChild(path);
+  });
+
+  nodesLayer.innerHTML = "";
+  nodes.forEach(node => {
+    const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    g.setAttribute("class", "node-group");
+    g.setAttribute("transform", `translate(${node.x.toFixed(1)}, ${node.y.toFixed(1)})`);
+
+    const isDimmed = (hasActiveFilter && !node.matched && node.type !== "root") ||
+      (state.selectedNode && node.type !== "root" && !isNodeOrAncestorSelected(node) &&
+       !(state.selectedNode.type === "branch" && node.id === state.selectedNode.id) &&
+       !(state.selectedNode.type === "sub" && node.type === "branch" && state.selectedNode.id.startsWith(node.id)));
+
+    if (isDimmed) g.classList.add("dimmed");
+
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("r", node.r);
+    circle.setAttribute("class", "node-circle");
+
+    if (node.type === "root") {
+      circle.setAttribute("fill", "var(--bg-panel)");
+      circle.setAttribute("stroke", "var(--b1-color)");
+      circle.setAttribute("stroke-width", "3");
+    } else if (node.type === "leaf") {
+      const flags = node.data.flags || [];
+      if (flags.includes("unresolved")) {
+        circle.setAttribute("fill", "var(--bg-panel)");
+        circle.setAttribute("stroke", "#ef4444");
+        circle.setAttribute("stroke-width", "2");
+      } else if (flags.includes("conditional")) {
+        circle.setAttribute("fill", node.color);
+        circle.setAttribute("stroke", "#eab308");
+        circle.setAttribute("stroke-width", "1.8");
+      } else {
+        circle.setAttribute("fill", node.matched ? node.color : "var(--text-muted)");
+        circle.setAttribute("stroke", "var(--bg-canvas)");
+        circle.setAttribute("stroke-width", "1.2");
+      }
+    } else {
+      circle.setAttribute("fill", node.color);
+      circle.setAttribute("stroke", "var(--bg-canvas)");
+      circle.setAttribute("stroke-width", "1.8");
+    }
+
+    g.appendChild(circle);
+
+    if (node.type === "root") {
+      const lines = node.label.split("\n");
+      lines.forEach((line, idx) => {
+        const txt = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        txt.setAttribute("class", "node-label root-label");
+        txt.setAttribute("y", idx === 0 ? "-3" : "11");
+        txt.setAttribute("font-size", "9.2");
+        txt.textContent = line;
+        g.appendChild(txt);
+      });
+    } else if (node.type === "branch") {
+      const txt = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      txt.setAttribute("class", "node-label main-branch-label");
+      const isRight = Math.cos(((node.angle - 90) * Math.PI) / 180) >= 0;
+      txt.setAttribute("x", isRight ? 18 : -18);
+      txt.setAttribute("y", 4);
+      txt.setAttribute("text-anchor", isRight ? "start" : "end");
+      txt.setAttribute("fill", node.color);
+      txt.textContent = node.label;
+      g.appendChild(txt);
+    } else if (node.type === "sub") {
+      const rad = ((node.angle - 90) * Math.PI) / 180;
+      const cos = Math.cos(rad);
+      const isRight = cos >= 0;
+      const txt = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      txt.setAttribute("class", "node-label sub-branch-label");
+      txt.setAttribute("x", isRight ? 12 : -12);
+      txt.setAttribute("y", 3);
+      txt.setAttribute("text-anchor", isRight ? "start" : "end");
+      txt.textContent = node.label;
+      g.appendChild(txt);
+    } else if (node.type === "leaf") {
+      const rad = ((node.angle - 90) * Math.PI) / 180;
+      const cos = Math.cos(rad);
+      const sin = Math.sin(rad);
+      const isRight = cos >= 0;
+
+      const showLeafLabel =
+        state.showAllLabels ||
+        (hasActiveFilter && node.matched) ||
+        (state.selectedNode && isNodeOrAncestorSelected(node)) ||
+        state.zoom >= 1.25;
+
+      if (showLeafLabel) {
+        let deg = (node.angle - 90) % 360;
+        if (deg < 0) deg += 360;
+        const flip = deg > 90 && deg < 270;
+        const rot = flip ? deg + 180 : deg;
+
+        const labelG = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        const offset = 10;
+        labelG.setAttribute("transform", `translate(${(cos * offset).toFixed(1)}, ${(sin * offset).toFixed(1)}) rotate(${rot.toFixed(1)})`);
+
+        const txt = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        txt.setAttribute("class", "node-label leaf-label");
+        txt.setAttribute("text-anchor", flip ? "end" : "start");
+        txt.setAttribute("dominant-baseline", "central");
+
+        const shortName = state.lang === "de" ? node.data.de : node.data.en;
+        const trimmed = shortName.length > 34 ? shortName.slice(0, 32) + "…" : shortName;
+        txt.textContent = `#${node.data.id} ${trimmed}`;
+        labelG.appendChild(txt);
+        g.appendChild(labelG);
+      }
+    }
+
+    g.addEventListener("click", (ev) => {
+      ev.stopPropagation();
+      if (node.type === "root") {
+        state.selectedNode = { type: "root", id: "root" };
+      } else if (node.type === "branch") {
+        state.selectedNode = { type: "branch", id: node.id };
+      } else if (node.type === "sub") {
+        state.selectedNode = { type: "sub", id: node.data.id };
+      } else if (node.type === "leaf") {
+        state.selectedNode = { type: "leaf", id: node.data.id };
+      }
+      openInspector();
+      renderInspector();
+      renderTree();
+    });
+
+    nodesLayer.appendChild(g);
+  });
+
+  applyTransform();
+  updateUI(visibleCount);
+}
+
+function applyTransform() {
+  viewportEl.setAttribute(
+    "transform",
+    `translate(${state.panX.toFixed(1)}, ${state.panY.toFixed(1)}) scale(${state.zoom.toFixed(3)}) rotate(${state.rotation.toFixed(1)})`
+  );
+  const readout = document.getElementById("zoom-readout");
+  if (readout) readout.textContent = `${Math.round(state.zoom * 100)}%`;
+}
+
+/* ============================================================================
+   8. PAN, ZOOM, ROTATE & TOUCH GESTURES
+   ============================================================================ */
+const canvasContainer = document.getElementById("canvas-container");
+let isDragging = false;
+let dragStartX = 0;
+let dragStartY = 0;
+let startPanX = 0;
+let startPanY = 0;
+let pinchStartDist = null;
+let pinchStartZoom = 1;
+
+canvasContainer.addEventListener("mousedown", (e) => {
+  if (e.button !== 0) return;
+  isDragging = true;
+  dragStartX = e.clientX;
+  dragStartY = e.clientY;
+  startPanX = state.panX;
+  startPanY = state.panY;
+});
+
+window.addEventListener("mousemove", (e) => {
+  if (!isDragging) return;
+  state.panX = startPanX + (e.clientX - dragStartX);
+  state.panY = startPanY + (e.clientY - dragStartY);
+  applyTransform();
+});
+
+window.addEventListener("mouseup", () => {
+  isDragging = false;
+});
+
+canvasContainer.addEventListener("wheel", (e) => {
+  e.preventDefault();
+  const factor = e.deltaY < 0 ? 1.12 : 0.89;
+  state.zoom = Math.min(3.5, Math.max(0.35, state.zoom * factor));
+  renderTree();
+}, { passive: false });
+
+canvasContainer.addEventListener("touchstart", (e) => {
+  if (e.touches.length === 1) {
+    isDragging = true;
+    dragStartX = e.touches[0].clientX;
+    dragStartY = e.touches[0].clientY;
+    startPanX = state.panX;
+    startPanY = state.panY;
+  } else if (e.touches.length === 2) {
+    isDragging = false;
+    const dx = e.touches[0].clientX - e.touches[1].clientX;
+    const dy = e.touches[0].clientY - e.touches[1].clientY;
+    pinchStartDist = Math.hypot(dx, dy);
+    pinchStartZoom = state.zoom;
+  }
+}, { passive: false });
+
+canvasContainer.addEventListener("touchmove", (e) => {
+  e.preventDefault();
+  if (e.touches.length === 1 && isDragging) {
+    state.panX = startPanX + (e.touches[0].clientX - dragStartX);
+    state.panY = startPanY + (e.touches[0].clientY - dragStartY);
+    applyTransform();
+  } else if (e.touches.length === 2 && pinchStartDist) {
+    const dx = e.touches[0].clientX - e.touches[1].clientX;
+    const dy = e.touches[0].clientY - e.touches[1].clientY;
+    const dist = Math.hypot(dx, dy);
+    state.zoom = Math.min(3.5, Math.max(0.35, pinchStartZoom * (dist / pinchStartDist)));
+    renderTree();
+  }
+}, { passive: false });
+
+canvasContainer.addEventListener("touchend", () => {
+  isDragging = false;
+  pinchStartDist = null;
+});
+
+function setZoomStep(factor) {
+  state.zoom = Math.min(3.5, Math.max(0.35, state.zoom * factor));
+  renderTree();
+}
+
+document.getElementById("btn-zoom-in").addEventListener("click", () => setZoomStep(1.18));
+document.getElementById("btn-zoom-out").addEventListener("click", () => setZoomStep(0.84));
+document.getElementById("btn-center").addEventListener("click", () => {
+  state.zoom = 0.85;
+  state.rotation = 0;
+  state.panX = 0;
+  state.panY = 0;
+  state.selectedNode = null;
+  renderTree();
+  renderInspector();
+});
+
+document.getElementById("btn-reset-labels").addEventListener("click", () => {
+  state.showAllLabels = false;
+  state.selectedNode = null;
+  renderTree();
+  renderInspector();
+});
+
+/* ============================================================================
+   9. INSPECTOR, MODAL, FILTERS, LANGUAGE & THEME BINDINGS
+   ============================================================================ */
+const inspectorEl = document.getElementById("inspector");
+
+function openInspector() {
+  inspectorEl.classList.remove("collapsed");
+}
+
+document.getElementById("btn-toggle-inspector").addEventListener("click", () => {
+  inspectorEl.classList.toggle("collapsed");
+});
+
+document.getElementById("btn-close-inspector").addEventListener("click", () => {
+  inspectorEl.classList.add("collapsed");
+});
+
+const ruleModal = document.getElementById("rule-modal");
+document.getElementById("btn-rules").addEventListener("click", () => {
+  renderRuleModal();
+  ruleModal.classList.add("open");
+});
+document.getElementById("btn-close-modal").addEventListener("click", () => {
+  ruleModal.classList.remove("open");
+});
+ruleModal.addEventListener("click", (e) => {
+  if (e.target === ruleModal) ruleModal.classList.remove("open");
+});
+
+function renderRuleModal() {
+  const t = I18N[state.lang];
+  document.getElementById("ui-modal-title").textContent = t.modalTitle;
+  document.getElementById("ui-modal-intro").textContent = t.modalIntro;
+  const container = document.getElementById("modal-steps-container");
+  container.innerHTML = t.rules.map(r => `
+    <div class="rule-step" style="border-left-color:${r.color}">
+      <div class="rule-num" style="color:${r.color}">${r.n}</div>
+      <div>
+        <div style="font-weight:700; font-size:0.88rem; margin-bottom:0.2rem;">${r.title}</div>
+        <div style="font-size:0.8rem; color:var(--text-secondary); line-height:1.45;">${r.desc}</div>
+      </div>
+    </div>
+  `).join("");
+}
+
+document.getElementById("search-input").addEventListener("input", (e) => {
+  state.search = e.target.value;
+  renderTree();
+});
+
+document.getElementById("trl-filter").addEventListener("change", (e) => {
+  state.trlFilter = e.target.value;
+  renderTree();
+});
+
+document.getElementById("vol-filter").addEventListener("change", (e) => {
+  state.volFilter = e.target.value;
+  renderTree();
+});
+
+document.getElementById("flag-filter").addEventListener("change", (e) => {
+  state.flagFilter = e.target.value;
+  renderTree();
+});
+
+function setLanguage(lang) {
+  state.lang = lang;
+  document.getElementById("lang-de").classList.toggle("active", lang === "de");
+  document.getElementById("lang-en").classList.toggle("active", lang === "en");
+  updateUI(getVisibleEntries().length);
+  renderTree();
+  renderInspector();
+}
+
+document.getElementById("lang-de").addEventListener("click", () => setLanguage("de"));
+document.getElementById("lang-en").addEventListener("click", () => setLanguage("en"));
+
+document.getElementById("btn-theme").addEventListener("click", () => {
+  state.theme = state.theme === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", state.theme);
+  renderTree();
+});
+
+function initTaxonomyApp() {
+  try {
+    renderTree();
+    renderInspector();
+  } catch (err) {
+    console.error("Taxonomy render error:", err);
+    if (inspectorEl) {
+      inspectorEl.innerHTML = `<div style="padding:1rem;font-size:0.82rem;color:var(--text-secondary);">Render fallback active.</div>`;
+    }
+  }
+}
+
+window.addEventListener("error", (ev) => {
+  console.warn("Handled window error:", ev && ev.message ? ev.message : ev);
+});
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initTaxonomyApp);
+} else {
+  initTaxonomyApp();
+}
+</script>
+</body>
+</html>
