@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exam – Circular Economy for Plastics and Composites</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 20px;
+      color: #000;
+      background: #fff;
+    }
+    #authGate {
+      max-width: 420px;
+      margin: 60px auto;
+      border: 1px solid #000;
+      padding: 20px;
+      background: #fafafa;
+    }
+    #authGate h1 {
+      margin: 0 0 8px 0;
+      font-size: 1.15rem;
+    }
+    #authGate p {
+      margin: 0 0 12px 0;
+      font-size: 0.9rem;
+      line-height: 1.35;
+    }
+    #authGate .auth-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    #authGate input[type="password"] {
+      flex: 1;
+      padding: 6px 8px;
+      font-size: 0.95rem;
+      border: 1px solid #666;
+      background: #fff;
+    }
+    #authError {
+      margin-top: 8px;
+      font-size: 0.85rem;
+      color: #900;
+      min-height: 1.1em;
+    }
+    #examContent {
+      display: none;
+    }
+    .course-header {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .assessment-date {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .student-meta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .field-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .field-group label {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .field-group input[type="text"],
+    .field-group input[type="number"] {
+      padding: 5px 8px;
+      font-size: 0.9rem;
+      border: 1px solid #666;
+    }
+    .field-group input[type="text"] {
+      min-width: 200px;
+    }
+    .field-group input[type="number"] {
+      width: 90px;
+    }
+    .effort-box,
+    .team-box {
+      border: 1px solid #000;
+      padding: 10px 12px;
+      margin-bottom: 22px;
+      background: #fafafa;
+      font-size: 0.92rem;
+    }
+    .inline-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+    .yes-no-group {
+      display: inline-flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .yes-no-group label {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .group-block {
+      margin-bottom: 24px;
+      page-break-inside: avoid;
+    }
+    h2 {
+      font-size: 1.05rem;
+      margin: 0 0 6px 0;
+    }
+    .section-desc {
+      margin: 0 0 10px 0;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+    th, td {
+      border: 1px solid #000;
+      padding: 6px 8px;
+      text-align: left;
+      vertical-align: middle;
+      font-size: 0.9rem;
+    }
+    th {
+      background: #eee;
+    }
+    .col-cat-key { width: 18%; font-weight: 700; }
+    .col-cat-val { width: 82%; }
+    .col-tech { width: 35%; }
+    .col-cat  { width: 40%; }
+    .col-trl  { width: 25%; }
+    .col-ai-used { width: 7%; text-align: center; }
+    .col-ai-num  { width: 6%; text-align: center; font-weight: 700; }
+    .col-ai-tool { width: 21%; }
+    .col-ai-str  { width: 33%; }
+    .col-ai-lim  { width: 33%; }
+
+    .col-nb-title { width: 45%; font-weight: 600; }
+    .col-nb-slot  { width: 11%; text-align: center; }
+
+    .col-rq-no   { width: 5%; text-align: center; font-weight: 700; }
+    .col-rq-ref  { width: 10%; }
+    .col-rq-ev   { width: 33%; }
+    .col-rq-conc { width: 28%; }
+    .col-rq-chk  { width: 8%; text-align: center; }
+
+    .review-table tr {
+      page-break-inside: avoid;
+    }
+    .review-table td {
+      vertical-align: top;
+      font-size: 0.72rem;
+      line-height: 1.3;
+    }
+    .review-table td.col-rq-no,
+    .review-table td.col-rq-chk {
+      vertical-align: middle;
+    }
+
+    td input[type="text"],
+    td input[type="number"] {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 5px 6px;
+      font-size: 0.85rem;
+      border: 1px solid #666;
+      background: #fff;
+    }
+    .nb-table td input[type="text"] {
+      text-align: center;
+    }
+    .schedule-table th,
+    .schedule-table td {
+      text-align: center;
+      padding: 6px 4px;
+    }
+    .schedule-table th:first-child,
+    .schedule-table td:first-child {
+      text-align: left;
+      padding-left: 8px;
+      font-weight: 600;
+      width: 16%;
+    }
+    .ref-lists {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+    .ref-box {
+      border: 1px solid #000;
+      padding: 8px 10px;
+      font-size: 0.82rem;
+      margin-bottom: 14px;
+    }
+    .ref-lists .ref-box {
+      margin-bottom: 0;
+      padding: 6px 8px;
+      font-size: 0.72rem;
+      line-height: 1.28;
+    }
+    .ref-box h3 {
+      margin: 0 0 6px 0;
+      font-size: 0.9rem;
+    }
+    .ref-lists .ref-box h3 {
+      margin: 0 0 4px 0;
+      font-size: 0.78rem;
+    }
+    .ref-box ul,
+    .ref-box ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .ref-lists .ref-box ul {
+      padding-left: 16px;
+    }
+    .ref-box li {
+      margin-bottom: 4px;
+    }
+    .ref-lists .ref-box li {
+      margin-bottom: 2px;
+    }
+    .nb-statement-grid {
+      columns: 2;
+      column-gap: 24px;
+    }
+    .nb-statement-grid li {
+      break-inside: avoid;
+    }
+    .submission-note {
+      margin-top: 22px;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    .actions {
+      margin-top: 8px;
+    }
+    button {
+      padding: 8px 16px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    @media print {
+      #authGate, .actions, .submission-note { display: none; }
+      body { margin: 10mm; }
+      input[type="text"], input[type="number"] { border: 1px solid #000; }
+      .effort-box, .team-box { background: #fff; }
+      .ref-lists { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="authGate">
+    <h1>Exam Access</h1>
+    <p>Circular Economy for Plastics and Composites – Enter the exam password to open the assessment.</p>
+    <form id="authForm">
+      <div class="auth-row">
+        <input type="password" id="examPasswordInput" placeholder="Password" autocomplete="off" />
+        <button type="submit" id="unlockBtn">Unlock</button>
+      </div>
+      <div id="authError" aria-live="polite"></div>
+    </form>
+  </div>
+
+  <div id="examContent">
+    <div class="course-header">Circular Economy for Plastics and Composites</div>
+    <div class="assessment-date">Assessment Date: 24.11.2026</div>
+
+    <form id="examForm">
+      <div class="student-meta">
+        <div class="field-group">
+          <label for="studentName">Student Name:</label>
+          <input type="text" id="studentName" name="student_name" value="" />
+        </div>
+        <div class="field-group">
+          <label for="studentId">Student ID:</label>
+          <input type="text" id="studentId" name="student_id" value="" />
+        </div>
+      </div>
+
+      <div class="effort-box">
+        <label for="totalHours"><strong>How many hours did you work on this assignment?</strong></label>
+        <div class="inline-row">
+          <input type="number" id="totalHours" name="total_hours" min="0" step="0.5" value="" />
+          <span>hours</span>
+        </div>
+      </div>
+
+      <section class="group-block" id="categoriesSection">
+        <h2>Recycling Technology Categories</h2>
+        <p class="section-desc">
+          Name the categories into which recycling technologies are classified (Categories A–E). Then use these categories below to fill in Groups 1, 2, and 3 accurately.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th class="col-cat-key">Category Key</th>
+              <th class="col-cat-val">Category Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-cat-key">Category A</td>
+              <td class="col-cat-val"><input type="text" name="cat_a" value="" /></td>
+            </tr>
+            <tr>
+              <td class="col-cat-key">Category B</td>
+              <td class="col-cat-val"><input type="text" name="cat_b" value="" /></td>
+            </tr>
+            <tr>
+              <td class="col-cat-key">Category C</td>
+              <td class="col-cat-val"><input type="text" name="cat_c" value="" /></td>
+            </tr>
+            <tr>
+              <td class="col-cat-key">Category D</td>
+              <td class="col-cat-val"><input type="text" name="cat_d" value="" /></td>
+            </tr>
+            <tr>
+              <td class="col-cat-key">Category E</td>
+              <td class="col-cat-val"><input type="text" name="cat_e" value="" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="group-block" data-group="1">
+        <h2>Group 1</h2>
+        <p class="section-desc">Use the categories defined above to classify each technology and enter its TRL.</p>
+        <table>
+          <thead>
+            <tr>
+              <th class="col-tech">Technology</th>
+              <th class="col-cat">Category</th>
+              <th class="col-trl">TRL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-id="24">
+              <td class="col-tech">Mechanical tyre recycling</td>
+              <td class="col-cat"><input type="text" name="g1_24_cat" value="" /></td>
+              <td class="col-trl"><input type="text" name="g1_24_trl" value="" /></td>
+            </tr>
+            <tr data-id="60">
+              <td class="col-tech">Rubber devulcanisation</td>
+              <td class="col-cat"><input type="text" name="g1_60_cat" value="" /></td>
+              <td class="col-trl"><input type="text" name="g1_60_trl" value="" /></td>
+            </tr>
+            <tr data-id="109">
+              <td class="col-tech">Epoxy-composite acetolysis</td>
+              <td class="col-cat"><input type="text" name="g1_109_cat" value="" /></td>
+              <td class="col-trl"><input type="text" name="g1_109_trl" value="" /></td>
+            </tr>
+            <tr data-id="52">
+              <td class="col-tech">Selective polypropylene dissolution</td>
+              <td class="col-cat"><input type="text" name="g1_52_cat" value="" /></td>
+              <td class="col-trl"><input type="text" name="g1_52_trl" value="" /></td>
+            </tr>
+            <tr data-id="90">
+              <td class="col-tech">Enzymatic recycling of PET/cotton blends</td>
+              <td class="col-cat"><input type="text" name="g1_90_cat" value="" /></td>
+              <td class="col-trl"><input type="text" name="g1_90_trl" value="" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="group-block" data-group="2">
+        <h2>Group 2</h2>
+        <p class="section-desc">Use the categories defined above to classify each technology and enter its TRL.</p>
+        <table>
+          <thead>
+            <tr>
+              <th class="col-tech">Technology</th>
+              <th class="col-cat">Category</th>
+              <th class="col-trl">TRL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-id="12">
+              <td class="col-tech">Rigid polystyrene recycling</td>
+              <td class="col-cat"><input type="text" name="g2_12_cat" value="" /></td>
+              <td class="col-trl"><input type="text" name="g2_12_trl" value="" /></td>
+            </tr>
+            <tr data-id="86">
+              <td class="col-tech">Bimetallic-catalyst PET depolymerisation</td>
+              <td class="col-cat"><input type="text" name="g2_86_cat" value="" /></td>
+              <td class="col-trl"><input type="text" name="g2_86_trl" value="" /></td>
+            </tr>
+            <tr data-id="49">
+              <td class="col-tech">PMMA depolymerisation to methyl methacrylate</td>
+              <td class="col-cat"><input type="text" name="g2_49_cat" value="" /></td>
+              <td class="col-trl"><input type="text" name="g2_49_trl" value="" /></td>
+            </tr>
+            <tr data-id="54">
+              <td class="col-tech">Solvent-based recycling of multilayer packaging</td>
+              <td class="col-cat"><input type="text" name="g2_54_cat" value="" /></td>
+              <td class="col-trl"><input type="text" name="g2_54_trl" value="" /></td>
+            </tr>
+            <tr data-id="124">
+              <td class="col-tech">Polydiketoenamine recycling</td>
+              <td class="col-cat"><input type="text" name="g2_124_cat" value="" /></td>
+              <td class="col-trl"><input type="text" name="g2_124_trl" value="" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="group-block" data-group="3">
+        <h2>Group 3</h2>
+        <p class="section-desc">Use the categories defined above to classify each technology and enter its TRL.</p>
+        <table>
+          <thead>
+            <tr>
+              <th class="col-tech">Technology</th>
+              <th class="col-cat">Category</th>
+              <th class="col-trl">TRL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-id="2">
+              <td class="col-tech">PET bottle-to-bottle recycling</td>
+              <td class="col-cat"><input type="text" name="g3_2_cat" value="" /></td>
+              <td class="col-trl"><input type="text" name="g3_2_trl" value="" /></td>
+            </tr>
+            <tr data-id="18">
+              <td class="col-tech">Polyamide mechanical recycling</td>
+              <td class="col-cat"><input type="text" name="g3_18_cat" value="" /></td>
+              <td class="col-trl"><input type="text" name="g3_18_trl" value="" /></td>
+            </tr>
+            <tr data-id="64">
+              <td class="col-tech">Neutral or high-temperature PET hydrolysis</td>
+              <td class="col-cat"><input type="text" name="g3_64_cat" value="" /></td>
+              <td class="col-trl"><input type="text" name="g3_64_trl" value="" /></td>
+            </tr>
+            <tr data-id="65">
+              <td class="col-tech">Enzymatic PET recycling</td>
+              <td class="col-cat"><input type="text" name="g3_65_cat" value="" /></td>
+              <td class="col-trl"><input type="text" name="g3_65_trl" value="" /></td>
+            </tr>
+            <tr data-id="123">
+              <td class="col-tech">Phase-separated reversible polymer networks</td>
+              <td class="col-cat"><input type="text" name="g3_123_cat" value="" /></td>
+              <td class="col-trl"><input type="text" name="g3_123_trl" value="" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="team-box">
+        <strong>Did you work in a team?</strong>
+        <div class="inline-row">
+          <div class="yes-no-group">
+            <label><input type="radio" name="worked_in_team" value="yes" /> Yes</label>
+            <label><input type="radio" name="worked_in_team" value="no" /> No</label>
+          </div>
+          <label for="teamSize">If yes, with how many people?</label>
+          <input type="number" id="teamSize" name="team_size" min="0" step="1" value="" />
+        </div>
+      </div>
+
+      <section class="group-block" id="notebookScopeSection">
+        <h2>Notebook Scope Matching</h2>
+        <p class="section-desc">
+          Assign statement numbers (1–12) to the notebooks where they fit. Not every statement has to match a notebook, and you decide how many numbers you enter per notebook across the available slots. Examine carefully which statements actually match the scope of each notebook.
+        </p>
+
+        <div class="ref-box">
+          <h3>Statements (1–12)</h3>
+          <ol id="notebookStatementList" class="nb-statement-grid"></ol>
+        </div>
+
+        <table class="nb-table">
+          <thead>
+            <tr>
+              <th class="col-nb-title">Notebook</th>
+              <th class="col-nb-slot">#1</th>
+              <th class="col-nb-slot">#2</th>
+              <th class="col-nb-slot">#3</th>
+              <th class="col-nb-slot">#4</th>
+              <th class="col-nb-slot">#5</th>
+            </tr>
+          </thead>
+          <tbody id="notebookTableBody"></tbody>
+        </table>
+      </section>
+
+      <section class="group-block" id="workScheduleSection">
+        <h2>When did you work? (Hours by Day &amp; Time of Day)</h2>
+        <table class="schedule-table">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Morning</th>
+              <th>Afternoon</th>
+              <th>Evening</th>
+            </tr>
+          </thead>
+          <tbody id="scheduleBody"></tbody>
+        </table>
+      </section>
+
+      <section class="group-block" id="aiWorkflowSection">
+        <h2>AI Workflow Analysis: Match Strengths &amp; Limitations</h2>
+        <p class="section-desc">
+          Mark which AI tools you used, and assign the matching strength code (S1–S10) and limitation code (L1–L10) from the reference lists below to each tool in the table.
+        </p>
+
+        <div class="ref-lists">
+          <div class="ref-box">
+            <h3>Strengths (S1–S10)</h3>
+            <ul id="strengthList"></ul>
+          </div>
+          <div class="ref-box">
+            <h3>Limitations (L1–L10)</h3>
+            <ul id="limitationList"></ul>
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th class="col-ai-used">Used</th>
+              <th class="col-ai-num">#</th>
+              <th class="col-ai-tool">AI Tool</th>
+              <th class="col-ai-str">Strength (Code)</th>
+              <th class="col-ai-lim">Limitation (Code)</th>
+            </tr>
+          </thead>
+          <tbody id="aiTableBody"></tbody>
+        </table>
+      </section>
+
+      <section class="group-block" id="reviewConclusionsSection">
+        <h2>Review Conclusions</h2>
+        <p class="section-desc">
+          As in any research process, initial findings and source extracts are not always unambiguous and require further investigation and verification. Relevant findings have been extracted below; evaluate each proposed conclusion/statement based on the evidence provided.
+        </p>
+        <table class="review-table">
+          <thead>
+            <tr>
+              <th class="col-rq-no">No.</th>
+              <th class="col-rq-ref">Review</th>
+              <th class="col-rq-ev">Evidence from the review</th>
+              <th class="col-rq-conc">Proposed conclusion / Statement</th>
+              <th class="col-rq-chk">Agree</th>
+              <th class="col-rq-chk">Dis-Agree</th>
+              <th class="col-rq-chk">Cannot decide</th>
+            </tr>
+          </thead>
+          <tbody id="reviewTableBody"></tbody>
+        </table>
+      </section>
+
+      <p class="submission-note">
+        Use <strong>Print</strong> to keep your own record (e.g. save as PDF). Use <strong>Send</strong> to submit your completed responses via email to <strong>martin.woelker@hs-kl.de</strong>.
+      </p>
+
+      <div class="actions">
+        <button type="button" onclick="window.print()">Print</button>
+        <button type="button" id="sendMailBtn">Send</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const EXAM_PASSWORD_B64 = "Q0VQU18yMDI2";
+    const RECIPIENT_EMAIL = "martin.woelker@hs-kl.de";
+    const ASSESSMENT_DATE = "24.11.2026";
+
+    const authGateEl = document.getElementById("authGate");
+    const authFormEl = document.getElementById("authForm");
+    const examPasswordInputEl = document.getElementById("examPasswordInput");
+    const authErrorEl = document.getElementById("authError");
+    const examContentEl = document.getElementById("examContent");
+
+    function verifyExamPassword(entered) {
+      try {
+        return btoa(entered) === EXAM_PASSWORD_B64;
+      } catch (_) {
+        return false;
+      }
+    }
+
+    authFormEl.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (verifyExamPassword(examPasswordInputEl.value)) {
+        authErrorEl.textContent = "";
+        authGateEl.style.display = "none";
+        examContentEl.style.display = "block";
+      } else {
+        authErrorEl.textContent = "Invalid password.";
+        examPasswordInputEl.focus();
+        examPasswordInputEl.select();
+      }
+    });
+
+    const NOTEBOOKS = [
+      { id: "9rs", title: "The 9Rs Strategies for the Circular Economy" },
+      { id: "ipas", title: "IPAS" },
+      { id: "recycling_tech", title: "Recycling Techniques" }
+    ];
+
+    const RAW_NOTEBOOK_STATEMENTS = [
+      // Notebook 1: The 9Rs Strategies for the Circular Economy
+      { id: "nb_9rs_1", text: "Focuses on plastics recycling, sorting technologies, and chemical processing." },
+      { id: "nb_9rs_2", text: "Quantifies global plastic material flows, waste exports, and environmental leakage." },
+      { id: "nb_9rs_3", text: "Evaluates circular economy concepts, legislation, and extended producer responsibility." },
+      // Notebook 2: IPAS
+      { id: "nb_ipas_1", text: "Scientific literature on sensor-based separation and sorting technologies." },
+      { id: "nb_ipas_2", text: "Combines physical measurement methods with industrial process simulation and economic viability." },
+      { id: "nb_ipas_3", text: "Focuses on the technological challenges of a circular plastics economy." },
+      // Notebook 3: Recycling Techniques
+      { id: "nb_rt_1", text: "Scientific data collection on mechanical and chemical plastics recycling processes." },
+      { id: "nb_rt_2", text: "Focuses on polymer degradation, solvolysis, pyrolysis, and depolymerisation." },
+      { id: "nb_rt_3", text: "Examines real operating capacities, reactor conditions, and evidence of industrial scale-up." },
+      // 3 Distractors (not covered by the three notebooks)
+      { id: "nb_dist_legal", text: "Examines legal enforcement, waste-status criteria, and liability rules." },
+      { id: "nb_dist_social", text: "Analyses societal acceptance, household sorting habits, and informal waste work." },
+      { id: "nb_dist_geopol", text: "Investigates geopolitical raw-material dependencies and cross-border trade restrictions." }
+    ];
+
+    const RAW_TOOLS = [
+      {
+        num: 1,
+        id: "chatgpt",
+        tool: "ChatGPT",
+        strengthText: "Breaks reports and claims into structured claim tables and testable sub-questions.",
+        limitationText: "Blends different feedstocks, units, or plant scales in summaries without flagging them."
+      },
+      {
+        num: 2,
+        id: "gemini",
+        tool: "Gemini",
+        strengthText: "Surveys technologies broadly across papers, reports, and industry sources plus search terms.",
+        limitationText: "Mixes academic papers, operator announcements, and secondary summaries of unequal evidentiary weight."
+      },
+      {
+        num: 3,
+        id: "claude",
+        tool: "Claude",
+        strengthText: "Compares supplied documents to surface apparent contradictions and rival explanations.",
+        limitationText: "Treats differing feedstocks, dates, or system boundaries as contradictions without context checks."
+      },
+      {
+        num: 4,
+        id: "perplexity",
+        tool: "Perplexity",
+        strengthText: "Locates web sources quickly for specific facts such as plant capacities or initial announcements.",
+        limitationText: "Links often point to secondary coverage or restatements rather than the primary source."
+      },
+      {
+        num: 5,
+        id: "notebooklm",
+        tool: "NotebookLM",
+        strengthText: "Answers strictly from selected notebook sources with direct jumps to cited passages.",
+        limitationText: "Remains blind to evidence, context, or counterclaims outside the uploaded source set."
+      },
+      {
+        num: 6,
+        id: "elicit",
+        tool: "Elicit",
+        strengthText: "Extracts structured fields—polymer, feedstock, operating conditions, and yield—from papers into tables.",
+        limitationText: "Compares yield figures that may rest on incompatible denominators across studies."
+      },
+      {
+        num: 7,
+        id: "consensus",
+        tool: "Consensus",
+        strengthText: "Synthesises findings across academic papers for a focused research question.",
+        limitationText: "Flattens study designs and scales; cannot verify real-world plant throughput."
+      },
+      {
+        num: 8,
+        id: "qwen",
+        tool: "Qwen",
+        strengthText: "Supports Chinese-language search terms/sources and offers a second pass on disputed readings.",
+        limitationText: "Depends on active mode and can echo identical assumptions when fed similar inputs."
+      },
+      {
+        num: 9,
+        id: "researchrabbit",
+        tool: "ResearchRabbit",
+        strengthText: "Maps related literature via forward and backward citations from seed papers.",
+        limitationText: "Misses work in disconnected communities or under different terms without citation links."
+      },
+      {
+        num: 10,
+        id: "scite",
+        tool: "Scite",
+        strengthText: "Finds citation snippets labelled as supporting, contrasting, or mentioning a claim.",
+        limitationText: "Citation labels are only leads; context must be read to confirm matching claims."
+      }
+    ];
+
+    const REVIEW_ITEMS = [
+      {
+        code: "rq_1",
+        question: "Q1",
+        evidence: "STRAP recovered polymers from PE/EVOH/PET laminate in the lab. A later pilot test recovered PP from PP-rich waste.",
+        conclusion: "Both findings can be correct. The PP test does not establish pilot-scale operation for the original laminate."
+      },
+      {
+        code: "rq_2",
+        question: "Q1",
+        evidence: "The STRAP pilot was designed for 25 kg/h. The PP recovery report gives no measured feed rate or run duration.",
+        conclusion: "The test confirms that the pilot processed PP-rich waste at 25 kg/h."
+      },
+      {
+        code: "rq_3",
+        question: "Q9",
+        evidence: "Two sources give 8,000 and 20,000 t/year for the APK site. Both figures describe capacity.",
+        conclusion: "Dividing 8,000 by 20,000 gives the site’s operating utilisation of 40%."
+      },
+      {
+        code: "rq_4",
+        question: "Q10",
+        evidence: "PureCycle reported 5.2 million pounds of resin produced at Ironton in Q3 2026. Two sources give the same annual design capacity rounded to 48,600 and 49,000 metric tonnes.",
+        conclusion: "The quarterly figure is evidence of actual production. The difference between the capacity figures is a rounding difference."
+      },
+      {
+        code: "rq_16",
+        question: "Q23, Q11",
+        evidence: "A process treats a carbon-fibre composite. The recovered fibres are used in a new composite. The original polymer matrix is destroyed. Consider the outcome from the perspective of fibre recovery and then from the perspective of polymer recovery.",
+        conclusion: "The process recovers a usable material from the part of the composite under consideration."
+      },
+      {
+        code: "rq_5",
+        question: "Q11",
+        evidence: "An acetolysis study recovered usable material from an 80 g composite sample. It also modelled a selling price for recovered carbon fibre from a hypothetical plant.",
+        conclusion: "Together, the experiment and model establish the price a commercial plant achieved for the recovered fibre."
+      },
+      {
+        code: "rq_6",
+        question: "Q20",
+        evidence: "The review documented industrial examples of PET glycolysis, PET methanolysis and selective solvent dissolution.",
+        conclusion: "If the scope includes all three routes, the evidence supports more than one commercially implemented technology family."
+      },
+      {
+        code: "rq_7",
+        question: "Q24",
+        evidence: "A thermoplastic retained its polymer identity after repeated melt processing, but its measured molecular weight fell.",
+        conclusion: "The molecular-weight change is enough to reclassify the process as chemical recycling."
+      },
+      {
+        code: "rq_8",
+        question: "Q7, Q19",
+        evidence: "A PET recycling line uses solid-state polycondensation (SSP) to restore intrinsic viscosity. The extract gives no evidence of validated decontamination.",
+        conclusion: "The SSP step and the restored viscosity are sufficient to show that the output is suitable for food-contact bottles."
+      },
+      {
+        code: "rq_18",
+        question: "Q9, Q13",
+        evidence: "A plant has a nameplate input capacity of 20,000 t/year. The operator reports that the plant ran during 2025 but gives no record of actual feed processed that year.",
+        conclusion: "The plant processed at least 10,000 tonnes of feed in 2025."
+      },
+      {
+        code: "rq_9",
+        question: "Q21",
+        evidence: "A dry-pyrolysis test accepted a specified mixed-plastic feed. A Hydro-PRT process has a feed specification requiring a high polyolefin fraction.",
+        conclusion: "Both findings can be valid because feed acceptance depends on the process and the mixture tested."
+      },
+      {
+        code: "rq_10",
+        question: "Q25",
+        evidence: "A thermochemical study reports a high liquid-product yield. It does not report how much of that liquid was ultimately converted into new polymer.",
+        conclusion: "The liquid-product yield can be used as the plastic-to-plastic yield if the oil is described as a potential petrochemical feedstock."
+      },
+      {
+        code: "rq_11",
+        question: "Q26",
+        evidence: "A chemo-biological study ran chemical oxidation and biological conversion as two sequential laboratory stages on defined plastic mixtures.",
+        conclusion: "The study demonstrates the two-stage pathway for the tested feeds. Continuous operation with variable, contaminated waste remains unverified."
+      },
+      {
+        code: "rq_12",
+        question: "Q27",
+        evidence: "Qin’s reversible-amidation network yielded isolated building blocks. Danielson’s PET-derived vitrimer yielded a macromonomer specific to that network.",
+        conclusion: "Qin’s reported isolation yields can be used to quantify recovery of the original PET monomers in Danielson’s process."
+      },
+      {
+        code: "rq_19",
+        question: "Q22, Q25",
+        evidence: "Two recycling trials each produced 90 kg of recovered polymer from 100 kg of comparable feed. Neither report gives the energy used.",
+        conclusion: "Trial A used less energy per kilogram of recovered polymer than Trial B."
+      },
+      {
+        code: "rq_13",
+        question: "Q28",
+        evidence: "Aquafil documents PA6 waste being converted to caprolactam and used in new PA6 products. The reviewed records give no audited annual caprolactam output.",
+        conclusion: "The records support industrial use of the route while leaving annual output unverified."
+      },
+      {
+        code: "rq_14",
+        question: "Q29",
+        evidence: "The Ferrara VinyLoop plant recovered PVC by selective dissolution and closed in 2018.",
+        conclusion: "Ferrara is evidence of prior industrial implementation of PVC dissolution."
+      },
+      {
+        code: "rq_17",
+        question: "Q15, Q22",
+        evidence: "A dissolution trial starts with 100 kg of mixed feed containing 60 kg of the target polymer. It recovers 54 kg of that polymer. Consider the yield relative to the target polymer in the feed and then relative to the total feed.",
+        conclusion: "The yield exceeds 80%."
+      },
+      {
+        code: "rq_15",
+        question: "Q32",
+        evidence: "One source describes 70% virgin PET and 30% recycled PET for bottles. Another reports a formulation with 70% recycled material and 30% virgin material.",
+        conclusion: "A comparison must state which fraction is recycled and the application. The figures alone do not establish a standard 70/30 recipe."
+      }
+    ];
+
+    const DAYS = [
+      { key: "mon", label: "Monday" },
+      { key: "tue", label: "Tuesday" },
+      { key: "wed", label: "Wednesday" },
+      { key: "thu", label: "Thursday" },
+      { key: "fri", label: "Friday" },
+      { key: "sat", label: "Saturday" },
+      { key: "sun", label: "Sunday" }
+    ];
+
+    const SLOTS = [
+      { key: "morning", label: "Morning" },
+      { key: "afternoon", label: "Afternoon" },
+      { key: "evening", label: "Evening" }
+    ];
+
+    function shuffleArray(arr) {
+      const copy = arr.slice();
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    const shuffledNotebookStatements = shuffleArray(RAW_NOTEBOOK_STATEMENTS).map((item, idx) => ({
+      num: idx + 1,
+      id: item.id,
+      text: item.text
+    }));
+
+    const nbStatementListEl = document.getElementById("notebookStatementList");
+    shuffledNotebookStatements.forEach(s => {
+      const li = document.createElement("li");
+      li.value = s.num;
+      li.textContent = s.text;
+      nbStatementListEl.appendChild(li);
+    });
+
+    const notebookTableBody = document.getElementById("notebookTableBody");
+    NOTEBOOKS.forEach(nb => {
+      const tr = document.createElement("tr");
+      const cells = [1, 2, 3, 4, 5].map(slotIdx =>
+        `<td><input type="text" name="nb_${nb.id}_s${slotIdx}" value="" /></td>`
+      ).join("");
+      tr.innerHTML = `<td class="col-nb-title">${nb.title}</td>${cells}`;
+      notebookTableBody.appendChild(tr);
+    });
+
+    const shuffledStrengthSource = shuffleArray(RAW_TOOLS);
+    const shuffledLimitationSource = shuffleArray(RAW_TOOLS);
+
+    const numberedStrengths = shuffledStrengthSource.map((item, idx) => ({
+      code: `S${idx + 1}`,
+      text: item.strengthText
+    }));
+
+    const numberedLimitations = shuffledLimitationSource.map((item, idx) => ({
+      code: `L${idx + 1}`,
+      text: item.limitationText
+    }));
+
+    const strengthListEl = document.getElementById("strengthList");
+    numberedStrengths.forEach(s => {
+      const li = document.createElement("li");
+      li.innerHTML = `<strong>${s.code}:</strong> ${s.text}`;
+      strengthListEl.appendChild(li);
+    });
+
+    const limitationListEl = document.getElementById("limitationList");
+    numberedLimitations.forEach(l => {
+      const li = document.createElement("li");
+      li.innerHTML = `<strong>${l.code}:</strong> ${l.text}`;
+      limitationListEl.appendChild(li);
+    });
+
+    const TABLE_ROWS = [
+      ...RAW_TOOLS.map(item => ({
+        num: item.num,
+        id: item.id,
+        tool: item.tool
+      })),
+      { num: 11, id: "custom_11", tool: "" },
+      { num: 12, id: "custom_12", tool: "" }
+    ];
+
+    const aiTableBody = document.getElementById("aiTableBody");
+    TABLE_ROWS.forEach(row => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td class="col-ai-used"><input type="checkbox" name="ai_${row.num}_${row.id}_used" value="1" /></td>
+        <td class="col-ai-num">${row.num}</td>
+        <td class="col-ai-tool"><input type="text" name="ai_${row.num}_${row.id}_tool" value="${row.tool}" placeholder="Other AI tool..." /></td>
+        <td class="col-ai-str"><input type="text" name="ai_${row.num}_${row.id}_str" value="" placeholder="e.g. S1" /></td>
+        <td class="col-ai-lim"><input type="text" name="ai_${row.num}_${row.id}_lim" value="" placeholder="e.g. L1" /></td>
+      `;
+      aiTableBody.appendChild(tr);
+    });
+
+    const scheduleBody = document.getElementById("scheduleBody");
+    DAYS.forEach(day => {
+      const tr = document.createElement("tr");
+      const cells = SLOTS.map(slot =>
+        `<td><input type="number" name="hours_${day.key}_${slot.key}" min="0" step="0.5" value="" /></td>`
+      ).join("");
+      tr.innerHTML = `<td>${day.label}</td>${cells}`;
+      scheduleBody.appendChild(tr);
+    });
+
+    const reviewTableBody = document.getElementById("reviewTableBody");
+    REVIEW_ITEMS.forEach((item, idx) => {
+      const rowNo = idx + 1;
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td class="col-rq-no">${rowNo}</td>
+        <td class="col-rq-ref">${item.question}</td>
+        <td class="col-rq-ev">${item.evidence}</td>
+        <td class="col-rq-conc">${item.conclusion}</td>
+        <td class="col-rq-chk"><input type="checkbox" name="${item.code}_agree" value="1" /></td>
+        <td class="col-rq-chk"><input type="checkbox" name="${item.code}_disagree" value="1" /></td>
+        <td class="col-rq-chk"><input type="checkbox" name="${item.code}_cannot_decide" value="1" /></td>
+      `;
+      reviewTableBody.appendChild(tr);
+    });
+
+    function cleanCell(val) {
+      return String(val || "").replace(/\|/g, "/").replace(/\r?\n/g, " ").trim();
+    }
+
+    function buildHumanReadableReport() {
+      const lines = [];
+
+      const studentName = cleanCell(document.getElementById("studentName").value);
+      const studentId = cleanCell(document.getElementById("studentId").value);
+      const totalHours = cleanCell(document.getElementById("totalHours").value);
+
+      lines.push("Assessment Date");
+      lines.push(ASSESSMENT_DATE);
+      lines.push("");
+
+      lines.push("Student Name");
+      lines.push(studentName);
+      lines.push("");
+
+      lines.push("Student ID");
+      lines.push(studentId);
+      lines.push("");
+
+      lines.push("How many hours did you work on this assignment?");
+      lines.push(totalHours);
+      lines.push("");
+
+      lines.push("Recycling Technology Categories");
+      lines.push("| Category | Name |");
+      lines.push("| --- | --- |");
+      ["a", "b", "c", "d", "e"].forEach(letter => {
+        const key = `Category ${letter.toUpperCase()}`;
+        const val = cleanCell(document.querySelector(`input[name="cat_${letter}"]`).value);
+        lines.push(`| ${key} | ${val} |`);
+      });
+      lines.push("");
+
+      document.querySelectorAll("section.group-block[data-group]").forEach(sec => {
+        const groupNum = sec.getAttribute("data-group");
+        lines.push(`Group ${groupNum}`);
+        lines.push("| Technology | Category | TRL |");
+        lines.push("| --- | --- | --- |");
+        sec.querySelectorAll("tbody tr").forEach(tr => {
+          const tech = cleanCell(tr.querySelector(".col-tech").textContent);
+          const cat = cleanCell(tr.querySelector('input[name$="_cat"]').value);
+          const trl = cleanCell(tr.querySelector('input[name$="_trl"]').value);
+          lines.push(`| ${tech} | ${cat} | ${trl} |`);
+        });
+        lines.push("");
+      });
+
+      const workedInTeamEl = document.querySelector('input[name="worked_in_team"]:checked');
+      const workedInTeam = workedInTeamEl ? workedInTeamEl.value : "";
+      const teamSize = cleanCell(document.getElementById("teamSize").value);
+
+      lines.push("Did you work in a team?");
+      lines.push(workedInTeam);
+      lines.push("");
+
+      lines.push("If yes, with how many people?");
+      lines.push(teamSize);
+      lines.push("");
+
+      lines.push("Notebook Scope Matching");
+      lines.push("| Notebook | #1 | #2 | #3 | #4 | #5 |");
+      lines.push("| --- | --- | --- | --- | --- | --- |");
+      NOTEBOOKS.forEach(nb => {
+        const slotVals = [1, 2, 3, 4, 5].map(idx => {
+          const inp = document.querySelector(`input[name="nb_${nb.id}_s${idx}"]`);
+          return cleanCell(inp ? inp.value : "");
+        });
+        lines.push(`| ${cleanCell(nb.title)} | ${slotVals.join(" | ")} |`);
+      });
+      lines.push("");
+
+      lines.push("When did you work? (Hours by Day & Time of Day)");
+      lines.push("| Day | Morning | Afternoon | Evening |");
+      lines.push("| --- | --- | --- | --- |");
+      DAYS.forEach(day => {
+        const m = cleanCell(document.querySelector(`input[name="hours_${day.key}_morning"]`).value);
+        const a = cleanCell(document.querySelector(`input[name="hours_${day.key}_afternoon"]`).value);
+        const e = cleanCell(document.querySelector(`input[name="hours_${day.key}_evening"]`).value);
+        lines.push(`| ${day.label} | ${m} | ${a} | ${e} |`);
+      });
+      lines.push("");
+
+      lines.push("AI Workflow Analysis");
+      lines.push("| # | AI Tool | Used | Strength | Limitation |");
+      lines.push("| --- | --- | --- | --- | --- |");
+      TABLE_ROWS.forEach(row => {
+        const usedCb = document.querySelector(`input[name="ai_${row.num}_${row.id}_used"]`);
+        const usedLabel = usedCb && usedCb.checked ? "Yes" : "No";
+        const toolName = cleanCell(document.querySelector(`input[name="ai_${row.num}_${row.id}_tool"]`).value);
+        const strCode = cleanCell(document.querySelector(`input[name="ai_${row.num}_${row.id}_str"]`).value);
+        const limCode = cleanCell(document.querySelector(`input[name="ai_${row.num}_${row.id}_lim"]`).value);
+        lines.push(`| ${row.num} | ${toolName} | ${usedLabel} | ${strCode} | ${limCode} |`);
+      });
+      lines.push("");
+
+      lines.push("Review Conclusions");
+      lines.push("| No. | Review | Agree | Dis-Agree | Cannot decide |");
+      lines.push("| --- | --- | --- | --- | --- |");
+      REVIEW_ITEMS.forEach((item, idx) => {
+        const rowNo = idx + 1;
+        const ag = document.querySelector(`input[name="${item.code}_agree"]`).checked ? "Yes" : "No";
+        const dis = document.querySelector(`input[name="${item.code}_disagree"]`).checked ? "Yes" : "No";
+        const cd = document.querySelector(`input[name="${item.code}_cannot_decide"]`).checked ? "Yes" : "No";
+        lines.push(`| ${rowNo} | ${cleanCell(item.question)} | ${ag} | ${dis} | ${cd} |`);
+      });
+
+      return lines.join("\n");
+    }
+
+    document.getElementById("sendMailBtn").addEventListener("click", () => {
+      const reportText = buildHumanReadableReport();
+      window.location.href = `mailto:${encodeURIComponent(RECIPIENT_EMAIL)}?subject=${encodeURIComponent("Exam_Result")}&body=${encodeURIComponent(reportText)}`;
+    });
+  </script>
+</body>
+</html>
